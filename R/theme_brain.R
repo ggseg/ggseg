@@ -23,7 +23,8 @@
 #' }
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
-#'
+
+#' @importFrom ggplot2 theme element_blank element_text
 #' @export
 #' @rdname ggtheme
 theme_brain = function(text.size=12,
@@ -34,7 +35,7 @@ theme_brain = function(text.size=12,
     panel.grid = ggplot2::element_blank(),
     panel.background = ggplot2::element_blank(),
     plot.background = ggplot2::element_blank(),
-    legend.background = element_blank(),
+    legend.background = ggplot2::element_blank(),
 
     text = ggplot2::element_text(family=text.family,
                                  size=text.size),
@@ -46,6 +47,7 @@ theme_brain = function(text.size=12,
 
 #' @export
 #' @rdname ggtheme
+#' @importFrom ggplot2 theme element_blank element_rect element_text
 theme_darkbrain = function(text.size=12,
                            text.family="Arial"){
 
@@ -53,7 +55,7 @@ theme_darkbrain = function(text.size=12,
     axis.ticks = ggplot2::element_blank(),
     panel.grid = ggplot2::element_blank(),
     plot.background = ggplot2::element_blank(),
-    legend.background = element_blank(),
+    legend.background = ggplot2::element_blank(),
 
     panel.background = ggplot2::element_rect(fill="black"),
     text = ggplot2::element_text(colour="lightgrey"),
@@ -66,6 +68,7 @@ theme_darkbrain = function(text.size=12,
 
 #' @export
 #' @rdname ggtheme
+#' @importFrom ggplot2 theme element_blank element_rect element_text
 theme_custombrain = function(plot.background="white",
                              text.colour="darkgrey",
                              text.size=12,
@@ -75,7 +78,7 @@ theme_custombrain = function(plot.background="white",
     axis.ticks = ggplot2::element_blank(),
     panel.grid = ggplot2::element_blank(),
     plot.background = ggplot2::element_blank(),
-    legend.background = element_blank(),
+    legend.background = ggplot2::element_blank(),
 
     panel.background = ggplot2::element_rect(fill=plot.background),
 
