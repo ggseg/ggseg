@@ -28,7 +28,7 @@
 #' @export
 #' @rdname ggtheme
 theme_brain = function(text.size=12,
-                       text.family="Arial"){
+                       text.family="mono"){
 
   ggplot2::theme(
     axis.ticks = ggplot2::element_blank(),
@@ -49,7 +49,7 @@ theme_brain = function(text.size=12,
 #' @rdname ggtheme
 #' @importFrom ggplot2 theme element_blank element_rect element_text
 theme_darkbrain = function(text.size=12,
-                           text.family="Arial"){
+                           text.family="mono"){
 
   ggplot2::theme(
     axis.ticks = ggplot2::element_blank(),
@@ -72,11 +72,11 @@ theme_darkbrain = function(text.size=12,
 theme_custombrain = function(plot.background="white",
                              text.colour="darkgrey",
                              text.size=12,
-                             text.family="Arial"){
+                             text.family="mono"){
 
   ggplot2::theme(
     axis.ticks = ggplot2::element_blank(),
-    panel.grid = ggplot2::element_blloadank(),
+    panel.grid = ggplot2::element_blank(),
     panel.background = ggplot2::element_blank(),
     legend.background = ggplot2::element_blank(),
 
