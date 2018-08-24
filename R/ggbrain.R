@@ -45,7 +45,7 @@
 #' ggbrain()
 #' ggbrain(na.fill = "transparent",mapping=aes(fill=area))
 #' ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-#' ggbrain(atlas=yeo7)
+#' ggbrain(atlas="yeo7")
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'
@@ -60,11 +60,10 @@ ggbrain = function(data = NULL,atlas="dkt",
                    na.fill="grey",
                    adapt.scales=T,...){
 
-  # Load the segmentation to use
-  geobrain = if(class(atlas) == "data.frame"){
+  geobrain = if(typeof(atlas) != "character"){
     atlas
   }else{
-    get(data(atlas))
+    get(atlas)
   }
 
   if(position=="stacked"){
@@ -171,7 +170,7 @@ ggbrain = function(data = NULL,atlas="dkt",
 
       gg = gg +
         ggplot2::scale_x_continuous(
-          breaks=pos$val,
+          breaks=pos$long,
           labels=pos$hemi) +
         ggplot2::scale_y_continuous(breaks=NULL)+
         ggplot2::labs(y=NULL, x="hemisphere")
