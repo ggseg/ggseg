@@ -64,7 +64,7 @@ ggbrain = function(data = NULL,atlas="dkt",
   geobrain = if(class(atlas) == "data.frame"){
     atlas
   }else{
-    eval(as.name(atlas))
+    get(data(atlas))
   }
 
   if(position=="stacked"){
