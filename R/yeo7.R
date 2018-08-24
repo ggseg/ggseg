@@ -20,7 +20,7 @@
 #'   \item{area}{name of network}
 #'   \item{hemi}{name of the hemisphere (left, right)}
 #'   \item{side}{which side to view (medial, lateral)}
-#'   \item{region}{approximate cortical region}
+#'   \item{network}{network number (1:7)}
 #'   \item{label}{unique name to each node}
 #' }
 #'

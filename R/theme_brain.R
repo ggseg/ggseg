@@ -54,10 +54,10 @@ theme_darkbrain = function(text.size=12,
   ggplot2::theme(
     axis.ticks = ggplot2::element_blank(),
     panel.grid = ggplot2::element_blank(),
-    plot.background = ggplot2::element_blank(),
+    panel.background = ggplot2::element_blank(),
     legend.background = ggplot2::element_blank(),
 
-    panel.background = ggplot2::element_rect(fill="black"),
+    plot.background = ggplot2::element_rect(fill="black"),
     text = ggplot2::element_text(colour="lightgrey"),
     axis.text = ggplot2::element_text(colour="lightgrey",
                                       family=text.family,
@@ -76,11 +76,11 @@ theme_custombrain = function(plot.background="white",
 
   ggplot2::theme(
     axis.ticks = ggplot2::element_blank(),
-    panel.grid = ggplot2::element_blank(),
-    plot.background = ggplot2::element_blank(),
+    panel.grid = ggplot2::element_blloadank(),
+    panel.background = ggplot2::element_blank(),
     legend.background = ggplot2::element_blank(),
 
-    panel.background = ggplot2::element_rect(fill=plot.background),
+    plot.background = ggplot2::element_rect(fill=plot.background),
 
     text = ggplot2::element_text(colour=text.colour,
                                  family=text.family,
