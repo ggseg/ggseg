@@ -1,0 +1,151 @@
+---
+title: "Plotting brain atlases in ggplot"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plotting Freesurfers aparc areas}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(eval=T)
+```
+
+## Introduction
+Plotting areas from different brain atlases ggplot2 is a handy way of displaying results or grouping of aparc data.
+
+## Basic use
+The function `ggbrain()`, is based in the ggplot2 format, it is recommended to get a little familiarized with with [plotting data with ggplot2](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). 
+
+Out-of-the-box, ggbrain() works without supplying any extra information. 
+It will create a base plot of the aparc brain segmentations.
+
+```{r start}
+library(ggbrain)
+library(tidyverse)
+ggbrain()
+```
+
+The plot is kept as simple as possible, with as little extra information to ggplot as possible. 
+This is done for it to be easy to extend the plot with the many ggplot options available.
+By default it plots `data(dkt)`.
+For instance, you might want to only see the brain and it's segments, without any grid or axis information.
+You can add ggplot2's `theme_void` to achieve this.
+
+```{r void}
+ggbrain() + theme_void()
+```
+
+You can supply some extra options to ggbrain, to alter the plot as you wish.
+
+You can stack the hemispheres if you want
+```{r stacked}
+ggbrain(position="stacked") +
+  theme_void()
+```
+
+Maybe you want each area to have a different colour. 
+ggbrain has a built column called `area` wich you can use as fill to achieve this.
+**Note:** unlike other ggplots, before using `aes` you must indicate `mapping=aes`.
+
+```{r fill}
+ggbrain(mapping=aes(fill=area)) +
+  theme_void()
+```
+
+Maybe you also want the contour lines to be black rather than white, and also a little thicker?
+
+```{r fill2}
+ggbrain(colour="black", size=.7, mapping=aes(fill=area)) +
+  theme_void()
+```
+
+You can also zoom in on a single area and plot it alone.
+
+```{r plot.area}
+ggbrain(plot.area="superior frontal") +
+  theme_void()
+```
+
+Or you can plot several of them, despite not making much sense.
+
+```{r plot.area2}
+ggbrain(plot.area=c("transverse temporal", "insula","pre central","superior parietal")) +
+  theme_void()
+```
+
+You can also choose to only view one of the hespheres by adding the `hemisphere` option
+```{r hemisphere}
+ggbrain(hemisphere="right") +
+  theme_void()
+```
+
+If you want to plot the entire brain, but hightlight specific areas with colour, you will need to provide the function with some data.
+The data **must** include a column names `area`, with area names corresponding to that of the aparc segmentations.
+Here we create some data with 4 rows, and an `area` and `p` column. We provide the `p` column as the column
+that dictates the colour of the area.
+
+```{r datasupp}
+someData = list(area=c("transverse temporal", "insula","pre central","superior parietal"), 
+                p=sample(seq(0,.5,.001), 4)) %>% 
+  as.data.frame(stringsAsFactors=F)
+
+ggbrain(data=someData, mapping=aes(fill=p))
+
+```
+
+We can also change how this looks, by various ggplot functions
+```{r datasupp2}
+ggbrain(data=someData, mapping=aes(fill=p)) +
+  theme_void() +
+  scale_fill_gradient(low="firebrick",high="goldenrod") +
+  labs(title="Aparc plots rule")
+
+```
+
+If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes
+the column `hemi` with either "rh" or "lh" for this to happen.
+```{r datasuppX}
+someData$hemi = "right"
+
+ggbrain(data=someData, mapping=aes(fill=p)) +
+  theme_void() +
+  scale_fill_gradient(low="firebrick",high="goldenrod") +
+  labs(title="Aparc plots rule")
+
+```
+
+
+If your data has different statistics for different groups, and you want to plot them all, we can use ggplot's `facet_wrap` or `facet_grid` for that.
+The data needs to be in long format for this to work, like ggplot likes it.
+
+```{r datasupp3}
+someData = list(area=rep(c("transversetemporal", "insula","precentral","superiorparietal"),2), 
+                p=sample(seq(0,.5,.001), 8),
+                AgeG = c(rep("Young",4), rep("Old",4))
+                ) %>% 
+  as.data.frame(stringsAsFactors=F)
+
+ggbrain(data=someData, mapping=aes(fill=p)) +
+  facet_wrap(~AgeG, ncol=1) +
+  theme(legend.position = "bottom")
+
+```
+
+We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?
+
+```{r datasupp4}
+ggbrain(data=someData, na.fill = "transparent",mapping=aes(fill=p)) +
+  facet_wrap(~AgeG, ncol=1) +
+  theme_dark() +
+  theme(legend.position = "bottom",
+        axis.text = element_blank(),
+        axis.title = element_blank()
+        )
+
+```
+
+You can try other atlases too.
+```{r atlases}
+ggbrain(atlas="aseg", mapping=aes(fill=area))
+```
