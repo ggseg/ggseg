@@ -28,6 +28,7 @@ ggbrain()
 
 The plot is kept as simple as possible, with as little extra information to ggplot as possible. 
 This is done for it to be easy to extend the plot with the many ggplot options available.
+By default it plots `data(dkt)`.
 For instance, you might want to only see the brain and it's segments, without any grid or axis information.
 You can add ggplot2's `theme_void` to achieve this.
 
@@ -62,20 +63,20 @@ ggbrain(colour="black", size=.7, mapping=aes(fill=area)) +
 You can also zoom in on a single area and plot it alone.
 
 ```{r plot.area}
-ggbrain(plot.area="transversetemporal") +
+ggbrain(plot.area="superior frontal") +
   theme_void()
 ```
 
 Or you can plot several of them, despite not making much sense.
 
 ```{r plot.area2}
-ggbrain(plot.area=c("transversetemporal", "insula","precentral","superiorparietal")) +
+ggbrain(plot.area=c("transverse temporal", "insula","pre central","superior parietal")) +
   theme_void()
 ```
 
 You can also choose to only view one of the hespheres by adding the `hemisphere` option
 ```{r hemisphere}
-ggbrain(hemisphere="rh") +
+ggbrain(hemisphere="right") +
   theme_void()
 ```
 
@@ -85,7 +86,7 @@ Here we create some data with 4 rows, and an `area` and `p` column. We provide t
 that dictates the colour of the area.
 
 ```{r datasupp}
-someData = list(area=c("transversetemporal", "insula","precentral","superiorparietal"), 
+someData = list(area=c("transverse temporal", "insula","pre central","superior parietal"), 
                 p=sample(seq(0,.5,.001), 4)) %>% 
   as.data.frame(stringsAsFactors=F)
 
@@ -95,10 +96,6 @@ ggbrain(data=someData, mapping=aes(fill=p))
 
 We can also change how this looks, by various ggplot functions
 ```{r datasupp2}
-someData = list(area=c("transversetemporal", "insula","precentral","superiorparietal"), 
-                p=sample(seq(0,.5,.001), 4)) %>% 
-  as.data.frame(stringsAsFactors=F)
-
 ggbrain(data=someData, mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
@@ -109,10 +106,7 @@ ggbrain(data=someData, mapping=aes(fill=p)) +
 If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes
 the column `hemi` with either "rh" or "lh" for this to happen.
 ```{r datasuppX}
-someData = list(area=c("transversetemporal", "insula","precentral","superiorparietal"), 
-                p=sample(seq(0,.5,.001), 4),
-                hemi="rh") %>% 
-  as.data.frame(stringsAsFactors=F)
+someData$hemi = "right"
 
 ggbrain(data=someData, mapping=aes(fill=p)) +
   theme_void() +
@@ -141,7 +135,6 @@ ggbrain(data=someData, mapping=aes(fill=p)) +
 We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?
 
 ```{r datasupp4}
-
 ggbrain(data=someData, na.fill = "transparent",mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme_dark() +
@@ -150,4 +143,9 @@ ggbrain(data=someData, na.fill = "transparent",mapping=aes(fill=p)) +
         axis.title = element_blank()
         )
 
+```
+
+You can try other atlases too.
+```{r atlases}
+ggbrain(atlas="aseg", mapping=aes(fill=area))
 ```

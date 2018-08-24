@@ -5,10 +5,10 @@
 \title{Plot brain parcellations}
 \usage{
 ggbrain(data = NULL, atlas = "dkt", plot.areas = NULL,
-  position = "dispersed", view = c("lateral", "medial"),
+  position = "dispersed", view = c("lateral", "medial", "axial"),
   hemisphere = c("right", "left"), mapping = NULL, na.alpha = NA,
-  colour = "white", size = 0.5, show.legend = NA, na.fill = "grey",
-  ...)
+  colour = "white", size = 0.1, show.legend = NA, na.fill = "grey",
+  adapt.scales = T, ...)
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -43,26 +43,27 @@ or a data.frame containing atlas information (i.e. pre-loaded atlas).}
 a ggplot object
 }
 \description{
-\code{ggaparc} plots and returns a ggplot object of plotted
+\code{ggbrain} plots and returns a ggplot object of plotted
 aparc areas.
 }
 \details{
 \describe{
 
 \item{`dkt`}{
-The Desikan-Killiany Cortical Atlas [default]. Part of Freesurfer segmentations.}
+The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
 
 \item{`yeo7`}{
 Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 
-\item{`yeo17`}{
-Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
+\item{`aseg`}{
+Freesurfer automatic subcortical segmentation of a brain volume}
 }
 }
 \examples{
-ggaparc()
-ggaparc(na.fill = "transparent",mapping=aes(fill=area))
-ggaparc(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
+ggbrain()
+ggbrain(na.fill = "transparent",mapping=aes(fill=area))
+ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
+ggbrain(atlas=yeo7)
 
 }
 \seealso{

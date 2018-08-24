@@ -25,22 +25,20 @@
 #' \describe{
 #'
 #' \item{`dkt`}{
-#' The Desikan-Killiany Cortical Atlas [default]. Part of Freesurfer segmentations.}
+#' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
 #'
 #' \item{`yeo7`}{
 #' Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 #'
-#' \item{`yeo17`}{
-#' Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
+#' \item{`aseg`}{
+#' Freesurfer automatic subcortical segmentation of a brain volume}
 #' }
-#'
 #'
 #' @return a ggplot object
 #'
-#' @importFrom dplyr filter summarise mutate left_join group_by
+#' @importFrom dplyr select group_by summarise_at vars funs mutate filter left_join
 #' @importFrom ggplot2 ggplot aes geom_polygon coord_fixed scale_y_continuous scale_x_continuous labs
 #' @importFrom stats na.omit
-#' @importFrom tidyr gather spread
 #' @importFrom magrittr "%>%"
 #'
 #' @examples
@@ -52,132 +50,137 @@
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'
 #' @export
-
 ggbrain = function(data = NULL,atlas="dkt",
                    plot.areas=NULL,
                    position="dispersed",
-                   view=c("lateral","medial"),
+                   view=c("lateral","medial","axial"),
                    hemisphere = c("right","left"),
                    mapping = NULL, na.alpha=NA,
-                   colour="white", size=.5, show.legend = NA,
-                   na.fill="grey",...){
+                   colour="white", size=.1, show.legend = NA,
+                   na.fill="grey",
+                   adapt.scales=T,...){
 
   # Load the segmentation to use
   geobrain = if(class(atlas) == "data.frame"){
-                    atlas
-    }else{
-         eval(as.name(atlas))
-    } %>%
+    atlas
+  }else{
+    eval(as.name(atlas))
+  }
+
+  if(position=="stacked"){
+    if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
+      stop("Cannot stack atlas. Check if atlas has medial and axial views.")
+    }
+    # Alter coordinates of the left side to stack ontop of right side
+    stack = geobrain %>%
+      dplyr::group_by(hemi,side) %>%
+      dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(min,max))
+    stack$lat_max[1] = ifelse(stack$lat_max[1] < 4.5,
+                              stack$lat_max[1]+.5,
+                              stack$lat_max[1])
+
+    geobrain = geobrain %>%
+
+      # Move right side over to the left
+      dplyr::mutate(lat=ifelse(hemi %in% "right",
+                               lat + (stack$lat_max[1]), lat)) %>%
+
+      # move right side on top of left, and swap the places of medial and lateral
+      dplyr::mutate(long=ifelse(hemi %in% "right" & side %in% "lateral" ,
+                                long - stack$long_min[3], long),
+                    long=ifelse(hemi %in% "right" & side %in% "medial" ,
+                                long +(stack$long_min[2]-stack$long_min[4]), long)
+      )
+  } # If stacked
+
+  # Remove data we don't want to plot
+  geobrain = geobrain %>%
     dplyr::filter(hemi %in% hemisphere) %>%
     dplyr::filter(side %in% view)
 
-  if(position=="stacked"){
-    # Alter coordinates of the left side to stack ontop of right side
-    stack = geobrain %>%
-      dplyr::filter(hemi %in% "right") %>%
-      dplyr::summarise(ymax=max(lat),xmax=max(long)) %>%
-      round(0)+1
-
-    geobrain = geobrain %>%
-      dplyr::mutate(lat=ifelse(hemi %in% "left",
-                               lat + stack$ymax, lat),
-                    long=ifelse(hemi %in% "left",
-                                long - stack$xmax, long)
-      )
-
-    # If stacked, and lateral view only, change coordinates some more for stacking.
-    if(length(view)==1){
-      if(view=="lateral"){
-        stack = geobrain %>%
-          dplyr::filter(hemi %in% "left") %>%
-          dplyr::summarise(xmin=min(long)) %>%
-          round(0)
-
-        geobrain = geobrain %>%
-          dplyr::mutate(long=ifelse(hemi %in% "left",
-                                    long - stack$xmin, long)
-          )
-      }else if(view=="medial"){
-        stack = geobrain %>%
-          dplyr::filter(hemi %in% "left") %>%
-          dplyr::summarise(xmax=max(long)) %>%
-          round(0)
-
-        geobrain = geobrain %>%
-          dplyr::mutate(long=ifelse(hemi %in% "left",
-                                    long + stack$xmax, long)
-          )
-
-      } # which view
-    } # if view
-  } # If stacked
-
-
-    # Filter data to single area if that is all you want.
-    if(!is.null(plot.areas)){
-      if(any(!plot.areas %in% geobrain$area)){
-        stop(paste("There is no", plot.areas,
-                   "in", atlas,"data. Check spelling. Options are:",
-                   paste0(geobrain$area %>% unique,collapse=", ")))
-      }
-      geobrain = geobrain %>% dplyr::filter(area %in% plot.areas)
+  # Filter data to single area if that is all you want.
+  if(!is.null(plot.areas)){
+    if(any(!plot.areas %in% geobrain$area)){
+      stop(paste("There is no", plot.areas,
+                 "in", atlas,"data. Check spelling. Options are:",
+                 paste0(geobrain$area %>% unique,collapse=", ")))
     }
+    geobrain = geobrain %>% dplyr::filter(area %in% plot.areas)
+  }
 
+  # Initiate plot, will create the "background" image
+  gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=group)) +
+    ggplot2::geom_polygon(
+      size=size,
+      colour=colour,
+      fill=na.fill,
+      alpha=na.alpha) +
+    ggplot2::coord_fixed()
 
-    gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=id)) +
+  # If mappings are provided, add polygons on top
+  if(!is.null(mapping)){
+
+    # Create duplicate data for mappings plot
+    geoData = geobrain
+
+    # If a data.frame has been supplied, merge it
+    if(!is.null(data))
+      geoData = suppressWarnings(suppressMessages(
+        geoData %>%
+          dplyr::left_join(data)
+      ))
+
+    # Plot the added polygons
+    gg = gg +
       ggplot2::geom_polygon(
+        data=geoData %>% stats::na.omit(),
+        mapping=mapping,
         size=size,
         colour=colour,
-        fill=na.fill,
-        alpha=na.alpha) +
-      ggplot2::coord_fixed()
+        show.legend = show.legend)
+  }
 
-    if(!is.null(mapping)){
-
-      geoData = geobrain
-      if(!is.null(data))
-          geoData = suppressWarnings(suppressMessages(
-            geoData %>%
-          dplyr::left_join(data)
-        ))
-
-      gg = gg +
-        ggplot2::geom_polygon(
-          data=geoData %>% stats::na.omit(),
-          mapping=mapping,
-          size=size,
-          colour=colour,
-          show.legend = show.legend)
-    }
-
-
-    pos = geobrain %>%
-      dplyr::group_by(hemi,side) %>%
-      dplyr::summarise(y=mean(lat), x=mean(long)) %>%
-      tidyr::gather(key,val, -c(1:2)) %>%
-      dplyr::group_by(hemi,key) %>%
-      dplyr::summarise(m=mean(val)) %>%
-      tidyr::spread(key,m)
+  # Scales may be adapted, for more convenient vieweing
+  if(adapt.scales){
 
     if(position == "stacked"){
+
+      pos = list(
+        x=geobrain %>%
+          dplyr::group_by(hemi) %>%
+          dplyr::summarise(val=mean(lat)),
+        y=geobrain %>%
+          dplyr::group_by(side) %>%
+          dplyr::summarise(val=mean(long))
+      )
+
       gg = gg +
         ggplot2::scale_y_continuous(
-          breaks=pos$y,
-          labels=pos$hemi) +
-        ggplot2::scale_x_continuous(breaks=NULL) +
-        ggplot2::labs(x=NULL, y="Hemisphere")
+          breaks=pos$x$val,
+          labels=pos$x$hemi) +
+        ggplot2::scale_x_continuous(
+          breaks=pos$y$val,
+          labels=pos$y$side
+        ) +
+        ggplot2::labs(x="side", y="hemisphere")
     }else{
+
+      pos = geobrain %>%
+        dplyr::group_by(hemi) %>%
+        dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(mean))
+
       gg = gg +
         ggplot2::scale_x_continuous(
-          breaks=pos$x,
+          breaks=pos$val,
           labels=pos$hemi) +
         ggplot2::scale_y_continuous(breaks=NULL)+
-        ggplot2::labs(y=NULL, x="Hemisphere")
+        ggplot2::labs(y=NULL, x="hemisphere")
     }
-
-    gg + theme_brain()
-
   }
+
+  gg + theme_brain()
+
+}
 
 
 

@@ -15,12 +15,13 @@
 #' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
 #'
 #' \describe{
-#'   \item{lat}{coordinates for the x-axis}
-#'   \item{long}{coordinates for the y-axis}
-#'   \item{area}{acronym of network}
-#'   \item{name}{full name of network}
+#'   \item{long}{coordinates for the x-axis}
+#'   \item{lat}{coordinates for the y-axis}
+#'   \item{area}{name of network}
 #'   \item{hemi}{name of the hemisphere (left, right)}
 #'   \item{side}{which side to view (medial, lateral)}
+#'   \item{region}{approximate cortical region}
+#'   \item{label}{unique name to each node}
 #' }
 #'
 #' @examples
