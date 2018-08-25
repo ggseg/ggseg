@@ -76,11 +76,13 @@ brain.pal.info <- data.frame(maxcol=unname(pal_list),
                              row.names=names(pal_list),
                              colorblind=FALSE)
 
-brain.pal <- function(n,name){
+brain_pal <- function(name,n="all",direction=1,unname=F){
 
   if(!(name %in% names(pal_list))){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
   }
+
+  if(n == "all") n = unname(pal_list[name])
 
   if(n < 3){
     warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
@@ -93,42 +95,53 @@ brain.pal <- function(n,name){
     n = unname(pal_list[name])
   }
 
-  brain.pals[[name]][1:n]
+  pal = brain.pals[[name]][1:n]
+
+  if (direction == -1) {
+    pal <- rev(pal)
+  }
+
+  if(unname){
+    pal = unname(pal)
+  }
+
+  pal
 }
 
 
-display.brain.pal <-
-  function (name="all", n="all", select=NULL, exact.n=TRUE, colorblindFriendly=FALSE) {
+display.brain.pal <- function (name="all",
+                               n="all") {
 
-    pals = as.data.frame(matrix(ncol=3,nrow=length(brain.pals)))
-    for(i in 1:nrow(pals)){
-      pals = stats::na.omit(rbind(pals,
-                           cbind(names(brain.pals)[i],
-                                 brain.pals[[i]],
-                                 seq(1,length(brain.pals[[i]])))))
-    }
-    names(pals) = c("atlas","colour","x")
+  pals = as.data.frame(matrix(ncol=3,nrow=length(brain.pals)))
+  for(i in 1:nrow(pals)){
+    pals = stats::na.omit(rbind(pals,
+                                cbind(names(brain.pals)[i],
+                                      brain.pals[[i]],
+                                      seq(1,length(brain.pals[[i]])))))
+  } #for i
+  names(pals) = c("atlas","colour","x")
 
-    if(name != "all"){
-      if(!(name %in% names(pal_list))){
-        stop(paste(name,"is not a valid palette name for brain.pal\n"))
-      }
-
-      if(n=="all") n = length(brain.pals[[name]])
-
-      if(n > pal_list[name]){
-        warning(paste("n too large, allowed maximum for palette",name,"is",unname(pal_list[name]),
-                      "\nDisplaying the palette you asked for with that many colors\n"))
-        n = unname(pal_list[name])
-      }
-
-      pals = pals %>%
-        dplyr::filter(atlas %in% name) %>%
-        dplyr::filter(x %in% seq(1,n))
+  if(name != "all"){
+    if(!(name %in% names(pal_list))){
+      stop(paste(name,"is not a valid palette name for brain.pal\n"))
     }
 
+    if(n=="all") n = length(brain.pals[[name]])
 
-    pals %>%
+    if(n > pal_list[name]){
+      warning(paste("n too large, allowed maximum for palette",name,"is",unname(pal_list[name]),
+                    "\nDisplaying the palette you asked for with that many colors\n"))
+      n = unname(pal_list[name])
+    }
+
+    pals = pals %>%
+      dplyr::filter(atlas %in% name) %>%
+      dplyr::filter(x %in% seq(1,n))
+  } # if name
+
+
+  pals %>%
     ggplot2::ggplot(ggplot2::aes(x=as.numeric(x), y=atlas, fill=I(colour))) +
-      ggplot2::geom_tile() + theme_brain() + labs(x=""ggplot2::labs
-  }
+    ggplot2::geom_tile() + theme_brain() + ggplot2::labs(x="")
+}
+
