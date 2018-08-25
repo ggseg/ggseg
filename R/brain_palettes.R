@@ -8,7 +8,41 @@ brain.pal.info <- data.frame(maxcol=unname(pal_list),
                              colorblind=FALSE)
 
 brain.pals = list(
-  dkt  = c(),
+dkt  = c(`medial wall`	= "#19051900"
+          `banks superior temporal`	= "#19642800"
+          `caudal anterior cingulate`	= "#7D64A00"0
+          `caudal middle frontal`	= "#64190000"
+          cuneus	= "#DC146400"
+          entorhinal	= "#DC140A00"
+          fusiform	= "#B4DC8C00"
+          `inferior parietal`	= "#DC3CDC00"
+          `inferior temporal`	= "#B4287800"
+          `isthmus cingulate`	= "#8C148C00"
+          lateraloccipital	= "#141E8C00"
+          `lateralorbito frontal`	= "#234B3200"
+          lingual	= "#E18C8C00"
+          `medial orbito frontal`	= "#C8234B00"
+          `middle temporal`	= "#A0643200"
+          parahippocampal	= "#14DC3C00"
+          `para central`	= "#3CDC3C00"
+          `pars opercularis`	= "#DCB48C00"
+          `pars orbitalis`	= "#14643200"
+          `pars triangularis`	= "#DC3C1400"
+          pericalcarine	= "#78643C00"
+          `post central`	= "#DC141400"
+          `posterior cingulate`	= "#DCB4DC00"
+          `pre central`	= "#3C14DC00"
+          precuneus	= "#A08CB400"
+          `rostral anterior cingulate`	= "#50148C00"
+          `rostral middle frontal`	= "#4B327D00"
+          `superior frontal`	= "#14DCA000"
+          `superior parietal`	= "#14B48C00"
+          `superior temporal`	= "#8CDCDC00"
+          supramarginal	= "#50A01400"
+          `frontal pole`	= "#64006400"
+          `temporal pole`	= "#46464600"
+          `transverse temporal`	= "#9696C800"
+          insula	= "#FFC02000"),
   yeo7 = c(visual = "#a153a2ff",
            somatomotor = "#6fabd2ff",
            `dorsal attention`= "#2c8b4bff",
@@ -33,7 +67,14 @@ brain.pals = list(
             "15" = "#041b80ff",
             "16" = "#fff937ff",
             "17" = "#cb4051ff"),
-  aseg =  c()
+  aseg =  c(Amygdala	= "#67FFFF00"
+            Caudate	= "#7ABADC00"
+            Hippocampus	= "#DCD81400"
+            `Lateral Ventricle`	= "#78128600"
+            Pallidum	= "#0D30FF00"
+            Putamen	= "#EC0DB000"
+            `Thalamus Proper`	= "#00760E00"
+            VentralDC	= "#A52A2A00")
 )
 
 
