@@ -69,30 +69,39 @@ brain.pals = list(
 )
 
 
-pal_list <- unlist(lapply(brain.pals,length))
-
-brain.pal.info <- data.frame(maxcol=unname(pal_list),
+brain.pal.info <- data.frame(atlas=names(unlist(lapply(brain.pals,length))),
+                             maxcol=unname(unlist(lapply(brain.pals,length))),
                              category="qual",
-                             row.names=names(pal_list),
                              colorblind=FALSE)
 
+#' Generate palettes from the ggbrain atlases
+#'
+#' \code{brain_pal} return HEX colours for the different ggbrain atlases.
+#'
+#' @param name String name of atlas
+#' @param n Number of colours to return (or "all" [default])
+#' @param direction Direction of  HEX, -1 reverses order
+#' @param unname logical, if colours are to be unnamed before returning
+#'
+#' @export
 brain_pal <- function(name,n="all",direction=1,unname=F){
 
-  if(!(name %in% names(pal_list))){
+  if(!(name %in% brain.pal.info$atlas)){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
   }
 
-  if(n == "all") n = unname(pal_list[name])
+  if(n == "all") n = brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]
 
   if(n < 3){
     warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
-    n=3
+    n = 3
   }
 
-  if(n > pal_list[name]){
-    warning(paste("n too large, allowed maximum for palette",name,"is",unname(pal_list[name]),
+  if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
+    warning(paste("n too large, allowed maximum for palette",name,"is",
+                  brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"],
                   "\nReturning the palette you asked for with that many colors\n"))
-    n = unname(pal_list[name])
+    n = unname(brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
   }
 
   pal = brain.pals[[name]][1:n]
@@ -108,7 +117,14 @@ brain_pal <- function(name,n="all",direction=1,unname=F){
   pal
 }
 
-
+#' Plot the colours of the atlases for selection
+#'
+#' \code{display.brain.pal} plots all the colours for each atlas.
+#'
+#' @param name String name of atlas
+#' @param n Number of colours to return (or "all" [default])
+#'
+#' @export
 display.brain.pal <- function (name="all",
                                n="all") {
 
@@ -122,16 +138,22 @@ display.brain.pal <- function (name="all",
   names(pals) = c("atlas","colour","x")
 
   if(name != "all"){
-    if(!(name %in% names(pal_list))){
+    if(!(name %in% brain.pal.info$atlas)){
       stop(paste(name,"is not a valid palette name for brain.pal\n"))
     }
 
-    if(n=="all") n = length(brain.pals[[name]])
+    if(n == "all") n = brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]
 
-    if(n > pal_list[name]){
-      warning(paste("n too large, allowed maximum for palette",name,"is",unname(pal_list[name]),
-                    "\nDisplaying the palette you asked for with that many colors\n"))
-      n = unname(pal_list[name])
+    if(n < 3){
+      warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
+      n = 3
+    }
+
+    if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
+      warning(paste("n too large, allowed maximum for palette",name,"is",
+                    brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"],
+                    "\nReturning the palette you asked for with that many colors\n"))
+      n = unname(brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
     }
 
     pals = pals %>%
