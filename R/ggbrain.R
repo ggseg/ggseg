@@ -134,8 +134,6 @@ ggbrain = function(data = NULL,atlas="dkt",
       ggplot2::geom_polygon(
         data=geoData %>% stats::na.omit(),
         mapping=mapping,
-        size=size,
-        #colour=colour,
         show.legend = show.legend)
   }
 
