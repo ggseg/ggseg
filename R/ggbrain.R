@@ -135,7 +135,7 @@ ggbrain = function(data = NULL,atlas="dkt",
         data=geoData %>% stats::na.omit(),
         mapping=mapping,
         size=size,
-        colour=colour,
+        #colour=colour,
         show.legend = show.legend)
   }
 
