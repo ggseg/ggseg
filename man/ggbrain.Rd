@@ -5,10 +5,10 @@
 \title{Plot brain parcellations}
 \usage{
 ggbrain(data = NULL, atlas = "dkt", plot.areas = NULL,
-  position = "dispersed", view = c("lateral", "medial", "axial"),
-  hemisphere = c("right", "left"), mapping = NULL, na.alpha = NA,
-  colour = "white", size = 0.1, show.legend = NA, na.fill = "grey",
-  adapt.scales = T, ...)
+  position = "dispersed", view = c("lateral", "medial", "axial",
+  "sagittal"), hemisphere = c("right", "left"), mapping = NULL,
+  na.alpha = NA, colour = "white", size = 0.1, show.legend = NA,
+  na.fill = "grey", adapt.scales = T, ...)
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a

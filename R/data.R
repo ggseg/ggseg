@@ -89,6 +89,61 @@
 #' data(yeo7)
 "yeo7"
 
+#' Yeo 7 Resting-state Cortical Parcellations
+#'
+#' Coordinate data for the resting-state networks of
+#' the Yeo 2011 17 networks.
+#'
+#' @docType data
+#' @name yeo17
+#' @usage data(yeo17)
+#'
+#' @format A data.frame with 8203 observations and 10 variables
+#'
+#' @keywords datasets
+#'
+#' @references Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
+#'
+#' \describe{
+#'   \item{long}{coordinates for the x-axis}
+#'   \item{lat}{coordinates for the y-axis}
+#'   \item{area}{name of network}
+#'   \item{hemi}{name of the hemisphere (left, right)}
+#'   \item{side}{which side to view (medial, lateral)}
+#'   \item{network}{network number (1:17)}
+#'   \item{label}{unique name to each node}
+#' }
+#'
+#' @examples
+#' data(yeo17)
+"yeo17"
+
+#' Mid-sagittal Parcellations
+#'
+#' Coordinate data for important structures in the mid-line
+#' sagittal view of the brain
+#'
+#' @docType data
+#' @name midsagittal
+#' @usage data(midsagittal)
+#'
+#' @format A data.frame with 2483 observations and 8 variables
+#'
+#' @keywords datasets
+#'
+#' \describe{
+#'   \item{long}{coordinates for the x-axis}
+#'   \item{lat}{coordinates for the y-axis}
+#'   \item{area}{name of region}
+#'   \item{hemi}{dummy name of the hemisphere}
+#'   \item{side}{which side to view (medial, lateral)}
+#' }
+#'
+#' @examples
+#' data(midsagittal)
+"midsagittal"
+
 
 #' ggbrain palettes
 #'

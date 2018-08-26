@@ -53,7 +53,7 @@
 ggbrain = function(data = NULL,atlas="dkt",
                    plot.areas=NULL,
                    position="dispersed",
-                   view=c("lateral","medial","axial"),
+                   view=c("lateral","medial","axial","sagittal"),
                    hemisphere = c("right","left"),
                    mapping = NULL, na.alpha=NA,
                    colour="white", size=.1, show.legend = NA,
