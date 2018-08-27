@@ -2,7 +2,7 @@ Plotting tool for brain atlases
 ================
 Athanasia Mowinckel & Didac Vidal Pineiro
 
-<img src="img/ggbrain_contemp.png" width="100px" /><img src="img/ggbrain_retro.png" width="100px" />
+<img src="img/ggbrain_contemp.png" width="200px" /><img src="img/ggbrain_retro.png" width="200px" />
 
 This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting. Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R and Matlab, and software for brain imaging to correctly visualise analysis results.
 
