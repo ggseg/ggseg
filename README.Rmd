@@ -8,6 +8,13 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r out.width="100px",echo=F}
+# All defaults
+knitr::include_graphics("img/ggbrain_contemp.png")
+knitr::include_graphics("img/ggbrain_retro.png")
+```
+
+
 This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting.
 Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R and Matlab, 
 and software for brain imaging to correctly visualise analysis results.

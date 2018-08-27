@@ -14,21 +14,21 @@ brain_pal <- function(name,n="all",direction=1,unname=F){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
   }
 
-  if(n == "all") n = brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]
-
-  if(n < 3){
+  if(length(n)>1){
+    n = n
+  }else   if(n == "all"){
+    n = seq(1,brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
+  }else if(n < 3){
     warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
-    n = 3
-  }
-
-  if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
+    n = seq(1:3)
+  }else if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
     warning(paste("n too large, allowed maximum for palette",name,"is",
                   brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"],
                   "\nReturning the palette you asked for with that many colors\n"))
-    n = unname(brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
+    n = seq(1,brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
   }
 
-  pal = brain.pals[[name]][1:n]
+  pal = brain.pals[[name]][n]
 
   if (direction == -1) {
     pal <- rev(pal)
