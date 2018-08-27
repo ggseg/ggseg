@@ -25,7 +25,7 @@ Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
   \item{area}{name of network}
   \item{hemi}{name of the hemisphere (left, right)}
   \item{side}{which side to view (medial, lateral)}
-  \item{network}{network number (1:7)}
+  \item{network}{network number (1:17)}
   \item{label}{unique name to each node}
 }
 }
