@@ -8,17 +8,10 @@ License: MIT
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 LazyData: true
-Imports: magrittr,
-    stringr,
-    utils,
-    lubridate,
-    stats,
-    shiny,
-    stringi,
-    tidyr,
-    dplyr,
-    purrr,
+Imports: dplyr,
     ggplot2
+    stats,
+    utils
 Suggests: knitr,
     rmarkdown,
     tidyverse
