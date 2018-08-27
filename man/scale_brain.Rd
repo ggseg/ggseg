@@ -5,10 +5,10 @@
 \alias{scale_fill_brain}
 \title{Colour scales from the ggbrain atlases}
 \usage{
-scale_colour_brain(palette = "dkt", n = "all", unname = F,
+scale_colour_brain(palette = "dkt", n = "all", unname = FALSE,
   direction = 1, aesthetics = "colour")
 
-scale_fill_brain(palette = "dkt", n = "all", unname = F,
+scale_fill_brain(palette = "dkt", n = "all", unname = FALSE,
   direction = 1, aesthetics = "fill")
 }
 \description{

@@ -4,21 +4,14 @@ Version: 0.0.0.9000
 Authors@R: c(person("Athanasia Mo", "Mowinckel", email = "a.m.mowinckel@psykologi.uio.no", role = c("aut", "cre")),
  person("Didac Vidal", "Pineiro", email = "d.v.pineiro@psykologi.uio.no", role = c("aut")))
 Description: This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 LazyData: true
-Imports: magrittr,
-    stringr,
-    utils,
-    lubridate,
+Imports: dplyr,
+    ggplot2,
     stats,
-    shiny,
-    stringi,
-    tidyr,
-    dplyr,
-    purrr,
-    ggplot2
+    utils
 Suggests: knitr,
     rmarkdown,
     tidyverse
