@@ -1,0 +1,9 @@
+utils::globalVariables(c("area",
+                         "atlas",
+                         "colour",
+                         "group",
+                         "hemi",
+                         "lat",
+                         "long",
+                         "side",
+                         "x"))

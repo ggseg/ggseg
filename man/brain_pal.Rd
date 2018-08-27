@@ -4,7 +4,7 @@
 \alias{brain_pal}
 \title{Generate palettes from the ggbrain atlases}
 \usage{
-brain_pal(name, n = "all", direction = 1, unname = F)
+brain_pal(name, n = "all", direction = 1, unname = FALSE)
 }
 \arguments{
 \item{name}{String name of atlas}
