@@ -8,7 +8,7 @@
 #' @param unname logical, if colours are to be unnamed before returning
 #'
 #' @export
-brain_pal <- function(name,n="all",direction=1,unname=F){
+brain_pal <- function(name,n="all",direction=1,unname=FALSE){
 
   if(!(name %in% brain.pal.info$atlas)){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
@@ -52,14 +52,12 @@ brain_pal <- function(name,n="all",direction=1,unname=F){
 display.brain.pal <- function (name="all",
                                n="all") {
 
-  pals = as.data.frame(matrix(ncol=3,nrow=length(brain.pals)))
-  for(i in 1:nrow(pals)){
-    pals = stats::na.omit(rbind(pals,
-                                cbind(names(brain.pals)[i],
-                                      brain.pals[[i]],
-                                      seq(1,length(brain.pals[[i]])))))
-  } #for i
-  names(pals) = c("atlas","colour","x")
+  pals = do.call(dplyr::bind_rows,
+                 lapply(names(brain.pals),
+                        function(nm) data.frame(atlas = nm,
+                                                colour = brain.pals[[nm]],
+                                                x = seq_along(brain.pals[[nm]]),
+                                                stringsAsFactors = FALSE)))
 
   if(name != "all"){
     if(!(name %in% brain.pal.info$atlas)){
@@ -81,8 +79,7 @@ display.brain.pal <- function (name="all",
     }
 
     pals = pals %>%
-      dplyr::filter(atlas %in% name) %>%
-      dplyr::filter(x %in% seq(1,n))
+      dplyr::filter(atlas %in% name, x %in% seq(1,n))
   } # if name
 
 
