@@ -3,7 +3,7 @@
 \docType{data}
 \name{yeo17}
 \alias{yeo17}
-\title{Yeo 7 Resting-state Cortical Parcellations}
+\title{Yeo 17 Resting-state Cortical Parcellations}
 \format{A data.frame with 8203 observations and 10 variables}
 \usage{
 data(yeo17)

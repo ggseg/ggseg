@@ -36,10 +36,9 @@
 #'
 #' @return a ggplot object
 #'
-#' @importFrom dplyr select group_by summarise_at vars funs mutate filter left_join
+#' @importFrom dplyr select group_by summarise_at vars funs mutate filter left_join "%>%"
 #' @importFrom ggplot2 ggplot aes geom_polygon coord_fixed scale_y_continuous scale_x_continuous labs
 #' @importFrom stats na.omit
-#' @importFrom magrittr "%>%"
 #'
 #' @examples
 #' ggbrain()
@@ -58,9 +57,9 @@ ggbrain = function(data = NULL,atlas="dkt",
                    mapping = NULL, na.alpha=NA,
                    colour="white", size=.1, show.legend = NA,
                    na.fill="grey",
-                   adapt.scales=T,...){
+                   adapt.scales=TRUE,...){
 
-  geobrain = if(typeof(atlas) != "character"){
+  geobrain = if(!is.character(atlas)){
     atlas
   }else{
     get(atlas)
@@ -94,8 +93,7 @@ ggbrain = function(data = NULL,atlas="dkt",
 
   # Remove data we don't want to plot
   geobrain = geobrain %>%
-    dplyr::filter(hemi %in% hemisphere) %>%
-    dplyr::filter(side %in% view)
+    dplyr::filter(hemi %in% hemisphere, side %in% view)
 
   # Filter data to single area if that is all you want.
   if(!is.null(plot.areas)){

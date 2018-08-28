@@ -89,7 +89,7 @@
 #' data(yeo7)
 "yeo7"
 
-#' Yeo 7 Resting-state Cortical Parcellations
+#' Yeo 17 Resting-state Cortical Parcellations
 #'
 #' Coordinate data for the resting-state networks of
 #' the Yeo 2011 17 networks.
