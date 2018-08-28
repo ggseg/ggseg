@@ -8,6 +8,7 @@ License: MIT
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 LazyData: true
+Depends: ggplot2
 Imports: magrittr,
     stringr,
     utils,
@@ -17,8 +18,7 @@ Imports: magrittr,
     stringi,
     tidyr,
     dplyr,
-    purrr,
-    ggplot2
+    purrr
 Suggests: knitr,
     rmarkdown,
     tidyverse
