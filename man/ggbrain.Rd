@@ -64,6 +64,7 @@ Freesurfer automatic subcortical segmentation of a brain volume}
 }
 }
 \examples{
+library(ggplot2)
 ggbrain()
 ggbrain(na.fill = "transparent",mapping=aes(fill=area))
 ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
