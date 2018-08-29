@@ -14,7 +14,9 @@ Imports: dplyr,
     stats,
     utils,
     tidyr
-Suggests: knitr,
+Suggests: 
+    knitr,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    covr
 VignetteBuilder: knitr

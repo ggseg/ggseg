@@ -3,22 +3,25 @@
 \name{scale_colour_brain}
 \alias{scale_colour_brain}
 \alias{scale_fill_brain}
+\alias{scale_brain}
 \title{Colour scales from the ggbrain atlases}
 \usage{
-scale_colour_brain(name = "dkt", n = "all", unname = FALSE,
-  direction = 1, aesthetics = "colour")
+scale_colour_brain(name = "dkt", ...)
 
-scale_fill_brain(name = "dkt", n = "all", unname = FALSE,
-  direction = 1, aesthetics = "fill")
+scale_colour_brain(name = "dkt", ...)
+
+scale_fill_brain(name = "dkt", ...)
+
+scale_brain(name = "dkt", ..., aesthetics = c("colour", "color",
+  "fill"))
 }
 \arguments{
 \item{name}{String name of atlas}
 
-\item{n}{Number of colours to return (or "all" [default])}
+\item{...}{additional arguments to pass to \code{\link{brain_pal}}}
 
-\item{unname}{logical, if colours are to be unnamed before returning}
-
-\item{direction}{Direction of  HEX, -1 reverses order}
+\item{aesthetics}{You can scale the brain mor generally with \code{scale_brain}
+and a switch of the aesthetics.}
 }
 \description{
 The `brain` scales provides colours for the different atlases in the
@@ -33,4 +36,8 @@ The following palettes are available for use with these scales:
 }
 }
 
-\concept{colour scales}
+\examples{
+scale_brain()
+scale_colour_brain()
+scale_fill_brain()
+}

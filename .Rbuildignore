@@ -1,3 +1,4 @@
+^codecov\.yml$
 ^data-raw$
 ^README\.Rmd$
 ^appveyor\.yml$
@@ -5,4 +6,4 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-img/.*
+img

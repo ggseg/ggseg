@@ -10,7 +10,11 @@
 #' @export
 brain_pal <- function(name,n="all",direction=1,unname=FALSE){
 
-  if(!(name %in% brain.pal.info$atlas)){
+  # for global variable notes
+  brain.pal.info = ggbrain::brain.pal.info
+  brain.pals = ggbrain::brain.pals
+
+    if(!(name %in% brain.pal.info$atlas)){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
   }
 
@@ -51,6 +55,10 @@ brain_pal <- function(name,n="all",direction=1,unname=FALSE){
 #' @export
 display.brain.pal <- function (name="all",
                                n="all") {
+
+  # for global variable notes
+  brain.pal.info = ggbrain::brain.pal.info
+  brain.pals = ggbrain::brain.pals
 
   pals = do.call(dplyr::bind_rows,
                  lapply(names(brain.pals),
