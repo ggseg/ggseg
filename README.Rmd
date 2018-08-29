@@ -4,6 +4,9 @@ author: "Athanasia Mowinckel & Didac Vidal Pineiro"
 output: github_document
 ---
 
+  [![Travis build status](https://travis-ci.com/LCBC-UiO/ggbrain-1.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggbrain-1)
+    [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggbrain-1?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggbrain-1)
+    
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

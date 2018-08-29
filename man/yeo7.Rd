@@ -4,7 +4,16 @@
 \name{yeo7}
 \alias{yeo7}
 \title{Yeo 7 Resting-state Cortical Parcellations}
-\format{A data.frame with 8203 observations and 10 variables}
+\format{A data.frame with 8203 observations and 10 variables
+\describe{
+  \item{long}{coordinates for the x-axis}
+  \item{lat}{coordinates for the y-axis}
+  \item{area}{name of network}
+  \item{hemi}{name of the hemisphere (left, right)}
+  \item{side}{which side to view (medial, lateral)}
+  \item{network}{network number (1:7)}
+  \item{label}{unique name to each node}
+}}
 \usage{
 data(yeo7)
 }
@@ -18,15 +27,5 @@ data(yeo7)
 \references{
 Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
 (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
-
-\describe{
-  \item{long}{coordinates for the x-axis}
-  \item{lat}{coordinates for the y-axis}
-  \item{area}{name of network}
-  \item{hemi}{name of the hemisphere (left, right)}
-  \item{side}{which side to view (medial, lateral)}
-  \item{network}{network number (1:7)}
-  \item{label}{unique name to each node}
-}
 }
 \keyword{datasets}
