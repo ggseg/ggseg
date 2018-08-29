@@ -3,9 +3,12 @@ Plotting tool for brain atlases
 Athanasia Mowinckel & Didac Vidal Pineiro
 
 [![Travis build
-status](https://travis-ci.com/LCBC-UiO/ggbrain-1.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggbrain-1)
+status](https://travis-ci.com/LCBC-UiO/ggbrain.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggbrain)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggbrain-1?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggbrain-1)
+status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggbrain?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggbrain)
+
+[![Coverage
+status](https://codecov.io/gh/LCBC-UiO/ggbrain/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggbrain?branch=master)
 
 <img src="img/ggbrain_contemp.png" width="200px" /><img src="img/ggbrain_retro.png" width="200px" />
 
