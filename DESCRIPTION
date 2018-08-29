@@ -1,6 +1,6 @@
 Package: ggbrain
 Title: Plotting tool for brain atlases
-Version: 1.0
+Version: 1.1
 Authors@R: c(person("Athanasia Mo", "Mowinckel", email = "a.m.mowinckel@psykologi.uio.no", role = c("aut", "cre")),
  person("Didac Vidal", "Pineiro", email = "d.v.pineiro@psykologi.uio.no", role = c("aut")))
 Description: This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting.
