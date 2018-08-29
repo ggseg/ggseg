@@ -11,6 +11,13 @@ scale_colour_brain(palette = "dkt", n = "all", unname = FALSE,
 scale_fill_brain(palette = "dkt", n = "all", unname = FALSE,
   direction = 1, aesthetics = "fill")
 }
+\arguments{
+\item{n}{Number of colours to return (or "all" [default])}
+
+\item{unname}{logical, if colours are to be unnamed before returning}
+
+\item{direction}{Direction of  HEX, -1 reverses order}
+}
 \description{
 The `brain` scales provides colours for the different atlases in the
 package, according to the colours used in the papers where the
