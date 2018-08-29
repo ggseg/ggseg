@@ -5,13 +5,15 @@
 \alias{scale_fill_brain}
 \title{Colour scales from the ggbrain atlases}
 \usage{
-scale_colour_brain(palette = "dkt", n = "all", unname = FALSE,
+scale_colour_brain(name = "dkt", n = "all", unname = FALSE,
   direction = 1, aesthetics = "colour")
 
-scale_fill_brain(palette = "dkt", n = "all", unname = FALSE,
+scale_fill_brain(name = "dkt", n = "all", unname = FALSE,
   direction = 1, aesthetics = "fill")
 }
 \arguments{
+\item{name}{String name of atlas}
+
 \item{n}{Number of colours to return (or "all" [default])}
 
 \item{unname}{logical, if colours are to be unnamed before returning}
