@@ -12,6 +12,7 @@
 #' }
 #'
 #' @family colour scales
+#' @inheritParams brain_pal
 #'
 #' @rdname scale_brain
 #' @export

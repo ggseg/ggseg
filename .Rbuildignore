@@ -1,6 +1,8 @@
+^data-raw$
 ^README\.Rmd$
 ^appveyor\.yml$
 ^\.travis\.yml$
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+img/.*

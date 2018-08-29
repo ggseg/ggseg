@@ -8,7 +8,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.0
 LazyData: true
-Depends: ggplot2
 Imports: dplyr,
     ggplot2,
     stats,
