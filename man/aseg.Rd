@@ -4,7 +4,15 @@
 \name{aseg}
 \alias{aseg}
 \title{Freesurfer automatic subcortical segmentation of a brain volume}
-\format{A data.frame with 2702 observations and 9 variables}
+\format{A data.frame with 2702 observations and 9 variables
+\describe{
+  \item{lat}{coordinates for the x-axis}
+  \item{long}{coordinates for the y-axis}
+  \item{area}{acronym of network}
+  \item{name}{full name of network}
+  \item{hemi}{name of the hemisphere (left, right)}
+  \item{side}{which side to view (medial, lateral,axial)}
+}}
 \usage{
 data(aseg)
 }
@@ -18,14 +26,5 @@ data(aseg)
 \references{
 Fischl et al., (2002). Neuron, 33:341-355
 (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
-
-\describe{
-  \item{lat}{coordinates for the x-axis}
-  \item{long}{coordinates for the y-axis}
-  \item{area}{acronym of network}
-  \item{name}{full name of network}
-  \item{hemi}{name of the hemisphere (left, right)}
-  \item{side}{which side to view (medial, lateral,axial)}
-}
 }
 \keyword{datasets}

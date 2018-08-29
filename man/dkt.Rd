@@ -4,7 +4,17 @@
 \name{dkt}
 \alias{dkt}
 \title{Desikan-Killiany Cortical Atlas}
-\format{A data.frame with 10913 observations and 11 variables}
+\format{A data.frame with 10913 observations and 11 variables
+\describe{
+  \item{long}{coordinates for the x-axis}
+  \item{lat}{coordinates for the y-axis}
+  \item{area}{name of region}
+  \item{hemi}{name of the hemisphere (left, right)}
+  \item{side}{which side to view (medial, lateral)}
+  \item{acronym}{abbreviated name of region}
+  \item{lobe}{lobe location}
+  \item{label}{label from recon-all segmentation}
+}}
 \usage{
 data(dkt)
 }
@@ -18,16 +28,5 @@ data(dkt)
 \references{
 Fischl et al. (2004) Cerebral Cortex 14:11-22
 (\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
-
-\describe{
-  \item{long}{coordinates for the x-axis}
-  \item{lat}{coordinates for the y-axis}
-  \item{area}{name of region}
-  \item{hemi}{name of the hemisphere (left, right)}
-  \item{side}{which side to view (medial, lateral)}
-  \item{acronym}{abbreviated name of region}
-  \item{lobe}{lobe location}
-  \item{label}{label from recon-all segmentation}
-}
 }
 \keyword{datasets}
