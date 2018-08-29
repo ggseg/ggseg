@@ -17,13 +17,13 @@
 #' @rdname scale_brain
 #' @export
 #' @importFrom ggplot2 scale_colour_manual
-scale_colour_brain <- function(palette = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "colour") {
-  ggplot2::scale_colour_manual(values = brain_pal(palette, n=n, direction=direction, unname=unname))
+scale_colour_brain <- function(name = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "colour") {
+  ggplot2::scale_colour_manual(values = brain_pal(name = name, n=n, direction=direction, unname=unname))
 }
 
 #' @export
 #' @rdname scale_brain
 #' @importFrom ggplot2 scale_fill_manual
-scale_fill_brain <- function(palette = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "fill") {
-  ggplot2::scale_fill_manual(values = brain_pal(palette, n=n, direction=direction, unname=unname))
+scale_fill_brain <- function(name = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "fill") {
+  ggplot2::scale_fill_manual(values = brain_pal(name = name, n=n, direction=direction, unname=unname))
 }
