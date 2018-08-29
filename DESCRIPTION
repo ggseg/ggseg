@@ -17,6 +17,5 @@ Imports: dplyr,
 Suggests: 
     knitr,
     rmarkdown,
-    tidyverse,
     covr
 VignetteBuilder: knitr
