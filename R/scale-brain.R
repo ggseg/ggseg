@@ -21,30 +21,30 @@
 #' scale_brain()
 #' scale_colour_brain()
 #' scale_fill_brain()
-scale_colour_brain <- function(name = "dkt", ...) {
+scale_colour_brain <- function(...) {
   scale_brain(..., aesthetics = "colour")
   }
 
 #' @rdname scale_brain
 #' @export
 #' @importFrom ggplot2 scale_color_manual
-scale_colour_brain <- function(name = "dkt", ...) {
+scale_color_brain <- function(...) {
   scale_brain(..., aesthetics = "color")
 }
 
 #' @export
 #' @rdname scale_brain
 #' @importFrom ggplot2 scale_fill_manual
-scale_fill_brain <- function(name = "dkt", ...) {
+scale_fill_brain <- function(...) {
   scale_brain(..., aesthetics = "fill")
 }
 
 #' @export
-#' @param aesthetics You can scale the brain mor generally with \code{scale_brain}
-#' and a switch of the aesthetics.
+#' @param aesthetics You can scale the brain more generally with \code{scale_brain}
+#' and a switch off the aesthetics.
 #' @rdname scale_brain
-scale_brain = function(name = "dkt", ..., aesthetics = c("colour", "color", "fill")) {
-  pal = brain_pal(name = name, ...)
+scale_brain = function(name = "dkt", unname=FALSE, ..., aesthetics = c("colour", "color", "fill")) {
+  pal = brain_pal(name = name, unname=unname,...)
   aesthetics = match.arg(aesthetics)
   func = switch(aesthetics,
                 color =   ggplot2::scale_color_manual,

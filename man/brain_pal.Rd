@@ -13,7 +13,8 @@ brain_pal(name, n = "all", direction = 1, unname = FALSE)
 
 \item{direction}{Direction of  HEX, -1 reverses order}
 
-\item{unname}{logical, if colours are to be unnamed before returning}
+\item{unname}{logical, if colours are to be unnamed before returning.
+Neccessary if applying palette to other data than the brain atlas it comes from.}
 }
 \description{
 \code{brain_pal} return HEX colours for the different ggseg atlases.

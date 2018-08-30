@@ -5,7 +5,8 @@
 #' @param name String name of atlas
 #' @param n Number of colours to return (or "all" [default])
 #' @param direction Direction of  HEX, -1 reverses order
-#' @param unname logical, if colours are to be unnamed before returning
+#' @param unname logical, if colours are to be unnamed before returning.
+#' Neccessary if applying palette to other data than the brain atlas it comes from.
 #'
 #' @export
 brain_pal <- function(name,n="all",direction=1,unname=FALSE){
@@ -14,13 +15,13 @@ brain_pal <- function(name,n="all",direction=1,unname=FALSE){
   brain.pal.info = ggseg::brain.pal.info
   brain.pals = ggseg::brain.pals
 
-    if(!(name %in% brain.pal.info$atlas)){
+  if(!(name %in% brain.pal.info$atlas)){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
   }
 
   if(length(n)>1){
     n = n
-  }else   if(n == "all"){
+  }else if(n == "all"){
     n = seq(1,brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
   }else if(n < 3){
     warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
@@ -30,9 +31,11 @@ brain_pal <- function(name,n="all",direction=1,unname=FALSE){
                   brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"],
                   "\nReturning the palette you asked for with that many colors\n"))
     n = seq(1,brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
+  }else{
+    n = seq(1,n)
   }
 
-  pal = brain.pals[[name]][n]
+  pal = brain.pals[[name]]
 
   if (direction == -1) {
     pal <- rev(pal)
@@ -42,7 +45,7 @@ brain_pal <- function(name,n="all",direction=1,unname=FALSE){
     pal = unname(pal)
   }
 
-  pal
+  pal[n]
 }
 
 #' Plot the colours of the atlases for selection
@@ -72,26 +75,36 @@ display.brain.pal <- function (name="all",
       stop(paste(name,"is not a valid palette name for brain.pal\n"))
     }
 
-    if(n == "all") n = brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]
+    if(n == "all") n = seq(1,brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
 
-    if(n < 3){
+    if(length(n)>1){
+      n = n
+    }else if(n < 3){
       warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
-      n = 3
-    }
-
-    if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
+      n = seq(1,3)
+    }else  if(n > brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]){
       warning(paste("n too large, allowed maximum for palette",name,"is",
                     brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"],
                     "\nReturning the palette you asked for with that many colors\n"))
-      n = unname(brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"])
+      n = seq(1:unname(brain.pal.info[brain.pal.info$atlas %in% name,"maxcol"]))
     }
 
-    pals = pals %>%
-      dplyr::filter(atlas %in% name, x %in% seq(1,n))
-  } # if name
+  }else{
+    name = brain.pal.info$atlas
+
+    if(length(n) > 1){
+      n = n
+    }else if(n == "all"){
+      n = seq(1, max(brain.pal.info$maxcol))
+    }else{
+      n = seq(1,n)
+    }
+  }# if name
 
 
   pals %>%
+    dplyr::filter(atlas %in% name) %>%
+    dplyr::filter(x %in% n) %>%
     ggplot2::ggplot(ggplot2::aes(x=as.numeric(x), y=atlas, fill=I(colour))) +
     ggplot2::geom_tile() + theme_brain() + ggplot2::labs(x="")
 }
