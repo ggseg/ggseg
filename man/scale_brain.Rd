@@ -4,7 +4,7 @@
 \alias{scale_colour_brain}
 \alias{scale_fill_brain}
 \alias{scale_brain}
-\title{Colour scales from the ggbrain atlases}
+\title{Colour scales from the ggseg atlases}
 \usage{
 scale_colour_brain(name = "dkt", ...)
 

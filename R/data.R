@@ -141,25 +141,25 @@
 "midsagittal"
 
 
-#' ggbrain palettes
+#' ggseg palettes
 #'
 #' @docType data
 #' @name brain.pals
 #' @usage data(brain.pals)
 #'
-#' @format A list of palettes for each atlas in ggbrain.
+#' @format A list of palettes for each atlas in ggseg.
 #'
 #' @keywords palettes
 "brain.pals"
 
 
-#' Information on ggbrain atlas palettes
+#' Information on ggseg atlas palettes
 #'
 #' @docType data
 #' @name brain.pal.info
 #' @usage data(brain.pal.info)
 #'
-#' @format A data.frame summarising the ggbrain palettes.
+#' @format A data.frame summarising the ggseg palettes.
 #'
 #' @keywords palettes
 "brain.pal.info"
