@@ -3,12 +3,12 @@
 \docType{data}
 \name{brain.pal.info}
 \alias{brain.pal.info}
-\title{Information on ggbrain atlas palettes}
-\format{A data.frame summarising the ggbrain palettes.}
+\title{Information on ggseg atlas palettes}
+\format{A data.frame summarising the ggseg palettes.}
 \usage{
 data(brain.pal.info)
 }
 \description{
-Information on ggbrain atlas palettes
+Information on ggseg atlas palettes
 }
 \keyword{palettes}

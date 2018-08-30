@@ -1,4 +1,4 @@
-#' Colour scales from the ggbrain atlases
+#' Colour scales from the ggseg atlases
 #'
 #' @description
 #' The `brain` scales provides colours for the different atlases in the
