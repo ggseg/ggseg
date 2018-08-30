@@ -1,20 +1,21 @@
 Package: ggbrain
 Title: Plotting tool for brain atlases
-Version: 1.0
+Version: 1.1
 Authors@R: c(person("Athanasia Mo", "Mowinckel", email = "a.m.mowinckel@psykologi.uio.no", role = c("aut", "cre")),
  person("Didac Vidal", "Pineiro", email = "d.v.pineiro@psykologi.uio.no", role = c("aut")))
 Description: This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.0
+Depends: R (>= 2.10)
 LazyData: true
-Depends: ggplot2
 Imports: dplyr,
     ggplot2,
     stats,
     utils,
     tidyr
-Suggests: knitr,
+Suggests: 
+    knitr,
     rmarkdown,
-    tidyverse
+    covr
 VignetteBuilder: knitr

@@ -4,9 +4,16 @@
 \name{midsagittal}
 \alias{midsagittal}
 \title{Mid-sagittal Parcellations}
-\format{A data.frame with 2483 observations and 8 variables}
+\format{A data.frame with 2483 observations and 8 variables
+\describe{
+  \item{long}{coordinates for the x-axis}
+  \item{lat}{coordinates for the y-axis}
+  \item{area}{name of region}
+  \item{hemi}{dummy name of the hemisphere}
+  \item{side}{which side to view (medial, lateral)}
+}}
 \usage{
-data(midsagittal)
+midsagittal
 }
 \description{
 Coordinate data for important structures in the mid-line
@@ -15,24 +22,4 @@ sagittal view of the brain
 \examples{
 data(midsagittal)
 }
-\keyword{(medial,}
-\keyword{\describe{}
-\keyword{\item{area}{name}
-\keyword{\item{hemi}{dummy}
-\keyword{\item{lat}{coordinates}
-\keyword{\item{long}{coordinates}
-\keyword{\item{side}{which}
 \keyword{datasets}
-\keyword{for}
-\keyword{hemisphere}}
-\keyword{lateral)}}
-\keyword{name}
-\keyword{of}
-\keyword{region}}
-\keyword{side}
-\keyword{the}
-\keyword{to}
-\keyword{view}
-\keyword{x-axis}}
-\keyword{y-axis}}
-\keyword{}}

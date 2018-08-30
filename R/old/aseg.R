@@ -7,12 +7,8 @@
 #' @name aseg
 #' @usage data(aseg)
 #'
-#' @format A data.frame with columns for area, hemisphere (left, right) and view (lateral, medial)
-#'
 #' @keywords datasets
-#'
-#' @references Fischl et al., (2002). Neuron, 33:341-355
-#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
+#' @format A data.frame with columns for area, hemisphere (left, right) and view (lateral, medial)
 #'
 #' \describe{
 #'   \item{lat}{coordinates for the x-axis}
@@ -22,6 +18,9 @@
 #'   \item{hemi}{name of the hemisphere (left, right)}
 #'   \item{side}{which side to view (medial, lateral,axial)}
 #' }
+#' @references Fischl et al., (2002). Neuron, 33:341-355
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
+#'
 #'
 #' @examples
 #' data(aseg)

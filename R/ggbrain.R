@@ -19,7 +19,10 @@
 #' @param colour String or HEX code for the colour of the outlines of each area
 #' @param size Numeric, size of the line outlining each area
 #' @param show.legend logical, toggle on or off legend.
-#' @param ...
+#' @param adapt.scales if \code{TRUE}, then the axes will
+#' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
+#' longitude values.  Also affected by \code{position} argument
+#' @param ... not used
 #'
 #' @details
 #' \describe{
@@ -41,10 +44,15 @@
 #' @importFrom stats na.omit
 #'
 #' @examples
+#' library(ggplot2)
 #' ggbrain()
 #' ggbrain(na.fill = "transparent",mapping=aes(fill=area))
 #' ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 #' ggbrain(atlas="yeo7")
+#' ggbrain(adapt.scales = FALSE ,position = "stacked")
+#' ggbrain(adapt.scales = TRUE ,position = "stacked")
+#' ggbrain(adapt.scales = TRUE)
+#' ggbrain(adapt.scales = FALSE)
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'

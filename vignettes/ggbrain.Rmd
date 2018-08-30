@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r setup, include=F}
-knitr::opts_chunk$set(eval=T)
+knitr::opts_chunk$set(eval=TRUE)
 ```
 
 ## Introduction
@@ -22,7 +22,7 @@ It will create a base plot of the aparc brain segmentations.
 
 ```{r start}
 library(ggbrain)
-library(tidyverse)
+library(ggplot2)
 ggbrain()
 ```
 
@@ -86,9 +86,11 @@ Here we create some data with 4 rows, and an `area` and `p` column. We provide t
 that dictates the colour of the area.
 
 ```{r datasupp}
-someData = list(area=c("transverse temporal", "insula","pre central","superior parietal"), 
-                p=sample(seq(0,.5,.001), 4)) %>% 
-  as.data.frame(stringsAsFactors=F)
+someData = data.frame(
+  area = c("transverse temporal", "insula",
+           "pre central","superior parietal"), 
+  p = sample(seq(0,.5,.001), 4),
+  stringsAsFactors = FALSE)
 
 ggbrain(data=someData, mapping=aes(fill=p))
 
@@ -120,12 +122,13 @@ If your data has different statistics for different groups, and you want to plot
 The data needs to be in long format for this to work, like ggplot likes it.
 
 ```{r datasupp3}
-someData = list(area=rep(c("transversetemporal", "insula","precentral","superiorparietal"),2), 
-                p=sample(seq(0,.5,.001), 8),
-                AgeG = c(rep("Young",4), rep("Old",4))
-                ) %>% 
-  as.data.frame(stringsAsFactors=F)
-
+someData = data.frame(
+  area = rep(c("transversetemporal", "insula",
+               "precentral","superiorparietal"),2), 
+  p = sample(seq(0,.5,.001), 8),
+  AgeG = c(rep("Young",4), rep("Old",4)),
+  stringsAsFactors = FALSE)
+  
 ggbrain(data=someData, mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom")

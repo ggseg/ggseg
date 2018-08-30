@@ -6,13 +6,12 @@
 #' @docType data
 #' @name dkt
 #' @usage data(dkt)
-#'
-#' @format A data.frame with 10913 observations and 11 variables
 #' @keywords datasets
 #'
 #' @references Fischl et al. (2004) Cerebral Cortex 14:11-22
 #' (\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
 #'
+#' @format A data.frame with 10913 observations and 11 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}
@@ -37,13 +36,13 @@
 #' @name aseg
 #' @usage data(aseg)
 #'
-#' @format A data.frame with 2702 observations and 9 variables
 #'
 #' @keywords datasets
 #'
 #' @references Fischl et al., (2002). Neuron, 33:341-355
 #' (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
 #'
+#' @format A data.frame with 2702 observations and 9 variables
 #' \describe{
 #'   \item{lat}{coordinates for the x-axis}
 #'   \item{long}{coordinates for the y-axis}
@@ -68,13 +67,13 @@
 #' @name yeo7
 #' @usage data(yeo7)
 #'
-#' @format A data.frame with 8203 observations and 10 variables
 #'
 #' @keywords datasets
 #'
 #' @references Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
 #' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
 #'
+#' @format A data.frame with 8203 observations and 10 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}
@@ -98,13 +97,13 @@
 #' @name yeo17
 #' @usage data(yeo17)
 #'
-#' @format A data.frame with 8203 observations and 10 variables
 #'
 #' @keywords datasets
 #'
 #' @references Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
 #' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
 #'
+#' @format A data.frame with 8203 observations and 10 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}
@@ -126,12 +125,9 @@
 #'
 #' @docType data
 #' @name midsagittal
-#' @usage data(midsagittal)
-#'
-#' @format A data.frame with 2483 observations and 8 variables
-#'
 #' @keywords datasets
 #'
+#' @format A data.frame with 2483 observations and 8 variables
 #' \describe{
 #'   \item{long}{coordinates for the x-axis}
 #'   \item{lat}{coordinates for the y-axis}

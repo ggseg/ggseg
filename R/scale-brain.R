@@ -11,18 +11,46 @@
 #'   \item{Qualitative}{dkt, yeo7, yeo17, aseg}
 #' }
 #'
-#' @family colour scales
+#' @param name String name of atlas
+#' @param ... additional arguments to pass to \code{\link{brain_pal}}
 #'
 #' @rdname scale_brain
 #' @export
 #' @importFrom ggplot2 scale_colour_manual
-scale_colour_brain <- function(palette = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "colour") {
-  ggplot2::scale_colour_manual(values = brain_pal(palette, n=n, direction=direction, unname=unname))
+#' @examples
+#' scale_brain()
+#' scale_colour_brain()
+#' scale_fill_brain()
+scale_colour_brain <- function(name = "dkt", ...) {
+  scale_brain(..., aesthetics = "colour")
+  }
+
+#' @rdname scale_brain
+#' @export
+#' @importFrom ggplot2 scale_color_manual
+scale_colour_brain <- function(name = "dkt", ...) {
+  scale_brain(..., aesthetics = "color")
 }
 
 #' @export
 #' @rdname scale_brain
 #' @importFrom ggplot2 scale_fill_manual
-scale_fill_brain <- function(palette = "dkt", n="all", unname = FALSE, direction = 1, aesthetics = "fill") {
-  ggplot2::scale_fill_manual(values = brain_pal(palette, n=n, direction=direction, unname=unname))
+scale_fill_brain <- function(name = "dkt", ...) {
+  scale_brain(..., aesthetics = "fill")
 }
+
+#' @export
+#' @param aesthetics You can scale the brain mor generally with \code{scale_brain}
+#' and a switch of the aesthetics.
+#' @rdname scale_brain
+scale_brain = function(name = "dkt", ..., aesthetics = c("colour", "color", "fill")) {
+  pal = brain_pal(name = name, ...)
+  aesthetics = match.arg(aesthetics)
+  func = switch(aesthetics,
+                color =   ggplot2::scale_color_manual,
+                colour =   ggplot2::scale_colour_manual,
+                fill =   ggplot2::scale_fill_manual)
+  func(values = pal)
+}
+
+
