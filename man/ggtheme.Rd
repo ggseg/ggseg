@@ -4,7 +4,7 @@
 \alias{theme_brain}
 \alias{theme_darkbrain}
 \alias{theme_custombrain}
-\title{ggbrain plot theme}
+\title{ggseg plot theme}
 \usage{
 theme_brain(text.size = 12, text.family = "mono")
 
@@ -23,13 +23,13 @@ theme_custombrain(plot.background = "white", text.colour = "darkgrey",
 \item{text.colour}{Speficy colour of plot text}
 }
 \description{
-a set of themes created for the ggbrain plots. Use ggplot2::theme() to tweak.
+a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.
 }
 \details{
 \describe{
 
 \item{`theme_brain`}{
-Default theme for ggbrain. Transparent background, no axis lines, and no grid.}
+Default theme for ggseg. Transparent background, no axis lines, and no grid.}
 
 \item{`theme_darkbrain`}{
 Dark equivalent to theme_brain, with black background, and light text.}

@@ -1,6 +1,6 @@
-#' ggbrain plot theme
+#' ggseg plot theme
 #'
-#' @description a set of themes created for the ggbrain plots. Use ggplot2::theme() to tweak.
+#' @description a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.
 #' @author Athanasia Mowinckel
 #'
 #' @param text.size Specify size of plot text
@@ -12,7 +12,7 @@
 #' \describe{
 #'
 #' \item{`theme_brain`}{
-#' Default theme for ggbrain. Transparent background, no axis lines, and no grid.}
+#' Default theme for ggseg. Transparent background, no axis lines, and no grid.}
 #'
 #' \item{`theme_darkbrain`}{
 #' Dark equivalent to theme_brain, with black background, and light text.}

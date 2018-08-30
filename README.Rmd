@@ -4,10 +4,10 @@ author: "Athanasia Mowinckel & Didac Vidal Pineiro"
 output: github_document
 ---
 
-  [![Travis build status](https://travis-ci.com/LCBC-UiO/ggbrain.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggbrain)
-    [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggbrain?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggbrain)
+  [![Travis build status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
+    [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
     
-  [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggbrain/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggbrain?branch=master)
+  [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
   
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -15,12 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r out.width="200px",echo=F}
 # All defaults
-knitr::include_graphics("img/ggbrain_contemp.png")
-knitr::include_graphics("img/ggbrain_retro.png")
+knitr::include_graphics("img/ggseg_contemp.png")
+knitr::include_graphics("img/ggseg_retro.png")
 ```
 
 
-This package mainly contains a plotting function `ggbrain` and data.frames of different brain atlases for plotting.
+This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.
 Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R and Matlab, 
 and software for brain imaging to correctly visualise analysis results.
 
@@ -35,7 +35,7 @@ There are currently three atlases available in the package:
 5. `midsagittal` - mid-sagittal slice showing the cerebellum, 3^rd^ and 4^th^ ventricles, corpus callosum etc.
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package.
-The `ggbrain` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must
+The `ggseg` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must
 correspond to certain specifications to work.
 
 Please see the wiki for information (still being updated), or inspect the included datasets for requirements.
@@ -45,7 +45,7 @@ The package can be installed using devtools:
 
 ```{r eval=F}
 install.packages("devtools")
-devtools::install_github("LCBC-UiO/ggbrain", build_vignettes = TRUE)
+devtools::install_github("LCBC-UiO/ggseg", build_vignettes = TRUE)
 ```
 
 The functions are now installed, and you may load them when you want to use them.
@@ -53,11 +53,11 @@ All functions are documented in standard R fashion.
 
 ## Use
 The package also has a vignette, to help you get started using it. 
-You can access it [here](inst/doc/ggbrain.Rmd), or via R:
+You can access it [here](inst/doc/ggseg.Rmd), or via R:
 
 ```{r eval=F}
-library(ggbrain)
-vignette("ggbrain")
+library(ggseg)
+vignette("ggseg")
 ```
 
-You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggbrain-r-package-for-brain-segmentations/)
+You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)

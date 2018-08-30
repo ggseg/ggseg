@@ -1,6 +1,6 @@
 #' Plot brain parcellations
 #'
-#' \code{ggbrain} plots and returns a ggplot object of plotted
+#' \code{ggseg} plots and returns a ggplot object of plotted
 #' aparc areas.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
@@ -45,19 +45,19 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' ggbrain()
-#' ggbrain(na.fill = "transparent",mapping=aes(fill=area))
-#' ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-#' ggbrain(atlas="yeo7")
-#' ggbrain(adapt.scales = FALSE ,position = "stacked")
-#' ggbrain(adapt.scales = TRUE ,position = "stacked")
-#' ggbrain(adapt.scales = TRUE)
-#' ggbrain(adapt.scales = FALSE)
+#' ggseg()
+#' ggseg(na.fill = "transparent",mapping=aes(fill=area))
+#' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
+#' ggseg(atlas="yeo7")
+#' ggseg(adapt.scales = FALSE ,position = "stacked")
+#' ggseg(adapt.scales = TRUE ,position = "stacked")
+#' ggseg(adapt.scales = TRUE)
+#' ggseg(adapt.scales = FALSE)
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'
 #' @export
-ggbrain = function(data = NULL,atlas="dkt",
+ggseg = function(data = NULL,atlas="dkt",
                    plot.areas=NULL,
                    position="dispersed",
                    view=c("lateral","medial","axial","sagittal"),
