@@ -37,7 +37,11 @@ or a data.frame containing atlas information (i.e. pre-loaded atlas).}
 
 \item{na.fill}{String or HEX code for the fill of the area without values}
 
-\item{...}{}
+\item{adapt.scales}{if \code{TRUE}, then the axes will
+be hemisphere without ticks.  If \code{FALSE}, then will be latitude
+longitude values.  Also affected by \code{position} argument}
+
+\item{...}{not used}
 }
 \value{
 a ggplot object
@@ -60,10 +64,15 @@ Freesurfer automatic subcortical segmentation of a brain volume}
 }
 }
 \examples{
+library(ggplot2)
 ggbrain()
 ggbrain(na.fill = "transparent",mapping=aes(fill=area))
 ggbrain(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 ggbrain(atlas="yeo7")
+ggbrain(adapt.scales = FALSE ,position = "stacked")
+ggbrain(adapt.scales = TRUE ,position = "stacked")
+ggbrain(adapt.scales = TRUE)
+ggbrain(adapt.scales = FALSE)
 
 }
 \seealso{

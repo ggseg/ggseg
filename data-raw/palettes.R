@@ -82,10 +82,13 @@ brain.pals = list(
                   `cerebral cortex`	= "#CD3E4Eff"
   )
 )
-save(brain.pals, file="data/brain.pals.RData")
+save(brain.pals, file="data/brain.pals.RData",
+     compress = "bzip2")
 
 brain.pal.info <- data.frame(atlas=names(unlist(lapply(brain.pals,length))),
                              maxcol=unname(unlist(lapply(brain.pals,length))),
                              category="qual",
                              colorblind=FALSE)
-save(brain.pal.info, file="data/brain.pal.info.RData")
+save(brain.pal.info, file="data/brain.pal.info.RData",
+     compress = "bzip2")
+
