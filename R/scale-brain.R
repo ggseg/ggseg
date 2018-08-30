@@ -43,8 +43,8 @@ scale_fill_brain <- function(...) {
 #' @param aesthetics You can scale the brain more generally with \code{scale_brain}
 #' and a switch off the aesthetics.
 #' @rdname scale_brain
-scale_brain = function(name = "dkt", unname=FALSE, ..., aesthetics = c("colour", "color", "fill")) {
-  pal = brain_pal(name = name, unname=unname,...)
+scale_brain = function(name = "dkt", ..., aesthetics = c("colour", "color", "fill")) {
+  pal = brain_pal(name = name, ...)
   aesthetics = match.arg(aesthetics)
   func = switch(aesthetics,
                 color =   ggplot2::scale_color_manual,
