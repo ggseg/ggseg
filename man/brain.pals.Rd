@@ -3,12 +3,12 @@
 \docType{data}
 \name{brain.pals}
 \alias{brain.pals}
-\title{ggbrain palettes}
-\format{A list of palettes for each atlas in ggbrain.}
+\title{ggseg palettes}
+\format{A list of palettes for each atlas in ggseg.}
 \usage{
 data(brain.pals)
 }
 \description{
-ggbrain palettes
+ggseg palettes
 }
 \keyword{palettes}

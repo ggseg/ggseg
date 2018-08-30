@@ -2,7 +2,7 @@
 
 export(brain_pal)
 export(display.brain.pal)
-export(ggbrain)
+export(ggseg)
 export(scale_brain)
 export(scale_colour_brain)
 export(scale_fill_brain)

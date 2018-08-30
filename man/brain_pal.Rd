@@ -2,7 +2,7 @@
 % Please edit documentation in R/brain_palettes.R
 \name{brain_pal}
 \alias{brain_pal}
-\title{Generate palettes from the ggbrain atlases}
+\title{Generate palettes from the ggseg atlases}
 \usage{
 brain_pal(name, n = "all", direction = 1, unname = FALSE)
 }
@@ -16,5 +16,5 @@ brain_pal(name, n = "all", direction = 1, unname = FALSE)
 \item{unname}{logical, if colours are to be unnamed before returning}
 }
 \description{
-\code{brain_pal} return HEX colours for the different ggbrain atlases.
+\code{brain_pal} return HEX colours for the different ggseg atlases.
 }

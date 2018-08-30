@@ -1,6 +1,6 @@
-#' Generate palettes from the ggbrain atlases
+#' Generate palettes from the ggseg atlases
 #'
-#' \code{brain_pal} return HEX colours for the different ggbrain atlases.
+#' \code{brain_pal} return HEX colours for the different ggseg atlases.
 #'
 #' @param name String name of atlas
 #' @param n Number of colours to return (or "all" [default])
@@ -11,8 +11,8 @@
 brain_pal <- function(name,n="all",direction=1,unname=FALSE){
 
   # for global variable notes
-  brain.pal.info = ggbrain::brain.pal.info
-  brain.pals = ggbrain::brain.pals
+  brain.pal.info = ggseg::brain.pal.info
+  brain.pals = ggseg::brain.pals
 
     if(!(name %in% brain.pal.info$atlas)){
     stop(paste(name,"is not a valid palette name for brain.pal\n"))
@@ -57,8 +57,8 @@ display.brain.pal <- function (name="all",
                                n="all") {
 
   # for global variable notes
-  brain.pal.info = ggbrain::brain.pal.info
-  brain.pals = ggbrain::brain.pals
+  brain.pal.info = ggseg::brain.pal.info
+  brain.pals = ggseg::brain.pals
 
   pals = do.call(dplyr::bind_rows,
                  lapply(names(brain.pals),
