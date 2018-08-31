@@ -44,8 +44,50 @@ Use
 The package also has a vignette, to help you get started using it. You can access it [here](inst/doc/ggseg.Rmd), or via R:
 
 ``` r
-library(ggseg)
 vignette("ggseg")
 ```
+
+### Included atlases and palettes
+
+``` r
+library(ggplot2)
+ggseg(atlas=dkt, position="stacked", mapping=aes(fill=area)) +
+  scale_fill_brain("dkt") +
+  ggtitle("Desikan-Killany atlas (dkt)")
+```
+
+![](README_files/figure-markdown_github/dkt-1.png)
+
+``` r
+ggseg(atlas=yeo7,position="stacked", mapping=aes(fill=area)) +
+  scale_fill_brain("yeo7") +
+  ggtitle("Yeo 2011 7 Resting-state networks (yeo7)")
+```
+
+![](README_files/figure-markdown_github/yeo7-1.png)
+
+``` r
+ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
+  scale_fill_brain("yeo17") +
+  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)")
+```
+
+![](README_files/figure-markdown_github/yeo17-1.png)
+
+``` r
+ggseg(atlas=aseg, mapping=aes(fill=area)) +
+  scale_fill_brain("aseg") +
+  ggtitle("Automatic segmentation of subcortical structured (aseg)")
+```
+
+![](README_files/figure-markdown_github/aseg-1.png)
+
+``` r
+ggseg(atlas=midsagittal, mapping=aes(fill=area)) +
+  scale_fill_brain("midsagittal") +
+  ggtitle("Mid-sagittal subdortical, cerebellum, & corpus callosum")
+```
+
+![](README_files/figure-markdown_github/midsagittal-1.png)
 
 You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
