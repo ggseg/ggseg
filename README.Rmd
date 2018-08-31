@@ -61,23 +61,25 @@ library(ggseg)
 vignette("ggseg")
 ```
 
+You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
+
 ### Included atlases and palettes
-```{r dkt, fig.height=8}
+```{r dkt, fig.height=8, echo=F}
 library(ggplot2)
 ggseg(atlas=dkt, position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("dkt") +
-  ggtitle("Desikan-Killany atlas (dkt)") +
+  ggtitle("Desikan-Killany cortical atlas (dkt)") +
   theme(legend.position = "bottom") +
   guides(fill=guide_legend(ncol=3))
 ```
 
-```{r yeo7}
+```{r yeo7, echo=F}
 ggseg(atlas=yeo7,position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("yeo7") +
   ggtitle("Yeo 2011 7 Resting-state networks (yeo7)")
 ```
 
-```{r yeo17, fig.height=7}
+```{r yeo17, fig.height=7, echo=F}
 ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("yeo17") +
   ggtitle("Yeo 2011 17 Resting-state networks (yeo17)") +
@@ -85,16 +87,14 @@ ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
   guides(fill=guide_legend(ncol=3))
 ```
 
-```{r aseg}
+```{r aseg, echo=F}
 ggseg(atlas=aseg, mapping=aes(fill=area)) +
   scale_fill_brain("aseg") +
   ggtitle("Automatic segmentation of subcortical structured (aseg)")
 ```
 
-```{r midsagittal}
+```{r midsagittal, echo=F}
 ggseg(atlas=midsagittal, mapping=aes(fill=area)) +
   scale_fill_brain("midsagittal") +
   ggtitle("Mid-sagittal subdortical, cerebellum, & corpus callosum")
 ```
-
-You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
