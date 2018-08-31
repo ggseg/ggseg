@@ -44,6 +44,7 @@ Use
 The package also has a vignette, to help you get started using it. You can access it [here](inst/doc/ggseg.Rmd), or via R:
 
 ``` r
+library(ggseg)
 vignette("ggseg")
 ```
 
@@ -53,7 +54,9 @@ vignette("ggseg")
 library(ggplot2)
 ggseg(atlas=dkt, position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("dkt") +
-  ggtitle("Desikan-Killany atlas (dkt)")
+  ggtitle("Desikan-Killany atlas (dkt)") +
+  theme(legend.position = "bottom") +
+  guides(fill=guide_legend(ncol=3))
 ```
 
 ![](README_files/figure-markdown_github/dkt-1.png)
@@ -69,7 +72,9 @@ ggseg(atlas=yeo7,position="stacked", mapping=aes(fill=area)) +
 ``` r
 ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("yeo17") +
-  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)")
+  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)") +
+  theme(legend.position = "bottom")+
+  guides(fill=guide_legend(ncol=3))
 ```
 
 ![](README_files/figure-markdown_github/yeo17-1.png)
