@@ -57,15 +57,18 @@ The package also has a vignette, to help you get started using it.
 You can access it [here](inst/doc/ggseg.Rmd), or via R:
 
 ```{r eval=F}
+library(ggseg)
 vignette("ggseg")
 ```
 
 ### Included atlases and palettes
-```{r dkt}
+```{r dkt, fig.height=8}
 library(ggplot2)
 ggseg(atlas=dkt, position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("dkt") +
-  ggtitle("Desikan-Killany atlas (dkt)")
+  ggtitle("Desikan-Killany atlas (dkt)") +
+  theme(legend.position = "bottom") +
+  guides(fill=guide_legend(ncol=3))
 ```
 
 ```{r yeo7}
@@ -74,10 +77,12 @@ ggseg(atlas=yeo7,position="stacked", mapping=aes(fill=area)) +
   ggtitle("Yeo 2011 7 Resting-state networks (yeo7)")
 ```
 
-```{r yeo17}
+```{r yeo17, fig.height=7}
 ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
   scale_fill_brain("yeo17") +
-  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)")
+  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)") +
+  theme(legend.position = "bottom")+
+  guides(fill=guide_legend(ncol=3))
 ```
 
 ```{r aseg}
