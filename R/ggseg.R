@@ -10,19 +10,15 @@
 #' @param atlas Either a string with the name of atlas to use,
 #' or a data.frame containing atlas information (i.e. pre-loaded atlas).
 #' @param plot.areas Character vector, plots only areas specified in the vector.
-#' @param mapping ggplot2 aethetics (cannot include x and y aethetics)
+#' @param mapping ggplot2::geom_poly aethetics (cannot include x and y aethetics)
+#' @param ... other options sent to ggplot2::geom_poly for plotting
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the data. Any of c("lateral","medial")[default].
 #' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
-#' @param na.fill String or HEX code for the fill of the area without values
-#' @param na.alpha Transparency for the fill of the area without values
-#' @param colour String or HEX code for the colour of the outlines of each area
-#' @param size Numeric, size of the line outlining each area
-#' @param show.legend logical, toggle on or off legend.
 #' @param adapt.scales if \code{TRUE}, then the axes will
 #' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 #' longitude values.  Also affected by \code{position} argument
-#' @param ... not used
+
 #'
 #' @details
 #' \describe{
@@ -58,14 +54,11 @@
 #'
 #' @export
 ggseg = function(data = NULL,atlas="dkt",
-                   plot.areas=NULL,
-                   position="dispersed",
-                   view=c("lateral","medial","axial","sagittal"),
-                   hemisphere = c("right","left"),
-                   mapping = NULL, na.alpha=NA,
-                   colour="white", size=.1, show.legend = NA,
-                   na.fill="grey",
-                   adapt.scales=TRUE,...){
+                 plot.areas=NULL,
+                 position="dispersed",
+                 view=c("lateral","medial","axial","sagittal"),
+                 hemisphere = c("right","left"),
+                 adapt.scales=TRUE,...){
 
   geobrain = if(!is.character(atlas)){
     atlas
@@ -103,6 +96,13 @@ ggseg = function(data = NULL,atlas="dkt",
   geobrain = geobrain %>%
     dplyr::filter(hemi %in% hemisphere, side %in% view)
 
+  # If data has been supplied, merge it
+  if(!is.null(data))
+    geobrain = suppressWarnings(suppressMessages(
+      geobrain %>%
+        dplyr::left_join(data)
+    ))
+
   # Filter data to single area if that is all you want.
   if(!is.null(plot.areas)){
     if(any(!plot.areas %in% geobrain$area)){
@@ -113,35 +113,11 @@ ggseg = function(data = NULL,atlas="dkt",
     geobrain = geobrain %>% dplyr::filter(area %in% plot.areas)
   }
 
-  # Initiate plot, will create the "background" image
+  # Create the
   gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=group)) +
-    ggplot2::geom_polygon(
-      size=size,
-      colour=colour,
-      fill=na.fill,
-      alpha=na.alpha) +
+    ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
 
-  # If mappings are provided, add polygons on top
-  if(!is.null(mapping)){
-
-    # Create duplicate data for mappings plot
-    geoData = geobrain
-
-    # If a data.frame has been supplied, merge it
-    if(!is.null(data))
-      geoData = suppressWarnings(suppressMessages(
-        geoData %>%
-          dplyr::left_join(data)
-      ))
-
-    # Plot the added polygons
-    gg = gg +
-      ggplot2::geom_polygon(
-        data=geoData %>% stats::na.omit(),
-        mapping=mapping,
-        show.legend = show.legend)
-  }
 
   # Scales may be adapted, for more convenient vieweing
   if(adapt.scales){

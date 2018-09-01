@@ -30,8 +30,10 @@ test_that("Check that scales are working", {
               scale_brain("yeo17"),c("gg","ggplot"))
   expect_is(ggseg(atlas = yeo17, mapping=aes(color=area),adapt.scales = F ) +
               scale_color_brain("yeo17"),c("gg","ggplot"))
+  expect_is(ggseg(atlas = yeo17, mapping=aes(colour=area),adapt.scales = F ) +
+              scale_colour_brain("yeo17"),c("gg","ggplot"))
   expect_error(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt.scales = F ) +
-                 scale_brain("yeo"))
+                 scale_fill_brain("yeo"))
 })
 
 test_that("Check that themes are working", {
@@ -43,11 +45,19 @@ test_that("Check that themes are working", {
 
 test_that("Check that ggseg is working", {
   expect_is(ggseg(),c("gg","ggplot"))
+  expect_is(
+    ggseg(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4),
+      stringsAsFactors = FALSE),mapping=aes(fill=p)),
+    c("gg","ggplot"))
   expect_is(ggseg(atlas = yeo17),c("gg","ggplot"))
   expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt.scales = F ),c("gg","ggplot"))
   expect_is(ggseg(atlas = dkt, mapping=aes(fill=area), position="stacked"),c("gg","ggplot"))
   expect_error(ggseg(atlas = aseg, position="stacked"))
   expect_error(ggseg(plot.areas = "default"))
+  expect_is(ggseg(atlas = yeo7, plot.areas = "default"),c("gg","ggplot"))
 
 })
 
