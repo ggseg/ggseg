@@ -13,8 +13,8 @@ scale_color_brain(...)
 
 scale_fill_brain(...)
 
-scale_brain(name = "dkt", ..., aesthetics = c("colour", "color",
-  "fill"))
+scale_brain(name = "dkt", na.value = NULL, ...,
+  aesthetics = c("colour", "color", "fill"))
 }
 \arguments{
 \item{...}{additional arguments to pass to \code{\link{brain_pal}}}

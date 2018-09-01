@@ -6,9 +6,8 @@
 \usage{
 ggseg(data = NULL, atlas = "dkt", plot.areas = NULL,
   position = "dispersed", view = c("lateral", "medial", "axial",
-  "sagittal"), hemisphere = c("right", "left"), mapping = NULL,
-  na.alpha = NA, colour = "white", size = 0.1, show.legend = NA,
-  na.fill = "grey", adapt.scales = TRUE, ...)
+  "sagittal"), hemisphere = c("right", "left"), adapt.scales = TRUE,
+  ...)
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -25,23 +24,13 @@ or a data.frame containing atlas information (i.e. pre-loaded atlas).}
 
 \item{hemisphere}{String to choose hemisphere to plot. Any of c("left","right")[default].}
 
-\item{mapping}{ggplot2 aethetics (cannot include x and y aethetics)}
-
-\item{na.alpha}{Transparency for the fill of the area without values}
-
-\item{colour}{String or HEX code for the colour of the outlines of each area}
-
-\item{size}{Numeric, size of the line outlining each area}
-
-\item{show.legend}{logical, toggle on or off legend.}
-
-\item{na.fill}{String or HEX code for the fill of the area without values}
-
 \item{adapt.scales}{if \code{TRUE}, then the axes will
 be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 longitude values.  Also affected by \code{position} argument}
 
-\item{...}{not used}
+\item{...}{other options sent to ggplot2::geom_poly for plotting}
+
+\item{mapping}{ggplot2::geom_poly aethetics (cannot include x and y aethetics)}
 }
 \value{
 a ggplot object
