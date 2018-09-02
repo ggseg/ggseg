@@ -28,9 +28,8 @@ or a data.frame containing atlas information (i.e. pre-loaded atlas).}
 be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 longitude values.  Also affected by \code{position} argument}
 
-\item{...}{other options sent to ggplot2::geom_poly for plotting}
-
-\item{mapping}{ggplot2::geom_poly aethetics (cannot include x and y aethetics)}
+\item{...}{other options sent to ggplot2::geom_poly for plotting, including
+mapping aes (cannot include x and y aethetics).}
 }
 \value{
 a ggplot object
@@ -48,18 +47,22 @@ The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations
 \item{`yeo7`}{
 Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 
+\item{`yeo17`}{
+Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
+
 \item{`aseg`}{
 Freesurfer automatic subcortical segmentation of a brain volume}
+
 }
 }
 \examples{
 library(ggplot2)
 ggseg()
-ggseg(na.fill = "transparent",mapping=aes(fill=area))
+ggseg(mapping=aes(fill=area))
 ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 ggseg(atlas="yeo7")
-ggseg(adapt.scales = FALSE ,position = "stacked")
-ggseg(adapt.scales = TRUE ,position = "stacked")
+ggseg(adapt.scales = FALSE, position = "stacked")
+ggseg(adapt.scales = TRUE, position = "stacked")
 ggseg(adapt.scales = TRUE)
 ggseg(adapt.scales = FALSE)
 
