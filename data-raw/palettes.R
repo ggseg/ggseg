@@ -81,6 +81,17 @@ brain.pals = list(
                   `cerebellum white matter`	= "#DCF8A4ff",
                   `cerebral cortex`	= "#CD3E4Eff"
   )
+  tracula = c(fmajor	= "#CC666600",
+              fminor	= "#CC666600",
+              atr	= "#FFFF6600",
+              cab	= "#99CC0000",
+              ccg	= "#00999900",
+              cst	= "#CC99FF00",
+              ilf	= "#FF993300",
+              slfp =	"#CCCCCC00",
+              slft	= "#99FFFF00",
+              unc	= "#6699FF00"
+  )
 )
 save(brain.pals, file="data/brain.pals.RData",
      compress = "bzip2")
