@@ -98,7 +98,7 @@ ggseg(data=someData, mapping=aes(fill=p))
 
 We can also change how this looks, by various ggplot functions
 ```{r datasupp2}
-ggseg(data=someData, colour="black", mapping=aes(fill=p)) +
+ggseg(data=someData, colour="black",mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
   labs(title="Aparc plots rule")
