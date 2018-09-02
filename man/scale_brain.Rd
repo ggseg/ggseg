@@ -21,6 +21,8 @@ scale_brain(name = "dkt", na.value = NULL, ...,
 
 \item{name}{String name of atlas}
 
+\item{na.value}{string name or hex for the colour of NA entries}
+
 \item{aesthetics}{You can scale the brain more generally with \code{scale_brain}
 and a switch off the aesthetics.}
 }
@@ -33,7 +35,7 @@ atlases where first introduced.
 
 The following palettes are available for use with these scales:
 \describe{
-  \item{Qualitative}{dkt, yeo7, yeo17, aseg}
+  \item{Qualitative}{dkt, yeo7, yeo17, aseg, midsagittal}
 }
 }
 

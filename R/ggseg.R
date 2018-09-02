@@ -10,8 +10,8 @@
 #' @param atlas Either a string with the name of atlas to use,
 #' or a data.frame containing atlas information (i.e. pre-loaded atlas).
 #' @param plot.areas Character vector, plots only areas specified in the vector.
-#' @param mapping ggplot2::geom_poly aethetics (cannot include x and y aethetics)
-#' @param ... other options sent to ggplot2::geom_poly for plotting
+#' @param ... other options sent to ggplot2::geom_poly for plotting, including
+#' mapping aes (cannot include x and y aethetics).
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the data. Any of c("lateral","medial")[default].
 #' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
@@ -29,8 +29,12 @@
 #' \item{`yeo7`}{
 #' Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 #'
+#' \item{`yeo17`}{
+#' Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
+#'
 #' \item{`aseg`}{
 #' Freesurfer automatic subcortical segmentation of a brain volume}
+#'
 #' }
 #'
 #' @return a ggplot object
@@ -42,11 +46,11 @@
 #' @examples
 #' library(ggplot2)
 #' ggseg()
-#' ggseg(na.fill = "transparent",mapping=aes(fill=area))
+#' ggseg(mapping=aes(fill=area))
 #' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 #' ggseg(atlas="yeo7")
-#' ggseg(adapt.scales = FALSE ,position = "stacked")
-#' ggseg(adapt.scales = TRUE ,position = "stacked")
+#' ggseg(adapt.scales = FALSE, position = "stacked")
+#' ggseg(adapt.scales = TRUE, position = "stacked")
 #' ggseg(adapt.scales = TRUE)
 #' ggseg(adapt.scales = FALSE)
 #'
