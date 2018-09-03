@@ -163,3 +163,14 @@
 #'
 #' @keywords palettes
 "brain.pal.info"
+
+#' Information on ggseg atlases
+#'
+#' @docType data
+#' @name atlas.info
+#' @usage data(atlas.info)
+#'
+#' @format A data.frame summarising the ggseg data.
+#'
+#' @keywords data summary
+"atlas.info"

@@ -1,0 +1,108 @@
+---
+title: "Adding external data to ggseg plotting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Adding external data to ggseg plotting}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(eval=TRUE)
+```
+
+## Introduction
+Once you have covered the main functionality in `ggseg` you will want to use it to plot the results of your data. 
+In order to do this, your data must adhere to certain specifications, so that `ggseg` can manage to merge your data with the atlas you are using.
+This means you need to be able to inspect and locate the way the regions you are working with are names in the internal atlas files.
+This vignette should provide the tools you need to figure these features out, and to manipulate your data to fit these requirements.
+
+## Inspecting the atlas labels
+There are several ways you can inspect what the data in the atlas looks like.
+While each atlas has some small differences, they all share six main columns:
+**1. long** - x-axis  
+**2. lat **- y-axis  
+**3. area **- name of area/network  
+**4. hemi** - hemisphere (left or right)  
+**5. side** - side of view (medial, lateral, sagittal or axial)  
+
+Most atlases also have a `label` column, which are raw names assigned from the program run to segment/extract data.
+
+This information is stored in a list of data.frames called `atlas.info`, which is loaded when ggseg is loaded, just like the atlases and palettes.
+
+```{r start}
+library(ggseg)
+library(magrittr)
+library(dplyr)
+atlas.info$yeo7
+```
+
+Here you can see information about the `yeo7` atlas, and the main attributes of this atlas. 
+If you want to use external data with your `ggseg` plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using. 
+
+## Structuring data for merging
+For instance, here we make some data for the "default" and "visual" networks in the `yeo7` atlas, and two p values for those two networks.
+
+```{r}
+someData = data.frame(area=c("default","visual"),
+                      p=c(.03,.6), 
+                      stringsAsFactors = F)
+someData
+```
+
+Notice you we have spelled bothe the column name and the area names **exactly** as they appear in the data. 
+This is necessary for the merging within the `ggseg` function to work properly.
+This merge can be attempted before supplying the data to `ggseg` to see if there are any errors.
+
+```{r}
+yeo7 %>% 
+  left_join(someData) %>% 
+  head(10) #only added to truncate output
+```
+
+No errors!
+Yes, the `p` column is seemingly full of `NA`s, but that is just because the top of the data is the somatomotor network, which we did not supply any p values for, so it has been populated with `NA`s.
+We can sort the data differently, so we can see the `p`has been added correctly.
+
+```{r}
+yeo7 %>% 
+  left_join(someData) %>% 
+  arrange(p) %>% 
+  head(10) #only added to truncate output
+```
+
+If you need your data to be matched on several columns, the approach is the same. 
+Add the column you want to match on, with the **exact** same name, and make sure it's content matches the content of the same column in the data.
+
+```{r}
+someData$hemi = c("left","left")
+someData
+
+yeo7 %>% 
+  left_join(someData) %>% 
+  arrange(p) %>% 
+  head(10)
+```
+
+Notice how the message now states that it is joining `by = c("area", "hemi")`.
+The merge function has recognized that there are two equally named columns, and assumes (in this case correctly) that these are equivalent.  
+**Notice** that everything is case-sensitive, so writing `Area` or `Left` will not result in matching.
+
+## Providing data to `ggseg`
+When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.
+
+```{r}
+library(ggplot2)
+ggseg(someData, atlas="yeo7", mapping=aes(fill=p))
+```
+
+You can actually also supply it directly as an atlas. 
+For instance, if you had saved the merged data from the previous steps, you can supply this directly to the `atlas` option.
+
+```{r}
+newAtlas = yeo7 %>% 
+  left_join(someData)
+
+ggseg(atlas=newAtlas, mapping=aes(fill=p), position="stacked")
+```
+
