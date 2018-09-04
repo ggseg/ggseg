@@ -7,10 +7,10 @@ Description: This package mainly contains a plotting function `ggseg` and data.f
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.0
-Depends: R (>= 2.10)
+Depends: R (>= 2.10),
+    ggplot2
 LazyData: true
 Imports: dplyr,
-    ggplot2,
     stats,
     utils,
     tidyr

@@ -19,7 +19,7 @@ This vignette should provide the tools you need to figure these features out, an
 
 ## Inspecting the atlas labels
 There are several ways you can inspect what the data in the atlas looks like.
-While each atlas has some small differences, they all share six main columns:
+While each atlas has some small differences, they all share six main columns:  
 **1. long** - x-axis  
 **2. lat **- y-axis  
 **3. area **- name of area/network  
@@ -34,6 +34,7 @@ This information is stored in a list of data.frames called `atlas.info`, which i
 library(ggseg)
 library(magrittr)
 library(dplyr)
+library(ggplot2)
 atlas.info$yeo7
 ```
 
@@ -105,4 +106,68 @@ newAtlas = yeo7 %>%
 
 ggseg(atlas=newAtlas, mapping=aes(fill=p), position="stacked")
 ```
+
+It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with.
+As mentioned in the introductory vignette, if you plan on using faceting, mergin the data and supplying it as an atlas is the way to go.
+If you do not, you will get unwanted results.
+Lets do a recap of the unwanted results:
+
+
+```{r datasupp3}
+someData = data.frame(
+  area = rep(c("transverse temporal", "insula",
+               "pre central","superior parietal"),2), 
+  p = sample(seq(0,.5,.001), 8),
+  AgeG = c(rep("Young",4), rep("Old",4)),
+  stringsAsFactors = FALSE)
+  
+ggseg(data=someData, colour="white", mapping=aes(fill=p)) +
+  facet_wrap(~AgeG, ncol=1) +
+  theme(legend.position = "bottom")
+
+```
+
+See how you have three facets, when you only have 2 groups, and that the "background"  brain is not printed in your two groups. 
+This is because for ggplot, that is what the data looks like.
+In order to plot it as we wish, we must completely duplicate the atlas for each group/facet.
+I like using lists for lapply to do this.
+
+```{r duplicate}
+# Initiate your list. Creating list newAtlas, that contains two data frames, one for each group
+newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
+                Old = someData %>% filter(AgeG %in% "Old")) 
+newAtlas 
+
+# Use list apply (lapply) to do the same operation on each element of the list.
+# Here we join each data.frame with the atlas of choice ("dkt"), and make sure the
+# group colum "AgeG" has it's group name populated in the column entirely
+newAtlas = lapply(newAtlas, function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG)))
+
+newAtlas %>% lapply(function(x)  head(x,5))
+  
+# Now, the each data.frame in our list has the exact same columns,
+# so we can easily append the dataframes by row.
+newAtlas = newAtlas %>% bind_rows()
+newAtlas %>% head(5)
+
+# We can now supply the newAtlas as an atlas to ggseg
+ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+  facet_wrap(~AgeG, ncol=1) +
+  theme(legend.position = "bottom")
+```
+
+
+This whole procedure can be piped together, so you dont have to save all the intermediate steps.
+
+```{r duplicatepipe}
+newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
+                Old = someData %>% filter(AgeG %in% "Old")) %>% 
+  lapply(function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG))) %>% 
+  bind_rows()
+
+ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+  facet_wrap(~AgeG, ncol=1) +
+  scale_fill_gradientn(colours = c("royalblue","firebrick","goldenrod"),na.value="grey")
+```
+
 
