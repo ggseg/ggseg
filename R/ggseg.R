@@ -104,7 +104,7 @@ ggseg = function(data = NULL,atlas="dkt",
   if(!is.null(data))
     geobrain = suppressWarnings(suppressMessages(
       geobrain %>%
-        dplyr::left_join(data)
+        dplyr::full_join(data, copy=TRUE)
     ))
 
   # Filter data to single area if that is all you want.
@@ -117,7 +117,7 @@ ggseg = function(data = NULL,atlas="dkt",
     geobrain = geobrain %>% dplyr::filter(area %in% plot.areas)
   }
 
-  # Create the
+  # Create the plot
   gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=group)) +
     ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
