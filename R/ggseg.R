@@ -39,8 +39,8 @@
 #'
 #' @return a ggplot object
 #'
+#' @import ggplot2
 #' @importFrom dplyr select group_by summarise_at vars funs mutate filter left_join "%>%"
-#' @importFrom ggplot2 ggplot aes geom_polygon coord_fixed scale_y_continuous scale_x_continuous labs
 #' @importFrom stats na.omit
 #'
 #' @examples
