@@ -80,17 +80,17 @@ brain.pals = list(
                   `cerebellum cortex`	= "#E69422ff",
                   `cerebellum white matter`	= "#DCF8A4ff",
                   `cerebral cortex`	= "#CD3E4Eff"
-  )
-  tracula = c(fmajor	= "#CC666600",
-              fminor	= "#CC666600",
-              atr	= "#FFFF6600",
-              cab	= "#99CC0000",
-              ccg	= "#00999900",
-              cst	= "#CC99FF00",
-              ilf	= "#FF993300",
-              slfp =	"#CCCCCC00",
-              slft	= "#99FFFF00",
-              unc	= "#6699FF00"
+  ),
+  tracula = c(fmajor	= "#CC6666ff",
+              fminor	= "#CC6666ff",
+              atr	= "#FFFF66ff",
+              cab	= "#99CC00ff",
+              ccg	= "#009999ff",
+              cst	= "#CC99FFff",
+              ilf	= "#FF9933ff",
+              slfp =	"#CCCCCCff",
+              slft	= "#99FFFFff",
+              unc	= "#6699FFff"
   )
 )
 save(brain.pals, file="data/brain.pals.RData",
