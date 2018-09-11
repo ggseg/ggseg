@@ -24,7 +24,7 @@ There are currently three atlases available in the package:
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package. The `ggseg` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must correspond to certain specifications to work.
 
-Please see the wiki for information (still being updated), or inspect the included datasets for requirements.
+Please see the [wiki](https://github.com/LCBC-UiO/ggseg/wiki/Creating-and-contributing-atlases) for information on adding atlases, or inspect the included datasets for requirements. If anything is unclear in the wiki, give us a shout out in the issues!
 
 Installation
 ------------

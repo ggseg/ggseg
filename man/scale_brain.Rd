@@ -13,7 +13,7 @@ scale_color_brain(...)
 
 scale_fill_brain(...)
 
-scale_brain(name = "dkt", na.value = NULL, ...,
+scale_brain(name = "dkt", na.value = "grey", ...,
   aesthetics = c("colour", "color", "fill"))
 }
 \arguments{
