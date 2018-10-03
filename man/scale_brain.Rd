@@ -35,7 +35,7 @@ atlases where first introduced.
 
 The following palettes are available for use with these scales:
 \describe{
-  \item{Qualitative}{dkt, yeo7, yeo17, aseg, midsagittal}
+  \item{Qualitative}{dkt, yeo7, yeo17, aseg, midsagittal,tracula}
 }
 }
 
