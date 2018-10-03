@@ -16,11 +16,11 @@ Atlases
 -------
 
 There are currently three atlases available in the package:
-1. `dkt` - Desikan-Killany atlas.
+1. `dkt` - Desikan-Killany atlas (aparc).
 2. `yeo7` - Yeo 2011 7 resting-state networks.
 3. `yeo17` - Yeo 2011 17 resting-state network.
 4. `aseg` - Automatic subcortical segmentation.
-5. `midsagittal` - mid-sagittal slice showing the cerebellum, 3<sup>rd</sup> and 4<sup>th</sup> ventricles, corpus callosum etc.
+5. `midsagittal` - mid-sagittal slice showing the cerebellum, 3<sup>rd</sup> and 4<sup>th</sup> ventricles, corpus callosum etc. 6. `glasser` - HCP cortical segmentation (Glasser et al. 2015)
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package. The `ggseg` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must correspond to certain specifications to work.
 
