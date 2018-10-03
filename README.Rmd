@@ -88,6 +88,13 @@ ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
   guides(fill=guide_legend(ncol=3))
 ```
 
+```{r glasser, fig.height=7, echo=F}
+ggseg(atlas=glasser,position="stacked", mapping=aes(fill=area), show.legend=F) +
+  scale_fill_brain("glasser") +
+  ggtitle("HCP cortical segmentation (glasser)") 
+```
+
+
 ```{r aseg, echo=F}
 ggseg(atlas=aseg, mapping=aes(fill=area)) +
   scale_fill_brain("aseg") +
