@@ -13,8 +13,9 @@ LazyData: true
 Imports: dplyr,
     stats,
     utils,
-    tidyr
-Suggests: 
+    tidyr,
+    magrittr
+Suggests:
     knitr,
     rmarkdown,
     covr,

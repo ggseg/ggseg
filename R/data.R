@@ -118,14 +118,17 @@
 #' data(yeo17)
 "yeo17"
 
-#' Mid-sagittal Parcellations
-#'
-#' Coordinate data for important structures in the mid-line
-#' sagittal view of the brain
+
+
+#' Parcellation from the Human Connectome Project
 #'
 #' @docType data
-#' @name midsagittal
+#' @name glasser
 #' @keywords datasets
+#'
+#' @references Glasser et al. (2016) Nature, volume 536, pages 171–178
+#' (\href{https://www.nature.com/articles/nature18933}{PubMed}) &
+#' (\href{https://figshare.com/articles/HCP-MMP1_0_projected_on_fsaverage/3498446})
 #'
 #' @format A data.frame with 2483 observations and 8 variables
 #' \describe{
@@ -137,8 +140,8 @@
 #' }
 #'
 #' @examples
-#' data(midsagittal)
-"midsagittal"
+#' data(glasser)
+"glasser"
 
 
 #' ggseg palettes

@@ -10,8 +10,8 @@
 #' @param atlas Either a string with the name of atlas to use,
 #' or a data.frame containing atlas information (i.e. pre-loaded atlas).
 #' @param plot.areas Character vector, plots only areas specified in the vector.
-#' @param ... other options sent to ggplot2::geom_poly for plotting, including
-#' mapping aes (cannot include x and y aethetics).
+#' @param ... other options sent to ggplot2::geom_polygon for plotting, including
+#' mapping aes (cannot include x, y, and group aethetics).
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the data. Any of c("lateral","medial")[default].
 #' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
@@ -118,7 +118,7 @@ ggseg = function(data = NULL,atlas="dkt",
   }
 
   # Create the plot
-  gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=group)) +
+  gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=id)) +
     ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
 
