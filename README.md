@@ -41,7 +41,7 @@ The functions are now installed, and you may load them when you want to use them
 Use
 ---
 
-The package also has a vignette, to help you get started using it. You can access it [here](inst/doc/ggseg.Rmd), or via R:
+The package also has a vignette, to help you get started using it. You can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or via R:
 
 ``` r
 library(ggseg)
