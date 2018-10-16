@@ -26,13 +26,13 @@ test_that("Check that palette extraction happens ok", {
 
 
 test_that("Check that scales are working", {
-  expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt.scales = F ) +
+  expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt_scales = F ) +
               scale_brain("yeo17"),c("gg","ggplot"))
-  expect_is(ggseg(atlas = yeo17, mapping=aes(color=area),adapt.scales = F ) +
+  expect_is(ggseg(atlas = yeo17, mapping=aes(color=area),adapt_scales = F ) +
               scale_color_brain("yeo17"),c("gg","ggplot"))
-  expect_is(ggseg(atlas = yeo17, mapping=aes(colour=area),adapt.scales = F ) +
+  expect_is(ggseg(atlas = yeo17, mapping=aes(colour=area),adapt_scales = F ) +
               scale_colour_brain("yeo17"),c("gg","ggplot"))
-  expect_error(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt.scales = F ) +
+  expect_error(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt_scales = F ) +
                  scale_fill_brain("yeo"))
 })
 
@@ -53,9 +53,9 @@ test_that("Check that ggseg is working", {
       stringsAsFactors = FALSE),mapping=aes(fill=p)),
     c("gg","ggplot"))
   expect_is(ggseg(atlas = yeo17),c("gg","ggplot"))
-  expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt.scales = F ),c("gg","ggplot"))
+  expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area), adapt_scales = F ),c("gg","ggplot"))
   expect_is(ggseg(atlas = dkt, mapping=aes(fill=area), position="stacked"),c("gg","ggplot"))
-  expect_error(ggseg(atlas = aseg, position="stacked"))
+  expect_warning(ggseg(atlas = aseg, position="stacked"))
   expect_error(ggseg(plot.areas = "default"))
   expect_is(ggseg(atlas = yeo7, plot.areas = "default"),c("gg","ggplot"))
 
@@ -74,7 +74,7 @@ test_that("Check that ggseg ggplot object is correct", {
 
   ## p$data
   expect_equal(dim(p$data)[1], 10913)
-  expect_equal(dim(p$data)[2], 11)
+  expect_equal(dim(p$data)[2], 12)
   expect_equal(colnames(p$data)[1], "long")
 
   ## p$layers

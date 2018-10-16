@@ -12,6 +12,7 @@
   \item{hemi}{dummy name of the hemisphere}
   \item{side}{which side to view (sagittal)}
   \item{label}{label name from Freesurfer}
+  \item{atlas}{name of the atlas}
 }}
 \usage{
 midsagittal

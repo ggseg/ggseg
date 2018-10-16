@@ -273,6 +273,20 @@ brain.pals = list(
     PI = "#7A3232ff",
     a32pr = "#823F57ff",
     p24 = "#7B234A00"
+  ),
+  jhu = c(
+    `Anterior thalamic radiation` = "#cf7bc7",
+      `Corticospinal tract` = "#83b74d",
+      `Cingulum (cingulate gyrus)` = "#bb6639",
+      `Cingulum (hippocampus)` = "#56b772",
+      `Forceps major` = "#563686",
+      `Forceps minor` =  "#c79f3a",
+      `Inferior fronto-occipital fasciculus` = "#6781d8",
+      `Inferior longitudinal fasciculus` = "#748434",
+      `Superior longitudinal fasciculus` = "#b2457c",
+      `Uncinate fasciculus` = "#43c9b0",
+      `Superior longitudinal fasciculus (temporal part)` = "#b8434e",
+      `Cerebral spinal fluid` = "grey20"
   )
 )
 save(brain.pals, file="data/brain.pals.RData",

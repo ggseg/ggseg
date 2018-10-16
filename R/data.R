@@ -21,6 +21,7 @@
 #'   \item{acronym}{abbreviated name of region}
 #'   \item{lobe}{lobe location}
 #'   \item{label}{label from recon-all segmentation}
+#'   \item{atlas}{name of the atlas}
 #' }
 #' @examples
 #' data(dkt)
@@ -50,6 +51,7 @@
 #'   \item{name}{full name of network}
 #'   \item{hemi}{name of the hemisphere (left, right)}
 #'   \item{side}{which side to view (medial, lateral,axial)}
+#'   \item{atlas}{name of the atlas}
 #' }
 #'
 #' @examples
@@ -82,6 +84,7 @@
 #'   \item{side}{which side to view (medial, lateral)}
 #'   \item{network}{network number (1:7)}
 #'   \item{label}{unique name to each node}
+#'   \item{atlas}{name of the atlas}
 #' }
 #'
 #' @examples
@@ -112,6 +115,7 @@
 #'   \item{side}{which side to view (medial, lateral)}
 #'   \item{network}{network number (1:17)}
 #'   \item{label}{unique name to each node}
+#'   \item{atlas}{name of the atlas}
 #' }
 #'
 #' @examples
@@ -137,6 +141,7 @@
 #'   \item{hemi}{dummy name of the hemisphere}
 #'   \item{side}{which side to view (medial, lateral)}
 #'   \item{label}{label name from Freesurfer}
+#'   \item{atlas}{name of the atlas}
 #' }
 #'
 #' @examples
@@ -158,11 +163,37 @@
 #'   \item{hemi}{dummy name of the hemisphere}
 #'   \item{side}{which side to view (sagittal)}
 #'   \item{label}{label name from Freesurfer}
+#'   \item{atlas}{name of the atlas}
 #' }
 #'
 #' @examples
 #' data(midsagittal)
 "midsagittal"
+
+#' Parcellation from the Human Connectome Project
+#'
+#' @docType data
+#' @name jhu
+#' @keywords datasets
+#'
+#' @references Hua et al., Tract probability maps in stereotaxic spaces:
+#' analysis of white matter anatomy and tract-specific quantification. NeuroImage, 39(1):336-347 (2008)
+#' (\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2724595/}{PubMed})
+#'
+#' @format A data.frame with 11341 observations and 11 variables
+#' \describe{
+#'   \item{long}{coordinates for the x-axis}
+#'   \item{lat}{coordinates for the y-axis}
+#'   \item{area}{name of region}
+#'   \item{hemi}{dummy name of the hemisphere}
+#'   \item{side}{which side to view (sagittal)}
+#'   \item{label}{label name from Freesurfer}
+#'   \item{atlas}{name of the atlas}
+#' }
+#'
+#' @examples
+#' data(jhu)
+"jhu"
 
 
 #' ggseg palettes
