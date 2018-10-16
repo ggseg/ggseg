@@ -5,9 +5,8 @@
 \title{Plot brain parcellations}
 \usage{
 ggseg(data = NULL, atlas = "dkt", plot.areas = NULL,
-  position = "dispersed", view = c("lateral", "medial", "axial",
-  "sagittal"), hemisphere = c("right", "left"), adapt.scales = TRUE,
-  ...)
+  position = "dispersed", view = NULL, hemisphere = NULL,
+  adapt_scales = TRUE, ...)
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -24,7 +23,7 @@ or a data.frame containing atlas information (i.e. pre-loaded atlas).}
 
 \item{hemisphere}{String to choose hemisphere to plot. Any of c("left","right")[default].}
 
-\item{adapt.scales}{if \code{TRUE}, then the axes will
+\item{adapt_scales}{if \code{TRUE}, then the axes will
 be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 longitude values.  Also affected by \code{position} argument}
 
@@ -61,10 +60,10 @@ ggseg()
 ggseg(mapping=aes(fill=area))
 ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 ggseg(atlas="yeo7")
-ggseg(adapt.scales = FALSE, position = "stacked")
-ggseg(adapt.scales = TRUE, position = "stacked")
-ggseg(adapt.scales = TRUE)
-ggseg(adapt.scales = FALSE)
+ggseg(adapt_scales = FALSE, position = "stacked")
+ggseg(adapt_scales = TRUE, position = "stacked")
+ggseg(adapt_scales = TRUE)
+ggseg(adapt_scales = FALSE)
 
 }
 \seealso{

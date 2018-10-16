@@ -12,6 +12,7 @@
   \item{name}{full name of network}
   \item{hemi}{name of the hemisphere (left, right)}
   \item{side}{which side to view (medial, lateral,axial)}
+  \item{atlas}{name of the atlas}
 }}
 \usage{
 data(aseg)

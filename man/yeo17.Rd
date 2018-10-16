@@ -13,6 +13,7 @@
   \item{side}{which side to view (medial, lateral)}
   \item{network}{network number (1:17)}
   \item{label}{unique name to each node}
+  \item{atlas}{name of the atlas}
 }}
 \usage{
 data(yeo17)

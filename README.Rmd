@@ -35,6 +35,7 @@ There are currently three atlases available in the package:
 4. `aseg` - Automatic subcortical segmentation.  
 5. `midsagittal` - mid-sagittal slice showing the cerebellum, 3^rd^ and 4^th^ ventricles, corpus callosum etc.
 6. `glasser` - HCP cortical segmentation (Glasser et al. 2015)
+7. `jhu`- JHU white-matter tractography atlas
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package.
 The `ggseg` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must
@@ -108,4 +109,10 @@ ggseg(atlas=aseg, mapping=aes(fill=area)) +
 ggseg(atlas=midsagittal, mapping=aes(fill=area)) +
   scale_fill_brain("midsagittal") +
   ggtitle("Mid-sagittal subdortical, cerebellum, & corpus callosum")
+```
+
+```{r jhu, echo=F}
+ggseg(atlas=jhu, mapping=aes(fill=area)) +
+  scale_fill_brain("jhu") +
+  ggtitle("JHU white-matter tractography atla")
 ```

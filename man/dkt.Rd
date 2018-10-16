@@ -14,6 +14,7 @@
   \item{acronym}{abbreviated name of region}
   \item{lobe}{lobe location}
   \item{label}{label from recon-all segmentation}
+  \item{atlas}{name of the atlas}
 }}
 \usage{
 data(dkt)

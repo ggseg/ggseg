@@ -4,9 +4,8 @@ atlas.info = list(dkt = dkt,
                   yeo7 = yeo7,
                   yeo17 = yeo17,
                   aseg = aseg,
-                  midsagittal = midsagittal)
-
-atlas.info = atlas.info %>%
+                  midsagittal = midsagittal,
+                  glasser = glasser) %>%
   lapply(function(x) x %>% select(area,hemi,side) %>% unique %>% na.omit()) #%>%
   #bind_rows(.id = "atlas")
 

@@ -15,7 +15,7 @@
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the data. Any of c("lateral","medial")[default].
 #' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
-#' @param adapt.scales if \code{TRUE}, then the axes will
+#' @param adapt_scales if \code{TRUE}, then the axes will
 #' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 #' longitude values.  Also affected by \code{position} argument
 
@@ -49,21 +49,24 @@
 #' ggseg(mapping=aes(fill=area))
 #' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
 #' ggseg(atlas="yeo7")
-#' ggseg(adapt.scales = FALSE, position = "stacked")
-#' ggseg(adapt.scales = TRUE, position = "stacked")
-#' ggseg(adapt.scales = TRUE)
-#' ggseg(adapt.scales = FALSE)
+#' ggseg(adapt_scales = FALSE, position = "stacked")
+#' ggseg(adapt_scales = TRUE, position = "stacked")
+#' ggseg(adapt_scales = TRUE)
+#' ggseg(adapt_scales = FALSE)
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'
 #' @export
-ggseg = function(data = NULL,atlas="dkt",
-                 plot.areas=NULL,
-                 position="dispersed",
-                 view=c("lateral","medial","axial","sagittal"),
-                 hemisphere = c("right","left"),
-                 adapt.scales=TRUE,...){
+ggseg = function(data = NULL,
+                 atlas = "dkt",
+                 plot.areas = NULL,
+                 position = "dispersed",
+                 view = NULL,
+                 hemisphere = NULL,
+                 adapt_scales = TRUE,
+                 ...){
 
+  # Grab the atlas, even if it has been provided as character string
   geobrain = if(!is.character(atlas)){
     atlas
   }else{
@@ -72,8 +75,9 @@ ggseg = function(data = NULL,atlas="dkt",
 
   if(position=="stacked"){
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
-      stop("Cannot stack atlas. Check if atlas has medial and axial views.")
-    }
+      warning("Cannot stack atlas. Check if atlas has medial views.")
+    }else{
+
     # Alter coordinates of the left side to stack ontop of right side
     stack = geobrain %>%
       dplyr::group_by(hemi,side) %>%
@@ -94,11 +98,12 @@ ggseg = function(data = NULL,atlas="dkt",
                     long=ifelse(hemi %in% "right" & side %in% "medial" ,
                                 long +(stack$long_min[2]-stack$long_min[4]), long)
       )
+    } # If possible to stack
   } # If stacked
 
   # Remove data we don't want to plot
-  geobrain = geobrain %>%
-    dplyr::filter(hemi %in% hemisphere, side %in% view)
+  if(!is.null(hemisphere)) geobrain = dplyr::filter(geobrain, hemi %in% hemisphere)
+  if(!is.null(view)) geobrain = dplyr::filter(geobrain, side %in% view)
 
   # If data has been supplied, merge it
   if(!is.null(data))
@@ -124,41 +129,11 @@ ggseg = function(data = NULL,atlas="dkt",
 
 
   # Scales may be adapted, for more convenient vieweing
-  if(adapt.scales){
-
-    if(position == "stacked"){
-
-      pos = list(
-        x=geobrain %>%
-          dplyr::group_by(hemi) %>%
-          dplyr::summarise(val=mean(lat)),
-        y=geobrain %>%
-          dplyr::group_by(side) %>%
-          dplyr::summarise(val=mean(long))
-      )
-
-      gg = gg +
-        ggplot2::scale_y_continuous(
-          breaks=pos$x$val,
-          labels=pos$x$hemi) +
-        ggplot2::scale_x_continuous(
-          breaks=pos$y$val,
-          labels=pos$y$side
-        ) +
-        ggplot2::labs(x="side", y="hemisphere")
-    }else{
-
-      pos = geobrain %>%
-        dplyr::group_by(hemi) %>%
-        dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(mean))
-
-      gg = gg +
-        ggplot2::scale_x_continuous(
-          breaks=pos$long,
-          labels=pos$hemi) +
-        ggplot2::scale_y_continuous(breaks=NULL)+
-        ggplot2::labs(y=NULL, x="hemisphere")
-    }
+  if(adapt_scales){
+    gg = gg +
+      scale_y_brain(geobrain, position) +
+      scale_x_brain(geobrain, position) +
+      scale_labs_brain(geobrain, position)
   }
 
   gg + theme_brain()
