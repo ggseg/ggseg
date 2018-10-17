@@ -1,3 +1,4 @@
+#covr::zero_coverage(package_coverage("testcovr"))
 
 
 test_that("Test that palette display works", {
@@ -26,6 +27,19 @@ test_that("Check that palette extraction happens ok", {
 
 
 test_that("Check that scales are working", {
+  expect_equal(mode(adapt_scales(dkt)), "list")
+  expect_equal(mode(adapt_scales(yeo7)), "list")
+  expect_equal(mode(adapt_scales(yeo17)), "list")
+  expect_equal(mode(adapt_scales(midsagittal)), "list")
+  expect_equal(mode(adapt_scales(aseg)), "list")
+  expect_equal(mode(adapt_scales(jhu)), "list")
+  expect_equal(mode(adapt_scales(glasser)), "list")
+
+  expect_warning(adapt_scales(glasser %>% select(-atlas)))
+
+})
+
+test_that("Check that adapt_scales is working", {
   expect_is(ggseg(atlas = yeo17, mapping=aes(fill=area),adapt_scales = F ) +
               scale_brain("yeo17"),c("gg","ggplot"))
   expect_is(ggseg(atlas = yeo17, mapping=aes(color=area),adapt_scales = F ) +
@@ -66,6 +80,9 @@ test_that("Check that ggseg is working", {
       p = sample(seq(0,.5,.001), 4),
       stringsAsFactors = FALSE),mapping=aes(fill=p))
     )
+
+  expect_is(ggseg(hemisphere = "left", adapt_scales = T),c("gg","ggplot"))
+  expect_is(ggseg(view = "lateral", adapt_scales = T),c("gg","ggplot"))
 })
 
 
