@@ -59,6 +59,13 @@ test_that("Check that ggseg is working", {
   expect_error(ggseg(plot.areas = "default"))
   expect_is(ggseg(atlas = yeo7, plot.areas = "default"),c("gg","ggplot"))
 
+  expect_warning(
+    ggseg(data=data.frame(
+      area = c("transverse tempral", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4),
+      stringsAsFactors = FALSE),mapping=aes(fill=p))
+    )
 })
 
 

@@ -40,7 +40,9 @@
 #' @return a ggplot object
 #'
 #' @import ggplot2
-#' @importFrom dplyr select group_by summarise_at vars funs mutate filter left_join "%>%"
+#' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise
+#' @importFrom tidyr unite_
+#' @importFrom magrittr "%>%"
 #' @importFrom stats na.omit
 #'
 #' @examples
@@ -78,26 +80,29 @@ ggseg = function(data = NULL,
       warning("Cannot stack atlas. Check if atlas has medial views.")
     }else{
 
-    # Alter coordinates of the left side to stack ontop of right side
-    stack = geobrain %>%
-      dplyr::group_by(hemi,side) %>%
-      dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(min,max))
-    stack$lat_max[1] = ifelse(stack$lat_max[1] < 4.5,
-                              stack$lat_max[1]+.5,
-                              stack$lat_max[1])
+      # Alter coordinates of the left side to stack ontop of right side
+      stack = geobrain %>%
+        dplyr::group_by(hemi,side) %>%
+        dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(min, max, sd)) %>%
+        dplyr::mutate(sd = lat_sd + long_sd)
 
-    geobrain = geobrain %>%
+      # Distance between hemispheres less than 3 looks untidy
+      stack$lat_max[1] = ifelse(stack$lat_max[1] < 3,
+                                stack$lat_max[1] + stack$lat_sd[1],
+                                stack$lat_max[1])
 
-      # Move right side over to the left
-      dplyr::mutate(lat=ifelse(hemi %in% "right",
-                               lat + (stack$lat_max[1]), lat)) %>%
+      geobrain = geobrain %>%
 
-      # move right side on top of left, and swap the places of medial and lateral
-      dplyr::mutate(long=ifelse(hemi %in% "right" & side %in% "lateral" ,
-                                long - stack$long_min[3], long),
-                    long=ifelse(hemi %in% "right" & side %in% "medial" ,
-                                long +(stack$long_min[2]-stack$long_min[4]), long)
-      )
+        # Move right side over to the left
+        dplyr::mutate(lat=ifelse(hemi %in% "right",
+                                 lat + (stack$lat_max[1]), lat)) %>%
+
+        # move right side on top of left, and swap the places of medial and lateral
+        dplyr::mutate(long=ifelse(hemi %in% "right" & side %in% "lateral" ,
+                                  long - stack$long_min[3], long),
+                      long=ifelse(hemi %in% "right" & side %in% "medial" ,
+                                  long +(stack$long_min[2]-stack$long_min[4]), long)
+        )
     } # If possible to stack
   } # If stacked
 
@@ -106,11 +111,32 @@ ggseg = function(data = NULL,
   if(!is.null(view)) geobrain = dplyr::filter(geobrain, side %in% view)
 
   # If data has been supplied, merge it
-  if(!is.null(data))
-    geobrain = suppressWarnings(suppressMessages(
-      geobrain %>%
-        dplyr::full_join(data, copy=TRUE)
-    ))
+  if(!is.null(data)){
+
+    # Find columns they have in common
+    cols = names(geobrain)[names(geobrain) %in% names(data)]
+
+    # Merge the brain with the data
+    geobrain = geobrain %>%
+      dplyr::full_join(data, by = cols, copy=TRUE)
+
+    # Find if there are instances of those columns that
+    # are not present in the atlas. Maybe mispelled?
+    errs = geobrain %>%
+      dplyr::filter(is.na(lat)) %>%
+      dplyr::select(!!cols) %>%
+      dplyr::distinct() %>%
+      tidyr::unite_("tt", cols, sep = " - ") %>%
+      dplyr::summarise(value = paste0(tt, collapse = ", "))
+
+    if(errs != ""){
+      warning(paste("Some data is not merged properly into the atlas. Check for spelling mistakes in:",
+                    errs$value))
+
+      geobrain = geobrain %>%
+        dplyr::filter(!is.na(lat))
+    }
+  }
 
   # Filter data to single area if that is all you want.
   if(!is.null(plot.areas)){
