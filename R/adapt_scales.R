@@ -17,6 +17,8 @@
 #' @export
 adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"){
 
+  geobrain = atlas
+
   atlas = ifelse(any(names(atlas) %in% "atlas"),
                  unique(atlas$atlas),
                  "unknown")
@@ -121,10 +123,10 @@ adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"
       warning("Unknown atlas, attempting to adapt scales in the blind.")
       list(stacked = {
         pos = list(
-          x=atlas %>%
+          x=geobrain %>%
             dplyr::group_by(hemi) %>%
             dplyr::summarise(val=mean(lat)),
-          y=atlas %>%
+          y=geobrain %>%
             dplyr::group_by(side) %>%
             dplyr::summarise(val=mean(long))
         )
@@ -138,7 +140,7 @@ adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"
 
       },
       dispersed = {
-        pos = atlas %>%
+        pos = geobrain %>%
           dplyr::group_by(hemi) %>%
           dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(mean))
 
