@@ -9,7 +9,7 @@
 #' Neccessary if applying palette to other data than the brain atlas it comes from.
 #'
 #' @export
-brain_pal <- function(name,n="all",direction=1,unname=FALSE){
+brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
 
   # for global variable notes
   brain.pal.info = ggseg::brain.pal.info
