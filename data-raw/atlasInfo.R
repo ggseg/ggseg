@@ -7,7 +7,6 @@ atlas.info = list(dkt = dkt,
                   jhu = jhu,
                   aseg = aseg,
                   midsagittal = midsagittal) %>%
-  lapply(function(x) x %>% select(area,hemi,side) %>% unique %>% na.omit()) #%>%
-  #bind_rows(.id = "atlas")
+  lapply(function(x) x %>% select(area,hemi,side,label) %>% unique %>% na.omit())
 
 save(atlas.info, file="data/atlas.info.RData")

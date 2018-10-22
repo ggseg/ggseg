@@ -10,7 +10,9 @@ jhu = geobrain_JHU %>%
   mutate(side = ifelse(id %in% c(200:240), "upper coronal",
                        ifelse(id %in% c(1:13), "lower coronal","axial")),
          atlas = "jhu"
-  )
+  ) %>%
+  mutate(area = ifelse(id %in% c(5,8,217),
+                       "Superior longitudinal fasciculus (temporal part)", area))
 
 tmp = data.frame(area = c("Anterior thalamic radiation", "Corticospinal tract","Cingulum (cingulate gyrus)",
                           "Cingulum (hippocampus)","Forceps major","Forceps minor",
