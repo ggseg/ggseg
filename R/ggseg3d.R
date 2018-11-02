@@ -3,22 +3,28 @@
 #' \code{ggseg3d} plots and returns a plotly mesh3d object.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
-#'
-#' @param atlas3d Either a string with the name of atlas to use,
-#' or a data.frame containing atlas information (i.e. pre-loaded atlas).
-#' @param plot.areas Character vector, plots only areas specified in the vector.
+#' @param data A data.frame to use for plot aesthetics. Must include a
+#' column called "area" corresponding to areas.
+#' @param atlas Either a string with the name of a 3d atlas to use.
 #' @param hemisphere String. Hemisphere to plot. Either "left" or "right"[default].
 #' @param surface String. Which surface to plot. Either "pial","white", or "inflated"[default]
 #' @param remove.axes Logical. Should axis and grid be removed.
-#' @param name String. Quoted name of column in atlas3d that should be used to name traces
+#' @param label String. Quoted name of column in atlas/data that should be used to name traces
+#' @param text String. Quoated name of column in atlas/data that should be added as extra
+#' information in the hover text.
 #' @param facecolour String. Quoted name of column from which colour should be supplied
+#' @param pal.colours String vector. Names/codes for the colours to be used if facecolour
+#' is numeric.
+#' @param pal.values Numeric vector. Break points corresponding to the pal.colours if
+#' facecolour is numeric.
+#' @param show.legend Logical. Toggle legend if facecolour is numeric.
 
 #'
 #' @details
 #' \describe{
-#'
 #' \item{`dkt3d`}{
 #' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format}
+#' }
 #'
 #' @return a plotly object
 #'
@@ -33,14 +39,14 @@
 #' library(ggplot2)
 #' ggseg3d()
 #' ggseg3d(surface="pial")
-#' ggseg3d(remove.axes = F)
+#' ggseg3d(remove.axes = FALSE)
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #'
 #' @export
 ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere = "right",
                     label = "area", text=NULL, facecolour="colour",
-                    pal.colours = c("firebrick","goldenrod"), pal.values=NULL, na.color = "darkgrey",
+                    palette = NULL, pal.colours = NULL, pal.values=NULL, na.color = "darkgrey",
                     remove.axes = TRUE, show.legend = FALSE, ...) {
 
   # Axix removal
@@ -94,6 +100,18 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
 
   # If facecolour column is numeric, calculate the gradient
   if(is.numeric(data[,facecolour])){
+
+    if(is.null(palette) & is.null(pal.colours)){
+      palette = "inferno"
+    }
+
+    if(!is.null(palette)){
+      if(!is.null(pal.colours)){
+        warning("Both palette and pal.colours supplied. Using pal.colours")
+      }
+
+      pal.colours = scale3d(palette)
+    }
 
     atlas3d$new_col = scales::gradient_n_pal(pal.colours, pal.values, "Lab")(
       scales::rescale(x=atlas3d[,facecolour])
