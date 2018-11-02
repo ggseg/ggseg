@@ -1,9 +1,9 @@
 #' @importFrom paletteer paletteer_d paletteer_dynamic paletteer_c
 #' @importFrom purrr map is_empty
 #' @importFrom rlang "!!"
-scale3d = function(palette){
+get_paletteer = function(palette){
 
-  pals = ggseg:::paletteers
+  pals = paletteers
 
   pal_src = paste0("^", palette, "$")
 

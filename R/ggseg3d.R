@@ -45,9 +45,9 @@
 #'
 #' @export
 ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere = "right",
-                    label = "area", text=NULL, facecolour="colour",
+                    label = "area", text = NULL, facecolour = "colour",
                     palette = NULL, pal.colours = NULL, pal.values=NULL, na.color = "darkgrey",
-                    remove.axes = TRUE, show.legend = FALSE, ...) {
+                    remove.axes = TRUE, show.legend = FALSE) {
 
   # Axix removal
   ax <- list(
@@ -110,7 +110,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
         warning("Both palette and pal.colours supplied. Using pal.colours")
       }
 
-      pal.colours = scale3d(palette)
+      pal.colours = get_paletteer(palette)
     }
 
     atlas3d$new_col = scales::gradient_n_pal(pal.colours, pal.values, "Lab")(
@@ -126,15 +126,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
   }
 
   # initiate plot
-  p = plotly::plot_ly(...)
-
-  if(show.legend & is.numeric(atlas3d[,facecolour])){
-    # word around to get legend
-    p = plotly::add_bars(x=seq(1, nrow(atlas3d)),
-                         y=atlas3d[,facecolour],
-                         color=atlas3d[,facecolour],
-                         visible="legendonly")
-  }
+  p = plotly::plot_ly()
 
   # add one trace per file inputed
   for(tt in 1:nrow(atlas3d)){
@@ -170,8 +162,20 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                        scene = list(
                          xaxis=ax,
                          yaxis=ax,
-                         zaxis=ax))
+                         zaxis=ax,
+                         plot_bgcolor='transparent',
+                         paper_bgcolor='transparent'))
   }
+
+  # if(show.legend & is.numeric(atlas3d[,facecolour])){
+  #   # word around to get legend
+  #
+  #   p = plotly::add_bars(p, x=seq(1, nrow(atlas3d)),
+  #                        y=atlas3d[,facecolour],
+  #                        color=atlas3d[,facecolour],
+  #                        visible="legendonly") %>%
+  #     layout(xaxis = ax, yaxis = ax)
+  # }
 
   p
 }

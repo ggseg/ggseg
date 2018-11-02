@@ -6,9 +6,9 @@
 \usage{
 ggseg3d(data = NULL, atlas = "dkt3d", surface = "inflated",
   hemisphere = "right", label = "area", text = NULL,
-  facecolour = "colour", paletteer = "RdBu", pal.colours = NULL,
+  facecolour = "colour", palette = NULL, pal.colours = NULL,
   pal.values = NULL, na.color = "darkgrey", remove.axes = TRUE,
-  show.legend = FALSE, ...)
+  show.legend = FALSE)
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
