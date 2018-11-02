@@ -4,7 +4,7 @@
 #' aparc areas.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
-#' @param data A data.frame to use for plot aesthetics. Must include a
+#' @param data A data.frame to use for plot aesthetics. Should include a
 #' column called "area" corresponding to aparc areas.
 #'
 #' @param atlas Either a string with the name of atlas to use,

@@ -14,7 +14,10 @@ Imports: dplyr,
     stats,
     utils,
     tidyr,
-    magrittr
+    magrittr,
+    gplots,
+    plotly,
+    scales
 Suggests:
     knitr,
     rmarkdown,

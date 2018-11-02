@@ -9,7 +9,7 @@ ggseg(data = NULL, atlas = "dkt", plot.areas = NULL,
   adapt_scales = TRUE, ...)
 }
 \arguments{
-\item{data}{A data.frame to use for plot aesthetics. Must include a
+\item{data}{A data.frame to use for plot aesthetics. Should include a
 column called "area" corresponding to aparc areas.}
 
 \item{atlas}{Either a string with the name of atlas to use,
