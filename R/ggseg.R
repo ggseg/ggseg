@@ -43,7 +43,7 @@
 #' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise
 #' @importFrom tidyr unite_
 #' @importFrom magrittr "%>%"
-#' @importFrom stats na.omit
+#' @importFrom stats na.omit sd
 #'
 #' @examples
 #' library(ggplot2)
