@@ -27,11 +27,15 @@ information in the hover text.}
 
 \item{facecolour}{String. Quoted name of column from which colour should be supplied}
 
+\item{palette}{String. Name of paletteer palette to if facecolour is numeric.}
+
 \item{pal.colours}{String vector. Names/codes for the colours to be used if facecolour
 is numeric.}
 
 \item{pal.values}{Numeric vector. Break points corresponding to the pal.colours if
 facecolour is numeric.}
+
+\item{na.color}{String. Either name, hex of RGB for colour of NA in facecolour.}
 
 \item{remove.axes}{Logical. Should axis and grid be removed.}
 

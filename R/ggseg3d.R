@@ -13,6 +13,8 @@
 #' @param text String. Quoated name of column in atlas/data that should be added as extra
 #' information in the hover text.
 #' @param facecolour String. Quoted name of column from which colour should be supplied
+#' @param palette String. Name of paletteer palette to if facecolour is numeric.
+#' @param na.color String. Either name, hex of RGB for colour of NA in facecolour.
 #' @param pal.colours String vector. Names/codes for the colours to be used if facecolour
 #' is numeric.
 #' @param pal.values Numeric vector. Break points corresponding to the pal.colours if
