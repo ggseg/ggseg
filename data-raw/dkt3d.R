@@ -28,11 +28,20 @@ get_surface = function(files){
     left_join(t)
 
   for(i in 1:length(mesh)){
-    data$mesh[[i]] = mesh[[i]]
+    #data$mesh[[i]] = mesh[[i]]
+
+    data$mesh[[i]] = list(vb=mesh[[i]]$vb,
+                          it=mesh[[i]]$it
+    )
+
+    # data$coords[[i]] = data.frame(x=mesh[[i]]$vb["xpts",],
+    #                               y=mesh[[i]]$vb["ypts",],
+    #                               z=mesh[[i]]$vb["zpts",])
+    # data$it[[i]] = data.frame(mesh[[i]]$it)
   }
 
-  data
-}
+  data #%>% as_tibble
+  }
 
 # Inflated --
 inflated = get_surface(list.files("data-raw/mesh3d/inflated_DKT", full.names = T))
