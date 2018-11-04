@@ -169,15 +169,24 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                          paper_bgcolor='transparent'))
   }
 
-  # if(show.legend & is.numeric(atlas3d[,facecolour])){
-  #   # word around to get legend
-  #
-  #   p = plotly::add_bars(p, x=seq(1, nrow(atlas3d)),
-  #                        y=atlas3d[,facecolour],
-  #                        color=atlas3d[,facecolour],
-  #                        visible="legendonly") %>%
-  #     layout(xaxis = ax, yaxis = ax)
-  # }
+  # work around to get legend
+  if(show.legend & is.numeric(atlas3d[,facecolour])){
+
+    col = seq(min(atlas3d[,facecolour], na.rm=T),
+              max(atlas3d[,facecolour], na.rm=T),
+              length.out=length(atlas3d[[tt,"mesh"]]$vb["xpts",])
+    )
+
+    ll = plotly::plot_ly(atlas3d,
+                            x = atlas3d[[tt,"mesh"]]$vb["xpts",],
+                            y = atlas3d[[tt,"mesh"]]$vb["ypts",],
+                            z = atlas3d[[tt,"mesh"]]$vb["zpts",],
+                         color = col,
+                         visible="legendonly",
+                         type = "scatter3d",
+                         mode="markers"
+                         )
+  }
 
   p
 }
