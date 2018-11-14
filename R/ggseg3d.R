@@ -12,14 +12,12 @@
 #' @param label String. Quoted name of column in atlas/data that should be used to name traces
 #' @param text String. Quoated name of column in atlas/data that should be added as extra
 #' information in the hover text.
-#' @param facecolour String. Quoted name of column from which colour should be supplied
-#' @param palette String. Name of paletteer palette to if facecolour is numeric.
-#' @param na.color String. Either name, hex of RGB for colour of NA in facecolour.
-#' @param pal.colours String vector. Names/codes for the colours to be used if facecolour
-#' is numeric.
-#' @param pal.values Numeric vector. Break points corresponding to the pal.colours if
-#' facecolour is numeric.
-#' @param show.legend Logical. Toggle legend if facecolour is numeric.
+#' @param colour String. Quoted name of column from which colour should be supplied
+#' @param palette String. Either name of paletteer palette or vector of hex colours,
+#' used if colour is numeric.
+#' @param na.color String. Either name, hex of RGB for colour of NA in colour.
+#' @param show.legend Logical. Toggle legend if colour is numeric.
+#' @param camera list of x, y, and z positions for initial camera position.
 
 #'
 #' @details
@@ -47,19 +45,11 @@
 #'
 #' @export
 ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere = "right",
-                    label = "area", text = NULL, facecolour = "colour",
-                    palette = NULL, pal.colours = NULL, pal.values=NULL, na.color = "darkgrey",
-                    remove.axes = TRUE, show.legend = FALSE) {
+                    label = "area", text = NULL, colour = "colour",
+                    palette = NULL, na.color = "darkgrey",
+                    remove.axes = TRUE, show.legend = TRUE,
+                    camera = list(x = 1.5, y = 0, z = 1)) {
 
-  # Axix removal
-  ax <- list(
-    title = "",
-    zeroline = FALSE,
-    showline = FALSE,
-    showticklabels = FALSE,
-    showgrid = FALSE,
-    showbackground = FALSE
-  )
 
 
   # Grab the atlas, even if it has been provided as character string
@@ -67,6 +57,14 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
     atlas
   }else{
     get(atlas)
+  }
+
+  if(is.null(which(names(atlas3d) == surface))){
+    stop(paste0("There is no surface '",surface,"' in this atlas." ))
+  }
+
+  if(any(!(hemisphere %in% atlas3d[[surface]]$hemi))){
+    stop(paste0("There is no data for the ",hemisphere," hemisphere in this atlas." ))
   }
 
   # grab the correct surface and hemisphere
@@ -100,23 +98,28 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
     }
   }
 
-  # If facecolour column is numeric, calculate the gradient
-  if(is.numeric(data[,facecolour])){
+  # If colour column is numeric, calculate the gradient
+  if(is.numeric(atlas3d[,colour])){
 
-    if(is.null(palette) & is.null(pal.colours)){
+    if(is.null(palette)){
       palette = "inferno"
     }
 
     if(!is.null(palette)){
-      if(!is.null(pal.colours)){
-        warning("Both palette and pal.colours supplied. Using pal.colours")
+
+      pal.colours = if(length(palette)==1){
+        get_paletteer(palette)
+      }else{
+        palette
       }
 
-      pal.colours = get_paletteer(palette)
+      pal.colours = data.frame(seq(0,1, length.out = length(pal.colours)),
+                               pal.colours, stringsAsFactors = F)
+      names(pal.colours) = NULL
     }
 
-    atlas3d$new_col = scales::gradient_n_pal(pal.colours, pal.values, "Lab")(
-      scales::rescale(x=atlas3d[,facecolour])
+    atlas3d$new_col = scales::gradient_n_pal(pal.colours[,2], NULL,"Lab")(
+      scales::rescale(x=atlas3d[,colour])
     )
 
     atlas3d$new_col[is.na(atlas3d$new_col)] = ifelse(
@@ -124,7 +127,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
 
     fill = "new_col"
   }else{
-    fill = facecolour
+    fill = colour
   }
 
   # initiate plot
@@ -133,33 +136,57 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
   # add one trace per file inputed
   for(tt in 1:nrow(atlas3d)){
 
-    col = rep(atlas3d[tt, fill], length(atlas3d[[tt,"mesh"]]$it[1,]))
-
-    nm = rep(atlas3d[tt, label], length(atlas3d[[tt,"mesh"]]$it[1,]))
+    col = rep(atlas3d[tt, fill], length(atlas3d$mesh[[tt]]$it[1,]))
 
     txt = if(is.null(text)){
       text
     }else{
-      rep(paste0(text, ": ", atlas3d[tt, text]), length(atlas3d[[tt,"mesh"]]$it[1,]))
+      paste0(text, ": ", atlas3d[tt, text])
     }
 
     p = plotly::add_trace(p,
-                          x = atlas3d[[tt,"mesh"]]$vb["xpts",],
-                          y = atlas3d[[tt,"mesh"]]$vb["ypts",],
-                          z = atlas3d[[tt,"mesh"]]$vb["zpts",],
+                          x = atlas3d$mesh[[tt]]$vb["xpts",],
+                          y = atlas3d$mesh[[tt]]$vb["ypts",],
+                          z = atlas3d$mesh[[tt]]$vb["zpts",],
 
-                          i = atlas3d[[tt,"mesh"]]$it[1,]-1,
-                          j = atlas3d[[tt,"mesh"]]$it[2,]-1,
-                          k = atlas3d[[tt,"mesh"]]$it[3,]-1,
+                          i = atlas3d$mesh[[tt]]$it[1,]-1,
+                          j = atlas3d$mesh[[tt]]$it[2,]-1,
+                          k = atlas3d$mesh[[tt]]$it[3,]-1,
 
                           facecolor = col,
                           type = "mesh3d",
                           text = txt,
-                          name = nm
+                          showscale = FALSE,
+                          name = atlas3d[tt, label]
+    )
+  }
+
+  # work around to get legend
+  if(show.legend & is.numeric(atlas3d[,colour])){
+
+    p = plotly::add_trace(p,
+                          x = c(min(atlas3d$mesh[[1]]$vb["xpts",]), max(atlas3d$mesh[[1]]$vb["xpts",])),
+                          y = c(min(atlas3d$mesh[[1]]$vb["ypts",]), max(atlas3d$mesh[[1]]$vb["ypts",])),
+                          z = c(min(atlas3d$mesh[[1]]$vb["zpts",]), max(atlas3d$mesh[[1]]$vb["zpts",])),
+
+                          intensity = c(min(atlas3d[,colour],na.rm=T),
+                                          max(atlas3d[,colour],na.rm=T)),
+                          colorscale = pal.colours,
+                          type = "mesh3d"
     )
   }
 
   if(remove.axes){
+    # Axix removal
+    ax <- list(
+      title = "",
+      zeroline = FALSE,
+      showline = FALSE,
+      showticklabels = FALSE,
+      showgrid = FALSE,
+      showbackground = FALSE
+    )
+
     p = plotly::layout(p,
                        scene = list(
                          xaxis=ax,
@@ -169,24 +196,8 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                          paper_bgcolor='transparent'))
   }
 
-  # work around to get legend
-  if(show.legend & is.numeric(atlas3d[,facecolour])){
-
-    col = seq(min(atlas3d[,facecolour], na.rm=T),
-              max(atlas3d[,facecolour], na.rm=T),
-              length.out=length(atlas3d[[tt,"mesh"]]$vb["xpts",])
+  p %>%
+    plotly::layout(
+      scene = list(camera = list(eye = camera))
     )
-
-    ll = plotly::plot_ly(atlas3d,
-                            x = atlas3d[[tt,"mesh"]]$vb["xpts",],
-                            y = atlas3d[[tt,"mesh"]]$vb["ypts",],
-                            z = atlas3d[[tt,"mesh"]]$vb["zpts",],
-                         color = col,
-                         visible="legendonly",
-                         type = "scatter3d",
-                         mode="markers"
-                         )
-  }
-
-  p
 }
