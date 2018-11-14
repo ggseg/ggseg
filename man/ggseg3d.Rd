@@ -7,8 +7,7 @@
 ggseg3d(data = NULL, atlas = "dkt3d", surface = "inflated",
   hemisphere = "right", label = "area", text = NULL,
   colour = "colour", palette = NULL, na.color = "darkgrey",
-  remove.axes = TRUE, show.legend = TRUE, camera = list(x = 1.5, y =
-  0, z = 1))
+  remove.axes = TRUE, show.legend = TRUE, camera = "lateral")
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -36,7 +35,7 @@ used if colour is numeric.}
 
 \item{show.legend}{Logical. Toggle legend if colour is numeric.}
 
-\item{camera}{list of x, y, and z positions for initial camera position.}
+\item{camera}{String of "medial" or "lateral", or list of x, y, and z positions for initial camera position.}
 }
 \value{
 a plotly object

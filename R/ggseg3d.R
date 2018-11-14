@@ -17,7 +17,7 @@
 #' used if colour is numeric.
 #' @param na.color String. Either name, hex of RGB for colour of NA in colour.
 #' @param show.legend Logical. Toggle legend if colour is numeric.
-#' @param camera list of x, y, and z positions for initial camera position.
+#' @param camera String of "medial" or "lateral", or list of x, y, and z positions for initial camera position.
 
 #'
 #' @details
@@ -48,7 +48,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                     label = "area", text = NULL, colour = "colour",
                     palette = NULL, na.color = "darkgrey",
                     remove.axes = TRUE, show.legend = TRUE,
-                    camera = list(x = 1.5, y = 0, z = 1)) {
+                    camera = "lateral") {
 
 
 
@@ -102,12 +102,16 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
   if(is.numeric(atlas3d[,colour])){
 
     if(is.null(palette)){
-      palette = "inferno"
+      palette = "oslo"
     }
 
     if(!is.null(palette)){
 
       pal.colours = if(length(palette)==1){
+        if(!palette %in% (lapply(paletteers$palettes, function(x) x$palette) %>% unlist)){
+          warning(paste0("No such palette '", palette, "'. Choose one from the paletteer package."))
+        }
+
         get_paletteer(palette)
       }else{
         palette
@@ -196,8 +200,20 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                          paper_bgcolor='transparent'))
   }
 
+  views = if(class(camera) != "list"){
+     switch(camera,
+      "lateral" = list(x = 1.5, y = 0, z = 1),
+      "medial" = list(x = -2.25, y = 0, z = 0)
+    )
+  }else{
+    camera
+  }
+
+
+
   p %>%
     plotly::layout(
-      scene = list(camera = list(eye = camera))
+      scene = list(camera = list(eye = views))
     )
 }
+
