@@ -6,9 +6,9 @@
 \usage{
 ggseg3d(data = NULL, atlas = "dkt3d", surface = "inflated",
   hemisphere = "right", label = "area", text = NULL,
-  facecolour = "colour", palette = NULL, pal.colours = NULL,
-  pal.values = NULL, na.color = "darkgrey", remove.axes = TRUE,
-  show.legend = FALSE)
+  colour = "colour", palette = NULL, na.color = "darkgrey",
+  remove.axes = TRUE, show.legend = TRUE, camera = list(x = 1.5, y =
+  0, z = 1))
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -25,21 +25,18 @@ column called "area" corresponding to areas.}
 \item{text}{String. Quoated name of column in atlas/data that should be added as extra
 information in the hover text.}
 
-\item{facecolour}{String. Quoted name of column from which colour should be supplied}
+\item{colour}{String. Quoted name of column from which colour should be supplied}
 
-\item{palette}{String. Name of paletteer palette to if facecolour is numeric.}
+\item{palette}{String. Either name of paletteer palette or vector of hex colours,
+used if colour is numeric.}
 
-\item{pal.colours}{String vector. Names/codes for the colours to be used if facecolour
-is numeric.}
-
-\item{pal.values}{Numeric vector. Break points corresponding to the pal.colours if
-facecolour is numeric.}
-
-\item{na.color}{String. Either name, hex of RGB for colour of NA in facecolour.}
+\item{na.color}{String. Either name, hex of RGB for colour of NA in colour.}
 
 \item{remove.axes}{Logical. Should axis and grid be removed.}
 
-\item{show.legend}{Logical. Toggle legend if facecolour is numeric.}
+\item{show.legend}{Logical. Toggle legend if colour is numeric.}
+
+\item{camera}{list of x, y, and z positions for initial camera position.}
 }
 \value{
 a plotly object
