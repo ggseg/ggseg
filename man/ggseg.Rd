@@ -67,7 +67,7 @@ ggseg(adapt_scales = FALSE)
 
 }
 \seealso{
-[ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
+\code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_polygon}},\code{\link[ggplot2]{coord_fixed}}
 }
 \author{
 Athanasia Mowinckel and Didac Pineiro

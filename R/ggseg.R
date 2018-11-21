@@ -56,7 +56,7 @@
 #' ggseg(adapt_scales = TRUE)
 #' ggseg(adapt_scales = FALSE)
 #'
-#' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
+#' @seealso \code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_polygon}},\code{\link[ggplot2]{coord_fixed}}
 #'
 #' @export
 ggseg = function(data = NULL,

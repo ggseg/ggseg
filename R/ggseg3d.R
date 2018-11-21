@@ -17,14 +17,24 @@
 #' used if colour is numeric.
 #' @param na.color String. Either name, hex of RGB for colour of NA in colour.
 #' @param show.legend Logical. Toggle legend if colour is numeric.
-#' @param camera String of "medial" or "lateral", or list of x, y, and z positions for initial camera position.
+#' @param camera String of "medial" or "lateral", or list of x, y, and z positions
+#' for initial camera position.
 
 #'
 #' @details
 #' \describe{
+#' \strong{Available atlases:}
 #' \item{`dkt3d`}{
-#' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format}
+#' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
 #' }
+#' }
+#'
+#' \strong{Available surfaces:}
+#' \itemize{
+#' \item `inflated` Fully inflated surface
+#' \item `semi-inflated` Semi-inflated surface
+#' \item `white` white matter surface
+#'  }
 #'
 #' @return a plotly object
 #'
@@ -41,7 +51,7 @@
 #' ggseg3d(surface="pial")
 #' ggseg3d(remove.axes = FALSE)
 #'
-#' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
+#' @seealso \code{\link[plotly]{plot_ly}}, \code{\link[plotly]{add_trace}}, \code{\link[plotly]{layout}}, the plotly package
 #'
 #' @export
 ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere = "right",
@@ -49,7 +59,6 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                     palette = NULL, na.color = "darkgrey",
                     remove.axes = TRUE, show.legend = TRUE,
                     camera = "lateral") {
-
 
 
   # Grab the atlas, even if it has been provided as character string
