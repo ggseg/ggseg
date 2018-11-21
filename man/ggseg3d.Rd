@@ -35,7 +35,8 @@ used if colour is numeric.}
 
 \item{show.legend}{Logical. Toggle legend if colour is numeric.}
 
-\item{camera}{String of "medial" or "lateral", or list of x, y, and z positions for initial camera position.}
+\item{camera}{String of "medial" or "lateral", or list of x, y, and z positions
+for initial camera position.}
 }
 \value{
 a plotly object
@@ -45,9 +46,18 @@ a plotly object
 }
 \details{
 \describe{
+\strong{Available atlases:}
 \item{`dkt3d`}{
-The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format}
+The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
 }
+}
+
+\strong{Available surfaces:}
+\itemize{
+\item `inflated` Fully inflated surface
+\item `semi-inflated` Semi-inflated surface
+\item `white` white matter surface
+ }
 }
 \examples{
 library(ggplot2)
@@ -57,7 +67,7 @@ ggseg3d(remove.axes = FALSE)
 
 }
 \seealso{
-[ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
+\code{\link[plotly]{plot_ly}}, \code{\link[plotly]{add_trace}}, \code{\link[plotly]{layout}}, the plotly package
 }
 \author{
 Athanasia Mowinckel and Didac Pineiro
