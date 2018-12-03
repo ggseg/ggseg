@@ -67,6 +67,11 @@ vignette("ggseg")
 
 You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
 
+### Report bugs or requests
+
+Don't hesitate to ask for support using [github issues](https://github.com/LCBC-UiO/ggseg/issues), or requesting new atlases. 
+While we would love getting help in creating new atlases, you may also request atlases through the issues, and we will try to get to it. 
+
 ### Included atlases and palettes
 ```{r dkt, fig.height=8, echo=F}
 library(ggplot2)
