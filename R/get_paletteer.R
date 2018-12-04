@@ -21,7 +21,8 @@ get_paletteer = function(palette){
          },
          "dynamic" = {
            paletteer::paletteer_dynamic(package = !!pkg,
-                                  palette = !!palette)
+                                  palette = !!palette,
+                                  pals$palettes[[type_indx]][idx,"length"])
          },
          "continuous" = {
            paletteer::paletteer_c(package = !!pkg,
