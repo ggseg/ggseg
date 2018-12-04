@@ -19,20 +19,25 @@
 #' @param show.legend Logical. Toggle legend if colour is numeric.
 #' @param camera String of "medial" or "lateral", or list of x, y, and z positions
 #' for initial camera position.
-
 #'
 #' @details
 #' \describe{
 #' \strong{Available atlases:}
-#' \item{`dkt3d`}{
-#' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
-#' }
+#'   \item{`dkt_3d`}{
+#'     The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
+#'   }
+#'   \item{`yeo7_3d`}{
+#'     Yeo 2011 7 resting-state networks, in 3dmesh format
+#'   }
+#'   \item{`yeo17_3d`}{
+#'     Yeo 2011 17 resting-state networks, in 3dmesh format
+#'   }
 #' }
 #'
 #' \strong{Available surfaces:}
 #' \itemize{
 #' \item `inflated` Fully inflated surface
-#' \item `semi-inflated` Semi-inflated surface
+# \item `semi-inflated` Semi-inflated surface
 #' \item `white` white matter surface
 #'  }
 #'
@@ -48,13 +53,13 @@
 #' @examples
 #' library(ggplot2)
 #' ggseg3d()
-#' ggseg3d(surface="pial")
+#' ggseg3d(surface="white")
 #' ggseg3d(remove.axes = FALSE)
 #'
 #' @seealso \code{\link[plotly]{plot_ly}}, \code{\link[plotly]{add_trace}}, \code{\link[plotly]{layout}}, the plotly package
 #'
 #' @export
-ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere = "right",
+ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere = "right",
                     label = "area", text = NULL, colour = "colour",
                     palette = NULL, na.color = "darkgrey",
                     remove.axes = TRUE, show.legend = TRUE,
@@ -68,16 +73,19 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
     get(atlas)
   }
 
-  if(is.null(which(names(atlas3d) == surface))){
+
+  if(!any(atlas3d$surf %in% surface)){
     stop(paste0("There is no surface '",surface,"' in this atlas." ))
   }
 
-  if(any(!(hemisphere %in% atlas3d[[surface]]$hemi))){
+  if(!any(atlas3d$hemi %in% hemisphere)){
     stop(paste0("There is no data for the ",hemisphere," hemisphere in this atlas." ))
   }
 
   # grab the correct surface and hemisphere
-  atlas3d = dplyr::filter(atlas3d[[surface]], hemi %in% hemisphere)
+  atlas3d = atlas3d %>%
+    dplyr::filter(surf %in% surface & hemi %in% hemisphere) %>%
+    tidyr::unnest()
 
   # If data has been supplied, merge it
   if(!is.null(data)){
@@ -92,7 +100,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
     # Find if there are instances of those columns that
     # are not present in the atlas. Maybe mispelled?
     errs = atlas3d %>%
-      dplyr::filter(is.na(mesh)) %>%
+      dplyr::filter(unlist(lapply(atlas3d$mesh, is.null))) %>%
       dplyr::select(!!cols) %>%
       dplyr::distinct() %>%
       tidyr::unite_("tt", cols, sep = " - ") %>%
@@ -103,40 +111,37 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                     errs$value))
 
       atlas3d = atlas3d %>%
-        dplyr::filter(!is.na(atlas3d))
+        dplyr::filter(!unlist(lapply(atlas3d$mesh, is.null)))
     }
   }
 
   # If colour column is numeric, calculate the gradient
-  if(is.numeric(atlas3d[,colour])){
+  if(is.numeric(unlist(atlas3d[,colour]))){
 
     if(is.null(palette)){
       palette = "oslo"
     }
 
-    if(!is.null(palette)){
-
-      pal.colours = if(length(palette)==1){
-        if(!palette %in% (lapply(paletteers$palettes, function(x) x$palette) %>% unlist)){
-          warning(paste0("No such palette '", palette, "'. Choose one from the paletteer package."))
-        }
-
-        get_paletteer(palette)
-      }else{
-        palette
+    pal.colours = if(length(palette)==1){
+      if(!palette %in% unlist(lapply(paletteers$palettes, function(x) x$palette))){
+        stop(paste0("No such palette '", palette, "'. Choose one from the paletteer package."))
       }
 
-      pal.colours = data.frame(seq(0,1, length.out = length(pal.colours)),
-                               pal.colours, stringsAsFactors = F)
-      names(pal.colours) = NULL
+      get_paletteer(palette)
+    }else{
+      palette
     }
 
-    atlas3d$new_col = scales::gradient_n_pal(pal.colours[,2], NULL,"Lab")(
-      scales::rescale(x=atlas3d[,colour])
-    )
+    pal.colours = data.frame(seq(0,1, length.out = length(pal.colours)),
+                             pal.colours, stringsAsFactors = F)
+    names(pal.colours) = NULL
 
-    atlas3d$new_col[is.na(atlas3d$new_col)] = ifelse(
-      grepl("^#", na.color), na.color, gplots::col2hex(na.color))
+    atlas3d$new_col = scales::gradient_n_pal(pal.colours[,2], NULL,"Lab")(
+      scales::rescale(x=unlist(atlas3d[,colour])))
+
+    atlas3d$new_col = ifelse(!is.na(atlas3d$new_col), atlas3d$new_col,
+                              ifelse(grepl("^#", na.color),
+                                     na.color, gplots::col2hex(na.color)))
 
     fill = "new_col"
   }else{
@@ -149,12 +154,12 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
   # add one trace per file inputed
   for(tt in 1:nrow(atlas3d)){
 
-    col = rep(atlas3d[tt, fill], length(atlas3d$mesh[[tt]]$it[1,]))
+    col = rep(unlist(atlas3d[tt, fill]), length(atlas3d$mesh[[tt]]$it[1,]))
 
     txt = if(is.null(text)){
       text
     }else{
-      paste0(text, ": ", atlas3d[tt, text])
+      paste0(text, ": ", unlist(atlas3d[tt, text]))
     }
 
     p = plotly::add_trace(p,
@@ -170,12 +175,12 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                           type = "mesh3d",
                           text = txt,
                           showscale = FALSE,
-                          name = atlas3d[tt, label]
+                          name = unlist(atlas3d[tt, label])
     )
   }
 
   # work around to get legend
-  if(show.legend & is.numeric(atlas3d[,colour])){
+  if(show.legend & is.numeric(unlist(atlas3d[,colour]))){
 
     p = plotly::add_trace(p,
                           x = c(min(atlas3d$mesh[[1]]$vb["xpts",]), max(atlas3d$mesh[[1]]$vb["xpts",])),
@@ -183,7 +188,7 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
                           z = c(min(atlas3d$mesh[[1]]$vb["zpts",]), max(atlas3d$mesh[[1]]$vb["zpts",])),
 
                           intensity = c(min(atlas3d[,colour],na.rm=T),
-                                          max(atlas3d[,colour],na.rm=T)),
+                                        max(atlas3d[,colour],na.rm=T)),
                           colorscale = pal.colours,
                           type = "mesh3d"
     )
@@ -210,19 +215,23 @@ ggseg3d <- function(data=NULL, atlas="dkt3d", surface = "inflated", hemisphere =
   }
 
   views = if(class(camera) != "list"){
-     switch(camera,
-      "lateral" = list(x = 1.5, y = 0, z = 1),
-      "medial" = list(x = -2.25, y = 0, z = 0)
+    switch(camera,
+           "lateral" = list(eye = list(x = 2, y = 0, z = 1)),
+           "medial" = list(eye = list(x = -2.25, y = -0.5, z = -0.5))
     )
   }else{
     camera
   }
 
 
-
+  # create final plotly plot
   p %>%
     plotly::layout(
-      scene = list(camera = list(eye = views))
+      scene = list(camera = views)
     )
 }
 
+## quiets concerns of R CMD check
+if(getRversion() >= "2.15.1"){
+  utils::globalVariables(c("tt", "surf", "mesh", "new_col"))
+}

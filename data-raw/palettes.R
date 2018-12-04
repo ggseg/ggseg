@@ -272,7 +272,7 @@ brain.pals = list(
     TE1m = "#3B2D2Bff",
     PI = "#7A3232ff",
     a32pr = "#823F57ff",
-    p24 = "#7B234A00"
+    p24 = "#7B234Aff"
   ),
   jhu = c(
     `Anterior thalamic radiation` = "#cf7bc7",

@@ -4,7 +4,7 @@
 \alias{ggseg3d}
 \title{Plot 3D brain parcellations}
 \usage{
-ggseg3d(data = NULL, atlas = "dkt3d", surface = "inflated",
+ggseg3d(data = NULL, atlas = "dkt_3d", surface = "inflated",
   hemisphere = "right", label = "area", text = NULL,
   colour = "colour", palette = NULL, na.color = "darkgrey",
   remove.axes = TRUE, show.legend = TRUE, camera = "lateral")
@@ -47,22 +47,27 @@ a plotly object
 \details{
 \describe{
 \strong{Available atlases:}
-\item{`dkt3d`}{
-The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
-}
+  \item{`dkt_3d`}{
+    The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations, in 3dmesh format
+  }
+  \item{`yeo7_3d`}{
+    Yeo 2011 7 resting-state networks, in 3dmesh format
+  }
+  \item{`yeo17_3d`}{
+    Yeo 2011 17 resting-state networks, in 3dmesh format
+  }
 }
 
 \strong{Available surfaces:}
 \itemize{
 \item `inflated` Fully inflated surface
-\item `semi-inflated` Semi-inflated surface
 \item `white` white matter surface
  }
 }
 \examples{
 library(ggplot2)
 ggseg3d()
-ggseg3d(surface="pial")
+ggseg3d(surface="white")
 ggseg3d(remove.axes = FALSE)
 
 }

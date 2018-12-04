@@ -1,22 +1,44 @@
 library(tidyverse)
 library(geomorph)
 
-# All files were downloaded from
-# https://brainder.org/research/brain-for-blender/
-# https://s3.us-east-2.amazonaws.com/brainder/software/brain4blender/all_ply.tar.bz2
-# A. M. Winkler created the 3d "ply" files here used as templates.
+# A. M. Winkler created the scripts that converterd Freesurfer
+# `.srf`  files to  `.ply`.
+# All files are made with Freesurfer's fsaverage5.
 
-get_surface = function(files){
+# Function to grab all the data and create a nested tibble
+get_surface = function(folder, atlasname){
+
+  surfs = list.files(folder, full.names = T)
+
+  hemi = sapply(surfs, list.files, full.names = T) %>% as.character()
+
+  files = sapply(hemi, list.files, pattern="*roi*", full.names = T) %>% as.character()
+
   mesh = lapply(files, read.ply, ShowSpecimen = F)
 
+
+  annots = sapply(hemi, list.files, pattern="*.csv", full.names = T) %>%
+    as.character() %>%
+    lapply(read_csv) %>%
+    bind_rows()
+
+
   data = data.frame(files=files) %>%
-    separate(files, c("Del1", "DEL2", "DEL3", "DEL4","DEL5", "hemi", "type", "DELY", "raw", "DELX")) %>%
+    separate(files, remove=F,
+             c("Del1", "DEL2", "DEL3", "atlas","DEL5", "DEL7", "hemi", "surf", "DEL6", "roi", "DELX")) %>%
+    separate(files, c("DEL1","DEL2","DEL#","DEL4","DEL5","DEL6","filename"), sep="/") %>%
     select(-contains("DEL")) %>%
-    unite(label, c("hemi", "raw"), remove=F) %>%
-    left_join(ggseg::dkt %>%
-                select(label, area, acronym, lobe) %>%
-                distinct()) %>%
-    mutate(hemi = ifelse(hemi =="lh", "left", "right"))
+    left_join(annots, by="filename") %>%
+    mutate(annot = ifelse(annot == "unknown", "medialwall", annot)) %>%
+    mutate(label = paste(hemi, annot, sep="_")) %>%
+    left_join(dkt %>% select(label, acronym, lobe, area) %>% distinct,
+            by="label") %>%
+    mutate(hemi = ifelse(hemi =="lh", "left", "right"),
+           acronym = ifelse(annot == "corpuscallosum","cc", acronym),
+           area = ifelse(annot == "corpuscallosum","corpus callosum", area),
+           atlas = atlasname) %>%
+    distinct()
+
 
   t = as.data.frame(ggseg::brain.pals$dkt)
   names(t)[1] = "colour"
@@ -33,26 +55,23 @@ get_surface = function(files){
     data$mesh[[i]] = list(vb=mesh[[i]]$vb,
                           it=mesh[[i]]$it
     )
-
-    # data$coords[[i]] = data.frame(x=mesh[[i]]$vb["xpts",],
-    #                               y=mesh[[i]]$vb["ypts",],
-    #                               z=mesh[[i]]$vb["zpts",])
-    # data$it[[i]] = data.frame(mesh[[i]]$it)
   }
 
-  data #%>% as_tibble
-  }
+  data %>%
+    select(-filename) %>%
+    group_by(surf, hemi) %>%
+    nest()
+}
 
-# Inflated --
-inflated = get_surface(list.files("data-raw/mesh3d/inflated_DKT", full.names = T))
 
-# Pial --
-pial =  get_surface(list.files("data-raw/mesh3d/pial_DKT/", full.names = T))
+dkt_3d = get_surface("data-raw/mesh3d/DKT/", atlasname = "dkt_3d")
+save(dkt_3d, file="data/dkt_3d.RData")
 
-# White --
-white = get_surface(list.files("data-raw/mesh3d/white_DKT/", full.names = T))
+yeo7_3d = get_surface("data-raw/mesh3d/DKT/", atlasname = "dkt3d")
+save(dkt3d, file="data/dkt3d.RData")
 
-dkt3d = list(pial=pial,
-             inflated=inflated,
-             white=white)
+yeo17_3d = get_surface("data-raw/mesh3d/DKT/", atlasname = "dkt3d")
+save(dkt3d, file="data/dkt3d.RData")
+
+dkt3d = get_surface("data-raw/mesh3d/DKT/", atlasname = "dkt3d")
 save(dkt3d, file="data/dkt3d.RData")
