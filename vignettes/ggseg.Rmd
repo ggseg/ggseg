@@ -2,7 +2,7 @@
 title: "Plotting brain atlases in ggplot"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Plotting Freesurfers aparc areas}
+  %\VignetteIndexEntry{Plotting brain atlases in ggplot}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -22,7 +22,6 @@ It will create a base plot of the aparc brain segmentations.
 
 ```{r start}
 library(ggseg)
-library(ggplot2)
 library(magrittr)
 library(dplyr)
 ggseg()
@@ -34,14 +33,14 @@ By default it plots `data(dkt)`.
 For instance, you might want to only see the brain and it's segments, without any grid or axis information.
 You can add ggplot2's `theme_void` to achieve this.
 
-```{r void}
+```{r void, fig.width=5}
 ggseg() + theme_void()
 ```
 
 You can supply some extra options to ggseg, to alter the plot as you wish.
 
 You can stack the hemispheres if you want
-```{r stacked}
+```{r stacked, fig.width=5}
 ggseg(position="stacked") +
   theme_void()
 ```
@@ -50,34 +49,34 @@ Maybe you want each area to have a different colour.
 ggseg has a built column called `area` wich you can use as fill to achieve this.
 **Note:** unlike other ggplots, before using `aes` you must indicate `mapping=aes`.
 
-```{r fill}
+```{r fill, fig.width=5}
 ggseg(mapping=aes(fill=area)) +
   theme_void()
 ```
 
 Maybe you also want the contour lines to be black rather than white, and also a little thicker?
 
-```{r fill2}
+```{r fill2, fig.width=5}
 ggseg(colour="black", size=.7, mapping=aes(fill=area)) +
   theme_void()
 ```
 
 You can also zoom in on a single area and plot it alone.
 
-```{r plot.area}
+```{r plot.area, fig.width=5}
 ggseg(plot.area="superior frontal") +
   theme_void()
 ```
 
 Or you can plot several of them, despite not making much sense.
 
-```{r plot.area2}
+```{r plot.area2, fig.width=5}
 ggseg(plot.area=c("transverse temporal", "insula","pre central","superior parietal")) +
   theme_void()
 ```
 
 You can also choose to only view one of the hespheres by adding the `hemisphere` option
-```{r hemisphere}
+```{r hemisphere, fig.width=5}
 ggseg(hemisphere="right") +
   theme_void()
 ```
@@ -87,7 +86,7 @@ The data **must** include a column names `area`, with area names corresponding t
 Here we create some data with 4 rows, and an `area` and `p` column. We provide the `p` column as the column
 that dictates the colour of the area.
 
-```{r datasupp}
+```{r datasupp, fig.width=5}
 someData = data.frame(
   area = c("transverse temporal", "insula",
            "pre central","superior parietal"), 
@@ -99,7 +98,7 @@ ggseg(data=someData, mapping=aes(fill=p))
 ```
 
 We can also change how this looks, by various ggplot functions
-```{r datasupp2}
+```{r datasupp2, fig.width=5}
 ggseg(data=someData, colour="black",mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
@@ -109,7 +108,7 @@ ggseg(data=someData, colour="black",mapping=aes(fill=p)) +
 
 If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes
 the column `hemi` with either "rh" or "lh" for this to happen.
-```{r datasuppX}
+```{r datasuppX, fig.width=5}
 someData$hemi = "right"
 
 ggseg(data=someData, colour="white",mapping=aes(fill=p)) +
@@ -125,7 +124,7 @@ The data needs to be in long format for this to work, like ggplot likes it.
 Also, you'll need to merge the data **outside** of the plotting function for it to work nicely.
 This is because the atlas data must be completely duplicated for plotting to look nice.
 
-```{r datasupp3}
+```{r datasupp3, fig.width=5}
 someData = data.frame(
   area = rep(c("transverse temporal", "insula",
                "pre central","superior parietal"),2), 
@@ -144,7 +143,7 @@ This is because the the function requires full data to be able to plot, and the 
 To fix this, you must duplicate the atlas data, and supply your data through the `atlas` option.
 This is maybe best achieved by making your data into a list, and then list applying `lapply` over them, and binding them together again.
 
-```{r duplicate}
+```{r duplicate, fig.width=5}
 newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
                 Old = someData %>% filter(AgeG %in% "Old")) %>% 
   lapply(function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG))) %>% 
@@ -163,7 +162,7 @@ vignette("externalData")
 
 We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?
 
-```{r datasupp4}
+```{r datasupp4, fig.width=5}
 ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme_dark() +
@@ -177,7 +176,7 @@ ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
 
 Depending on what type of column is used for fill (continuous or discrete),
 you can also use the differenct `scales` to alter the colours.
-```{r datasupp5}
+```{r datasupp5, fig.width=5}
 ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme_dark() +
@@ -190,6 +189,6 @@ ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
 ```
 
 You can try other atlases too.
-```{r atlases}
+```{r atlases, fig.width=5}
 ggseg(atlas="aseg", mapping=aes(fill=area))
 ```
