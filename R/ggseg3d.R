@@ -15,7 +15,7 @@
 #' @param colour String. Quoted name of column from which colour should be supplied
 #' @param palette String. Either name of paletteer palette or vector of hex colours,
 #' used if colour is numeric.
-#' @param na.color String. Either name, hex of RGB for colour of NA in colour.
+#' @param na.colour String. Either name, hex of RGB for colour of NA in colour.
 #' @param show.legend Logical. Toggle legend if colour is numeric.
 #' @param camera String of "medial" or "lateral", or list of x, y, and z positions
 #' for initial camera position.
@@ -61,7 +61,7 @@
 #' @export
 ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere = "right",
                     label = "area", text = NULL, colour = "colour",
-                    palette = NULL, na.color = "darkgrey",
+                    palette = NULL, na.colour = "darkgrey",
                     remove.axes = TRUE, show.legend = TRUE,
                     camera = "lateral") {
 
@@ -140,8 +140,8 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere 
       scales::rescale(x=unlist(atlas3d[,colour])))
 
     atlas3d$new_col = ifelse(!is.na(atlas3d$new_col), atlas3d$new_col,
-                              ifelse(grepl("^#", na.color),
-                                     na.color, gplots::col2hex(na.color)))
+                              ifelse(grepl("^#", na.colour),
+                                     na.colour, gplots::col2hex(na.colour)))
 
     fill = "new_col"
   }else{
@@ -155,6 +155,8 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere 
   for(tt in 1:nrow(atlas3d)){
 
     col = rep(unlist(atlas3d[tt, fill]), length(atlas3d$mesh[[tt]]$it[1,]))
+
+    col = ifelse(is.na(col), na.colour, col)
 
     txt = if(is.null(text)){
       text
