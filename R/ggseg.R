@@ -167,6 +167,8 @@ ggseg = function(data = NULL,
 }
 
 
-
-
+## quiets concerns of R CMD check
+if(getRversion() >= "2.15.1"){
+  utils::globalVariables(c("dkt", "lat_sd", "long_sd", "id"))
+}
 

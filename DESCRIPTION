@@ -6,7 +6,7 @@ Authors@R: c(person("Athanasia Mo", "Mowinckel", email = "a.m.mowinckel@psykolog
 Description: This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
