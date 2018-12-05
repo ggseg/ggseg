@@ -6,7 +6,7 @@
 \usage{
 ggseg3d(data = NULL, atlas = "dkt_3d", surface = "inflated",
   hemisphere = "right", label = "area", text = NULL,
-  colour = "colour", palette = NULL, na.color = "darkgrey",
+  colour = "colour", palette = NULL, na.colour = "darkgrey",
   remove.axes = TRUE, show.legend = TRUE, camera = "lateral")
 }
 \arguments{
@@ -29,7 +29,7 @@ information in the hover text.}
 \item{palette}{String. Either name of paletteer palette or vector of hex colours,
 used if colour is numeric.}
 
-\item{na.color}{String. Either name, hex of RGB for colour of NA in colour.}
+\item{na.colour}{String. Either name, hex of RGB for colour of NA in colour.}
 
 \item{remove.axes}{Logical. Should axis and grid be removed.}
 
