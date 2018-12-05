@@ -43,9 +43,10 @@ get_surface = function(folder, atlasname){
 
   data %>%
     select(-filename) %>%
-    group_by(surf, hemi) %>%
+    group_by(atlas, surf, hemi) %>%
     nest()
 }
+
 
 
 ## DKT ----
@@ -116,7 +117,7 @@ schaefer7_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels7Networksorder
   unite(area, c("network", "no"), remove = F) %>%
   select(-contains("DEL"), -no) %>%
   mutate_all(funs(ifelse(grepl("Defined", .), "medialwall", .))) %>%
-  group_by(surf, hemi) %>%
+  group_by(atlas, surf, hemi) %>%
   nest()
 
 lut = rio::import_list("data-raw/mesh3d/Schaefer2018_400Parcels_ctabs.xlsx") %>%
@@ -141,7 +142,7 @@ schaefer17_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels17Networksord
   unite(area, c("network", "no"), remove = F) %>%
   select(-contains("DEL"), -no) %>%
   mutate_all(funs(ifelse(grepl("Defined", .), "medialwall", .))) %>%
-  group_by(surf, hemi) %>%
+  group_by(atlas, surf, hemi) %>%
   nest()
 
 schaefer17_3d = schaefer17_3d %>%
@@ -157,7 +158,7 @@ aseg_3d = list.files("data-raw/mesh3d/aseg/", pattern="ply", full.names = T) %>%
   data.frame(files = ., stringsAsFactors = F) %>%
   separate(files, c("DEL","DEL1","DEL2","DEL3", "DEL4", "roi", "DEL5"), remove = F) %>%
   select(-contains("DEL")) %>%
-  mutate(surf="inflated", hemi="subcort")
+  mutate(surf="inflated", hemi="subcort", atlas="aseg_3d")
 
 rgb2hex <- function(r,g,b) rgb(r, g, b, maxColorValue = 255)
 
@@ -180,7 +181,7 @@ for(i in 1:length(mesh)){
 
 aseg_3d = aseg_3d %>%
   mutate(area=label) %>%
-  group_by(surf, hemi) %>%
+  group_by(atlas, surf, hemi) %>%
   nest()
 save(aseg_3d, file="data/aseg_3d.RData")
 
