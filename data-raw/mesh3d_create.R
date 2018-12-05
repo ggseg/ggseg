@@ -89,7 +89,7 @@ yeo7_3d = yeo7_3d %>%
 save(yeo7_3d, file="data/yeo7_3d.RData")
 
 
-## Yeo 7 ----
+## Yeo 17 ----
 yeo17_3d = get_surface("data-raw/mesh3d/Yeo201117NetworksN1000/", atlasname = "yeo17_3d")
 
 t = data.frame(ggseg::brain.pals$yeo17)
@@ -108,7 +108,64 @@ yeo17_3d = yeo17_3d %>%
   mutate(data = map(data, ~left_join(., t, by="label")))
 save(yeo17_3d, file="data/yeo17_3d.RData")
 
-## Glasser
+## Schaefer 7 ----
+schaefer7_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels7Networksorder/",
+                           atlasname = "schaefer7_3d") %>%
+  unnest() %>%
+  separate(annot, c("DEL", "DEL2", "network", "no"), remove = F) %>%
+  unite(area, c("network", "no"), remove = F) %>%
+  select(-contains("DEL"), -no) %>%
+  mutate_all(funs(ifelse(grepl("Defined", .), "medialwall", .))) %>%
+  group_by(surf, hemi) %>%
+  nest()
+
+lut = rio::import_list("data-raw/mesh3d/Schaefer2018_400Parcels_ctabs.xlsx") %>%
+  bind_rows() %>%
+  select(annot, HEX) %>%
+  rename(colour = HEX) %>%
+  filter(!grepl("Wall$", annot))
+
+schaefer7_3d = schaefer7_3d %>%
+  mutate(data = map(data, ~left_join(., lut) %>%
+                      select(1:4, colour, everything()) %>%
+                      mutate(annot = ifelse(grepl("Wall$",annot), "medialwall", annot))
+  )
+  )
+save(schaefer7_3d, file="data/schaefer7_3d.RData")
+
+## Schaefer 17 ----
+schaefer17_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels17Networksorder/",
+                            atlasname = "schaefer17_3d") %>%
+  unnest() %>%
+  separate(annot, c("DEL", "DEL2", "network", "no"), remove = F) %>%
+  unite(area, c("network", "no"), remove = F) %>%
+  select(-contains("DEL"), -no) %>%
+  mutate_all(funs(ifelse(grepl("Defined", .), "medialwall", .))) %>%
+  group_by(surf, hemi) %>%
+  nest()
+
+schaefer17_3d = schaefer17_3d %>%
+  mutate(data = map(data, ~left_join(., lut) %>%
+                      select(1:4, colour, everything()) %>%
+                      mutate(annot = ifelse(grepl("Wall$",annot), "medialwall", annot))
+  )
+  )
+save(schaefer17_3d, file="data/schaefer17_3d.RData")
+
+## aseg ----
+aseg_3d = list.files("data-raw/mesh3d/aseg/", pattern="ply", full.names = T) %>%
+  data.frame(files = ., stringsAsFactors = F) %>%
+  mutate()
+                            atlasname = "aseg_3d")
+
+# No palettes yet ----
+
+desterieux_3d = get_surface("data-raw/mesh3d/Desterieux/",
+                            atlasname = "desterieux_3d")
+#save(desterieux_3d, file="data/desterieux_3d.RData")
+
+# buggy ----
+## Glasser ----
 glasser_3d = get_surface("data-raw/mesh3d/HCPMMP1/", atlasname = "glasser_3d") %>%
   mutate(data = map(data, ~ separate(., annot, c("DEL","area", "DEL2"), remove = F) %>%
                       select(-contains("DEL"))))
@@ -127,23 +184,9 @@ t = glasser %>%
 
 glasser_3d = glasser_3d %>%
   mutate(data = map(data, ~left_join(., t, ) %>%
-           select(1:5, colour, everything()) %>%
-             mutate(area = ifelse(area == "", "medialwall", area))
-           )
-         )
-#save(glasser_3d, file="data/glasser_3d.RData")
+                      select(1:5, colour, everything()) %>%
+                      mutate(area = ifelse(area == "", "medialwall", area))
+  )
+  )
+save(glasser_3d, file="data/glasser_3d.RData")
 
-
-# No palettes yet ----
-
-desterieux_3d = get_surface("data-raw/mesh3d/Desterieux/",
-                            atlasname = "desterieux_3d")
-#save(desterieux_3d, file="data/desterieux_3d.RData")
-
-schaefer7_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels7Networksorder/",
-                          atlasname = "schaefer7_3d")
-#save(schaefer7_3d, file="data/schaefer7_3d.RData")
-
-schaefer17_3d = get_surface("data-raw/mesh3d/Schaefer2018400Parcels17Networksorder/",
-                         atlasname = "schaefer17_3d")
-#save(schaefer17_3d, file="data/schaefer17_3d.RData")
