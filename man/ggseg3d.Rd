@@ -5,9 +5,10 @@
 \title{Plot 3D brain parcellations}
 \usage{
 ggseg3d(data = NULL, atlas = "dkt_3d", surface = "inflated",
-  hemisphere = "right", label = "area", text = NULL,
+  hemisphere = c("right", "subcort"), label = "area", text = NULL,
   colour = "colour", palette = NULL, na.colour = "darkgrey",
-  remove.axes = TRUE, show.legend = TRUE, camera = "lateral")
+  na.alpha = 1, remove.axes = TRUE, show.legend = TRUE,
+  camera = "lateral")
 }
 \arguments{
 \item{data}{A data.frame to use for plot aesthetics. Must include a
@@ -17,7 +18,8 @@ column called "area" corresponding to areas.}
 
 \item{surface}{String. Which surface to plot. Either "pial","white", or "inflated"[default]}
 
-\item{hemisphere}{String. Hemisphere to plot. Either "left" or "right"[default].}
+\item{hemisphere}{String. Hemisphere to plot. Either "left" or "right"[default],
+can also be "subcort".}
 
 \item{label}{String. Quoted name of column in atlas/data that should be used to name traces}
 
@@ -30,6 +32,8 @@ information in the hover text.}
 used if colour is numeric.}
 
 \item{na.colour}{String. Either name, hex of RGB for colour of NA in colour.}
+
+\item{na.alpha}{Numeric. A number between 0 and 1 to control transparency of NA-regions.}
 
 \item{remove.axes}{Logical. Should axis and grid be removed.}
 

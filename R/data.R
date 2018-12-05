@@ -203,6 +203,9 @@
 "jhu"
 
 
+################################
+
+
 
 ## Mesh data ----
 #' Desikan-Killiany Cortical Atlas - tri-surf mesh
@@ -309,6 +312,45 @@
 #' data(yeo7_3d)
 "yeo17_3d"
 
+
+
+#' Freesurfer automatic subcortical segmentation of a brain volume
+#'
+#' Coordinate data for the subcortical parcellations implemented
+#' in Freesurfer.
+#'
+#' @docType data
+#' @name aseg_3d
+#' @usage data(aseg_3d)
+#'
+#'
+#' @keywords datasets
+#'
+#' @references Fischl et al., (2002). Neuron, 33:341-355
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
+#'
+#' @format A tibble with 4 observations and a nested data.frame
+#' \describe{
+#'   \item{surf}{type of surface (`inflated` or `white`)}
+#'   \item{hemi}{hemisphere (`left`` or `right`)}
+#'   \item{data}{data.frame of necessary variables for plotting
+#'   }
+#'
+#'   \item{atlas}{String. atlas name}
+#'   \item{roi}{numbered region from surface}
+#'   \item{annot}{concatenated region name}
+#'   \item{label}{label `hemi_annot` of the region}
+#'   \item{mesh}{list of meshes in two lists: vb and it}
+#'   \item{area}{name of area in full}
+#'   \item{colour}{HEX colour of region}
+#' }
+#'
+#' @examples
+#' data(aseg_3d)
+"aseg_3d"
+
+
+
 #' Parcellation from the Human Connectome Project
 #'
 #' @docType data
@@ -333,10 +375,12 @@
 #' data(glasser_3d)
 "glasser_3d"
 
+
+
 #' Schaefer 7 Resting-state Cortical Parcellations
 #'
-#' Mesh data for the resting-state networks of
-#' the XXX networks.
+#' Mesh data for the 7 resting-state networks of
+#' the Schaefer et al. (2018) networks.
 #'
 #' @docType data
 #' @name schaefer7_3d
@@ -344,8 +388,9 @@
 #'
 #' @keywords datasets
 #'
-#' @references Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
-#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
+#'
+#' @references Schaefer et al. (2018) Cereb Cortex. 2018 Sep 1;28(9):3095-3114. doi: 10.1093/cercor/bhx179
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/28981612}{PubMed})
 #'
 #' @format A tibble with 4 observations and a nested data.frame
 #' \describe{
@@ -366,10 +411,12 @@
 #' data(schaefer7_3d)
 "schaefer7_3d"
 
+
+
 #' Schaefer 17 Resting-state Cortical Parcellations
 #'
-#' Mesh data for the resting-state networks of
-#' the XXX networks.
+#' Mesh data for the 17 resting-state networks of
+#' the Schaefer et al. (2018) networks.
 #'
 #' @docType data
 #' @name schaefer17_3d
@@ -377,8 +424,8 @@
 #'
 #' @keywords datasets
 #'
-#' @references Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
-#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
+#' @references Schaefer et al. (2018) Cereb Cortex. 2018 Sep 1;28(9):3095-3114. doi: 10.1093/cercor/bhx179
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/28981612}{PubMed})
 #'
 #' @format A tibble with 4 observations and a nested data.frame
 #' \describe{
@@ -398,6 +445,11 @@
 #' @examples
 #' data(schaefer17_3d)
 "schaefer17_3d"
+
+
+
+################################
+
 
 
 

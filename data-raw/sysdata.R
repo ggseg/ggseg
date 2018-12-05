@@ -7,5 +7,4 @@ paletteers$palettes = list(paletteer::palettes_c_names,
 paletteers = as_tibble(paletteers)
 
 # Save as internal data, for ggseg3d use only
-devtools::use_data(paletteers, internal = TRUE, overwrite = TRUE)
-
+usethis::use_data(paletteers, internal = TRUE, overwrite = TRUE)

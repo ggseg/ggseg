@@ -155,16 +155,36 @@ save(schaefer17_3d, file="data/schaefer17_3d.RData")
 ## aseg ----
 aseg_3d = list.files("data-raw/mesh3d/aseg/", pattern="ply", full.names = T) %>%
   data.frame(files = ., stringsAsFactors = F) %>%
-  mutate()
-                            atlasname = "aseg_3d")
+  separate(files, c("DEL","DEL1","DEL2","DEL3", "DEL4", "roi", "DEL5"), remove = F) %>%
+  select(-contains("DEL")) %>%
+  mutate(surf="inflated", hemi="subcort")
 
-# No palettes yet ----
+rgb2hex <- function(r,g,b) rgb(r, g, b, maxColorValue = 255)
 
-desterieux_3d = get_surface("data-raw/mesh3d/Desterieux/",
-                            atlasname = "desterieux_3d")
-#save(desterieux_3d, file="data/desterieux_3d.RData")
+aseg_3d = aseg_3d %>%
+  left_join(
+    read.table("data-raw/mesh3d/aseg/annot2filename.csv", sep="\t",header=T,stringsAsFactors = F) %>%
+  mutate(colour = rgb2hex(R,G,B),
+         no = str_pad(no, 3, side = "left", pad="0")) %>%
+  rename(roi=no) %>%
+  select(roi, label, colour)
+  )
 
-# buggy ----
+mesh = lapply(aseg_3d$files, read.ply, ShowSpecimen = F)
+
+for(i in 1:length(mesh)){
+  aseg_3d$mesh[[i]] = list(vb=mesh[[i]]$vb,
+                        it=mesh[[i]]$it
+  )
+}
+
+aseg_3d = aseg_3d %>%
+  mutate(area=label) %>%
+  group_by(surf, hemi) %>%
+  nest()
+save(aseg_3d, file="data/aseg_3d.RData")
+
+
 ## Glasser ----
 glasser_3d = get_surface("data-raw/mesh3d/HCPMMP1/", atlasname = "glasser_3d") %>%
   mutate(data = map(data, ~ separate(., annot, c("DEL","area", "DEL2"), remove = F) %>%
@@ -189,4 +209,10 @@ glasser_3d = glasser_3d %>%
   )
   )
 save(glasser_3d, file="data/glasser_3d.RData")
+# No palettes yet ----
+
+desterieux_3d = get_surface("data-raw/mesh3d/Desterieux/",
+                            atlasname = "desterieux_3d")
+#save(desterieux_3d, file="data/desterieux_3d.RData")
+
 

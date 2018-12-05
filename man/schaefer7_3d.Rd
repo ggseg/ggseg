@@ -23,14 +23,14 @@
 data(schaefer7_3d)
 }
 \description{
-Mesh data for the resting-state networks of
-the XXX networks.
+Mesh data for the 7 resting-state networks of
+the Schaefer et al. (2018) networks.
 }
 \examples{
 data(schaefer7_3d)
 }
 \references{
-Yeo et al. (2011) J. Neurophysiology 16(3):1125-1165
-(\href{https://www.ncbi.nlm.nih.gov/pubmed/21653723}{PubMed})
+Schaefer et al. (2018) Cereb Cortex. 2018 Sep 1;28(9):3095-3114. doi: 10.1093/cercor/bhx179
+(\href{https://www.ncbi.nlm.nih.gov/pubmed/28981612}{PubMed})
 }
 \keyword{datasets}
