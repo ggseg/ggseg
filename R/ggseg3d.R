@@ -6,7 +6,8 @@
 #' @param data A data.frame to use for plot aesthetics. Must include a
 #' column called "area" corresponding to areas.
 #' @param atlas Either a string with the name of a 3d atlas to use.
-#' @param hemisphere String. Hemisphere to plot. Either "left" or "right"[default].
+#' @param hemisphere String. Hemisphere to plot. Either "left" or "right"[default],
+#' can also be "subcort".
 #' @param surface String. Which surface to plot. Either "pial","white", or "inflated"[default]
 #' @param remove.axes Logical. Should axis and grid be removed.
 #' @param label String. Quoted name of column in atlas/data that should be used to name traces
@@ -16,6 +17,7 @@
 #' @param palette String. Either name of paletteer palette or vector of hex colours,
 #' used if colour is numeric.
 #' @param na.colour String. Either name, hex of RGB for colour of NA in colour.
+#' @param na.alpha Numeric. A number between 0 and 1 to control transparency of NA-regions.
 #' @param show.legend Logical. Toggle legend if colour is numeric.
 #' @param camera String of "medial" or "lateral", or list of x, y, and z positions
 #' for initial camera position.
@@ -59,9 +61,9 @@
 #' @seealso \code{\link[plotly]{plot_ly}}, \code{\link[plotly]{add_trace}}, \code{\link[plotly]{layout}}, the plotly package
 #'
 #' @export
-ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere = "right",
+ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere = c("right","subcort"),
                     label = "area", text = NULL, colour = "colour",
-                    palette = NULL, na.colour = "darkgrey",
+                    palette = NULL, na.colour = "darkgrey", na.alpha = 1,
                     remove.axes = TRUE, show.legend = TRUE,
                     camera = "lateral") {
 
@@ -139,14 +141,15 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere 
     atlas3d$new_col = scales::gradient_n_pal(pal.colours[,2], NULL,"Lab")(
       scales::rescale(x=unlist(atlas3d[,colour])))
 
-    atlas3d$new_col = ifelse(!is.na(atlas3d$new_col), atlas3d$new_col,
-                              ifelse(grepl("^#", na.colour),
-                                     na.colour, gplots::col2hex(na.colour)))
+    # atlas3d$new_col = ifelse(!is.na(atlas3d$new_col), atlas3d$new_col,
+    #                           ifelse(grepl("^#", na.colour), na.colour,
+    #                                   gplots::col2hex(na.colour)))
 
     fill = "new_col"
   }else{
     fill = colour
   }
+
 
   # initiate plot
   p = plotly::plot_ly()
@@ -157,6 +160,8 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere 
     col = rep(unlist(atlas3d[tt, fill]), length(atlas3d$mesh[[tt]]$it[1,]))
 
     col = ifelse(is.na(col), na.colour, col)
+
+    op = ifelse(is.na(unlist(atlas3d[tt, fill])), na.alpha, 1)
 
     txt = if(is.null(text)){
       text
@@ -177,6 +182,7 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "inflated", hemisphere 
                           type = "mesh3d",
                           text = txt,
                           showscale = FALSE,
+                          opacity = op,
                           name = unlist(atlas3d[tt, label])
     )
   }

@@ -211,6 +211,16 @@ test_that("Check that ggseg3d is working", {
     c("plotly", "htmlwidget")
   )
 
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      remove.axes = F, camera = "medial", na.alpha = .5),
+    c("plotly", "htmlwidget")
+  )
+
 })
 
 
