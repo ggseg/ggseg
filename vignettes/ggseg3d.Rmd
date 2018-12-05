@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include=F}
 knitr::opts_chunk$set(eval=TRUE)
-library(ggseg)
+devtools::load_all(".")
 library(magrittr)
 library(dplyr)
 library(tidyr)
@@ -77,7 +77,7 @@ someData = yeo7_3d %>%
   ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p")
 ```
 
-## Palettes
+## Colours
 You can also change the palette. Choose from ALL the paletteer palettes, just use their name.
 ```{r,fig.width=5}
   ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p", palette = "berlin")
@@ -103,6 +103,19 @@ If you want to alter the colour of `NA` regions, supply `na.colour`
           na.colour = "#ffff00", camera="medial")
 ```
 
+If you are plotting the sub-cortical structures, you might want to reduce the opacity of the `NA` structures, so that you can see the more medial structures.
+```{r,fig.width=5, warning=F, message=FALSE}
+somData_aseg = aseg_3d %>% 
+  unnest() %>% 
+  select(label) %>% 
+  filter(!grepl("Ventricle|Putamen", label)) %>% 
+  mutate(p = seq(1, nrow(.))) 
+
+  ggseg3d(data = somData_aseg, atlas = aseg_3d, 
+          colour = "p", text = "p", 
+          na.alpha= .5)
+```
+
 ## Camera
 You can rotate away all you like. if you want to start from the medial view, you can use the `camera` option
 ```{r fig.width=5}
@@ -113,6 +126,14 @@ There is also a surface of the white-matter
 ```{r fig.width=5}
  ggseg3d(atlas=yeo17_3d, surface="white")
 ```
+
+There is much more you can do with the camera options, or by adding extra layout options to plotly. 
+You may want to have a look at these resources if you want to do more complex adaptations to the plots:
+
+https://plot.ly/r/axes/#modifying-axes-for-3d-plots  
+https://plot.ly/r/trisurf/
+https://moderndata.plot.ly/trisurf-plots-in-r-using-plotly/
+
 
 
 
