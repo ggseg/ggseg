@@ -482,7 +482,7 @@
 #' @name atlas.info
 #' @usage data(atlas.info)
 #'
-#' @format A data.frame summarising the ggseg data.
+#' @format A tibble summarising the ggseg data.
 #'
 #' @keywords data summary
 "atlas.info"
