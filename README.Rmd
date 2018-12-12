@@ -67,6 +67,7 @@ vignette("ggseg")
 
 You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
 
+
 ### Included atlases and palettes
 ```{r dkt, fig.height=8, echo=F}
 library(ggplot2)
@@ -119,3 +120,14 @@ ggseg(atlas=jhu, mapping=aes(fill=area)) +
   theme(legend.position = "bottom")+
   guides(fill=guide_legend(ncol=2))
 ```
+
+
+
+# Funding
+This tool is partly funded by:  
+
+**EU Horizon 2020 Grant:** Healthy minds 0-100 years: Optimising the use of European brain imaging cohorts (Lifebrain).
+
+**Grant agreement number:** 732592.
+
+**Call:** Societal challenges: Health, demographic change and well-being

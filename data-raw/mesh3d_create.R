@@ -8,7 +8,7 @@ library(geomorph)
 # Function to grab all the data and create a nested tibble
 get_surface = function(folder, atlasname){
 
-  surfs = list.files(folder, full.names = T)
+  surfs = list.dirs(folder, full.names = T, recursive = F)
 
   hemi = sapply(surfs, list.files, full.names = T) %>% as.character()
 
@@ -16,14 +16,16 @@ get_surface = function(folder, atlasname){
 
   mesh = lapply(files, read.ply, ShowSpecimen = F)
 
-
-  annots = sapply(hemi, list.files, pattern="*.csv", full.names = T) %>%
+  annots = sapply(hemi, list.files, pattern="annot*", full.names = T) %>%
     as.character() %>%
     lapply(read_csv) %>%
     bind_rows()
 
 
   data = data.frame(files=files) %>%
+    separate(files,
+             c("Del1", "DEL2", "DEL3", "atlas","DEL5", "DEL7", "hemi", "surf", "DEL6", "roi", "DELX"),
+    remove=F) %>%
     separate(files, remove=F,
              c("Del1", "DEL2", "DEL3", "atlas","DEL5", "DEL7", "hemi", "surf", "DEL6", "roi", "DELX")) %>%
     separate(files, c("DEL1","DEL2","DEL#","DEL4","DEL5","DEL6","filename"), sep="/") %>%
@@ -153,39 +155,6 @@ schaefer17_3d = schaefer17_3d %>%
   )
 save(schaefer17_3d, file="data/schaefer17_3d.RData")
 
-## aseg ----
-aseg_3d = list.files("data-raw/mesh3d/aseg/", pattern="ply", full.names = T) %>%
-  data.frame(files = ., stringsAsFactors = F) %>%
-  separate(files, c("DEL","DEL1","DEL2","DEL3", "DEL4", "roi", "DEL5"), remove = F) %>%
-  select(-contains("DEL")) %>%
-  mutate(surf="inflated", hemi="subcort", atlas="aseg_3d")
-
-rgb2hex <- function(r,g,b) rgb(r, g, b, maxColorValue = 255)
-
-aseg_3d = aseg_3d %>%
-  left_join(
-    read.table("data-raw/mesh3d/aseg/annot2filename.csv", sep="\t",header=T,stringsAsFactors = F) %>%
-  mutate(colour = rgb2hex(R,G,B),
-         no = str_pad(no, 3, side = "left", pad="0")) %>%
-  rename(roi=no) %>%
-  select(roi, label, colour)
-  )
-
-mesh = lapply(aseg_3d$files, read.ply, ShowSpecimen = F)
-
-for(i in 1:length(mesh)){
-  aseg_3d$mesh[[i]] = list(vb=mesh[[i]]$vb,
-                        it=mesh[[i]]$it
-  )
-}
-
-aseg_3d = aseg_3d %>%
-  mutate(area=label) %>%
-  group_by(atlas, surf, hemi) %>%
-  nest()
-save(aseg_3d, file="data/aseg_3d.RData")
-
-
 ## Glasser ----
 glasser_3d = get_surface("data-raw/mesh3d/HCPMMP1/", atlasname = "glasser_3d") %>%
   mutate(data = map(data, ~ separate(., annot, c("DEL","area", "DEL2"), remove = F) %>%
@@ -210,10 +179,60 @@ glasser_3d = glasser_3d %>%
   )
   )
 save(glasser_3d, file="data/glasser_3d.RData")
-# No palettes yet ----
-
+## Desterieux ----
 desterieux_3d = get_surface("data-raw/mesh3d/Desterieux/",
                             atlasname = "desterieux_3d")
-#save(desterieux_3d, file="data/desterieux_3d.RData")
+
+lut = lapply(list.files("data-raw/mesh3d/Desterieux/", pattern="*csv", full.names = T), read_csv) %>%
+  bind_rows() %>%
+  mutate(colour = rgb(R,G,B, maxColorValue = 255)) %>%
+  select(annot, colour) %>%
+  filter(!grepl("annot",annot)) %>%
+  filter(!grepl("all$",annot))
+
+desterieux_3d = desterieux_3d %>%
+  mutate(data = map(data, ~left_join(., lut) %>%
+                      select(1:4, colour, everything()) %>%
+                      mutate(annot = ifelse(grepl("all$",annot), "medialwall", annot),                             area = annot)
+  )
+  )
+save(desterieux_3d, file="data/desterieux_3d.RData")
+
+## aseg ----
+aseg_3d = list.files("data-raw/mesh3d/aseg/", pattern="ply", full.names = T) %>%
+  data.frame(files = ., stringsAsFactors = F) %>%
+  separate(files, c("DEL","DEL1","DEL2","DEL3", "DEL4", "roi", "DEL5"), remove = F) %>%
+  select(-contains("DEL")) %>%
+  mutate(surf="inflated", hemi="subcort", atlas="aseg_3d")
+
+rgb2hex <- function(r,g,b) rgb(r, g, b, maxColorValue = 255)
+
+aseg_3d = aseg_3d %>%
+  left_join(
+    read.table("data-raw/mesh3d/aseg/annot2filename.csv", sep="\t",header=T,stringsAsFactors = F) %>%
+      mutate(colour = rgb2hex(R,G,B),
+             no = str_pad(no, 3, side = "left", pad="0")) %>%
+      rename(roi=no) %>%
+      select(roi, label, colour)
+  )
+
+mesh = lapply(aseg_3d$files, read.ply, ShowSpecimen = F)
+
+for(i in 1:length(mesh)){
+  aseg_3d$mesh[[i]] = list(vb=mesh[[i]]$vb,
+                           it=mesh[[i]]$it
+  )
+}
+
+aseg_3d = aseg_3d %>%
+  mutate(area=label) %>%
+  group_by(atlas, surf, hemi) %>%
+  nest()
+save(aseg_3d, file="data/aseg_3d.RData")
+
+
+######################
+# No palettes yet ----
+
 
 
