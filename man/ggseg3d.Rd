@@ -4,7 +4,7 @@
 \alias{ggseg3d}
 \title{Plot 3D brain parcellations}
 \usage{
-ggseg3d(data = NULL, atlas = "dkt_3d", surface = "inflated",
+ggseg3d(data = NULL, atlas = "dkt_3d", surface = "LCBC",
   hemisphere = c("right", "subcort"), label = "area", text = NULL,
   colour = "colour", palette = NULL, na.colour = "darkgrey",
   na.alpha = 1, remove.axes = TRUE, show.legend = TRUE,
