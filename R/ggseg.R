@@ -4,7 +4,7 @@
 #' aparc areas.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
-#' @param data A data.frame to use for plot aesthetics. Must include a
+#' @param data A data.frame to use for plot aesthetics. Should include a
 #' column called "area" corresponding to aparc areas.
 #'
 #' @param atlas Either a string with the name of atlas to use,
@@ -43,7 +43,7 @@
 #' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise
 #' @importFrom tidyr unite_
 #' @importFrom magrittr "%>%"
-#' @importFrom stats na.omit
+#' @importFrom stats na.omit sd
 #'
 #' @examples
 #' library(ggplot2)
@@ -56,7 +56,7 @@
 #' ggseg(adapt_scales = TRUE)
 #' ggseg(adapt_scales = FALSE)
 #'
-#' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
+#' @seealso \code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_polygon}},\code{\link[ggplot2]{coord_fixed}}
 #'
 #' @export
 ggseg = function(data = NULL,
@@ -167,6 +167,8 @@ ggseg = function(data = NULL,
 }
 
 
-
-
+## quiets concerns of R CMD check
+if(getRversion() >= "2.15.1"){
+  utils::globalVariables(c("dkt", "lat_sd", "long_sd", "id"))
+}
 

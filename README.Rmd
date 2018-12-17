@@ -5,8 +5,7 @@ output: github_document
 ---
 
   [![Travis build status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
-    [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
-    
+  [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
   [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
   
 ```{r setup, include=FALSE}
@@ -67,8 +66,7 @@ vignette("ggseg")
 
 You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
 
-### Report bugs or requests
-
+### Report bugs or requests  
 Don't hesitate to ask for support using [github issues](https://github.com/LCBC-UiO/ggseg/issues), or requesting new atlases. 
 While we would love getting help in creating new atlases, you may also request atlases through the issues, and we will try to get to it. 
 
@@ -124,3 +122,14 @@ ggseg(atlas=jhu, mapping=aes(fill=area)) +
   theme(legend.position = "bottom")+
   guides(fill=guide_legend(ncol=2))
 ```
+
+
+
+# Funding
+This tool is partly funded by:  
+
+**EU Horizon 2020 Grant:** Healthy minds 0-100 years: Optimising the use of European brain imaging cohorts (Lifebrain).
+
+**Grant agreement number:** 732592.
+
+**Call:** Societal challenges: Health, demographic change and well-being

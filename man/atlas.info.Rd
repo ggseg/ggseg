@@ -4,7 +4,7 @@
 \name{atlas.info}
 \alias{atlas.info}
 \title{Information on ggseg atlases}
-\format{A data.frame summarising the ggseg data.}
+\format{A tibble summarising the ggseg data.}
 \usage{
 data(atlas.info)
 }

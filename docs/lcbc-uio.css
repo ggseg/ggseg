@@ -1,0 +1,86 @@
+
+.remark-slide-content {
+  background-color: #fff;
+}
+
+div.my-sidebar {
+    position: fixed;
+    right: 69%;
+    bottom: 45%;
+    height: 2.5em;
+    width: calc(100% * .55); /* fix sidebar height */
+    padding: 0.5em;
+    opacity: 0.7;
+    background-color: #fff;
+    background-position: left;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("lcbc_logo_wide.png"),
+    linear-gradient(70deg, #fff, #ffffff00 30%);
+    transform: rotate(-90deg);
+}
+
+.inverse {
+  background-color:  #66bfdd;
+  text-shadow: none;
+}
+
+.dark {
+  background-color: #222;
+  text-shadow: none;
+  color: #ddd;
+}
+
+.title-slide {
+  border: 1em solid #94c11f;
+  border-image-source: linear-gradient(60deg,#ffffff00 40%, #94c11faa, #c5da84aa, #b2b2b2aa, #66bfddaa, #009fe3aa);
+  border-image-slice: 50;
+  padding: 20px;
+  background-color: #fff;
+  background-origin: padding-box;
+  background-size: 30%;
+  background-position: 8em ;
+  background-image: url("lcbc_logo_tall.png");
+}
+
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  color: #66bfdd;
+  text-shadow: none;
+}
+
+h1 {
+  padding: 5px 0px;
+  margin: 20px 0px;
+  border-width: 0em 0em .3em 0em ;
+  border-style: solid;
+  border-color: #0099CC;
+  border-image: linear-gradient(to left,#ffffff00 3%, #94c11faa, #c5da84aa, #b2b2b2aa, #66bfddaa);
+  border-image-slice: 1;
+}
+
+.inverse h1, .inverse h2, .inverse h3{
+  border: none;
+  color: #fff;
+}
+
+
+.title-slide h1, .title-slide h2, .title-slide h3 {
+  border: none;
+  color: #222;
+  text-shadow: 0 0 10px #fff;
+}
+
+a, a > code {
+  color: #626262;
+}
+
+
+.remark-code-line-highlighted { background-color: #66bfdd60; }
+

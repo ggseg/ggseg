@@ -1,5 +1,3 @@
-#covr::zero_coverage(package_coverage("testcovr"))
-
 
 test_that("Test that palette display works", {
   expect_is(display.brain.pal(),c("gg","ggplot"))
@@ -79,7 +77,7 @@ test_that("Check that ggseg is working", {
                "pre central","superior parietal"),
       p = sample(seq(0,.5,.001), 4),
       stringsAsFactors = FALSE),mapping=aes(fill=p))
-    )
+  )
 
   expect_is(ggseg(hemisphere = "left", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(view = "lateral", adapt_scales = T),c("gg","ggplot"))
@@ -115,4 +113,116 @@ test_that("Check that ggseg ggplot object is correct", {
   expect_equal(p$labels$y, NULL)
 })
 
+
+
+
+test_that("Check that get_paletteer is working", {
+  expect_is(get_paletteer("oslo"),c("character"))
+
+  expect_equal(length(get_paletteer("oslo")),5)
+  expect_equal(length(get_paletteer("PonyoMedium")),7)
+  expect_equal(length(get_paletteer("seadra")),10)
+  expect_equal(length(get_paletteer("qualitative")),12)
+  expect_error(get_paletteer("mononoke"))
+})
+
+
+test_that("Check that ggseg3d is working", {
+  p = ggseg3d()
+  expect_is(p, c("plotly", "htmlwidget"))
+  expect_equal(length(p$x), 7)
+
+  expect_error(ggseg3d(atlas=dkt))
+  expect_error(ggseg3d(atlas=hhj))
+  expect_error(ggseg3d(atlas=yeo7_3d, hemisphere = "hi"))
+
+
+  expect_warning(
+    ggseg3d(data=data.frame(
+      area = c("transverse tempral", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p")
+  )
+
+  expect_error(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", palette="ponyomedium")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", palette=c("black", "white")),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white")),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      show.legend = T),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      remove.axes = F),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      remove.axes = F, camera = list(eye = list(x = 2, y = 0, z = 1))),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      remove.axes = F, camera = "medial"),
+    c("plotly", "htmlwidget")
+  )
+
+  expect_is(
+    ggseg3d(data=data.frame(
+      area = c("transverse temporal", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4), stringsAsFactors = F),
+      colour = "p", text="p", palette=c("black", "white"),
+      remove.axes = F, camera = "medial", na.alpha = .5),
+    c("plotly", "htmlwidget")
+  )
+
+})
+
+
+#covr::zero_coverage(covr::package_coverage("."))
 
