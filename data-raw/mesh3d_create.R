@@ -1,5 +1,6 @@
 library(tidyverse)
 library(geomorph)
+devtools::load_all(".")
 
 # A. M. Winkler created the scripts that converterd Freesurfer
 # `.srf`  files to  `.ply`.
@@ -25,7 +26,7 @@ get_surface = function(folder, atlasname){
   data = data.frame(files=files) %>%
     separate(files,
              c("Del1", "DEL2", "DEL3", "atlas","DEL5", "DEL7", "hemi", "surf", "DEL6", "roi", "DELX"),
-    remove=F) %>%
+             remove=F) %>%
     separate(files, remove=F,
              c("Del1", "DEL2", "DEL3", "atlas","DEL5", "DEL7", "hemi", "surf", "DEL6", "roi", "DELX")) %>%
     separate(files, c("DEL1","DEL2","DEL#","DEL4","DEL5","DEL6","filename"), sep="/") %>%
@@ -44,7 +45,7 @@ get_surface = function(folder, atlasname){
   }
 
   data %>%
-    select(-filename) %>%
+    select(-filename, -ply) %>%
     group_by(atlas, surf, hemi) %>%
     nest()
 }
@@ -157,8 +158,13 @@ save(schaefer17_3d, file="data/schaefer17_3d.RData")
 
 ## Glasser ----
 glasser_3d = get_surface("data-raw/mesh3d/HCPMMP1/", atlasname = "glasser_3d") %>%
-  mutate(data = map(data, ~ separate(., annot, c("DEL","area", "DEL2"), remove = F) %>%
-                      select(-contains("DEL"))))
+  unnest() %>%
+  separate(annot, c("DEL","area", "DEL2", "DEL3"), remove = F) %>%
+  mutate(area = ifelse(!is.na(DEL3), paste(area, DEL2, sep="-"), area),
+         label = gsub("^L_|^R_|_ROI$", "", label)) %>%
+  select(-contains("DEL")) %>%
+  group_by(atlas, surf, hemi) %>%
+  nest()
 
 t = data.frame(ggseg::brain.pals$glasser)
 names(t)[1] = "colour"
@@ -166,11 +172,11 @@ t = t %>%
   rownames_to_column(var = "area") %>%
   mutate_all(as.character)
 
-t = glasser %>%
-  left_join(t) %>%
-  select(area, colour) %>%
-  distinct() %>%
-  na.omit()
+# t = glasser %>%
+#   left_join(t) %>%
+#   select(area, colour) %>%
+#   distinct() %>%
+#   na.omit()
 
 glasser_3d = glasser_3d %>%
   mutate(data = map(data, ~left_join(., t, ) %>%
@@ -225,7 +231,8 @@ for(i in 1:length(mesh)){
 }
 
 aseg_3d = aseg_3d %>%
-  mutate(area=label) %>%
+  mutate(area=label,
+         surf="LCBC") %>%
   group_by(atlas, surf, hemi) %>%
   nest()
 save(aseg_3d, file="data/aseg_3d.RData")
