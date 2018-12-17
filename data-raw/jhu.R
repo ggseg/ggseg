@@ -1,4 +1,5 @@
 jhu = geobrain_JHU %>%
+jhu = geobrain_JHU %>%
   mutate(aparc = gsub("ifl", "ilf", aparc)) %>%
   separate(aparc, c("hemi","acronym"), remove = FALSE) %>%
   mutate(acronym = ifelse(!hemi %in% c("lh","rh"), hemi, acronym),

@@ -3,7 +3,7 @@
 \docType{data}
 \name{midsagittal}
 \alias{midsagittal}
-\title{Parcellation from the Human Connectome Project}
+\title{Parcellation from a midsagittal slice}
 \format{A data.frame with 2483 observations and 8 variables
 \describe{
   \item{long}{coordinates for the x-axis}
@@ -18,7 +18,7 @@
 midsagittal
 }
 \description{
-Parcellation from the Human Connectome Project
+Parcellation from a midsagittal slice
 }
 \examples{
 data(midsagittal)

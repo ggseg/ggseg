@@ -3,7 +3,7 @@
 \docType{data}
 \name{jhu}
 \alias{jhu}
-\title{Parcellation from the Human Connectome Project}
+\title{Parcellation from JHU}
 \format{A data.frame with 11341 observations and 11 variables
 \describe{
   \item{long}{coordinates for the x-axis}
@@ -18,7 +18,7 @@
 jhu
 }
 \description{
-Parcellation from the Human Connectome Project
+Parcellation from JHU
 }
 \examples{
 data(jhu)

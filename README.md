@@ -86,3 +86,14 @@ You can also see one of the creators blog for introductions to its use
 ![](README_files/figure-gfm/midsagittal-1.png)<!-- -->
 
 ![](README_files/figure-gfm/jhu-1.png)<!-- -->
+
+# Funding
+
+This tool is partly funded by:
+
+**EU Horizon 2020 Grant:** Healthy minds 0-100 years: Optimising the use
+of European brain imaging cohorts (Lifebrain).
+
+**Grant agreement number:** 732592.
+
+**Call:** Societal challenges: Health, demographic change and well-being
