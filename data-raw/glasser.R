@@ -10,4 +10,4 @@ glasser = geobrain_hcp %>%
          area = ifelse(grepl("\\?", area), NA, area)) %>%
   rename(label=aparc) %>%
   select(long, lat, id, hemi, area, side, label, everything())
-save(glasser, file="data/glasser.RData")
+save(glasser, file="data/glasser.RData", compress = "xz")
