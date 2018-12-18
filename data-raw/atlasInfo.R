@@ -37,4 +37,4 @@ atlas.info = list(dkt = dkt,
 # }
 #
 # atlas.info = d
-save(atlas.info, file="data/atlas.info.RData")
+save(atlas.info, file="data/atlas.info.RData", compress = "xz")
