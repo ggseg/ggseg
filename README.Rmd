@@ -45,7 +45,7 @@ Please see the [wiki](https://github.com/LCBC-UiO/ggseg/wiki/Creating-and-contri
 If anything is unclear in the wiki, give us a shout out in the issues!
 
 ## Installation
-The package can be installed using devtools:
+The package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.
 
 ```{r eval=F}
 install.packages("devtools")

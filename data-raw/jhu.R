@@ -26,4 +26,4 @@ jhu = jhu %>%
   rename(label=aparc) %>%
   select(lat, long, area, hemi, side, acronym, atlas, everything()) %>%
   select(-meas, -piece)
-save(jhu, file="data/jhu.RData")
+save(jhu, file="data/jhu.RData", compress = "xz")
