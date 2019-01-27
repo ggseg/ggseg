@@ -6,11 +6,10 @@ Athanasia Mowinckel & Didac Vidal Pineiro
 status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
-
 [![Coverage
 status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
 
-<img src="img/ggseg_contemp.png" width="200px" /><img src="img/ggseg_retro.png" width="200px" />
+# ggseg <img src="man/img/logo.png" align="right" alt="" width="120" />
 
 This package mainly contains a plotting function `ggseg` and data.frames
 of different brain atlases for plotting. Plotting results of analyses on
@@ -23,16 +22,12 @@ R.
 
 ## Atlases
 
-There are currently three atlases available in the package:
+There are currently four atlases available in the package:
 
 1.  `dkt` - Desikan-Killany atlas (aparc).  
 2.  `yeo7` - Yeo 2011 7 resting-state networks.  
 3.  `yeo17` - Yeo 2011 17 resting-state network.  
-4.  `aseg` - Automatic subcortical segmentation.  
-5.  `midsagittal` - mid-sagittal slice showing the cerebellum,
-    3<sup>rd</sup> and 4<sup>th</sup> ventricles, corpus callosum etc.
-6.  `glasser` - HCP cortical segmentation (Glasser et al. 2015)  
-7.  `jhu`- JHU white-matter tractography atlas
+4.  `aseg` - Automatic subcortical segmentation.
 
 We are working on creating a detailed description in the wiki on how to
 create and contribute atlases to the package. The `ggseg` function
@@ -47,7 +42,9 @@ the issues\!
 
 ## Installation
 
-The package can be installed using devtools:
+The package can be installed using devtools. The package includes some
+large datasets for the brain coordinates. Please be patient during
+download and install, it will take some time.
 
 ``` r
 install.packages("devtools")
@@ -71,21 +68,23 @@ vignette("ggseg")
 You can also see one of the creators blog for introductions to its use
 [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
 
+### Report bugs or requests
+
+Don’t hesitate to ask for support using [github
+issues](https://github.com/LCBC-UiO/ggseg/issues), or requesting new
+atlases. While we would love getting help in creating new atlases, you
+may also request atlases through the issues, and we will try to get to
+it.
+
 ### Included atlases and palettes
 
-![](README_files/figure-gfm/dkt-1.png)<!-- -->
+![](man/img/README-dkt-1.png)<!-- -->
 
-![](README_files/figure-gfm/yeo7-1.png)<!-- -->
+![](man/img/README-yeo7-1.png)<!-- -->
 
-![](README_files/figure-gfm/yeo17-1.png)<!-- -->
+![](man/img/README-yeo17-1.png)<!-- -->
 
-![](README_files/figure-gfm/glasser-1.png)<!-- -->
-
-![](README_files/figure-gfm/aseg-1.png)<!-- -->
-
-![](README_files/figure-gfm/midsagittal-1.png)<!-- -->
-
-![](README_files/figure-gfm/jhu-1.png)<!-- -->
+![](man/img/README-aseg-1.png)<!-- -->
 
 # Funding
 

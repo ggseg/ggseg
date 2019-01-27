@@ -1,5 +1,7 @@
 ^Meta$
 ^doc$
+^docs$
+^pkgdown$
 ^codecov\.yml$
 ^data-raw$
 ^README\.Rmd$
@@ -9,3 +11,4 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 img
+logo.png

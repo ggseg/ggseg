@@ -28,4 +28,8 @@ data(aseg)
 Fischl et al., (2002). Neuron, 33:341-355
 (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
 }
+\seealso{
+Other ggseg_atlases: \code{\link{dkt}}
+}
+\concept{ggseg_atlases}
 \keyword{datasets}

@@ -5,6 +5,7 @@
 #' Results from such analyses are usually easier to interpret if
 #' the plot can mimmick the shape and position in the brain it
 #' represents.
+#'
 #' This package contains data from various brain parcellations,
 #' with convenient functions to inspect the results directly on
 #' a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).

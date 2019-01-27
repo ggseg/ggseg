@@ -37,4 +37,8 @@ data(dkt_3d)
 Fischl et al. (2004) Cerebral Cortex 14:11-22
 (\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
 }
+\seealso{
+Other ggseg3d_atlases: \code{\link{aseg_3d}}
+}
+\concept{ggseg3d_atlases}
 \keyword{datasets}

@@ -45,6 +45,8 @@ ggseg(position="stacked") +
   theme_void()
 ```
 
+
+## Using fill and colour
 Maybe you want each area to have a different colour. 
 ggseg has a built column called `area` wich you can use as fill to achieve this.
 **Note:** unlike other ggplots, before using `aes` you must indicate `mapping=aes`.
@@ -61,20 +63,7 @@ ggseg(colour="black", size=.7, mapping=aes(fill=area)) +
   theme_void()
 ```
 
-You can also zoom in on a single area and plot it alone.
-
-```{r plot.area, fig.width=5}
-ggseg(plot.area="superior frontal") +
-  theme_void()
-```
-
-Or you can plot several of them, despite not making much sense.
-
-```{r plot.area2, fig.width=5}
-ggseg(plot.area=c("transverse temporal", "insula","pre central","superior parietal")) +
-  theme_void()
-```
-
+## 
 You can also choose to only view one of the hespheres by adding the `hemisphere` option
 ```{r hemisphere, fig.width=5}
 ggseg(hemisphere="right") +
@@ -82,9 +71,8 @@ ggseg(hemisphere="right") +
 ```
 
 If you want to plot the entire brain, but hightlight specific areas with colour, you will need to provide the function with some data.
-The data **must** include a column names `area`, with area names corresponding to that of the aparc segmentations.
-Here we create some data with 4 rows, and an `area` and `p` column. We provide the `p` column as the column
-that dictates the colour of the area.
+The data **must** include a column that overlaps with the columns in the atlas data.
+Here we create some data with 4 rows, and an `area` and `p` column. We provide the `p` column as the column that dictates the colour of the area. The `area` column matches a column in the dkt atlas.
 
 ```{r datasupp, fig.width=5}
 someData = data.frame(
@@ -93,16 +81,16 @@ someData = data.frame(
   p = sample(seq(0,.5,.001), 4),
   stringsAsFactors = FALSE)
 
-ggseg(data=someData, mapping=aes(fill=p))
+ggseg(.data=someData, mapping=aes(fill=p))
 
 ```
 
 We can also change how this looks, by various ggplot functions
 ```{r datasupp2, fig.width=5}
-ggseg(data=someData, colour="black",mapping=aes(fill=p)) +
+ggseg(.data=someData, colour="black", mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
-  labs(title="Aparc plots rule")
+  labs(title="Aparc plots rule", fill="p-value")
 
 ```
 
@@ -111,7 +99,7 @@ the column `hemi` with either "rh" or "lh" for this to happen.
 ```{r datasuppX, fig.width=5}
 someData$hemi = "right"
 
-ggseg(data=someData, colour="white",mapping=aes(fill=p)) +
+ggseg(.data=someData, colour="white",mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
   labs(title="Aparc plots rule")
@@ -132,7 +120,7 @@ someData = data.frame(
   AgeG = c(rep("Young",4), rep("Old",4)),
   stringsAsFactors = FALSE)
   
-ggseg(data=someData, colour="white", mapping=aes(fill=p)) +
+ggseg(.data=someData, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom")
 

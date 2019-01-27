@@ -3,7 +3,7 @@
 #' \code{ggseg3d} plots and returns a plotly mesh3d object.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
-#' @param data A data.frame to use for plot aesthetics. Must include a
+#' @param .data A data.frame to use for plot aesthetics. Must include a
 #' column called "area" corresponding to areas.
 #' @param atlas Either a string with the name of a 3d atlas to use.
 #' @param hemisphere String. Hemisphere to plot. Either "left" or "right"[default],
@@ -56,12 +56,13 @@
 #' library(ggplot2)
 #' ggseg3d()
 #' ggseg3d(surface="white")
+#' ggseg3d(surface="inflated")
 #' ggseg3d(remove.axes = FALSE)
 #'
 #' @seealso \code{\link[plotly]{plot_ly}}, \code{\link[plotly]{add_trace}}, \code{\link[plotly]{layout}}, the plotly package
 #'
 #' @export
-ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c("right","subcort"),
+ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c("right","subcort"),
                     label = "area", text = NULL, colour = "colour",
                     palette = NULL, na.colour = "darkgrey", na.alpha = 1,
                     remove.axes = TRUE, show.legend = TRUE,
@@ -90,14 +91,14 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c(
     tidyr::unnest()
 
   # If data has been supplied, merge it
-  if(!is.null(data)){
+  if(!is.null(.data)){
 
     # Find columns they have in common
-    cols = names(atlas3d)[names(atlas3d) %in% names(data)]
+    cols = names(atlas3d)[names(atlas3d) %in% names(.data)]
 
     # Merge the brain with the data
     atlas3d = atlas3d %>%
-      dplyr::full_join(data, by = cols, copy=TRUE)
+      dplyr::full_join(.data, by = cols, copy=TRUE)
 
     # Find if there are instances of those columns that
     # are not present in the atlas. Maybe mispelled?
@@ -140,10 +141,6 @@ ggseg3d <- function(data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c(
 
     atlas3d$new_col = scales::gradient_n_pal(pal.colours[,2], NULL,"Lab")(
       scales::rescale(x=unlist(atlas3d[,colour])))
-
-    # atlas3d$new_col = ifelse(!is.na(atlas3d$new_col), atlas3d$new_col,
-    #                           ifelse(grepl("^#", na.colour), na.colour,
-    #                                   gplots::col2hex(na.colour)))
 
     fill = "new_col"
   }else{

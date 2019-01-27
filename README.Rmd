@@ -4,22 +4,22 @@ author: "Athanasia Mowinckel & Didac Vidal Pineiro"
 output: github_document
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/img/README-",
+  echo = TRUE
+)
+library(ggseg)
+```
+
   [![Travis build status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
   [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
   [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
+
+# ggseg <img src="man/img/logo.png" align="right" alt="" width="120" />  
   
-```{r setup, include=FALSE}
-library(ggseg)
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r out.width="200px",echo=F}
-# All defaults
-knitr::include_graphics("img/ggseg_contemp.png")
-knitr::include_graphics("img/ggseg_retro.png")
-```
-
-
 This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.
 Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R and Matlab, 
 and software for brain imaging to correctly visualise analysis results.
@@ -27,15 +27,12 @@ and software for brain imaging to correctly visualise analysis results.
 This package aims to make it possible to plot results directly through R. 
 
 ## Atlases
-There are currently three atlases available in the package:  
+There are currently four atlases available in the package:  
 
 1. `dkt` - Desikan-Killany atlas (aparc).   
 2. `yeo7` - Yeo 2011 7 resting-state networks.  
 3. `yeo17` - Yeo 2011 17 resting-state network.  
 4. `aseg` - Automatic subcortical segmentation.  
-5. `midsagittal` - mid-sagittal slice showing the cerebellum, 3^rd^ and 4^th^ ventricles, corpus callosum etc.
-6. `glasser` - HCP cortical segmentation (Glasser et al. 2015)  
-7. `jhu`- JHU white-matter tractography atlas  
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package.
 The `ggseg` function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must
@@ -69,61 +66,6 @@ You can also see one of the creators blog for introductions to its use [here](ht
 ### Report bugs or requests  
 Don't hesitate to ask for support using [github issues](https://github.com/LCBC-UiO/ggseg/issues), or requesting new atlases. 
 While we would love getting help in creating new atlases, you may also request atlases through the issues, and we will try to get to it. 
-
-### Included atlases and palettes
-```{r dkt, fig.height=8, echo=F}
-library(ggplot2)
-ggseg(atlas=dkt, position="stacked", mapping=aes(fill=area)) +
-  scale_fill_brain("dkt") +
-  ggtitle("Desikan-Killany cortical atlas (dkt)") +
-  theme(legend.position = "bottom") +
-  guides(fill=guide_legend(ncol=3))
-```
-
-```{r yeo7, echo=F}
-ggseg(atlas=yeo7,position="stacked", mapping=aes(fill=area)) +
-  scale_fill_brain("yeo7") +
-  ggtitle("Yeo 2011 7 Resting-state networks (yeo7)")
-```
-
-```{r yeo17, fig.height=7, echo=F}
-ggseg(atlas=yeo17,position="stacked", mapping=aes(fill=area)) +
-  scale_fill_brain("yeo17") +
-  ggtitle("Yeo 2011 17 Resting-state networks (yeo17)") +
-  theme(legend.position = "bottom")+
-  guides(fill=guide_legend(ncol=3))
-```
-
-```{r glasser, fig.height=12, echo=F}
-ggseg(atlas=glasser,position="stacked", mapping=aes(fill=area)) +
-  scale_fill_brain("glasser") +
-  ggtitle("HCP cortical segmentation (glasser)") +
-  theme(legend.position = "bottom")+
-  guides(fill=guide_legend(ncol=8))
-```
-
-
-```{r aseg, echo=F}
-ggseg(atlas=aseg, mapping=aes(fill=area)) +
-  scale_fill_brain("aseg") +
-  ggtitle("Automatic segmentation of subcortical structured (aseg)")
-```
-
-```{r midsagittal, echo=F}
-ggseg(atlas=midsagittal, mapping=aes(fill=area)) +
-  scale_fill_brain("midsagittal") +
-  ggtitle("Mid-sagittal subdortical, cerebellum, & corpus callosum")
-```
-
-```{r jhu, echo=F}
-ggseg(atlas=jhu, mapping=aes(fill=area)) +
-  scale_fill_brain("jhu") +
-  ggtitle("JHU white-matter tractography atlas") +
-  theme(legend.position = "bottom")+
-  guides(fill=guide_legend(ncol=2))
-```
-
-
 
 # Funding
 This tool is partly funded by:  
