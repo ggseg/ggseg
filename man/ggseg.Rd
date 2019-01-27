@@ -6,22 +6,19 @@
 \alias{ggseg-package}
 \title{ggseg: Plot brain segmentations with ggplot and plotly}
 \usage{
-ggseg(data = NULL, atlas = "dkt", plot.areas = NULL,
-  position = "dispersed", view = NULL, hemisphere = NULL,
-  adapt_scales = TRUE, ...)
+ggseg(.data = NULL, atlas = "dkt", position = "dispersed",
+  view = NULL, hemisphere = NULL, adapt_scales = TRUE, ...)
 }
 \arguments{
-\item{data}{A data.frame to use for plot aesthetics. Should include a
+\item{.data}{A .data.frame to use for plot aesthetics. Should include a
 column called "area" corresponding to aparc areas.}
 
 \item{atlas}{Either a string with the name of atlas to use,
-or a data.frame containing atlas information (i.e. pre-loaded atlas).}
+or a .data.frame containing atlas information (i.e. pre-loaded atlas).}
 
-\item{plot.areas}{Character vector, plots only areas specified in the vector.}
+\item{position}{String choosing how to view the .data. Either "dispersed"[default] or "stacked".}
 
-\item{position}{String choosing how to view the data. Either "dispersed"[default] or "stacked".}
-
-\item{view}{String to choose view of the data. Any of c("lateral","medial")[default].}
+\item{view}{String to choose view of the .data. Any of c("lateral","medial")[default].}
 
 \item{hemisphere}{String to choose hemisphere to plot. Any of c("left","right")[default].}
 
@@ -41,24 +38,19 @@ segmentations is a common need, but may be quite laborious.
 Results from such analyses are usually easier to interpret if
 the plot can mimmick the shape and position in the brain it
 represents.
-This package contains data from various brain parcellations,
-with convenient functions to inspect the results directly on
-a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
 
 \code{ggseg} plots and returns a ggplot object of plotted
 aparc areas.
 }
 \details{
+This package contains data from various brain parcellations,
+with convenient functions to inspect the results directly on
+a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
+
 \describe{
 
 \item{`dkt`}{
 The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
-
-\item{`yeo7`}{
-Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
-
-\item{`yeo17`}{
-Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 
 \item{`aseg`}{
 Freesurfer automatic subcortical segmentation of a brain volume}
@@ -70,7 +62,6 @@ library(ggplot2)
 ggseg()
 ggseg(mapping=aes(fill=area))
 ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-ggseg(atlas="yeo7")
 ggseg(adapt_scales = FALSE, position = "stacked")
 ggseg(adapt_scales = TRUE, position = "stacked")
 ggseg(adapt_scales = TRUE)
@@ -78,7 +69,8 @@ ggseg(adapt_scales = FALSE)
 
 }
 \seealso{
-\code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_polygon}},\code{\link[ggplot2]{coord_fixed}}
+[ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
+[geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
 }
 \author{
 \strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no}

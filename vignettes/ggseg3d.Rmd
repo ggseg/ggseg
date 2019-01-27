@@ -40,19 +40,19 @@ ggseg3d()
 
 
 ```{r,fig.width=5}
-ggseg3d(atlas=yeo7_3d)
+ggseg3d(atlas=dkt_3d)
 ```
 
 
 ## Atlas data
 The data is stored in tibbles, and looks like so:
 ```{r,fig.width=5}
-yeo7_3d
+dkt_3d
 ```
 
 To grab all the data for a surface and hemisphere, you should reduce the data to one line, and then `unnest()`
 ```{r}
-yeo7_3d %>% 
+dkt_3d %>% 
   filter(surf == "inflated" & hemi == "right") %>% 
   unnest()
 ```
@@ -66,7 +66,7 @@ The function _should_ give you a warning if it's struggling to match something.
 The column you want to use for colour, needs to be supplied to the `colour` option, and you'll likely want to supply it to the `text` option, as this will add another line to the plotly hover information.
 
 ```{r,fig.width=5}
-someData = yeo7_3d %>% 
+someData = dkt_3d %>% 
   filter(surf == "inflated" & hemi == "right") %>% 
   unnest() %>% 
   select(area) %>% 
@@ -74,32 +74,32 @@ someData = yeo7_3d %>%
   mutate(p = sample(seq(0,.5, length.out = 100 ), nrow(.)) %>% 
            round(2)) 
   
-  ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p")
+  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p")
 ```
 
 ## Colours
 You can also change the palette. Choose from ALL the paletteer palettes, just use their name.
 ```{r,fig.width=5}
-  ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p", palette = "berlin")
-  ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p", palette = "RdBu")
-  ggseg3d(data = someData, atlas = yeo7_3d, colour = "p", text = "p", palette = "GrandBudapest1")
+  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "berlin")
+  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "RdBu")
+  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "GrandBudapest1")
 ```
 
 You can also provide custom colour palettes either in hex or R-names
 ```{r,fig.width=5}
-  ggseg3d(data = someData, atlas = yeo7_3d, 
+  ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 
           palette = c("forestgreen", "white", "firebrick"))
-  ggseg3d(data = someData, atlas = yeo7_3d, 
+  ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", palette = c("#ff0000", "#00ff00", "#0000ff"))
 ```
 
 If you want to alter the colour of `NA` regions, supply `na.colour`
 ```{r,fig.width=5}
-  ggseg3d(data = someData, atlas = yeo7_3d, 
+  ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 
           na.colour = "black", camera="medial")
-  ggseg3d(data = someData, atlas = yeo7_3d, 
+  ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 
           na.colour = "#ffff00", camera="medial")
 ```
@@ -112,7 +112,7 @@ somData_aseg = aseg_3d %>%
   filter(!grepl("Ventricle|Putamen", label)) %>% 
   mutate(p = seq(1, nrow(.))) 
 
-  ggseg3d(data = somData_aseg, atlas = aseg_3d, 
+  ggseg3d(.data = somData_aseg, atlas = aseg_3d, 
           colour = "p", text = "p", 
           na.alpha= .5)
 ```
@@ -120,12 +120,12 @@ somData_aseg = aseg_3d %>%
 ## Camera
 You can rotate away all you like. if you want to start from the medial view, you can use the `camera` option
 ```{r fig.width=5}
-  ggseg3d(data = someData, atlas=yeo7_3d, colour = "p", camera = "medial")
+  ggseg3d(.data = someData, atlas=dkt_3d, colour = "p", camera = "medial")
 ```
 
 There is also a surface of the white-matter
 ```{r fig.width=5}
- ggseg3d(atlas=yeo17_3d, surface="white")
+ ggseg3d(atlas=dkt_3d, surface="white")
 ```
 
 There is much more you can do with the camera options, or by adding extra layout options to plotly. 

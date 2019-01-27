@@ -35,17 +35,17 @@ library(ggseg)
 library(magrittr)
 library(dplyr)
 library(ggplot2)
-atlas.info$yeo7
+atlas.info$dkt
 ```
 
-Here you can see information about the `yeo7` atlas, and the main attributes of this atlas. 
+Here you can see information about the `dkt` atlas, and the main attributes of this atlas. 
 If you want to use external data with your `ggseg` plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using. 
 
 ## Structuring data for merging
-For instance, here we make some data for the "default" and "visual" networks in the `yeo7` atlas, and two p values for those two networks.
+For instance, here we make some data for the "default" and "visual" networks in the `dkt` atlas, and two p values for those two networks.
 
 ```{r}
-someData = data.frame(area=c("default","visual"),
+someData = data.frame(area=c("superior temporal","pre central"),
                       p=c(.03,.6), 
                       stringsAsFactors = F)
 someData
@@ -56,7 +56,7 @@ This is necessary for the merging within the `ggseg` function to work properly.
 This merge can be attempted before supplying the data to `ggseg` to see if there are any errors.
 
 ```{r}
-yeo7 %>% 
+dkt %>% 
   left_join(someData) %>% 
   head(10) #only added to truncate output
 ```
@@ -66,7 +66,7 @@ Yes, the `p` column is seemingly full of `NA`s, but that is just because the top
 We can sort the data differently, so we can see the `p`has been added correctly.
 
 ```{r}
-yeo7 %>% 
+dkt %>% 
   left_join(someData) %>% 
   arrange(p) %>% 
   head(10) #only added to truncate output
@@ -79,7 +79,7 @@ Add the column you want to match on, with the **exact** same name, and make sure
 someData$hemi = c("left","left")
 someData
 
-yeo7 %>% 
+dkt %>% 
   left_join(someData) %>% 
   arrange(p) %>% 
   head(10)
@@ -94,22 +94,20 @@ When you have managed to create data that merges nicely with the atlas, you can 
 
 ```{r}
 library(ggplot2)
-ggseg(someData, atlas="yeo7", mapping=aes(fill=p))
+ggseg(someData, atlas=dkt, mapping=aes(fill=p))
 ```
 
 You can actually also supply it directly as an atlas. 
 For instance, if you had saved the merged data from the previous steps, you can supply this directly to the `atlas` option.
 
 ```{r}
-newAtlas = yeo7 %>% 
+newAtlas = dkt %>% 
   left_join(someData)
 
 ggseg(atlas=newAtlas, mapping=aes(fill=p), position="stacked")
 ```
 
 It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with.
-As mentioned in the introductory vignette, if you plan on using faceting, mergin the data and supplying it as an atlas is the way to go.
-If you do not, you will get unwanted results.
 Lets do a recap of the unwanted results:
 
 
@@ -121,7 +119,7 @@ someData = data.frame(
   AgeG = c(rep("Young",4), rep("Old",4)),
   stringsAsFactors = FALSE)
   
-ggseg(data=someData, colour="white", mapping=aes(fill=p)) +
+ggseg(.data=someData, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom")
 
@@ -129,45 +127,30 @@ ggseg(data=someData, colour="white", mapping=aes(fill=p)) +
 
 See how you have three facets, when you only have 2 groups, and that the "background"  brain is not printed in your two groups. 
 This is because for ggplot, that is what the data looks like.
-In order to plot it as we wish, we must completely duplicate the atlas for each group/facet.
-I like using lists for lapply to do this.
+For this to work, you can supply already grouped data to `ggseg`, but you must make sure they are grouped by the columns you will use for facetting, or else it will not work. 
 
 ```{r duplicate}
-# Initiate your list. Creating list newAtlas, that contains two data frames, one for each group
-newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
-                Old = someData %>% filter(AgeG %in% "Old")) 
-newAtlas 
-
-# Use list apply (lapply) to do the same operation on each element of the list.
-# Here we join each data.frame with the atlas of choice ("dkt"), and make sure the
-# group colum "AgeG" has it's group name populated in the column entirely
-newAtlas = lapply(newAtlas, function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG)))
-
-newAtlas %>% lapply(function(x)  head(x,5))
-  
-# Now, the each data.frame in our list has the exact same columns,
-# so we can easily append the dataframes by row.
-newAtlas = newAtlas %>% bind_rows()
-newAtlas %>% head(5)
+# If you group_by the columns you will facet by, this will work well.
+someData = someData %>% 
+  group_by(AgeG)
 
 # We can now supply the newAtlas as an atlas to ggseg
-ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  scale_fill_gradientn(colours = c("royalblue","firebrick","goldenrod"),na.value="grey")
 ```
 
 
 This whole procedure can be piped together, so you dont have to save all the intermediate steps.
 
 ```{r duplicatepipe}
-newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
-                Old = someData %>% filter(AgeG %in% "Old")) %>% 
-  lapply(function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG))) %>% 
-  bind_rows()
+someData %>% 
+  group_by(AgeG) %>% 
 
-ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+  ggseg(atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
+  theme(legend.position = "bottom") +
   scale_fill_gradientn(colours = c("royalblue","firebrick","goldenrod"),na.value="grey")
 ```
-
 

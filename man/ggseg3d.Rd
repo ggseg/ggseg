@@ -4,14 +4,14 @@
 \alias{ggseg3d}
 \title{Plot 3D brain parcellations}
 \usage{
-ggseg3d(data = NULL, atlas = "dkt_3d", surface = "LCBC",
+ggseg3d(.data = NULL, atlas = "dkt_3d", surface = "LCBC",
   hemisphere = c("right", "subcort"), label = "area", text = NULL,
   colour = "colour", palette = NULL, na.colour = "darkgrey",
   na.alpha = 1, remove.axes = TRUE, show.legend = TRUE,
   camera = "lateral")
 }
 \arguments{
-\item{data}{A data.frame to use for plot aesthetics. Must include a
+\item{.data}{A data.frame to use for plot aesthetics. Must include a
 column called "area" corresponding to areas.}
 
 \item{atlas}{Either a string with the name of a 3d atlas to use.}
@@ -72,6 +72,7 @@ a plotly object
 library(ggplot2)
 ggseg3d()
 ggseg3d(surface="white")
+ggseg3d(surface="inflated")
 ggseg3d(remove.axes = FALSE)
 
 }

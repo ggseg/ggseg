@@ -4,17 +4,16 @@
 #' aparc areas.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
-#' @param data A data.frame to use for plot aesthetics. Should include a
+#' @param .data A .data.frame to use for plot aesthetics. Should include a
 #' column called "area" corresponding to aparc areas.
 #'
 #' @param atlas Either a string with the name of atlas to use,
-#' or a data.frame containing atlas information (i.e. pre-loaded atlas).
-#' @param plot.areas Character vector, plots only areas specified in the vector.
+#' or a .data.frame containing atlas information (i.e. pre-loaded atlas).
 #' @param ... other options sent to ggplot2::geom_polygon for plotting, including
 #' mapping aes (cannot include x, y, and group aethetics).
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
-#' @param view String to choose view of the data. Any of c("lateral","medial")[default].
-#' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
+#' @param view String to choose view of the .data. Any of c("lateral","medial")[default].
+#' @param position String choosing how to view the .data. Either "dispersed"[default] or "stacked".
 #' @param adapt_scales if \code{TRUE}, then the axes will
 #' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 #' longitude values.  Also affected by \code{position} argument
@@ -25,12 +24,6 @@
 #'
 #' \item{`dkt`}{
 #' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
-#'
-#' \item{`yeo7`}{
-#' Seven resting-state networks from Yeo et al. 2011, J. Neurophysiology}
-#'
-#' \item{`yeo17`}{
-#' Seventeen resting-state networks from Yeo et al. 2011, J. Neurophysiology}
 #'
 #' \item{`aseg`}{
 #' Freesurfer automatic subcortical segmentation of a brain volume}
@@ -50,18 +43,17 @@
 #' ggseg()
 #' ggseg(mapping=aes(fill=area))
 #' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-#' ggseg(atlas="yeo7")
 #' ggseg(adapt_scales = FALSE, position = "stacked")
 #' ggseg(adapt_scales = TRUE, position = "stacked")
 #' ggseg(adapt_scales = TRUE)
 #' ggseg(adapt_scales = FALSE)
 #'
-#' @seealso \code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_polygon}},\code{\link[ggplot2]{coord_fixed}}
+#' @seealso [ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
+#' [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
 #'
 #' @export
-ggseg = function(data = NULL,
+ggseg = function(.data = NULL,
                  atlas = "dkt",
-                 plot.areas = NULL,
                  position = "dispersed",
                  view = NULL,
                  hemisphere = NULL,
@@ -69,7 +61,7 @@ ggseg = function(data = NULL,
                  ...){
 
   # Grab the atlas, even if it has been provided as character string
-  geobrain = if(!is.character(atlas)){
+  geobrain <- if(!is.character(atlas)){
     atlas
   }else{
     get(atlas)
@@ -79,84 +71,28 @@ ggseg = function(data = NULL,
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
       warning("Cannot stack atlas. Check if atlas has medial views.")
     }else{
-
-      # Alter coordinates of the left side to stack ontop of right side
-      stack = geobrain %>%
-        dplyr::group_by(hemi,side) %>%
-        dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(min, max, sd)) %>%
-        dplyr::mutate(sd = lat_sd + long_sd)
-
-      # Distance between hemispheres less than 3 looks untidy
-      stack$lat_max[1] = ifelse(stack$lat_max[1] < 3,
-                                stack$lat_max[1] + stack$lat_sd[1],
-                                stack$lat_max[1])
-
-      geobrain = geobrain %>%
-
-        # Move right side over to the left
-        dplyr::mutate(lat=ifelse(hemi %in% "right",
-                                 lat + (stack$lat_max[1]), lat)) %>%
-
-        # move right side on top of left, and swap the places of medial and lateral
-        dplyr::mutate(long=ifelse(hemi %in% "right" & side %in% "lateral" ,
-                                  long - stack$long_min[3], long),
-                      long=ifelse(hemi %in% "right" & side %in% "medial" ,
-                                  long +(stack$long_min[2]-stack$long_min[4]), long)
-        )
+      geobrain <- stack_brain(geobrain)
     } # If possible to stack
   } # If stacked
 
-  # Remove data we don't want to plot
-  if(!is.null(hemisphere)) geobrain = dplyr::filter(geobrain, hemi %in% hemisphere)
-  if(!is.null(view)) geobrain = dplyr::filter(geobrain, side %in% view)
+  # Remove .data we don't want to plot
+  if(!is.null(hemisphere)) geobrain <- dplyr::filter(geobrain, hemi %in% hemisphere)
+  if(!is.null(view)) geobrain <- dplyr::filter(geobrain, side %in% view)
 
-  # If data has been supplied, merge it
-  if(!is.null(data)){
-
-    # Find columns they have in common
-    cols = names(geobrain)[names(geobrain) %in% names(data)]
-
-    # Merge the brain with the data
-    geobrain = geobrain %>%
-      dplyr::full_join(data, by = cols, copy=TRUE)
-
-    # Find if there are instances of those columns that
-    # are not present in the atlas. Maybe mispelled?
-    errs = geobrain %>%
-      dplyr::filter(is.na(lat)) %>%
-      dplyr::select(!!cols) %>%
-      dplyr::distinct() %>%
-      tidyr::unite_("tt", cols, sep = " - ") %>%
-      dplyr::summarise(value = paste0(tt, collapse = ", "))
-
-    if(errs != ""){
-      warning(paste("Some data is not merged properly into the atlas. Check for spelling mistakes in:",
-                    errs$value))
-
-      geobrain = geobrain %>%
-        dplyr::filter(!is.na(lat))
-    }
-  }
-
-  # Filter data to single area if that is all you want.
-  if(!is.null(plot.areas)){
-    if(any(!plot.areas %in% geobrain$area)){
-      stop(paste("There is no", plot.areas,
-                 "in", atlas,"data. Check spelling. Options are:",
-                 paste0(geobrain$area %>% unique,collapse=", ")))
-    }
-    geobrain = geobrain %>% dplyr::filter(area %in% plot.areas)
+  # If .data has been supplied, merge it
+  if(!is.null(.data)){
+    geobrain <- data_merge(.data, geobrain)
   }
 
   # Create the plot
-  gg = ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=id)) +
+  gg <- ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=id)) +
     ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
 
 
   # Scales may be adapted, for more convenient vieweing
   if(adapt_scales){
-    gg = gg +
+    gg <- gg +
       scale_y_brain(geobrain, position) +
       scale_x_brain(geobrain, position) +
       scale_labs_brain(geobrain, position)
@@ -169,6 +105,6 @@ ggseg = function(data = NULL,
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("dkt", "lat_sd", "long_sd", "id"))
+  utils::globalVariables(c(".data","dkt", "lat_sd", "long_sd", "id"))
 }
 
