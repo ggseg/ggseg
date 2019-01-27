@@ -76,16 +76,6 @@ atlases. While we would love getting help in creating new atlases, you
 may also request atlases through the issues, and we will try to get to
 it.
 
-### Included atlases and palettes
-
-![](man/img/README-dkt-1.png)<!-- -->
-
-![](man/img/README-yeo7-1.png)<!-- -->
-
-![](man/img/README-yeo17-1.png)<!-- -->
-
-![](man/img/README-aseg-1.png)<!-- -->
-
 # Funding
 
 This tool is partly funded by:
