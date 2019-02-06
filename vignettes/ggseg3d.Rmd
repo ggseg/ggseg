@@ -78,14 +78,14 @@ someData = dkt_3d %>%
 ```
 
 ## Colours
-You can also change the palette. Choose from ALL the paletteer palettes, just use their name.
-```{r,fig.width=5}
-  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "berlin")
-  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "RdBu")
-  ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "GrandBudapest1")
-```
+<!-- You can also change the palette. Choose from ALL the paletteer palettes, just use their name. -->
+<!-- ```{r,fig.width=5} -->
+<!--   ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "berlin") -->
+<!--   ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "RdBu") -->
+<!--   ggseg3d(.data = someData, atlas = dkt_3d, colour = "p", text = "p", palette = "GrandBudapest1") -->
+<!-- ``` -->
 
-You can also provide custom colour palettes either in hex or R-names
+You can provide custom colour palettes either in hex or R-names
 ```{r,fig.width=5}
   ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 

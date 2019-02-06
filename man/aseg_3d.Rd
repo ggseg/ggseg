@@ -34,7 +34,7 @@ Fischl et al., (2002). Neuron, 33:341-355
 (\href{https://www.ncbi.nlm.nih.gov/pubmed/11832223}{PubMed})
 }
 \seealso{
-Other ggseg3d_atlases: \code{\link{dkt3d}}
+Other ggseg3d_atlases: \code{\link{dkt_3d}}
 }
 \concept{ggseg3d_atlases}
 \keyword{datasets}

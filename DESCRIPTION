@@ -15,10 +15,10 @@ Imports: dplyr,
     utils,
     tidyr,
     magrittr,
+    methods,
     gplots,
     plotly,
     scales,
-    paletteer,
     purrr,
     rlang
 Suggests:
