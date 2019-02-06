@@ -122,18 +122,20 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
   if(is.numeric(unlist(atlas3d[,colour]))){
 
     if(is.null(palette)){
-      palette = "oslo"
+      palette = c("skyblue", "dodgerblue")
     }
 
-    pal.colours = if(length(palette)==1){
-      if(!palette %in% unlist(lapply(paletteers$palettes, function(x) x$palette))){
-        stop(paste0("No such palette '", palette, "'. Choose one from the paletteer package."))
-      }
+    pal.colours = palette
+    # pal.colours = if(length(palette)==1){
+    #   if(!palette %in% unlist(lapply(paletteers$palettes, function(x) x$palette))){
+    #     stop(paste0("No such palette '", palette, "'. Choose one from the paletteer package."))
+    #   }
+    #
+    #   get_paletteer(palette)
+    # }else{
+    #   palette
+    # }
 
-      get_paletteer(palette)
-    }else{
-      palette
-    }
 
     pal.colours = data.frame(seq(0,1, length.out = length(pal.colours)),
                              pal.colours, stringsAsFactors = F)

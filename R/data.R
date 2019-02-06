@@ -73,7 +73,7 @@
 #' A nested tibble for all available surfaces and hemispheres
 #'
 #' @docType data
-#' @name dkt3d
+#' @name dkt_3d
 #' @usage data(dkt_3d)
 #' @keywords datasets
 #' @family ggseg3d_atlases
