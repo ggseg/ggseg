@@ -132,13 +132,10 @@ To fix this, you must duplicate the atlas data, and supply your data through the
 This is maybe best achieved by making your data into a list, and then list applying `lapply` over them, and binding them together again.
 
 ```{r duplicate, fig.width=5}
-newAtlas = list(Young = someData %>% filter(AgeG %in% "Young"),
-                Old = someData %>% filter(AgeG %in% "Old")) %>% 
-  lapply(function(x) x %>% full_join(dkt) %>% mutate(AgeG = unique(x$AgeG))) %>% 
-  bind_rows()
-newAtlas %>% head(10)
+someData = someData %>% 
+  group_by(AgeG)
 
-ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom")
 ```
@@ -151,7 +148,7 @@ vignette("externalData")
 We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?
 
 ```{r datasupp4, fig.width=5}
-ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme_dark() +
   theme(legend.position = "bottom",
@@ -165,7 +162,7 @@ ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
 Depending on what type of column is used for fill (continuous or discrete),
 you can also use the differenct `scales` to alter the colours.
 ```{r datasupp5, fig.width=5}
-ggseg(atlas=newAtlas, colour="white", mapping=aes(fill=p)) +
+ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme_dark() +
   theme(legend.position = "bottom",
