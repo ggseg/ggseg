@@ -12,7 +12,8 @@ data_merge <- function(.data, geobrain){
 
     geobrain <- .data %>%
       dplyr::mutate(data = purrr::map(data, ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE))) %>%
-      tidyr::unnest()
+      tidyr::unnest() %>%
+      dplyr::ungroup()
 
   }else{
     # Merge the brain with the .data

@@ -1,7 +1,3 @@
-#' @importFrom methods setOldClass
-#' @exportClass ggseg_atlas
-setOldClass(c("ggseg_atlas","tbl_df", "tbl", "data.frame"))
-
 #' `ggseg_atlas` class
 #'
 #' @description
@@ -33,24 +29,22 @@ setOldClass(c("ggseg_atlas","tbl_df", "tbl", "data.frame"))
 #' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()],
 #'   [glimpse()]
 NULL
-
-
-ggseg_atlas <- function(x = data.frame(long = NA,
-                                       lat = NA,
-                                       order = NA,
-                                       piece = NA,
-                                       id = NA,
-                                       hemi = NA,
-                                       area = NA,
-                                       label = NA,
-                                       side = NA,
-                                       atlas = NA,
-                                       pos = NA)) {
+as_ggseg_atlas <- function(x = data.frame(long = double(),
+                                       lat = double(),
+                                       id = character(),
+                                       hemi = character(),
+                                       area = character(),
+                                       side = character())) {
   stopifnot(is.data.frame(x))
-  stopifnot(all(c("long", "lat", "id", "hemi", "area", "side") %in% names(x)))
+  miss <- c("long", "lat", "id", "hemi", "area", "side") %in% names(x)
+  if(!all(miss)){
+    miss <- na.omit(names(x)[!miss])
+    stop(paste0("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
+                paste0(as.character(miss), "'", collapse=" '"))
+    )
+  }
 
-  structure(
-    x,
-    class = "ggseg_atlas"
-  )
+  class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
+  return(x)
+
 }
