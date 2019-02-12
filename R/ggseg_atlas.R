@@ -33,12 +33,12 @@ as_ggseg_atlas <- function(x = data.frame(long = double(),
                                        lat = double(),
                                        id = character(),
                                        hemi = character(),
-                                       area = character(),
                                        side = character())) {
   stopifnot(is.data.frame(x))
-  miss <- c("long", "lat", "id", "hemi", "area", "side") %in% names(x)
+  necessaries <- c("long", "lat", "id", "hemi", "area", "side")
+  miss <- necessaries %in% names(x)
   if(!all(miss)){
-    miss <- na.omit(names(x)[!miss])
+    miss <- na.omit(necessaries[!miss])
     stop(paste0("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
                 paste0(as.character(miss), "'", collapse=" '"))
     )
