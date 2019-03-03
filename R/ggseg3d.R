@@ -76,6 +76,9 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
     get(atlas)
   }
 
+  if(!any(grepl("3d", atlas3d$atlas))){
+    stop(paste0("This is not a 3d atlas, did you mean ", atlas3d$atlas[1], "_3d?"))
+  }
 
   if(!any(atlas3d$surf %in% surface)){
     stop(paste0("There is no surface '",surface,"' in this atlas." ))
