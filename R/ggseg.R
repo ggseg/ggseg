@@ -67,7 +67,6 @@ ggseg = function(.data = NULL,
     get(atlas)
   }
 
-  # Check atlas has necessary components
   geobrain <- as_ggseg_atlas(geobrain)
 
   if(position=="stacked"){
