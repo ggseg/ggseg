@@ -39,3 +39,4 @@ aseg <- aseg %>%
   left_join(aseg_labs) %>%
   as_ggseg_atlas() %>%
   select(-group, -piece)
+usethis::use_data(aseg, internal = FALSE, overwrite = TRUE)

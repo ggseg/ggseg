@@ -1,6 +1,6 @@
 context("test-ggseg_atlas")
 
-test_that("echeck that ggseg_atlas is correct", {
+test_that("check that ggseg_atlas is correct", {
   tt <- data.frame(long = double(),
                 lat = double(),
                 id = character(),
@@ -11,3 +11,4 @@ test_that("echeck that ggseg_atlas is correct", {
   expect_warning(as_ggseg_atlas())
 
 })
+

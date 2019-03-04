@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convenience function to install all atlases from ggsegExtra-repo — install_atlases • ggseg</title>
+<title>Plot the colours of the atlases for selection — display_brain_pal • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Convenience function to install all atlases from ggsegExtra-repo — install_atlases" />
+<meta property="og:title" content="Plot the colours of the atlases for selection — display_brain_pal" />
 
-<meta property="og:description" content="install_atlases calls devtools::install_github() with repo = &quot;LCBC-UiO/ggsegExtra&quot;" />
+<meta property="og:description" content="display_brain_pal plots all the colours for each atlas." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -124,42 +124,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convenience function to install all atlases from ggsegExtra-repo</h1>
+    <h1>Plot the colours of the atlases for selection</h1>
     
-    <div class="hidden name"><code>install_atlases.Rd</code></div>
+    <div class="hidden name"><code>display_brain_pal.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>install_atlases</code> calls devtools::install_github() with repo = "LCBC-UiO/ggsegExtra"</p>
+    <p><code>display_brain_pal</code> plots all the colours for each atlas.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_atlases</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"LCBC-UiO/ggsegExtra"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>display_brain_pal</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>repo</th>
-      <td><p>repository to install via github</p></td>
+      <th>name</th>
+      <td><p>String name of atlas</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other options to install_github</p></td>
+      <th>n</th>
+      <td><p>Number of colours to return (or "all" [default])</p></td>
     </tr>
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>display_brain_pal</span>()</div><div class='img'><img src='display_brain_pal-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>display_brain_pal</span>(<span class='st'>"dkt"</span>, <span class='fl'>1</span>:<span class='fl'>8</span>)</div><div class='img'><img src='display_brain_pal-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
-    <h2>Author</h2>
-    <p>Athanasia Mowinckel and Didac Pineiro</p>
   </div>
 </div>
 

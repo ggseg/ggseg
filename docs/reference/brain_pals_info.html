@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convenience function to install all atlases from ggsegExtra-repo — install_atlases • ggseg</title>
+<title>Get info on brain palettes — brain_pals_info • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Convenience function to install all atlases from ggsegExtra-repo — install_atlases" />
+<meta property="og:title" content="Get info on brain palettes — brain_pals_info" />
 
-<meta property="og:description" content="install_atlases calls devtools::install_github() with repo = &quot;LCBC-UiO/ggsegExtra&quot;" />
+<meta property="og:description" content="Get info on brain palettes" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -124,42 +124,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convenience function to install all atlases from ggsegExtra-repo</h1>
+    <h1>Get info on brain palettes</h1>
     
-    <div class="hidden name"><code>install_atlases.Rd</code></div>
+    <div class="hidden name"><code>brain_pals_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>install_atlases</code> calls devtools::install_github() with repo = "LCBC-UiO/ggsegExtra"</p>
+    <p>Get info on brain palettes</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_atlases</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"LCBC-UiO/ggsegExtra"</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>repo</th>
-      <td><p>repository to install via github</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other options to install_github</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>brain_pals_info</span>()</pre>
+        
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>data.frame</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>brain_pals_info</span>()</div><div class='output co'>#&gt;   atlas maxcol category colorblind
+#&gt; 1   dkt     34     qual      FALSE
+#&gt; 2  aseg      8     qual      FALSE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
-    <h2>Author</h2>
-    <p>Athanasia Mowinckel and Didac Pineiro</p>
   </div>
 </div>
 

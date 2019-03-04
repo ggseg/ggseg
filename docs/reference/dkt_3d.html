@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convenience function to install all atlases from ggsegExtra-repo — install_atlases • ggseg</title>
+<title>Desikan-Killiany Cortical Atlas - tri-surf mesh
+Mesh data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain. — dkt_3d • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +39,11 @@
 
 
 
-<meta property="og:title" content="Convenience function to install all atlases from ggsegExtra-repo — install_atlases" />
+<meta property="og:title" content="Desikan-Killiany Cortical Atlas - tri-surf mesh
+Mesh data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain. — dkt_3d" />
 
-<meta property="og:description" content="install_atlases calls devtools::install_github() with repo = &quot;LCBC-UiO/ggsegExtra&quot;" />
+<meta property="og:description" content="A nested tibble for all available surfaces and hemispheres" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -124,42 +128,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convenience function to install all atlases from ggsegExtra-repo</h1>
+    <h1>Desikan-Killiany Cortical Atlas - tri-surf mesh
+Mesh data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain.</h1>
     
-    <div class="hidden name"><code>install_atlases.Rd</code></div>
+    <div class="hidden name"><code>dkt_3d.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>install_atlases</code> calls devtools::install_github() with repo = "LCBC-UiO/ggsegExtra"</p>
+    <p>A nested tibble for all available surfaces and hemispheres</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_atlases</span>(<span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"LCBC-UiO/ggsegExtra"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>dkt_3d</span>)</pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A tibble with 4 observations and a nested data.frame</p><dl class='dl-horizontal'>
+  <dt>surf</dt><dd><p>type of surface (`inflated` or `white`)</p></dd>
+  <dt>hemi</dt><dd><p>hemisphere (`left`` or `right`)</p></dd>
+  <dt>data</dt><dd><p>data.frame of necessary variables for plotting</p></dd>
+    <dt>atlas</dt><dd><p>String. atlas name</p></dd>
+  <dt>roi</dt><dd><p>numbered region from surface</p></dd>
+  <dt>annot</dt><dd><p>concatenated region name</p></dd>
+  <dt>label</dt><dd><p>label `hemi_annot` of the region</p></dd>
+  <dt>mesh</dt><dd><p>list of meshes in two lists: vb and it</p></dd>
+  <dt>acronym</dt><dd><p>abbreviated name of annot</p></dd>
+  <dt>lobe</dt><dd><p>lobe localization</p></dd>
+  <dt>area</dt><dd><p>name of area in full</p></dd>
+  <dt>colour</dt><dd><p>HEX colour of region</p></dd>
+</dl>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>repo</th>
-      <td><p>repository to install via github</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other options to install_github</p></td>
-    </tr>
-    </table>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Fischl et al. (2004) Cerebral Cortex 14:11-22
+(<a href='https://academic.oup.com/cercor/article/14/1/11/433466'>PubMed</a>)</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other ggseg3d_atlases: <code><a href='aseg_3d.html'>aseg_3d</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>dkt_3d</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#format">Format</a></li>
 
-    <h2>Author</h2>
-    <p>Athanasia Mowinckel and Didac Pineiro</p>
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

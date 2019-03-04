@@ -52,7 +52,8 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
 #'
 #' @param name String name of atlas
 #' @param n Number of colours to return (or "all" [default])
-#'
+#' @importFrom dplyr row_number bind_rows group_by mutate filter
+#' @importFrom ggplot2 ggplot geom_tile labs aes
 #' @export
 #' @examples
 #' display_brain_pal()
@@ -72,22 +73,22 @@ display_brain_pal <- function (name="all",
                 name))
   }
 
-  pals = do.call(dplyr::bind_rows,
+  pals = do.call(bind_rows,
                  lapply(info$atlas,
                         function(nm) data.frame(atlas = nm,
                                                 colour = brain_pal(nm, n=n, unname=T),
                                                 stringsAsFactors = FALSE))
-                 )
+  )
 
   pals %>%
     group_by(atlas) %>%
     mutate(x = row_number()) %>%
-    dplyr::filter(atlas %in% name) %>%
+    filter(atlas %in% name) %>%
 
-    ggplot2::ggplot(ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
-    ggplot2::geom_tile() +
+    ggplot(aes(x=x, y=atlas, fill=I(colour))) +
+    geom_tile() +
     theme_brain() +
-    ggplot2::labs(x="")
+    labs(x="")
 }
 
 
@@ -106,6 +107,42 @@ brain_pals_info <- function(){
     category="qual",
     colorblind=FALSE,
     stringsAsFactors = FALSE)
+}
+
+#' Get information about atlas
+#'
+#' @param name name of atlas as character string. If left to NULL gives all.
+#'
+#' @return data.frame
+#' @export
+#' @importFrom dplyr as_tibble select one_of bind_rows
+atlas_info = function(name = NULL){
+
+  n <- brain_pals_info()$atlas
+
+  if(is.null(name)){
+    name = n
+
+  }else if(! name %in% n){
+    name = paste0("'", name[!(name %in% n)], "'", collapse=", ")
+
+    stop(paste0("Did you specify the correct atlases, could not find ",
+                name))
+  }
+
+  t <- lapply(name,
+              function(x)
+                suppressWarnings(
+                  get(x) %>%
+                    select(one_of(c("area","hemi","side","label") )) %>%
+                    unique %>% na.omit())
+  )
+  names(t) <- name
+
+  suppressWarnings(
+    as_tibble(bind_rows(t, .id="atlas"))
+  )
+
 }
 
 ## quiets concerns of R CMD check
