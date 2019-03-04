@@ -148,33 +148,33 @@
 #' ggseg palettes
 #'
 #' @docType data
-#' @name brain.pals
-#' @usage data(brain.pals)
+#' @name brain_pals
+#' @usage data(brain_pals)
 #'
 #' @format A list of palettes for each atlas in ggseg.
 #'
 #' @keywords palettes
-"brain.pals"
+"brain_pals"
 
 #' Information on ggseg atlas palettes
 #'
 #' @docType data
-#' @name brain.pal.info
-#' @usage data(brain.pal.info)
+#' @name brain_pals_info
+#' @usage data(brain_pals_info)
 #'
 #' @format A data.frame summarising the ggseg palettes.
 #'
 #' @keywords palettes
-"brain.pal.info"
+"brain_pals_info"
 
 #' Information on ggseg atlases
 #'
 #' @docType data
-#' @name atlas.info
-#' @usage data(atlas.info)
+#' @name atlas_info
+#' @usage data(atlas_info)
 #'
 #' @format A tibble summarising the ggseg data.
 #'
 #' @keywords data summary
-"atlas.info"
+"atlas_info"
 

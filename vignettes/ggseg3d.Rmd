@@ -86,7 +86,7 @@ someData = dkt_3d %>%
 <!-- ``` -->
 
 You can provide custom colour palettes either in hex or R-names
-```{r,fig.width=5}
+```{r,fig.width=5, eval=FALSE}
   ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 
           palette = c("forestgreen", "white", "firebrick"))
@@ -95,7 +95,7 @@ You can provide custom colour palettes either in hex or R-names
 ```
 
 If you want to alter the colour of `NA` regions, supply `na.colour`
-```{r,fig.width=5}
+```{r,fig.width=5, eval=FALSE}
   ggseg3d(.data = someData, atlas = dkt_3d, 
           colour = "p", text = "p", 
           na.colour = "black", camera="medial")
@@ -119,12 +119,12 @@ somData_aseg = aseg_3d %>%
 
 ## Camera
 You can rotate away all you like. if you want to start from the medial view, you can use the `camera` option
-```{r fig.width=5}
+```{r,fig.width=5, eval=FALSE}
   ggseg3d(.data = someData, atlas=dkt_3d, colour = "p", camera = "medial")
 ```
 
 There is also a surface of the white-matter
-```{r fig.width=5}
+```{r,fig.width=5, eval=FALSE}
  ggseg3d(atlas=dkt_3d, surface="white")
 ```
 
