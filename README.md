@@ -25,9 +25,7 @@ R.
 There are currently four atlases available in the package:
 
 1.  `dkt` - Desikan-Killany atlas (aparc).  
-2.  `yeo7` - Yeo 2011 7 resting-state networks.  
-3.  `yeo17` - Yeo 2011 17 resting-state network.  
-4.  `aseg` - Automatic subcortical segmentation.
+2.  `aseg` - Automatic subcortical segmentation.
 
 We are working on creating a detailed description in the wiki on how to
 create and contribute atlases to the package. The `ggseg` function
@@ -39,6 +37,9 @@ Please see the
 for information on adding atlases, or inspect the included datasets for
 requirements. If anything is unclear in the wiki, give us a shout out in
 the issues\!
+
+You may find more atlases in the companion package
+[ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
 
 ## Installation
 
