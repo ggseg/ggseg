@@ -156,14 +156,4 @@
 #' @keywords palettes
 "brain_pals"
 
-#' Information on ggseg atlases
-#'
-#' @docType data
-#' @name atlas_info
-#' @usage data(atlas_info)
-#'
-#' @format A tibble summarising the ggseg data.
-#'
-#' @keywords data summary
-"atlas_info"
 
