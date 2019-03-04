@@ -27,8 +27,10 @@
 as_ggseg_atlas <- function(x = data.frame(long = double(),
                                        lat = double(),
                                        id = character(),
+                                       area = as.character(),
                                        hemi = character(),
-                                       side = character())) {
+                                       side = character())
+                           ) {
   stopifnot(is.data.frame(x))
   necessaries <- c("long", "lat", "id", "hemi", "area", "side")
   miss <- necessaries %in% names(x)

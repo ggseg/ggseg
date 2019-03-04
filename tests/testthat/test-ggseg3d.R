@@ -6,9 +6,9 @@ test_that("Check that ggseg3d is working", {
   expect_is(p, c("plotly", "htmlwidget"))
   expect_equal(length(p$x), 7)
 
-  expect_error(ggseg3d(atlas=dkt))
-  expect_error(ggseg3d(atlas=hhj))
-  expect_error(ggseg3d(atlas=dkt_3d, hemisphere = "hi"))
+  expect_error(ggseg3d(atlas=dkt), "not a 3d atlas")
+  expect_error(ggseg3d(atlas=hhj), "object 'hhj")
+  expect_error(ggseg3d(atlas=dkt_3d, hemisphere = "hi"), "hemisphere")
 
 
   expect_warning(
@@ -73,6 +73,8 @@ test_that("Check that ggseg3d is working", {
       remove.axes = F, camera = "medial", na.alpha = .5),
     c("plotly", "htmlwidget")
   )
+
+  expect_error(ggseg3d(atlas = aseg_3d, surface = "white"), "no surface")
 
 })
 
