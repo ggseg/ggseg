@@ -7,7 +7,8 @@
 \title{`ggseg_atlas` class}
 \usage{
 as_ggseg_atlas(x = data.frame(long = double(), lat = double(), id =
-  character(), hemi = character(), side = character()))
+  character(), area = as.character(), hemi = character(), side =
+  character()))
 }
 \arguments{
 \item{x}{dataframe to be made a ggseg-atlas}

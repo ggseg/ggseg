@@ -14,3 +14,7 @@ display_brain_pal(name = "all", n = "all")
 \description{
 \code{display_brain_pal} plots all the colours for each atlas.
 }
+\examples{
+display_brain_pal()
+display_brain_pal("dkt", 1:8)
+}
