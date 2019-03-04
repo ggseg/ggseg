@@ -1,6 +1,6 @@
 ---
 title: "Plotting brain atlases in ggplot"
-output: rmarkdown::html_vignette
+output: rmarkdown::github_document
 vignette: >
   %\VignetteIndexEntry{Plotting brain atlases in ggplot}
   %\VignetteEngine{knitr::rmarkdown}
