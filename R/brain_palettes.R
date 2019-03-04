@@ -68,7 +68,7 @@ display_brain_pal <- function (name="all",
 
   if(name != "all"){
     if(!(name %in% info$atlas)){
-      stop(paste(name,"is not a valid palette name for brain.pal\n"))
+      stop(paste(name,"is not a valid palette name for brain_pal\n"))
     }
 
     if(n == "all") n = seq(1,info[info$atlas %in% name,"maxcol"])
