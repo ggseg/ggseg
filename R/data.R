@@ -156,17 +156,6 @@
 #' @keywords palettes
 "brain_pals"
 
-#' Information on ggseg atlas palettes
-#'
-#' @docType data
-#' @name brain_pals_info
-#' @usage data(brain_pals_info)
-#'
-#' @format A data.frame summarising the ggseg palettes.
-#'
-#' @keywords palettes
-"brain_pals_info"
-
 #' Information on ggseg atlases
 #'
 #' @docType data
