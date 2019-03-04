@@ -54,55 +54,40 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
 #' @param n Number of colours to return (or "all" [default])
 #'
 #' @export
+#' @examples
+#' display_brain_pal()
+#' display_brain_pal("dkt", 1:8)
 display_brain_pal <- function (name="all",
                                n="all") {
 
 
   info <- brain_pals_info()
-  pals = do.call(dplyr::bind_rows,
-                 lapply(names(brain_pals),
-                        function(nm) data.frame(atlas = nm,
-                                                colour = brain_pals[[nm]],
-                                                x = seq_along(brain_pals[[nm]]),
-                                                stringsAsFactors = FALSE)))
-
-  if(name != "all"){
-    if(!(name %in% info$atlas)){
-      stop(paste(name,"is not a valid palette name for brain_pal\n"))
-    }
-
-    if(n == "all") n = seq(1,info[info$atlas %in% name,"maxcol"])
-
-    if(length(n)>1){
-      n = n
-    }else if(n < 3){
-      warning("minimal value for n is 3, returning requested palette with 3 different levels\n")
-      n = seq(1,3)
-    }else  if(n > info[info$atlas %in% name,"maxcol"]){
-      warning(paste("n too large, allowed maximum for palette",name,"is",
-                    info[info$atlas %in% name,"maxcol"],
-                    "\nReturning the palette you asked for with that many colors\n"))
-      n = seq(1:unname(info[info$atlas %in% name,"maxcol"]))
-    }
-
-  }else{
+  if(name == "all"){
     name = info$atlas
+  }else if(!(any(name %in% info$atlas))){
 
-    if(length(n) > 1){
-      n = n
-    }else if(n == "all"){
-      n = seq(1, max(info$maxcol))
-    }else{
-      n = seq(1,n)
-    }
-  }# if name
+    name = paste0("'", name[!(name %in% info$atlas)], "'", collapse=", ")
 
+    stop(paste0("Did you specify the correct atlases, could not find ",
+                name))
+  }
+
+  pals = do.call(dplyr::bind_rows,
+                 lapply(info$atlas,
+                        function(nm) data.frame(atlas = nm,
+                                                colour = brain_pal(nm, n=n, unname=T),
+                                                stringsAsFactors = FALSE))
+                 )
 
   pals %>%
+    group_by(atlas) %>%
+    mutate(x = row_number()) %>%
     dplyr::filter(atlas %in% name) %>%
-    dplyr::filter(x %in% n) %>%
-    ggplot2::ggplot(ggplot2::aes(x=as.numeric(x), y=atlas, fill=I(colour))) +
-    ggplot2::geom_tile() + theme_brain() + ggplot2::labs(x="")
+
+    ggplot2::ggplot(ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
+    ggplot2::geom_tile() +
+    theme_brain() +
+    ggplot2::labs(x="")
 }
 
 
@@ -112,12 +97,15 @@ display_brain_pal <- function (name="all",
 #' @export
 #'
 #' @examples
+#' brain_pals_info()
+
 brain_pals_info <- function(){
   data.frame(
     atlas=names(unlist(lapply(brain_pals,length))),
     maxcol=unname(unlist(lapply(brain_pals,length))),
     category="qual",
-    colorblind=FALSE)
+    colorblind=FALSE,
+    stringsAsFactors = FALSE)
 }
 
 ## quiets concerns of R CMD check

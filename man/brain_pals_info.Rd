@@ -12,3 +12,6 @@ data.frame
 \description{
 Get info on brain palettes
 }
+\examples{
+brain_pals_info()
+}
