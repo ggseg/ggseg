@@ -39,11 +39,6 @@ ggseg3d()
 ```
 
 
-```{r,fig.width=5}
-ggseg3d(atlas=dkt_3d)
-```
-
-
 ## Atlas data
 The data is stored in tibbles, and looks like so:
 ```{r,fig.width=5}
