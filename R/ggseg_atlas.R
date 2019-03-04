@@ -1,4 +1,5 @@
 #' `ggseg_atlas` class
+#' @param x dataframe to be made a ggseg-atlas
 #'
 #' @description
 #' The `ggseg_atlas` class is a subclass of [`data.frame`][base::data.frame()],
@@ -10,7 +11,6 @@
 #' [tidyr](http://tidyr.tidyverse.org/), and
 #' [readr](http://readr.tidyverse.org/).
 #'
-#'
 #' @section Properties of `ggseg_atlas`:
 #'
 #' Objects of class `ggseg_atlas` have:
@@ -20,15 +20,10 @@
 #' * Alot of this script and its functions are taken from the
 #'   [`tibble`][tibble::tibble()]-package
 #'
-#'
-#' @section Behavior of `ggseg_atlas`:
-#'
-#'
 #' @name ggseg_atlas-class
+#' @importFrom dplyr one_of select everything
 #' @aliases ggseg_atlas ggseg_atlas-class
-#' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()],
-#'   [glimpse()]
-NULL
+#' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()], [glimpse()]
 as_ggseg_atlas <- function(x = data.frame(long = double(),
                                        lat = double(),
                                        id = character(),
@@ -44,7 +39,10 @@ as_ggseg_atlas <- function(x = data.frame(long = double(),
     )
   }
 
+  x <- select(x,
+              one_of(c(necessaries, "label","atlas")), everything())
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
   return(x)
 
 }
+

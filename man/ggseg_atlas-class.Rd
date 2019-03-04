@@ -2,8 +2,16 @@
 % Please edit documentation in R/ggseg_atlas.R
 \name{ggseg_atlas-class}
 \alias{ggseg_atlas-class}
+\alias{as_ggseg_atlas}
 \alias{ggseg_atlas}
 \title{`ggseg_atlas` class}
+\usage{
+as_ggseg_atlas(x = data.frame(long = double(), lat = double(), id =
+  character(), hemi = character(), side = character()))
+}
+\arguments{
+\item{x}{dataframe to be made a ggseg-atlas}
+}
 \description{
 The `ggseg_atlas` class is a subclass of [`data.frame`][base::data.frame()],
 created in order to have different default behaviour. It heavily relieas on
@@ -25,11 +33,6 @@ Objects of class `ggseg_atlas` have:
   [`tibble`][tibble::tibble()]-package
 }
 
-\section{Behavior of `ggseg_atlas`}{
-
-}
-
 \seealso{
-[tibble()], [as_tibble()], [tribble()], [print.tbl()],
-  [glimpse()]
+[tibble()], [as_tibble()], [tribble()], [print.tbl()], [glimpse()]
 }

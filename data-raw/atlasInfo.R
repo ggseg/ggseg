@@ -1,12 +1,12 @@
 library(ggseg)
 library(tidyverse)
-atlas.info = list(dkt = dkt,
+atlas_info = list(dkt = dkt,
                   aseg = aseg
                   ) %>%
   lapply(function(x) x %>%
            select(one_of(c("area","hemi","side","label") )) %>%
            unique %>% na.omit())
-usethis::use_data(atlas.info, internal = FALSE, overwrite = TRUE)
+usethis::use_data(atlas_info, internal = FALSE, overwrite = TRUE)
 
 ### Work in progress. get all data in one tibble?
 # d <- data(package = "ggseg")
