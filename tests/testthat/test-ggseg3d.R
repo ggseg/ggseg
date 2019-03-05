@@ -1,6 +1,5 @@
 context("test-ggseg3d")
 
-
 test_that("Check that ggseg3d is working", {
   p = ggseg3d()
   expect_is(p, c("plotly", "htmlwidget"))
