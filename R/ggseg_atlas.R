@@ -75,7 +75,7 @@ as_ggseg_atlas <- function(x = data.frame(long = double(),
 #'
 #' @name ggseg3d_atlas-class
 #' @importFrom dplyr one_of select everything
-#' @importFrom tidyr unnest
+#' @importFrom tidyr unnest nest
 #' @aliases ggseg3d_atlas ggseg3d_atlas-class
 #' @export
 #' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()], [glimpse()]
@@ -86,7 +86,7 @@ as_ggseg3d_atlas <- function(x = data.frame(atlas = character(),
   stopifnot(is.data.frame(x))
 
   if("data" %in% names(x)) x <- unnest(x)
-  necessaries <- c("atlas", "surf", "hemi","annot","area", "colour", "mesh")
+  necessaries <- c("atlas", "surf", "hemi","area", "colour", "mesh")
   miss <- necessaries %in% names(x)
   if(!all(miss)){
     miss <- na.omit(necessaries[!miss])
@@ -95,9 +95,13 @@ as_ggseg3d_atlas <- function(x = data.frame(atlas = character(),
     )
   }
 
-  x <- group_by(x, atlas, surf, hemi)
-  x <- select(x,
-              one_of(c(necessaries, "label")), everything())
+  names(x$mesh[[1]]) = c("vb", "it")
+
+  x <- group_by(x, atlas, surf, hemi) %>%
+    select(one_of(c(necessaries, "label")),
+           everything()) %>%
+    nest()
+
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
   return(x)
 

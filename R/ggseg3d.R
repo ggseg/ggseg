@@ -88,6 +88,8 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
     stop(paste0("There is no data for the ",hemisphere," hemisphere in this atlas." ))
   }
 
+  atlas3d <- as_ggseg3d_atlas(atlas3d)
+
   # grab the correct surface and hemisphere
   atlas3d = atlas3d %>%
     dplyr::filter(surf %in% surface & hemi %in% hemisphere) %>%
