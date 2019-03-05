@@ -14,7 +14,7 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
   info <- brain_pals_info()
 
   if(!(name %in% info$atlas)){
-    stop(paste(name,"is not a valid palette name for brain.pal\n"))
+    stop(paste(name,"is not a valid palette name for brain_pal\n"))
   }
 
   if(length(n)>1){
