@@ -8,7 +8,8 @@ ggseg3d(.data = NULL, atlas = "dkt_3d", surface = "LCBC",
   hemisphere = c("right", "subcort"), label = "area", text = NULL,
   colour = "colour", palette = NULL, na.colour = "darkgrey",
   na.alpha = 1, remove.axes = TRUE, show.legend = TRUE,
-  camera = "lateral")
+  camera = "lateral", glassbrain = 0,
+  glassbrain_hemisphere = c("left", "right"))
 }
 \arguments{
 \item{.data}{A data.frame to use for plot aesthetics. Must include a
@@ -41,6 +42,11 @@ used if colour is numeric.}
 
 \item{camera}{String of "medial" or "lateral", or list of x, y, and z positions
 for initial camera position.}
+
+\item{glassbrain}{numeric between 0 and 1, transparency of a glass brain overlay.
+Recommended for subcrotical or white matter tracts.}
+
+\item{glassbrain_hemisphere}{Which hemisphere of the glassbrain to add.}
 }
 \value{
 a plotly object
