@@ -21,6 +21,9 @@
 #' @param show.legend Logical. Toggle legend if colour is numeric.
 #' @param camera String of "medial" or "lateral", or list of x, y, and z positions
 #' for initial camera position.
+#' @param glassbrain numeric between 0 and 1, transparency of a glass brain overlay.
+#' Recommended for subcrotical or white matter tracts.
+#' @param glassbrain_hemisphere Which hemisphere of the glassbrain to add.
 #'
 #' @details
 #' \describe{
@@ -66,7 +69,7 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
                     label = "area", text = NULL, colour = "colour",
                     palette = NULL, na.colour = "darkgrey", na.alpha = 1,
                     remove.axes = TRUE, show.legend = TRUE,
-                    camera = "lateral") {
+                    camera = "lateral", glassbrain = 0, glassbrain_hemisphere = c("left", "right")) {
 
 
   # Grab the atlas, even if it has been provided as character string
@@ -206,6 +209,34 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
     )
   }
 
+  if(glassbrain != 0){
+
+    cortex <- cortex_3d %>%
+      filter(hemi %in% glassbrain_hemisphere) %>%
+      unnest()
+
+    # add one trace per file inputed
+    for(tt in 1:nrow(cortex)){
+
+      col = rep(unlist(cortex[tt, fill]), length(cortex$mesh[[tt]]$it[1,]))
+
+      p = plotly::add_trace(p,
+                            x = cortex$mesh[[tt]]$vb["xpts",],
+                            y = cortex$mesh[[tt]]$vb["ypts",],
+                            z = cortex$mesh[[tt]]$vb["zpts",],
+
+                            i = cortex$mesh[[tt]]$it[1,]-1,
+                            j = cortex$mesh[[tt]]$it[2,]-1,
+                            k = cortex$mesh[[tt]]$it[3,]-1,
+
+                            facecolor = col,
+                            type = "mesh3d",
+                            showscale = FALSE,
+                            opacity = glassbrain
+      )
+    }
+  }
+
   if(remove.axes){
     # Axix removal
     ax <- list(
@@ -234,7 +265,6 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
   }else{
     camera
   }
-
 
   # create final plotly plot
   p %>%
