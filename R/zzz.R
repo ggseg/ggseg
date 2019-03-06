@@ -1,4 +1,4 @@
-.onAttach <- function(libname, pkgname) {
+.onLoad <- function(libname, pkgname) {
   if (interactive()) {
     if("ggsegExtra" %in% rownames(installed.packages())){
       packageStartupMessage(paste("ggseg by default only loads atlases dkt and aseg in 2 and 3D.",

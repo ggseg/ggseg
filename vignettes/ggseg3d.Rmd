@@ -109,7 +109,8 @@ somData_aseg = aseg_3d %>%
 
   ggseg3d(.data = somData_aseg, atlas = aseg_3d, 
           colour = "p", text = "p", 
-          na.alpha= .5)
+          na.alpha= .5, glassbrain = .5, 
+          glassbrain_hemisphere = "left")
 ```
 
 ## Camera
