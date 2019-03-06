@@ -99,7 +99,7 @@ If you want to alter the colour of `NA` regions, supply `na.colour`
           na.colour = "#ffff00", camera="medial")
 ```
 
-If you are plotting the sub-cortical structures, you might want to reduce the opacity of the `NA` structures, so that you can see the more medial structures.
+If you are plotting the sub-cortical structures, you might want to reduce the opacity of the `NA` structures, so that you can see the more medial structures. you may also want to add the `glassbrain` option, any value above 0 and up to 1 increases the opacity of a glass brain overlay.
 ```{r,fig.width=5, warning=F, message=FALSE}
 somData_aseg = aseg_3d %>% 
   unnest() %>% 
