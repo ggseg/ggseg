@@ -62,13 +62,18 @@ library(ggplot2)
 ggseg()
 ggseg(mapping=aes(fill=area))
 ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-ggseg(adapt_scales = FALSE, position = "stacked")
-ggseg(adapt_scales = TRUE, position = "stacked")
-ggseg(adapt_scales = TRUE)
+ggseg(position = "stacked")
 ggseg(adapt_scales = FALSE)
 
 }
 \seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/LCBC-UiO/ggseg}
+  \item Report bugs at \url{https://github.com/LCBC-UiO/ggseg/issues}
+}
+
+
 [ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
 [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
 }

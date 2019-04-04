@@ -46,9 +46,9 @@ If you want to use external data with your `ggseg` plot, you will need to make s
 For instance, here we make some data for the "default" and "visual" networks in the `dkt` atlas, and two p values for those two networks.
 
 ```{r}
-someData = data.frame(area=c("superior temporal","pre central", "lateral orbitofrontal"),
-                      p=c(.03,.6, .05), 
-                      stringsAsFactors = F)
+someData = tibble(area=c("superior temporal","pre central", "lateral orbitofrontal"),
+                      p=c(.03,.6, .05)
+                  )
 someData
 ```
 

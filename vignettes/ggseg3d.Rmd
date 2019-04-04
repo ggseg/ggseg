@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r setup, include=F}
-knitr::opts_chunk$set(eval=TRUE)
+knitr::opts_chunk$set(eval=FALSE)
 devtools::load_all(".")
 library(magrittr)
 library(dplyr)

@@ -3,7 +3,7 @@
 #' \code{adapt_scales} returns a list of coordinate breaks and labels
 #' for axes or axes label manipulation of the ggseg brain atlases.
 #'
-#' @param atlas a data.frame containing atlas information.
+#' @param geobrain a data.frame containing atlas information.
 #' @param position String choosing how to view the data. Either "dispersed"[default] or "stacked".
 #' @param aesthetics String of which aesthetics to adapt scale of, either "x","y", or "labs".
 #'
@@ -13,14 +13,13 @@
 #' adapt_scales(dkt, position="stacked", aesthetics="y")
 #'
 #' @importFrom dplyr group_by summarise summarise_at vars funs
+#' @importFrom tidyr unnest
 #'
 #' @export
-adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"){
+adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
-  geobrain = atlas
-
-  atlas = ifelse(any(names(atlas) %in% "atlas"),
-                 unique(atlas$atlas),
+  atlas = ifelse(any(names(geobrain) %in% "atlas"),
+                 unique(geobrain$atlas),
                  "unknown")
 
   if(atlas == "unknown"){
@@ -28,15 +27,15 @@ adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"
     stk = list(
       x=geobrain %>%
         dplyr::group_by(hemi) %>%
-        dplyr::summarise(val=mean(lat)),
+        dplyr::summarise(val=mean(.lat)),
       y=geobrain %>%
         dplyr::group_by(side) %>%
-        dplyr::summarise(val=mean(long))
+        dplyr::summarise(val=mean(.long))
     )
 
     disp = geobrain %>%
       dplyr::group_by(hemi) %>%
-      dplyr::summarise_at(dplyr::vars(long,lat),dplyr::funs(mean))
+      dplyr::summarise_at(dplyr::vars(.long,.lat), list(mean))
 
     ad_scale <- list(
       stacked =
@@ -48,7 +47,7 @@ adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"
         ),
 
       dispersed =
-        list(x = list(breaks = disp$long,
+        list(x = list(breaks = disp$.long,
                       labels = disp$hemi),
              y = list(breaks = NULL,
                       labels = ""),
@@ -56,7 +55,7 @@ adapt_scales = function(atlas = dkt, position = "dispersed", aesthetics = "labs"
         )
     )
   }else{
-    ad_scale = geobrain$pos[[1]]
+    ad_scale = geobrain$.pos[[1]]
   }
 
   if(is.null(ad_scale[[position]])){

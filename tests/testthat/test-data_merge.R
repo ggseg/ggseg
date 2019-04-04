@@ -13,7 +13,7 @@ someData <- data.frame(
 
 test_that("Check that merging with grouped data works", {
 
-    testData <- data_merge(someData, dkt)
+    testData <- data_merge(someData, unnest(dkt, ggseg))
 
     expect_equal(names(testData)[1], "Group")
     expect_equal(unique(testData$Group), c("G1", "G2"))
@@ -21,7 +21,7 @@ test_that("Check that merging with grouped data works", {
 
 test_that("Check that plotting with grouped data works", {
 
-  pp <- ggseg(.data=someData,mapping=aes(fill=p)) +
+  pp <- ggseg(.data=someData, mapping=aes(fill=p)) +
     facet_wrap(~Group)
 
   expect_is(pp, c("gg","ggplot"))
@@ -33,7 +33,7 @@ test_that("Check that simple data merge works", {
     tidyr::unnest() %>%
     dplyr::filter(Group == "G1")
 
-  testData <- data_merge(someData, dkt)
+  testData <- data_merge(someData, unnest(dkt, ggseg))
 
   expect_equal(names(testData)[1], "Group")
   expect_equal(unique(testData$Group), "G1")

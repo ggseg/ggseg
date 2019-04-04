@@ -10,11 +10,12 @@ test_that("Check that ggseg ggplot object is correct", {
   # a ggplot object should be a list of 9
   expect_equal(mode(p), "list")
   expect_equal(length(p), 9)
+  expect_equal(length(p$scales$scales), 2)
 
   ## p$data
-  expect_equal(dim(p$data)[1], 10913)
+  expect_equal(dim(p$data)[1], 65478)
   expect_equal(dim(p$data)[2], 12)
-  expect_equal(colnames(p$data)[1], "long")
+  expect_equal(colnames(p$data)[1], "atlas")
 
   ## p$layers
   # should have a defined number of layers
@@ -61,6 +62,16 @@ test_that("Check that ggseg is working", {
   expect_is(ggseg(hemisphere = "right", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(view = "lateral", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(view = "medial", adapt_scales = T),c("gg","ggplot"))
+
+})
+
+test_that("Check that plotting non ggseg_atlas-class tries conversion", {
+  atlas <- dkt %>% unnest(ggseg)
+
+  expect_warning(p <- ggseg(atlas=atlas))
+
+  expect_is(p, c("gg","ggplot"))
+
 })
 
 
