@@ -4,11 +4,10 @@
 \alias{adapt_scales}
 \title{Scale ggseg plot axes.}
 \usage{
-adapt_scales(atlas = dkt, position = "dispersed",
-  aesthetics = "labs")
+adapt_scales(geobrain, position = "dispersed", aesthetics = "labs")
 }
 \arguments{
-\item{atlas}{a data.frame containing atlas information.}
+\item{geobrain}{a data.frame containing atlas information.}
 
 \item{position}{String choosing how to view the data. Either "dispersed"[default] or "stacked".}
 

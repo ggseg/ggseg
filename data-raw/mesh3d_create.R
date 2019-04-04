@@ -65,7 +65,7 @@ aseg_3d = aseg_3d %>%
 
 
 usethis::use_data(dkt_3d, aseg_3d,
-                  internal = FALSE, overwrite = FALSE, compress = "xz")
+                  internal = FALSE, overwrite = TRUE, compress = "xz")
 
 
 

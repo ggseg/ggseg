@@ -2,11 +2,11 @@ library(tidyverse)
 
 # DKT ----
 dkt <- dkt %>%
- # select(-group) %>%
-  mutate(pos = list(x = 1))
+  unnest %>%
+  mutate(.pos = list(x = 1))
 
 for(i in 1:nrow(dkt)){
-  dkt$pos[[i]] = list(
+  dkt$.pos[[i]] = list(
     stacked = list(x = list(breaks = c(2.5, 9.2),
                             labels = c("lateral","medial")),
                    y = list(breaks = c(2.5, 7.5),
@@ -21,16 +21,17 @@ for(i in 1:nrow(dkt)){
                                  y = NULL))
   )
 }
+dkt <- as_ggseg_atlas(dkt)
 usethis::use_data(dkt, internal = FALSE, overwrite = TRUE)
 
 
 # aseg ----
 aseg <- aseg %>%
-  #select(-group) %>%
-  mutate(pos = list(x = 1))
+  unnest() %>%
+  mutate(.pos = list(x = 1))
 
 for(i in 1:nrow(aseg)){
-  aseg$pos[[i]] = list(
+  aseg$.pos[[i]] = list(
     dispersed = list(x = list(breaks = c(9.2, 11.4),
                               labels = c("left","right")),
                      y = list(breaks = NULL,
@@ -39,4 +40,5 @@ for(i in 1:nrow(aseg)){
                                  y = NULL))
   )
 }
+aseg <- as_ggseg_atlas(aseg)
 usethis::use_data(aseg, internal = FALSE, overwrite = TRUE)

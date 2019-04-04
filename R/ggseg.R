@@ -34,7 +34,7 @@
 #'
 #' @import ggplot2
 #' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise
-#' @importFrom tidyr unite_
+#' @importFrom tidyr unite_ unnest
 #' @importFrom magrittr "%>%"
 #' @importFrom stats na.omit sd
 #'
@@ -43,9 +43,7 @@
 #' ggseg()
 #' ggseg(mapping=aes(fill=area))
 #' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
-#' ggseg(adapt_scales = FALSE, position = "stacked")
-#' ggseg(adapt_scales = TRUE, position = "stacked")
-#' ggseg(adapt_scales = TRUE)
+#' ggseg(position = "stacked")
 #' ggseg(adapt_scales = FALSE)
 #'
 #' @seealso [ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
@@ -67,7 +65,12 @@ ggseg = function(.data = NULL,
     get(atlas)
   }
 
-  geobrain <- as_ggseg_atlas(geobrain)
+  if(!is_ggseg_atlas(geobrain)){
+    warning("This is not a ggseg_atlas-class. Attempting to convert with `as_ggseg_atlas()`")
+    geobrain <- as_ggseg_atlas(geobrain)
+  }
+
+  geobrain <- unnest(geobrain, ggseg)
 
   if(position=="stacked"){
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
@@ -87,7 +90,7 @@ ggseg = function(.data = NULL,
   }
 
   # Create the plot
-  gg <- ggplot2::ggplot(data = geobrain, ggplot2::aes(x=long, y=lat, group=id)) +
+  gg <- ggplot2::ggplot(data = geobrain, ggplot2::aes(x=.long, y=.lat, group=.id)) +
     ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
 
@@ -107,6 +110,6 @@ ggseg = function(.data = NULL,
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c(".data","dkt", "lat_sd", "long_sd", "id"))
+  utils::globalVariables(c(".data","dkt"))
 }
 

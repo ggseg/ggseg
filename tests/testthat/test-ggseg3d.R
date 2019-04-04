@@ -78,3 +78,24 @@ test_that("Check that ggseg3d is working", {
 })
 
 
+
+test_that("Check glassbrain", {
+  p = ggseg3d(atlas = aseg_3d,
+              glassbrain = .5)
+  expect_is(p, c("plotly", "htmlwidget"))
+  expect_equal(length(p$x), 7)
+
+  p = ggseg3d(atlas = aseg_3d,
+              glassbrain = .5,
+              glassbrain_hemisphere = "right")
+  expect_is(p, c("plotly", "htmlwidget"))
+  expect_equal(length(p$x), 7)
+
+  p = ggseg3d(atlas = aseg_3d,
+              glassbrain = .5,
+              glassbrain_hemisphere = "left",
+              glassbrain_colour = "red")
+  expect_is(p, c("plotly", "htmlwidget"))
+  expect_equal(length(p$x), 7)
+
+})

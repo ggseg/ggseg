@@ -215,8 +215,7 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
 
     cortex <- cortex_3d %>%
       filter(hemi %in% glassbrain_hemisphere) %>%
-      unnest()
-
+      unnest(ggseg_3d)
 
     glassbrain_colour <- if(grepl("^#", glassbrain_colour)){
       glassbrain_colour

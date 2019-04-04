@@ -28,3 +28,5 @@ Suggests:
     testthat,
     devtools
 VignetteBuilder: knitr
+URL: https://github.com/LCBC-UiO/ggseg
+BugReports: https://github.com/LCBC-UiO/ggseg/issues

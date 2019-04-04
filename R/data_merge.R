@@ -22,23 +22,22 @@ data_merge <- function(.data, geobrain){
   }
 
   # Find if there are instances of those columns that
-  # are not present in the atlas. Maybe mispelled?
+  # are not present in the geobrain. Maybe mispelled?
   errs = geobrain %>%
-    dplyr::filter(is.na(lat)) %>%
+    dplyr::filter(is.na(.lat)) %>%
     dplyr::select(!!cols) %>%
     dplyr::distinct() %>%
     tidyr::unite_("tt", cols, sep = " - ") %>%
     dplyr::summarise(value = paste0(tt, collapse = ", "))
 
   if(errs != ""){
-    warning(paste("Some .data is not merged properly into the atlas. Check for spelling mistakes in:",
+    warning(paste("Some .data is not merged properly into the geobrain. Check for spelling mistakes in:",
                   errs$value))
-
-    geobrain = geobrain %>%
-      dplyr::filter(!is.na(lat))
   }
-  return(geobrain)
+
+    return(geobrain)
 }
+
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
   utils::globalVariables(c("data"))
