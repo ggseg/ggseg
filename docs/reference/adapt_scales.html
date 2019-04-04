@@ -41,8 +41,6 @@
 
 <meta property="og:description" content="adapt_scales returns a list of coordinate breaks and labels
 for axes or axes label manipulation of the ggseg brain atlases." />
-
-<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -73,7 +71,7 @@ for axes or axes label manipulation of the ggseg brain atlases." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -112,7 +110,12 @@ for axes or axes label manipulation of the ggseg brain atlases." />
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/LCBC-UiO/ggseg">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -126,7 +129,7 @@ for axes or axes label manipulation of the ggseg brain atlases." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Scale ggseg plot axes.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/adapt_scales.R'><code>R/adapt_scales.R</code></a></small>
     <div class="hidden name"><code>adapt_scales.Rd</code></div>
     </div>
 
@@ -137,14 +140,13 @@ for axes or axes label manipulation of the ggseg brain atlases.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>adapt_scales</span>(<span class='kw'>atlas</span> <span class='kw'>=</span> <span class='no'>dkt</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dispersed"</span>,
-  <span class='kw'>aesthetics</span> <span class='kw'>=</span> <span class='st'>"labs"</span>)</pre>
+    <pre class="usage"><span class='fu'>adapt_scales</span>(<span class='no'>geobrain</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dispersed"</span>, <span class='kw'>aesthetics</span> <span class='kw'>=</span> <span class='st'>"labs"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>atlas</th>
+      <th>geobrain</th>
       <td><p>a data.frame containing atlas information.</p></td>
     </tr>
     <tr>
@@ -163,12 +165,7 @@ for axes or axes label manipulation of the ggseg brain atlases.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>adapt_scales</span>(<span class='no'>dkt</span>, <span class='kw'>position</span><span class='kw'>=</span><span class='st'>"stacked"</span>, <span class='kw'>aesthetics</span><span class='kw'>=</span><span class='st'>"y"</span>)</div><div class='output co'>#&gt; $breaks
-#&gt; [1] 2.5 7.5
-#&gt; 
-#&gt; $labels
-#&gt; [1] "left"  "right"
-#&gt; </div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>adapt_scales</span>(<span class='no'>dkt</span>, <span class='kw'>position</span><span class='kw'>=</span><span class='st'>"stacked"</span>, <span class='kw'>aesthetics</span><span class='kw'>=</span><span class='st'>"y"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: '.pos'.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: No such position for this atlas. Returning only available scale.</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -31,12 +31,6 @@ test_that("Check that ggseg ggplot object is correct", {
   expect_equal(p$labels$y, NULL)
 })
 
-test_that("Check that themes are working", {
-  expect_is(ggseg() + theme_brain(),c("gg","ggplot"))
-  expect_is(ggseg() + theme_darkbrain(),c("gg","ggplot"))
-  expect_is(ggseg() + theme_custombrain(),c("gg","ggplot"))
-})
-
 
 test_that("Check that ggseg is working", {
   expect_is(ggseg(),c("gg","ggplot"))

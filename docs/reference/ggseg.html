@@ -46,8 +46,6 @@ the plot can mimmick the shape and position in the brain it
 represents.
 ggseg plots and returns a ggplot object of plotted
 aparc areas." />
-
-<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,7 +76,7 @@ aparc areas." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -117,7 +115,12 @@ aparc areas." />
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/LCBC-UiO/ggseg">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -131,7 +134,7 @@ aparc areas." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ggseg: Plot brain segmentations with ggplot and plotly</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/ggseg-package.R'><code>R/ggseg-package.R</code></a>, <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/ggseg.R'><code>R/ggseg.R</code></a></small>
     <div class="hidden name"><code>ggseg.Rd</code></div>
     </div>
 
@@ -204,13 +207,17 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://github.com/LCBC-UiO/ggseg'>https://github.com/LCBC-UiO/ggseg</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/LCBC-UiO/ggseg/issues'>https://github.com/LCBC-UiO/ggseg/issues</a></p></li>
+</ul></div>
     <div class='dont-index'><p>[ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
 [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'>ggseg</span>()</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>))</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='st'>"black"</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.7</span>, <span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='ggseg-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='ggseg-7.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>ggseg</span>()</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>))</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='st'>"black"</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.7</span>, <span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>)) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme'>theme_void</a></span>()</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

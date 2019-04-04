@@ -40,8 +40,6 @@
 <meta property="og:title" content="Plotting brain atlases in ggplot" />
 
 <meta property="og:description" content="" />
-
-<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -72,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -111,7 +109,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/LCBC-UiO/ggseg">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,7 +131,7 @@
       <h1>Plotting brain atlases in ggplot</h1>
             
       
-      
+      <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/vignettes/ggseg.Rmd'><code>vignettes/ggseg.Rmd</code></a></small>
       <div class="hidden name"><code>ggseg.Rmd</code></div>
 
     </div>
@@ -235,7 +238,7 @@
 <p><img src="ggseg_files/figure-html/duplicate-1.png" width="480" /></p>
 <p>You can read more about more complex functions like this in the vignette for external data</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">vignette</span>(<span class="st">&quot;externalData&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: vignette &#39;externalData&#39; not found</code></pre>
+<pre><code>## starting httpd help server ... done</code></pre>
 <p>We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">ggseg</span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">&quot;white&quot;</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
