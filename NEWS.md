@@ -1,5 +1,11 @@
 # ggseg 1.5
 
+## ggseg 1.5.1
+
+* Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling
+
+## ggseg 1.5
+
 * Changed atlas.info to function `atlas_info()`
 * Changed brain.pal to function `brain_pal()`
 * Changed atlas.info to function `atlas_info()`

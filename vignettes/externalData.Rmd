@@ -36,7 +36,7 @@ library(ggseg)
 library(magrittr)
 library(dplyr)
 library(ggplot2)
-atlas_info("dkt")
+dkt
 ```
 
 Here you can see information about the `dkt` atlas, and the main attributes of this atlas. 

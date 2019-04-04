@@ -29,11 +29,4 @@ test_that("Test that palette display works", {
   expect_error(display_brain_pal(name = "et"))
 })
 
-test_that("check that atlas_info is working", {
-  expect_equal(class(atlas_info()), c("tbl_df", "tbl", "data.frame" ))
-  expect_equal(names(atlas_info()), c("atlas", "area", "hemi", "side", "label"))
-  expect_equal(unique(atlas_info("aseg")$atlas), "aseg")
-  expect_error(atlas_info("yeo7"), "could not find 'yeo7'")
-
-})
 

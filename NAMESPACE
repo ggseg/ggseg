@@ -3,7 +3,6 @@
 export(adapt_scales)
 export(as_ggseg3d_atlas)
 export(as_ggseg_atlas)
-export(atlas_info)
 export(brain_pal)
 export(brain_pals_info)
 export(display_brain_pal)
