@@ -1,9 +1,28 @@
-#' GeomBrain <- ggproto("GeomPolygon", Geom,
-#'                      required_aes = c("x", "y", "atlas"),
+#' # my_arrow <- function(data, panel_params, coord) {
+#' #   coords <- coord$transform(data, panel_params)
+#' #   trans <- function(coords, fun) {
+#' #     coords$length * coords$size * fun(2 * pi * coords$direction / 360)
+#' #   }
+#' #   grid::polylineGrob(
+#' #     x = c(coords$x, coords$x + trans(coords, cos)),
+#' #     y = c(coords$y, coords$y + trans(coords, sin)),
+#' #     id = c(1:length(coords$x), 1:length(coords$x)),
+#' #     arrow = arrow(
+#' #       angle = 30,
+#' #       length = unit(coords$size * coords$length/2, "native")),
+#' #     default.units = "native",
+#' #     gp = grid::gpar(col = coords$colour, lwd = coords$linewidth)
+#' #   )
+#' # }
+#'
+#' GeomAtlas <- ggproto("GeomPolygon", Geom,
+#'                      required_aes = c("atlas"),
 #'
 #'                      default_aes = aes(
 #'                        colour = NA, fill = "grey20", size = 0.5,
-#'                        linetype = 1, alpha = 1
+#'                        linetype = 1, alpha = 1,
+#'                        position = "stacked", view = NULL,
+#'                        hemisphere = NULL,
 #'                      ),
 #'
 #'                      draw_key = draw_key_polygon,
@@ -32,11 +51,11 @@
 #'                      }
 #' )
 #'
-#' geom_brain <- function(mapping = NULL, data = NULL, stat = "identity", atlas = atlas,
+#' geom_atlas <- function(mapping = NULL, data = NULL, stat = "identity", atlas = NA,
 #'                        position = "identity", na.rm = FALSE, show.legend = NA,
 #'                        inherit.aes = TRUE, ...) {
 #'   layer(
-#'     geom = GeomBrain, mapping = mapping, data = data, stat = stat,
+#'     geom = GeomAtlas, mapping = mapping, data = data, stat = stat,
 #'     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
 #'     params = list(na.rm = na.rm, atlas = atlas, ...)
 #'   )
@@ -47,8 +66,8 @@
 #' #' @format NULL
 #' #' @usage NULL
 #' #' @export
-#' StatBrain <- ggproto(
-#'   "StatBrain",
+#' StatAtlas <- ggproto(
+#'   "StatAtlas",
 #'   Stat,
 #'   required_aes = c("atlas"),
 #'   default_aes = aes(
@@ -67,7 +86,7 @@
 #' )
 #'
 #'
-#' stat_brain <-
+#' stat_atlas <-
 #'   function(mapping = NULL,
 #'            data = NULL,
 #'            geom = "polygon",
@@ -79,7 +98,7 @@
 #'            ...) {
 #'     # , dparams = list()
 #'     layer(
-#'       stat = StatBrain,
+#'       stat = StatAtlas,
 #'       data = data,
 #'       mapping = mapping,
 #'       geom = geom,
@@ -90,19 +109,6 @@
 #'         na.rm = na.rm,
 #'         atlas = atlas,
 #'         ...
-#'       )
+#'       # )
 #'     )
 #'   }
-#'
-#'
-#'
-#' someData <- tibble(area = c("transverse temporal", "insula",
-#'                             "pre central","superior parietal",
-#'                             "transverse temporal", "insula",
-#'                             "pre central","superior parietal"),
-#'                    p = sample(seq(0,.5,.001), 8),
-#'                    Group = c(rep("G1",4), rep("G2",4))) %>%
-#'   group_by(Group)
-#'
-#' p <- ggplot(someData, ) + stat_brain(atlas=dkt)
-#' p
