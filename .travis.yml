@@ -5,6 +5,7 @@ sudo: false
 cache:
   packages: false
 warnings_are_errors: true
+before_install: R -e 'source("https://install-github.me/r-lib/remotes")'
 
 after_success:
   - Rscript -e 'covr::codecov(type = "all")'
