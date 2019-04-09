@@ -2,7 +2,8 @@
 
 language: R
 sudo: false
-cache: packages
+cache:
+  packages: false
 warnings_are_errors: true
 
 after_success:
