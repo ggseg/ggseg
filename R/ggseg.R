@@ -33,7 +33,7 @@
 #' @return a ggplot object
 #'
 #' @import ggplot2
-#' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise
+#' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise case_when
 #' @importFrom tidyr unite_ unnest
 #' @importFrom magrittr "%>%"
 #' @importFrom stats na.omit sd
@@ -72,12 +72,23 @@ ggseg = function(.data = NULL,
 
   geobrain <- unnest(geobrain, ggseg)
 
-  if(position=="stacked"){
+  stack <- case_when(
+    grepl("stack", position) ~ "stacked",
+    grepl("disperse", position) ~ "dispersed",
+    TRUE ~ "unknown"
+  )
+
+  if(stack == "stacked"){
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
       warning("Cannot stack atlas. Check if atlas has medial views.")
     }else{
       geobrain <- stack_brain(geobrain)
     } # If possible to stack
+  }else if(stack == "unknown"){
+    warning(paste0("Cannot recognise position = '", position,
+                   "'. Please use either 'stacked' or 'dispersed', returning dispersed.")
+    )
+    stack <- "dispersed"
   } # If stacked
 
   # Remove .data we don't want to plot
@@ -98,9 +109,9 @@ ggseg = function(.data = NULL,
   # Scales may be adapted, for more convenient vieweing
   if(adapt_scales){
     gg <- gg +
-      scale_y_brain(geobrain, position) +
-      scale_x_brain(geobrain, position) +
-      scale_labs_brain(geobrain, position)
+      scale_y_brain(geobrain, stack) +
+      scale_x_brain(geobrain, stack) +
+      scale_labs_brain(geobrain, stack)
   }
 
   gg + theme_brain()
