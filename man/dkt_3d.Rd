@@ -3,9 +3,7 @@
 \docType{data}
 \name{dkt_3d}
 \alias{dkt_3d}
-\title{Desikan-Killiany Cortical Atlas - tri-surf mesh
-Mesh data for the Desikan-Killany Cortical atlas,
-with 40 regions in on the cortical surface of the brain.}
+\title{Desikan-Killiany Cortical Atlas}
 \format{A tibble with 4 observations and a nested data.frame
 \describe{
   \item{surf}{type of surface (`inflated` or `white`)}
@@ -27,6 +25,10 @@ with 40 regions in on the cortical surface of the brain.}
 data(dkt_3d)
 }
 \description{
+Mesh data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain.
+}
+\details{
 A nested tibble for all available surfaces and hemispheres
 }
 \examples{
