@@ -66,7 +66,8 @@
 
 
 ## Mesh data ----
-#' Desikan-Killiany Cortical Atlas - tri-surf mesh
+#' Desikan-Killiany Cortical Atlas
+#'
 #' Mesh data for the Desikan-Killany Cortical atlas,
 #' with 40 regions in on the cortical surface of the brain.
 #'
