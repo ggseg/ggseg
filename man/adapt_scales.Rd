@@ -20,7 +20,3 @@ nested list
 \code{adapt_scales} returns a list of coordinate breaks and labels
 for axes or axes label manipulation of the ggseg brain atlases.
 }
-\examples{
-adapt_scales(dkt, position="stacked", aesthetics="y")
-
-}

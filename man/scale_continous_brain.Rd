@@ -31,9 +31,10 @@ The `brain` axis and label scales provides scales for the different atlases in t
 package. These add axis labels and tick labels corresponding to the different atlases.
 }
 \examples{
+\dontrun{
 scale_x_brain()
 scale_y_brain()
 scale_labs_brain()
-
+}
 
 }

@@ -15,10 +15,11 @@
 #' @export
 #' @importFrom ggplot2 scale_colour_manual
 #' @examples
+#' \dontrun{
 #' scale_x_brain()
 #' scale_y_brain()
 #' scale_labs_brain()
-#'
+#' }
 #'
 scale_continous_brain = function(atlas = dkt, position = "dispersed",
                                  aesthetics = c("y", "x")) {

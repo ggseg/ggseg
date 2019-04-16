@@ -9,41 +9,35 @@
 #'
 #' @return nested list
 #'
-#' @examples
-#' adapt_scales(dkt, position="stacked", aesthetics="y")
-#'
 #' @importFrom dplyr group_by summarise summarise_at vars funs
 #' @importFrom tidyr unnest
-#'
-#' @export
 adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
   atlas = ifelse(any(names(geobrain) %in% "atlas"),
                  unique(geobrain$atlas),
                  "unknown")
 
-  if(atlas == "unknown"){
-    warning("Unknown atlas, attempting to adapt scales in the blind.")
+   if(!".pos" %in% names(geobrain)){
     stk = list(
-      x=geobrain %>%
+      y = geobrain %>%
         dplyr::group_by(hemi) %>%
-        dplyr::summarise(val=mean(.lat)),
-      y=geobrain %>%
+        dplyr::summarise(val=gap(.lat)),
+      x = geobrain %>%
         dplyr::group_by(side) %>%
-        dplyr::summarise(val=mean(.long))
+        dplyr::summarise(val=gap(.long))
     )
 
     disp = geobrain %>%
       dplyr::group_by(hemi) %>%
-      dplyr::summarise_at(dplyr::vars(.long,.lat), list(mean))
+      dplyr::summarise_at(dplyr::vars(.long,.lat), list(gap))
 
     ad_scale <- list(
       stacked =
         list(x = list(breaks = stk$x$val,
-                      labels = stk$x$hemi),
+                      labels = stk$x$side),
              y = list(breaks = stk$y$val,
-                      labels = stk$y$side),
-             labs = list(y = "side", x = "hemisphere")
+                      labels = stk$y$hemi),
+             labs = list(y = "hemisphere", x = "side")
         ),
 
       dispersed =
@@ -58,12 +52,19 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
     ad_scale = geobrain$.pos[[1]]
   }
 
-  if(is.null(ad_scale[[position]])){
-    warning("No such position for this atlas. Returning only available scale.")
-    ad_scale[[names(ad_scale)]]
-  }else{
+ if(is.null(ad_scale[[position]])){
+ warning("No such position for this atlas. Returning only available scale.")
+  ad_scale[[names(ad_scale)]]
+ }else{
     ad_scale[[position]][[aesthetics]]
   }
+}
+
+gap <- function(x){
+  mi <- min(x)
+  ma <- max(x)
+
+  (mi+ma)/2
 }
 
 ## quiets concerns of R CMD check
