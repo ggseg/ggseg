@@ -52,12 +52,13 @@
 #' @export
 ggseg = function(.data = NULL,
                  atlas = "dkt",
-                 position = "dispersed",
+                 position = c("dispersed", "stacked"),
                  view = NULL,
                  hemisphere = NULL,
                  adapt_scales = TRUE,
                  ...){
 
+  stack <- match.arg(position)
   # Grab the atlas, even if it has been provided as character string
   geobrain <- if(!is.character(atlas)){
     atlas
@@ -72,23 +73,12 @@ ggseg = function(.data = NULL,
 
   geobrain <- unnest(geobrain, ggseg)
 
-  stack <- case_when(
-    grepl("stack", position) ~ "stacked",
-    grepl("disperse", position) ~ "dispersed",
-    TRUE ~ "unknown"
-  )
-
   if(stack == "stacked"){
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
       warning("Cannot stack atlas. Check if atlas has medial views.")
     }else{
       geobrain <- stack_brain(geobrain)
     } # If possible to stack
-  }else if(stack == "unknown"){
-    warning(paste0("Cannot recognise position = '", position,
-                   "'. Please use either 'stacked' or 'dispersed', returning dispersed.")
-    )
-    stack <- "dispersed"
   } # If stacked
 
   # Remove .data we don't want to plot
