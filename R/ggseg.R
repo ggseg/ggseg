@@ -93,7 +93,17 @@ ggseg = function(.data = NULL,
 
   # Remove .data we don't want to plot
   if(!is.null(hemisphere)) geobrain <- dplyr::filter(geobrain, hemi %in% hemisphere)
-  if(!is.null(view)) geobrain <- dplyr::filter(geobrain, side %in% view)
+
+  if(!is.null(view)){
+    geobrain <- dplyr::filter(geobrain, grepl(view, side))
+
+    # Lateral sides are on the far of eachother, squish them together
+    if(view == "lateral" &
+       (all(c("left", "right") %in% hemisphere) | is.null(hemisphere) ) &
+       stack == "dispersed"){
+      geobrain <- squish_position(geobrain, hemisphere, stack)
+    }
+  }
 
   # If .data has been supplied, merge it
   if(!is.null(.data)){
