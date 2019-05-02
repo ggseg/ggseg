@@ -39,4 +39,9 @@ aseg <- aseg %>%
   left_join(aseg_labs) %>%
   as_ggseg_atlas() %>%
   select(-group, -piece)
+
+aseg <- aseg %>%
+  filter(!(grepl("right", hemi) & grepl("Left", label))) %>%
+  filter(!(grepl("left", hemi) & grepl("Right", label)))
+
 usethis::use_data(aseg, internal = FALSE, overwrite = TRUE)

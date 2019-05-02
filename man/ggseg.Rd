@@ -78,11 +78,11 @@ Useful links:
 [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
 }
 \author{
-\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no}
+\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (0000-0002-5756-0223)
 
 Authors:
 \itemize{
-  \item Didac Vidal Pineiro \email{d.v.pineiro@psykologi.uio.no}
+  \item Didac Vidal Pineiro \email{d.v.pineiro@psykologi.uio.no} (0000-0001-9997-9156)
 }
 
 

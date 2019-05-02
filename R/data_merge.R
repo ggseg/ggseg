@@ -17,8 +17,7 @@ data_merge <- function(.data, geobrain){
 
   }else{
     # Merge the brain with the .data
-    geobrain = geobrain %>%
-      dplyr::full_join(.data, by = cols, copy=TRUE)
+    geobrain = dplyr::full_join(geobrain, .data, by = cols, copy=TRUE)
   }
 
   # Find if there are instances of those columns that
