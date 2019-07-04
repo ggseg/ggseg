@@ -35,7 +35,7 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
 ) {
   stopifnot(is.data.frame(x))
 
-  if("ggseg" %in% names(x)) x <- unnest(x, ggseg)
+  if("ggseg" %in% names(x)) x <- unnest(x, cols = c(ggseg))
 
   necessaries <- c(".long", ".lat", ".id", "hemi", "area", "side")
   miss <- necessaries %in% names(x)
@@ -68,7 +68,8 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
                                           rename_ggseg_cols)
 
   x <- group_by_at(x, vars(one_of(group_variables))) %>%
-    nest(.key = "ggseg")
+    nest() %>%
+    rename(ggseg = data)
 
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
   return(x)
@@ -100,7 +101,7 @@ rename_ggseg_cols <- function(x) paste0(".", x)
 #'   [`tibble`][tibble::tibble()]-package
 #'
 #' @name ggseg3d_atlas-class
-#' @importFrom dplyr tibble as_tibble one_of select everything
+#' @importFrom dplyr tibble as_tibble one_of select everything rename
 #' @importFrom tidyr unnest nest
 #' @aliases ggseg3d_atlas ggseg3d_atlas-class
 #' @export
@@ -111,7 +112,7 @@ as_ggseg3d_atlas <- function(x = data.frame(atlas = character(),
 ) {
   stopifnot(is.data.frame(x))
 
-  if("ggseg_3d" %in% names(x)) x <- unnest(x, ggseg_3d)
+  if("ggseg_3d" %in% names(x)) x <- unnest(x, cols = c(ggseg_3d))
 
   necessaries <- c("atlas", "surf", "hemi", "area", "colour", "mesh")
   miss <- necessaries %in% names(x)
@@ -127,7 +128,8 @@ as_ggseg3d_atlas <- function(x = data.frame(atlas = character(),
   x <- group_by(x, atlas, surf, hemi) %>%
     select(one_of(c(necessaries, "label")),
            everything()) %>%
-    nest(.key = ggseg_3d)
+    nest() %>%
+    rename(ggseg_3d = data)
 
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
   return(x)

@@ -12,7 +12,7 @@ data_merge <- function(.data, geobrain){
 
     geobrain <- .data %>%
       dplyr::mutate(data = purrr::map(data, ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE))) %>%
-      tidyr::unnest() %>%
+      tidyr::unnest(cols = c(data)) %>%
       dplyr::ungroup()
 
   }else{

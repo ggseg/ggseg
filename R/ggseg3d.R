@@ -98,7 +98,7 @@ ggseg3d <- function(.data=NULL, atlas="dkt_3d", surface = "LCBC", hemisphere = c
   # grab the correct surface and hemisphere
   atlas3d = atlas3d %>%
     filter(surf %in% surface & hemi %in% hemisphere) %>%
-    unnest()
+    unnest(cols = ggseg_3d)
 
   # If data has been supplied, merge it
   if(!is.null(.data)){
