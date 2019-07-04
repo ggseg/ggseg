@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
       </span>
     </div>
 
@@ -135,18 +135,18 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">dkt</a></code></pre></div>
 <pre><code>## # A tibble: 80 x 6
-##    atlas area               hemi  side    label             ggseg          
-##    &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;             &lt;list&gt;         
-##  1 dkt   superior temporal  left  lateral lh_superiortempo… &lt;tibble [1,494…
-##  2 dkt   pre central        left  lateral lh_precentral     &lt;tibble [1,314…
-##  3 dkt   post central       left  lateral lh_postcentral    &lt;tibble [1,164…
-##  4 dkt   rostral middle fr… left  lateral lh_rostralmiddle… &lt;tibble [1,194…
-##  5 dkt   insula             left  lateral lh_insula         &lt;tibble [870 ×…
-##  6 dkt   superior parietal  left  lateral lh_superiorparie… &lt;tibble [480 ×…
-##  7 dkt   inferior temporal  left  lateral lh_inferiortempo… &lt;tibble [906 ×…
-##  8 dkt   lateral occipital  left  lateral lh_lateraloccipi… &lt;tibble [738 ×…
-##  9 dkt   lateral orbitofro… left  lateral lh_lateralorbito… &lt;tibble [528 ×…
-## 10 dkt   superior frontal   left  lateral lh_superiorfront… &lt;tibble [420 ×…
+##    atlas area                 hemi  side    label                ggseg     
+##    &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                &lt;list&gt;    
+##  1 dkt   superior temporal    left  lateral lh_superiortemporal  &lt;tibble […
+##  2 dkt   pre central          left  lateral lh_precentral        &lt;tibble […
+##  3 dkt   post central         left  lateral lh_postcentral       &lt;tibble […
+##  4 dkt   rostral middle fron… left  lateral lh_rostralmiddlefro… &lt;tibble […
+##  5 dkt   insula               left  lateral lh_insula            &lt;tibble […
+##  6 dkt   superior parietal    left  lateral lh_superiorparietal  &lt;tibble […
+##  7 dkt   inferior temporal    left  lateral lh_inferiortemporal  &lt;tibble […
+##  8 dkt   lateral occipital    left  lateral lh_lateraloccipital  &lt;tibble […
+##  9 dkt   lateral orbitofront… left  lateral lh_lateralorbitofro… &lt;tibble […
+## 10 dkt   superior frontal     left  lateral lh_superiorfrontal   &lt;tibble […
 ## # … with 70 more rows</code></pre>
 <p>Here you can see information about the <code>dkt</code> atlas, and the main attributes of this atlas. If you want to use external data with your <code>ggseg</code> plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using.</p>
 </div>
@@ -170,18 +170,18 @@
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
 <pre><code>## Joining, by = "area"</code></pre>
 <pre><code>## # A tibble: 10 x 7
-##    atlas area             hemi  side    label           ggseg             p
-##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;list&gt;        &lt;dbl&gt;
-##  1 dkt   superior tempor… left  lateral lh_superiortem… &lt;tibble [1,4…  0.03
-##  2 dkt   pre central      left  lateral lh_precentral   &lt;tibble [1,3…  0.6 
-##  3 dkt   post central     left  lateral lh_postcentral  &lt;tibble [1,1… NA   
-##  4 dkt   rostral middle … left  lateral lh_rostralmidd… &lt;tibble [1,1… NA   
-##  5 dkt   insula           left  lateral lh_insula       &lt;tibble [870… NA   
-##  6 dkt   superior pariet… left  lateral lh_superiorpar… &lt;tibble [480… NA   
-##  7 dkt   inferior tempor… left  lateral lh_inferiortem… &lt;tibble [906… NA   
-##  8 dkt   lateral occipit… left  lateral lh_lateralocci… &lt;tibble [738… NA   
-##  9 dkt   lateral orbitof… left  lateral lh_lateralorbi… &lt;tibble [528…  0.05
-## 10 dkt   superior frontal left  lateral lh_superiorfro… &lt;tibble [420… NA</code></pre>
+##    atlas area              hemi  side    label              ggseg         p
+##    &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;list&gt;    &lt;dbl&gt;
+##  1 dkt   superior temporal left  lateral lh_superiortempor… &lt;tibble …  0.03
+##  2 dkt   pre central       left  lateral lh_precentral      &lt;tibble …  0.6 
+##  3 dkt   post central      left  lateral lh_postcentral     &lt;tibble … NA   
+##  4 dkt   rostral middle f… left  lateral lh_rostralmiddlef… &lt;tibble … NA   
+##  5 dkt   insula            left  lateral lh_insula          &lt;tibble … NA   
+##  6 dkt   superior parietal left  lateral lh_superiorpariet… &lt;tibble … NA   
+##  7 dkt   inferior temporal left  lateral lh_inferiortempor… &lt;tibble … NA   
+##  8 dkt   lateral occipital left  lateral lh_lateraloccipit… &lt;tibble … NA   
+##  9 dkt   lateral orbitofr… left  lateral lh_lateralorbitof… &lt;tibble …  0.05
+## 10 dkt   superior frontal  left  lateral lh_superiorfrontal &lt;tibble … NA</code></pre>
 <p>No errors! Yes, the <code>p</code> column is seemingly full of <code>NA</code>s, but that is just because the top of the data is the somatomotor network, which we did not supply any p values for, so it has been populated with <code>NA</code>s. We can sort the data differently, so we can see the <code>p</code>has been added correctly.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -189,18 +189,18 @@
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
 <pre><code>## Joining, by = "area"</code></pre>
 <pre><code>## # A tibble: 10 x 7
-##    atlas area             hemi  side    label           ggseg             p
-##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;list&gt;        &lt;dbl&gt;
-##  1 dkt   superior tempor… left  lateral lh_superiortem… &lt;tibble [1,4…  0.03
-##  2 dkt   superior tempor… right lateral rh_superiortem… &lt;tibble [1,3…  0.03
-##  3 dkt   lateral orbitof… left  lateral lh_lateralorbi… &lt;tibble [528…  0.05
-##  4 dkt   lateral orbitof… right lateral rh_lateralorbi… &lt;tibble [636…  0.05
-##  5 dkt   pre central      left  lateral lh_precentral   &lt;tibble [1,3…  0.6 
-##  6 dkt   pre central      right lateral rh_precentral   &lt;tibble [1,3…  0.6 
-##  7 dkt   post central     left  lateral lh_postcentral  &lt;tibble [1,1… NA   
-##  8 dkt   rostral middle … left  lateral lh_rostralmidd… &lt;tibble [1,1… NA   
-##  9 dkt   insula           left  lateral lh_insula       &lt;tibble [870… NA   
-## 10 dkt   superior pariet… left  lateral lh_superiorpar… &lt;tibble [480… NA</code></pre>
+##    atlas area              hemi  side    label              ggseg         p
+##    &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;list&gt;    &lt;dbl&gt;
+##  1 dkt   superior temporal left  lateral lh_superiortempor… &lt;tibble …  0.03
+##  2 dkt   superior temporal right lateral rh_superiortempor… &lt;tibble …  0.03
+##  3 dkt   lateral orbitofr… left  lateral lh_lateralorbitof… &lt;tibble …  0.05
+##  4 dkt   lateral orbitofr… right lateral rh_lateralorbitof… &lt;tibble …  0.05
+##  5 dkt   pre central       left  lateral lh_precentral      &lt;tibble …  0.6 
+##  6 dkt   pre central       right lateral rh_precentral      &lt;tibble …  0.6 
+##  7 dkt   post central      left  lateral lh_postcentral     &lt;tibble … NA   
+##  8 dkt   rostral middle f… left  lateral lh_rostralmiddlef… &lt;tibble … NA   
+##  9 dkt   insula            left  lateral lh_insula          &lt;tibble … NA   
+## 10 dkt   superior parietal left  lateral lh_superiorpariet… &lt;tibble … NA</code></pre>
 <p>If you need your data to be matched on several columns, the approach is the same. Add the column you want to match on, with the <strong>exact</strong> same name, and make sure it’s content matches the content of the same column in the data.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">someData<span class="op">$</span>hemi =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"left"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(someData))</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">someData</a></code></pre></div>
@@ -216,18 +216,18 @@
 <a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(<span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Joining, by = c("area", "hemi")</code></pre>
 <pre><code>## # A tibble: 10 x 7
-##    atlas area             hemi  side    label           ggseg             p
-##    &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;list&gt;        &lt;dbl&gt;
-##  1 dkt   superior tempor… left  lateral lh_superiortem… &lt;tibble [1,4…  0.03
-##  2 dkt   lateral orbitof… left  lateral lh_lateralorbi… &lt;tibble [528…  0.05
-##  3 dkt   pre central      left  lateral lh_precentral   &lt;tibble [1,3…  0.6 
-##  4 dkt   post central     left  lateral lh_postcentral  &lt;tibble [1,1… NA   
-##  5 dkt   rostral middle … left  lateral lh_rostralmidd… &lt;tibble [1,1… NA   
-##  6 dkt   insula           left  lateral lh_insula       &lt;tibble [870… NA   
-##  7 dkt   superior pariet… left  lateral lh_superiorpar… &lt;tibble [480… NA   
-##  8 dkt   inferior tempor… left  lateral lh_inferiortem… &lt;tibble [906… NA   
-##  9 dkt   lateral occipit… left  lateral lh_lateralocci… &lt;tibble [738… NA   
-## 10 dkt   superior frontal left  lateral lh_superiorfro… &lt;tibble [420… NA</code></pre>
+##    atlas area              hemi  side    label              ggseg         p
+##    &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;              &lt;list&gt;    &lt;dbl&gt;
+##  1 dkt   superior temporal left  lateral lh_superiortempor… &lt;tibble …  0.03
+##  2 dkt   lateral orbitofr… left  lateral lh_lateralorbitof… &lt;tibble …  0.05
+##  3 dkt   pre central       left  lateral lh_precentral      &lt;tibble …  0.6 
+##  4 dkt   post central      left  lateral lh_postcentral     &lt;tibble … NA   
+##  5 dkt   rostral middle f… left  lateral lh_rostralmiddlef… &lt;tibble … NA   
+##  6 dkt   insula            left  lateral lh_insula          &lt;tibble … NA   
+##  7 dkt   superior parietal left  lateral lh_superiorpariet… &lt;tibble … NA   
+##  8 dkt   inferior temporal left  lateral lh_inferiortempor… &lt;tibble … NA   
+##  9 dkt   lateral occipital left  lateral lh_lateraloccipit… &lt;tibble … NA   
+## 10 dkt   superior frontal  left  lateral lh_superiorfrontal &lt;tibble … NA</code></pre>
 <p>Notice how the message now states that it is joining <code>by = c("area", "hemi")</code>. The merge function has recognized that there are two equally named columns, and assumes (in this case correctly) that these are equivalent.<br><strong>Notice</strong> that everything is case-sensitive, so writing <code>Area</code> or <code>Left</code> will not result in matching.</p>
 </div>
 <div id="providing-data-to-ggseg" class="section level2">
@@ -236,13 +236,13 @@
 </h2>
 <p>When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(someData, <span class="dt">atlas=</span>dkt, <span class="dt">mapping=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill=</span>p))</a></code></pre></div>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(someData, <span class="dt">atlas=</span>dkt, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p))</a></code></pre></div>
 <p><img src="externalData_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>You can actually also supply it directly as an atlas. For instance, if you had saved the merged data from the previous steps, you can supply this directly to the <code>atlas</code> option.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">newAtlas =<span class="st"> </span>dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData)</a></code></pre></div>
 <pre><code>## Joining, by = c("area", "hemi")</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>newAtlas, <span class="dt">mapping=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill=</span>p), <span class="dt">position=</span><span class="st">"stacked"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>newAtlas, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p), <span class="dt">position=</span><span class="st">"stacked"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with. Lets do a recap of the unwanted results:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</a>
@@ -252,9 +252,9 @@
 <a class="sourceLine" id="cb28-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
 <a class="sourceLine" id="cb28-6" data-line-number="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb28-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/datasupp3-1.png" width="700"></p>
 <p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for facetting, or else it will not work.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># If you group_by the columns you will facet by, this will work well.</span></a>
@@ -262,19 +262,19 @@
 <a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
 <a class="sourceLine" id="cb29-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb29-5" data-line-number="5"><span class="co"># We can now supply the newAtlas as an atlas to ggseg</span></a>
-<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/duplicate-1.png" width="700"></p>
 <p>This whole procedure can be piped together, so you dont have to save all the intermediate steps.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">someData <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb30-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/duplicatepipe-1.png" width="700"></p>
 </div>
   </div>

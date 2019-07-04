@@ -39,9 +39,6 @@
 
 <meta property="og:title" content="Changelog" />
 
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
-
 
 
 <!-- mathjax -->
@@ -70,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
       </span>
     </div>
 
@@ -109,7 +106,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/LCBC-UiO/ggseg">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -123,20 +125,49 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1>Changelog <small></small></h1>
-      
+      <small>Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="ggseg-1-5" class="section level1">
 <h1 class="page-header">
 <a href="#ggseg-1-5" class="anchor"></a>ggseg 1.5</h1>
+<div id="ggseg-1-5-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1-5-2" class="anchor"></a>ggseg 1.5.2</h2>
 <ul>
+<li>Adapted to work with dplr 0.8.1</li>
+</ul>
+</div>
+<div id="ggseg-1-5-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1-5-1" class="anchor"></a>ggseg 1.5.1</h2>
+<ul>
+<li>Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling</li>
+</ul>
+</div>
+<div id="ggseg-1-5-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1-5-1" class="anchor"></a>ggseg 1.5</h2>
+<ul>
+<li>Changed atlas.info to function <code>atlas_info()</code>
+</li>
+<li>Changed brain.pal to function <code><a href="../reference/brain_pal.html">brain_pal()</a></code>
+</li>
+<li>Changed atlas.info to function <code>atlas_info()</code>
+</li>
+<li>Reduced code necessary for <code>brain_pals_info</code>
+</li>
+<li>Simplified <code><a href="../reference/display_brain_pal.html">display_brain_pal()</a></code>
+</li>
+<li><p>Moved paletted of ggsegExtra atlases to ggsegExtra package</p></li>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 <li>Changes all <code>data</code> options to <code>.data</code> to decrease possibility of column nameing overlap</li>
 <li>Added compatibility with <code>grouped</code> data.frames</li>
 <li>Reduced internal atlases, to improve CRAN compatibility</li>
 <li>Added function to install extra atlases from github easily</li>
-<li>Changes vignettes to comply with new functionality</li>
+<li><p>Changes vignettes to comply with new functionality</p></li>
 </ul>
+</div>
 </div>
   </div>
 

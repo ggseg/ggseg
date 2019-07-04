@@ -13,7 +13,7 @@ someData <- data.frame(
 
 test_that("Check that merging with grouped data works", {
 
-    testData <- data_merge(someData, unnest(dkt, ggseg))
+    testData <- data_merge(someData, unnest(dkt, cols = ggseg))
 
     expect_equal(names(testData)[1], "Group")
     expect_equal(unique(testData$Group), c("G1", "G2"))
@@ -30,7 +30,7 @@ test_that("Check that plotting with grouped data works", {
 
 test_that("Check that simple data merge works", {
   someData <- someData %>%
-    tidyr::unnest() %>%
+    #tidyr::unnest() %>%
     dplyr::filter(Group == "G1")
 
   testData <- data_merge(someData, unnest(dkt, ggseg))
