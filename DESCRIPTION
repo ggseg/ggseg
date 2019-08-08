@@ -26,6 +26,7 @@ Imports: dplyr,
     plotly,
     scales,
     purrr,
+    remotes,
     rlang
 Suggests:
     knitr,
