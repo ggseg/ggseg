@@ -11,7 +11,8 @@ data_merge <- function(.data, geobrain){
     cols = stats::na.omit(cols[!names(.data) %in% cols])
 
     geobrain <- .data %>%
-      dplyr::mutate(data = purrr::map(data, ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE))) %>%
+      dplyr::mutate(data = purrr::map(data,
+                                      ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE))) %>%
       tidyr::unnest(cols = c(data)) %>%
       dplyr::ungroup()
 

@@ -6,7 +6,7 @@
 #'
 #' @param repo repository to install via github
 #' @param ... other options to install_github
-#'
+#' @export
 install_atlases = function(repo="LCBC-UiO/ggsegExtra",...){
-  devtools::install_github(repo=repo, ...)
+  remotes::install_github(repo=repo, ...)
 }
