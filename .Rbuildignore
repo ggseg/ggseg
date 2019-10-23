@@ -13,3 +13,4 @@
 ^\.Rproj\.user$
 img
 logo.png
+^_pkgdown\.yml$
