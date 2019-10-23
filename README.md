@@ -14,6 +14,8 @@ status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch
 status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames
