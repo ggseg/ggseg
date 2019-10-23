@@ -2,14 +2,19 @@ Plotting tool for brain atlases
 ================
 Athanasia Mowinckel & Didac Vidal Pineiro
 
+# ggseg <img src="man/img/logo.png" align="right" alt="" width="120" />
+
+<!-- badges: start -->
+
 [![Travis build
 status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
 [![Coverage
 status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
-
-# ggseg <img src="man/img/logo.png" align="right" alt="" width="120" />
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
+<!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames
 of different brain atlases for plotting. Plotting results of analyses on
@@ -48,8 +53,8 @@ large datasets for the brain coordinates. Please be patient during
 download and install, it will take some time.
 
 ``` r
-install.packages("devtools")
-devtools::install_github("LCBC-UiO/ggseg", build_vignettes = TRUE)
+install.packages("remotes")
+remotes::install_github("LCBC-UiO/ggseg", build_vignettes = TRUE)
 ```
 
 The functions are now installed, and you may load them when you want to
