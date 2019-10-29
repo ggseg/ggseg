@@ -65,7 +65,7 @@ use them. All functions are documented in standard R fashion.
 ## Use
 
 The package also has a vignette, to help you get started using it. You
-can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or
+can access it [here](https://lcbc-uio.github.io/ggseg/articles/ggseg.html), or
 via R:
 
 ``` r
