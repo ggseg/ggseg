@@ -4,5 +4,4 @@ pkgdown_sha: ~
 articles:
   externalData: externalData.html
   ggseg: ggseg.html
-  ggseg3d: ggseg3d.html
 
