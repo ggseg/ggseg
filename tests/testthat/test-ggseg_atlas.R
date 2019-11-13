@@ -1,5 +1,3 @@
-context("test-ggseg_atlas")
-
 test_that("check that ggseg_atlas is correct", {
   tt <- data.frame(.long = double(),
                    .lat = double(),
@@ -21,19 +19,8 @@ test_that("check that ggseg_atlas is correct", {
 
 })
 
-test_that("check that ggseg3d_atlas is correct", {
-  tt <- data.frame(atlas = character(),
-                   surf = character(),
-                   hemi = character())
-
-  expect_error(as_ggseg3d_atlas(tt))
-  expect_warning(as_ggseg_atlas())
-
-})
-
 test_that("check that is_ggseg_atlas works", {
   expect_true(is_ggseg_atlas(dkt))
-  expect_true(is_ggseg_atlas(dkt_3d))
 
   dt <- data.frame(.long = double(),
                    .lat = double(),

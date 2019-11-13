@@ -1,6 +1,6 @@
 Package: ggseg
 Title: Plotting tool for brain atlases
-Version: 1.5.2
+Version: 1.5.3
 Authors@R: c(person("Athanasia Mo", "Mowinckel", 
                     email = "a.m.mowinckel@psykologi.uio.no", 
                     role = c("aut", "cre"),
@@ -9,25 +9,19 @@ Authors@R: c(person("Athanasia Mo", "Mowinckel",
                     email = "d.v.pineiro@psykologi.uio.no", 
                     role = c("aut"),
                     comment = c(ORCID = "0000-0001-9997-9156")))
-Description: This package mainly contains two plotting functions: `ggseg` and `ggseg3d`, and data.frames or tibbles of different brain atlases for plotting. By far, the largestbit of the package is the data for each of the atlases.
+Description: This package mainly contains one plotting functions: `ggseg`, and data.frames or tibbles of different brain atlases for plotting. By far, the largestbit of the package is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
-Imports: dplyr,
-    stats,
-    utils,
+Imports:
+    dplyr,
     tidyr,
     magrittr,
-    methods,
-    gplots,
-    plotly,
-    scales,
     purrr,
-    remotes,
-    rlang
+    remotes
 Suggests:
     knitr,
     rmarkdown,
