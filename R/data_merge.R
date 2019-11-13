@@ -40,5 +40,5 @@ data_merge <- function(.data, geobrain){
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("data"))
+  utils::globalVariables(c("data", "tt"))
 }
