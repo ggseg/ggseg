@@ -13,11 +13,11 @@ knitr::opts_chunk$set(
 )
 library(ggseg)
 ```
-
+ 
 
 # ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />  
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
+[![Travis build status](https://travis-ci.org/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.org/LCBC-UiO/ggseg)
   [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
   [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg3d/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
