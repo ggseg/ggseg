@@ -84,7 +84,7 @@ ggseg(atlas=aseg)
 <img src="man/img/README-unnamed-chunk-3-2.png" width="50%" />
 
 The package also has a vignette, to help you get started using it. You
-can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or
+can access it [here](https://lcbc-uio.github.io/ggseg/articles/ggseg.html), or
 via R:
 
 ``` r
