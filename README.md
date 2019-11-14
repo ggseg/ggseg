@@ -11,13 +11,14 @@ status](https://travis-ci.org/LCBC-UiO/ggseg.svg?branch=master)](https://travis-
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
 [![Coverage
-status](https://codecov.io/gh/LCBC-UiO/ggseg3d/branch/master/graph/badge.svg)](https://codecov.io/github/LCBC-UiO/ggseg?branch=master)
+status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
+[![codecov](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 This package mainly contains a plotting function `ggseg` and data.frames
 of different brain atlases for plotting. Plotting results of analyses on
 regions or networks often involves swapping between statistical tools,
@@ -84,7 +85,7 @@ ggseg(atlas=aseg)
 <img src="man/img/README-unnamed-chunk-3-2.png" width="50%" />
 
 The package also has a vignette, to help you get started using it. You
-can access it [here](https://lcbc-uio.github.io/ggseg/articles/ggseg.html), or
+can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or
 via R:
 
 ``` r
