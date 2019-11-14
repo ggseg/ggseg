@@ -1,5 +1,8 @@
 # ggseg 1.5
 
+## ggseg 1.5.3
+* Split ggseg, and ggseg3d into two different packages
+
 ## ggseg 1.5.2
 * Adapted to work with dplyr 0.8.1
 
