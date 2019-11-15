@@ -72,11 +72,7 @@ ggseg = function(.data = NULL,
 
   geobrain <- unnest(geobrain, ggseg)
 
-  stack <- case_when(
-    grepl("stack", position) ~ "stacked",
-    grepl("disperse", position) ~ "dispersed",
-    TRUE ~ "unknown"
-  )
+  stack <- match.arg(position, c("stacked","dispersed"))
 
   if(stack == "stacked"){
     if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
