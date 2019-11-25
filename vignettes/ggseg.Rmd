@@ -64,8 +64,8 @@ ggseg(colour="black", size=.7, mapping=aes(fill=area)) +
   theme_void()
 ```
 
-## 
-You can also choose to only view one of the hespheres by adding the `hemisphere` option
+
+You can also choose to only view one of the hemispheres by adding the `hemisphere` option
 ```{r hemisphere, fig.width=5}
 ggseg(hemisphere="right") +
   theme_void()
