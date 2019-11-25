@@ -7,7 +7,7 @@ Athanasia Mowinckel & Didac Vidal Pineiro
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
+status](https://travis-ci.org/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.org/LCBC-UiO/ggseg)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
 [![Coverage
@@ -18,6 +18,7 @@ status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
+[![codecov](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 This package mainly contains a plotting function `ggseg` and data.frames
 of different brain atlases for plotting. Plotting results of analyses on
 regions or networks often involves swapping between statistical tools,
