@@ -18,7 +18,6 @@ status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-[![codecov](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 This package mainly contains a plotting function `ggseg` and data.frames
 of different brain atlases for plotting. Plotting results of analyses on
 regions or networks often involves swapping between statistical tools,
