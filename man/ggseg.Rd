@@ -82,7 +82,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Didac Vidal Pineiro \email{d.v.pineiro@psykologi.uio.no} (0000-0001-9997-9156)
+  \item Didac Vidal-Piñeiro \email{d.v.pineiro@psykologi.uio.no} (0000-0001-9997-9156)
 }
 
 
