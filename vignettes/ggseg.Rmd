@@ -12,11 +12,10 @@ knitr::opts_chunk$set(eval=TRUE)
 devtools::load_all(".")
 ```
 
-## Introduction
+## Basic use
 Plotting areas from different brain atlases ggplot2 is a handy way of displaying results or grouping of aparc data.
 
-## Basic use
-The function `ggseg()`, is based in the ggplot2 format, it is recommended to get a little familiarized with with [plotting data with ggplot2](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). 
+The function `ggseg()`, is based in the ggplot2 format, it is recommended to get familiarized with with [plotting data with ggplot2](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html). 
 
 Out-of-the-box, ggseg() works without supplying any extra information. 
 It will create a base plot of the aparc brain segmentations.
@@ -51,7 +50,7 @@ ggseg(position="stacked") +
 Maybe you want each area to have a different colour. 
 ggseg has a built column called `area` wich you can use as fill to achieve this.
 **Note:** unlike other ggplots, before using `aes` you must indicate `mapping=aes`.
-
+  
 ```{r fill, fig.width=5}
 ggseg(mapping=aes(fill=area)) +
   theme_void()
