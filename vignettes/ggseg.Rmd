@@ -94,8 +94,8 @@ ggseg(.data=someData, colour="black", mapping=aes(fill=p)) +
 
 ```
 
-If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes
-the column `hemi` with either "rh" or "lh" for this to happen.
+## Single hemisphere results
+If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes the column `hemi` with either "rh" or "lh" for this to happen.
 ```{r datasuppX, fig.width=5}
 someData$hemi = "right"
 
@@ -106,7 +106,19 @@ ggseg(.data=someData, colour="white",mapping=aes(fill=p)) +
 
 ```
 
+You may also choose to only plot a single hemisphere, in which case using the `hemisphere` argument can do that for you.
 
+```{r datasuppHemi, fig.width=5}
+someData$hemi = "right"
+
+ggseg(.data=someData, colour="white", hemisphere = "right",
+      mapping=aes(fill=p)) +
+  theme_void() +
+  scale_fill_gradient(low="firebrick",high="goldenrod") +
+  labs(title="Aparc plots rule")
+```
+
+## Facetting
 If your data has different statistics for different groups, and you want to plot them all, we can use ggplot's `facet_wrap` or `facet_grid` for that.
 The data needs to be in long format for this to work, like ggplot likes it.
 Also, you'll need to merge the data **outside** of the plotting function for it to work nicely.
@@ -125,7 +137,8 @@ ggseg(.data=someData, colour="white", mapping=aes(fill=p)) +
   theme(legend.position = "bottom")
 
 ```
-as you can see. The result of this facetting is not what we are after. 
+
+As you can see. The result of this facetting is not what we are after. 
 This is because the the function requires full data to be able to plot, and the `AgeG` column is NA for everything outside the significant results.
 
 To fix this, you must duplicate the atlas data, and supply your data through the `atlas` option.
@@ -145,8 +158,10 @@ You can read more about more complex functions like this in the vignette for ext
 vignette("externalData")
 ```
 
-We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?
+We can change how this looks quite a bit.
+Maybe you want it on a dark background, and the areas without any data to be transparent?
 
+# Changing the look of the plot
 ```{r datasupp4, fig.width=5}
 ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
@@ -156,7 +171,6 @@ ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
         axis.title = element_blank()
         ) +
   scale_fill_continuous(na.value="transparent")
-
 ```
 
 Depending on what type of column is used for fill (continuous or discrete),
@@ -173,7 +187,7 @@ ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
 
 ```
 
-You can try other atlases too.
+You can try other atlases too, and also get many more atlases is in the ggseg atlas library, [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
 ```{r atlases, fig.width=5}
 ggseg(atlas="aseg", mapping=aes(fill=area))
 ```
