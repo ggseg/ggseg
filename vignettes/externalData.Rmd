@@ -21,11 +21,11 @@ This vignette should provide the tools you need to figure these features out, an
 ## Inspecting the atlas labels
 There are several ways you can inspect what the data in the atlas looks like.
 While each atlas has some small differences, they all share six main columns:  
-**1. long** - x-axis  
-**2. lat **- y-axis  
-**3. area **- name of area/network  
-**4. hemi** - hemisphere (left or right)  
-**5. side** - side of view (medial, lateral, sagittal or axial)  
+**1. .long** - x-axis  
+**2. .lat **- y-axis  
+**3. .area **- name of area/network  
+**4. .hemi** - hemisphere (left or right)  
+**5. .side** - side of view (medial, lateral, sagittal or axial)  
 
 Most atlases also have a `label` column, which are raw names assigned from the program run to segment/extract data.
 
@@ -33,10 +33,10 @@ This information is stored in a list of data.frames called `atlas.info`, which i
 
 ```{r start}
 library(ggseg)
-library(magrittr)
 library(dplyr)
 library(ggplot2)
-dkt
+
+head(dkt, 10)
 ```
 
 Here you can see information about the `dkt` atlas, and the main attributes of this atlas. 
@@ -46,13 +46,14 @@ If you want to use external data with your `ggseg` plot, you will need to make s
 For instance, here we make some data for the "default" and "visual" networks in the `dkt` atlas, and two p values for those two networks.
 
 ```{r}
-someData = tibble(area=c("superior temporal","pre central", "lateral orbitofrontal"),
-                      p=c(.03,.6, .05)
-                  )
+someData = tibble(
+  area=c("superior temporal","pre central", "lateral orbitofrontal"),
+  p=c(.03,.6, .05)
+)
 someData
 ```
 
-Notice you we have spelled bothe the column name and the area names **exactly** as they appear in the data. 
+Notice you we have spelled both the column name and the area names **exactly** as they appear in the data. 
 This is necessary for the merging within the `ggseg` function to work properly.
 This merge can be attempted before supplying the data to `ggseg` to see if there are any errors.
 
