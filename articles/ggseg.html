@@ -168,6 +168,10 @@
 <a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">high=</span><span class="st">"goldenrod"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">"Aparc plots rule"</span>, <span class="dt">fill=</span><span class="st">"p-value"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/datasupp2-1.png" width="480"></p>
+</div>
+<div id="single-hemisphere-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#single-hemisphere-results" class="anchor"></a>Single hemisphere results</h2>
 <p>If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes the column <code>hemi</code> with either “rh” or “lh” for this to happen.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">someData<span class="op">$</span>hemi =<span class="st"> "right"</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"></a>
@@ -176,40 +180,48 @@
 <a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">high=</span><span class="st">"goldenrod"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">"Aparc plots rule"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/datasuppX-1.png" width="480"></p>
+<p>You may also choose to only plot a single hemisphere, in which case using the <code>hemisphere</code> argument can do that for you.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">someData<span class="op">$</span>hemi =<span class="st"> "right"</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">hemisphere =</span> <span class="st">"right"</span>,</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">      <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">high=</span><span class="st">"goldenrod"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">"Aparc plots rule"</span>)</a></code></pre></div>
+<p><img src="ggseg_files/figure-html/datasuppHemi-1.png" width="480"></p>
+</div>
+<div id="facetting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#facetting" class="anchor"></a>Facetting</h2>
 <p>If your data has different statistics for different groups, and you want to plot them all, we can use ggplot’s <code>facet_wrap</code> or <code>facet_grid</code> for that. The data needs to be in long format for this to work, like ggplot likes it. Also, you’ll need to merge the data <strong>outside</strong> of the plotting function for it to work nicely. This is because the atlas data must be completely duplicated for plotting to look nice.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">               <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>),<span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">8</span>),</a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
-<p><img src="ggseg_files/figure-html/datasupp3-1.png" width="480"> as you can see. The result of this facetting is not what we are after. This is because the the function requires full data to be able to plot, and the <code>AgeG</code> column is NA for everything outside the significant results.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">               <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>),<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<p><img src="ggseg_files/figure-html/datasupp3-1.png" width="480"></p>
+<p>As you can see. The result of this facetting is not what we are after. This is because the the function requires full data to be able to plot, and the <code>AgeG</code> column is NA for everything outside the significant results.</p>
 <p>To fix this, you must duplicate the atlas data, and supply your data through the <code>atlas</code> option. This is maybe best achieved by making your data into a list, and then list applying <code>lapply</code> over them, and binding them together again.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">someData =<span class="st"> </span>someData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">someData =<span class="st"> </span>someData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/duplicate-1.png" width="480"></p>
 <p>You can read more about more complex functions like this in the vignette for external data</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"externalData"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"externalData"</span>)</a></code></pre></div>
 <pre><code>## Warning: vignette 'externalData' not found</code></pre>
 <p>We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>,</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">        <span class="dt">axis.title =</span> <span class="kw">element_blank</span>()</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">        ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_continuous</span>(<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
-<p><img src="ggseg_files/figure-html/datasupp4-1.png" width="480"></p>
-<p>Depending on what type of column is used for fill (continuous or discrete), you can also use the differenct <code>scales</code> to alter the colours.</p>
+</div>
+<div id="changing-the-look-of-the-plot" class="section level1">
+<h1 class="hasAnchor">
+<a href="#changing-the-look-of-the-plot" class="anchor"></a>Changing the look of the plot</h1>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span></a>
@@ -217,10 +229,20 @@
 <a class="sourceLine" id="cb23-5" data-line-number="5">        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb23-6" data-line-number="6">        <span class="dt">axis.title =</span> <span class="kw">element_blank</span>()</a>
 <a class="sourceLine" id="cb23-7" data-line-number="7">        ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">high=</span><span class="st">"goldenrod"</span>,<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_continuous</span>(<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
+<p><img src="ggseg_files/figure-html/datasupp4-1.png" width="480"></p>
+<p>Depending on what type of column is used for fill (continuous or discrete), you can also use the differenct <code>scales</code> to alter the colours.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>,</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">        <span class="dt">axis.title =</span> <span class="kw">element_blank</span>()</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">        ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">high=</span><span class="st">"goldenrod"</span>,<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/datasupp5-1.png" width="480"></p>
-<p>You can try other atlases too.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span><span class="st">"aseg"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area))</a></code></pre></div>
+<p>You can try other atlases too, and also get many more atlases is in the ggseg atlas library, <a href="https://github.com/LCBC-UiO/ggsegExtra">ggsegExtra</a>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span><span class="st">"aseg"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area))</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/atlases-1.png" width="480"></p>
 </div>
   </div>
@@ -233,6 +255,9 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#basic-use">Basic use</a></li>
       <li><a href="#using-fill-and-colour">Using fill and colour</a></li>
+      <li><a href="#single-hemisphere-results">Single hemisphere results</a></li>
+      <li><a href="#facetting">Facetting</a></li>
+      <li><a href="#changing-the-look-of-the-plot">Changing the look of the plot</a></li>
       </ul>
 </div>
       </div>

@@ -110,17 +110,11 @@
 <div id="inspecting-the-atlas-labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#inspecting-the-atlas-labels" class="anchor"></a>Inspecting the atlas labels</h2>
-<p>There are several ways you can inspect what the data in the atlas looks like. While each atlas has some small differences, they all share six main columns:<br><strong>1. long</strong> - x-axis<br><strong>2. lat </strong>- y-axis<br><strong>3. area </strong>- name of area/network<br><strong>4. hemi</strong> - hemisphere (left or right)<br><strong>5. side</strong> - side of view (medial, lateral, sagittal or axial)</p>
+<p>There are several ways you can inspect what the data in the atlas looks like. While each atlas has some small differences, they all share six main columns:<br><strong>1. .long</strong> - x-axis<br><strong>2. .lat </strong>- y-axis<br><strong>3. .area </strong>- name of area/network<br><strong>4. .hemi</strong> - hemisphere (left or right)<br><strong>5. .side</strong> - side of view (medial, lateral, sagittal or axial)</p>
 <p>Most atlases also have a <code>label</code> column, which are raw names assigned from the program run to segment/extract data.</p>
 <p>This information is stored in a list of data.frames called <code>atlas.info</code>, which is loaded when ggseg is loaded, just like the atlases and palettes.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggseg)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr)</a></code></pre></div>
-<pre><code>## 
-## Attaching package: 'magrittr'</code></pre>
-<pre><code>## The following objects are masked from 'package:testthat':
-## 
-##     equals, is_less_than, not</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following object is masked from 'package:testthat':
@@ -132,9 +126,10 @@
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">dkt</a></code></pre></div>
-<pre><code>## # A tibble: 80 x 6
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dkt, <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 6
 ##    atlas area                hemi  side    label               ggseg            
 ##    &lt;chr&gt; &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;               &lt;list&gt;           
 ##  1 dkt   superior temporal   left  lateral lh_superiortemporal &lt;tibble [1,494 ×…
@@ -146,28 +141,28 @@
 ##  7 dkt   inferior temporal   left  lateral lh_inferiortemporal &lt;tibble [906 × 6…
 ##  8 dkt   lateral occipital   left  lateral lh_lateraloccipital &lt;tibble [738 × 6…
 ##  9 dkt   lateral orbitofron… left  lateral lh_lateralorbitofr… &lt;tibble [528 × 6…
-## 10 dkt   superior frontal    left  lateral lh_superiorfrontal  &lt;tibble [420 × 6…
-## # … with 70 more rows</code></pre>
+## 10 dkt   superior frontal    left  lateral lh_superiorfrontal  &lt;tibble [420 × 6…</code></pre>
 <p>Here you can see information about the <code>dkt</code> atlas, and the main attributes of this atlas. If you want to use external data with your <code>ggseg</code> plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using.</p>
 </div>
 <div id="structuring-data-for-merging" class="section level2">
 <h2 class="hasAnchor">
 <a href="#structuring-data-for-merging" class="anchor"></a>Structuring data for merging</h2>
 <p>For instance, here we make some data for the “default” and “visual” networks in the <code>dkt</code> atlas, and two p values for those two networks.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="dt">area=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"superior temporal"</span>,<span class="st">"pre central"</span>, <span class="st">"lateral orbitofrontal"</span>),</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">                      <span class="dt">p=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">03</span>,.<span class="dv">6</span>, <span class="fl">.05</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">                  )</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">someData</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">area=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"superior temporal"</span>,<span class="st">"pre central"</span>, <span class="st">"lateral orbitofrontal"</span>),</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">p=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(.<span class="dv">03</span>,.<span class="dv">6</span>, <span class="fl">.05</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">someData</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   area                      p
 ##   &lt;chr&gt;                 &lt;dbl&gt;
 ## 1 superior temporal      0.03
 ## 2 pre central            0.6 
 ## 3 lateral orbitofrontal  0.05</code></pre>
-<p>Notice you we have spelled bothe the column name and the area names <strong>exactly</strong> as they appear in the data. This is necessary for the merging within the <code>ggseg</code> function to work properly. This merge can be attempted before supplying the data to <code>ggseg</code> to see if there are any errors.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
+<p>Notice you we have spelled both the column name and the area names <strong>exactly</strong> as they appear in the data. This is necessary for the merging within the <code>ggseg</code> function to work properly. This merge can be attempted before supplying the data to <code>ggseg</code> to see if there are any errors.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
 <pre><code>## Joining, by = "area"</code></pre>
 <pre><code>## # A tibble: 10 x 7
 ##    atlas area              hemi  side    label             ggseg               p
@@ -183,10 +178,10 @@
 ##  9 dkt   lateral orbitofr… left  lateral lh_lateralorbito… &lt;tibble [528 ×…  0.05
 ## 10 dkt   superior frontal  left  lateral lh_superiorfront… &lt;tibble [420 ×… NA</code></pre>
 <p>No errors! Yes, the <code>p</code> column is seemingly full of <code>NA</code>s, but that is just because the top of the data is the somatomotor network, which we did not supply any p values for, so it has been populated with <code>NA</code>s. We can sort the data differently, so we can see the <code>p</code>has been added correctly.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(p) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(p) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>) <span class="co">#only added to truncate output</span></a></code></pre></div>
 <pre><code>## Joining, by = "area"</code></pre>
 <pre><code>## # A tibble: 10 x 7
 ##    atlas area              hemi  side    label             ggseg               p
@@ -202,18 +197,18 @@
 ##  9 dkt   insula            left  lateral lh_insula         &lt;tibble [870 ×… NA   
 ## 10 dkt   superior parietal left  lateral lh_superiorparie… &lt;tibble [480 ×… NA</code></pre>
 <p>If you need your data to be matched on several columns, the approach is the same. Add the column you want to match on, with the <strong>exact</strong> same name, and make sure it’s content matches the content of the same column in the data.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">someData<span class="op">$</span>hemi =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"left"</span>, <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(someData))</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">someData</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">someData<span class="op">$</span>hemi =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"left"</span>, <span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(someData))</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">someData</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   area                      p hemi 
 ##   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;
 ## 1 superior temporal      0.03 left 
 ## 2 pre central            0.6  left 
 ## 3 lateral orbitofrontal  0.05 left</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(p) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(p) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Joining, by = c("area", "hemi")</code></pre>
 <pre><code>## # A tibble: 10 x 7
 ##    atlas area              hemi  side    label             ggseg               p
@@ -235,46 +230,46 @@
 <a href="#providing-data-to-ggseg" class="anchor"></a>Providing data to <code>ggseg</code>
 </h2>
 <p>When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(someData, <span class="dt">atlas=</span>dkt, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p))</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(someData, <span class="dt">atlas=</span>dkt, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p))</a></code></pre></div>
 <p><img src="externalData_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>You can actually also supply it directly as an atlas. For instance, if you had saved the merged data from the previous steps, you can supply this directly to the <code>atlas</code> option.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">newAtlas =<span class="st"> </span>dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">newAtlas =<span class="st"> </span>dkt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(someData)</a></code></pre></div>
 <pre><code>## Joining, by = c("area", "hemi")</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>newAtlas, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p), <span class="dt">position=</span><span class="st">"stacked"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>newAtlas, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p), <span class="dt">position=</span><span class="st">"stacked"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with. Lets do a recap of the unwanted results:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
-<a class="sourceLine" id="cb28-3" data-line-number="3">               <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>),<span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb28-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">8</span>),</a>
-<a class="sourceLine" id="cb28-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb28-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">               <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>),<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">8</span>),</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data=</span>someData, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/datasupp3-1.png" width="700"></p>
 <p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for facetting, or else it will not work.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># If you group_by the columns you will facet by, this will work well.</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">someData =<span class="st"> </span>someData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="co"># We can now supply the newAtlas as an atlas to ggseg</span></a>
-<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># If you group_by the columns you will facet by, this will work well.</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">someData =<span class="st"> </span>someData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="co"># We can now supply the newAtlas as an atlas to ggseg</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/duplicate-1.png" width="700"></p>
 <p>This whole procedure can be piped together, so you dont have to save all the intermediate steps.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">someData <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">someData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span>(<span class="dt">colours =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span>),<span class="dt">na.value=</span><span class="st">"grey"</span>)</a></code></pre></div>
 <p><img src="externalData_files/figure-html/duplicatepipe-1.png" width="700"></p>
 </div>
   </div>
