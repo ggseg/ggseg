@@ -40,7 +40,7 @@ The `ggseg` function already allows you to provide it with a data.frame of a cus
 correspond to certain specifications to work.
 
 **Note:** As of version 1.5.3, `ggseg` was split into two packages: one for 2d polygon plots in ggplot, and another for 3d mesh plots through plotly. 
-This was done to reduce package size, dependencies and also to simplify maintenance. 
+This was done to reduce package size, dependencies, and also to simplify maintenance. 
 If you want the 3d plotting tool, please go the [ggseg3d repository](https://github.com/LCBC-UiO/ggseg3d).
 
 Please see the [wiki](https://github.com/LCBC-UiO/ggsegExtra/wiki/Contributing%3A-polygon-atlases-new) for information on adding atlases, or inspect the included datasets for requirements. 

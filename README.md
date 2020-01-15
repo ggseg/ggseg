@@ -46,7 +46,7 @@ simplify maintenance. If you want the 3d plotting tool, please go the
 [ggseg3d repository](https://github.com/LCBC-UiO/ggseg3d).
 
 Please see the
-[wiki](https://github.com/LCBC-UiO/ggseg/wiki/Creating-and-contributing-atlases)
+[wiki](https://github.com/LCBC-UiO/ggsegExtra/wiki/Contributing%3A-polygon-atlases-new)
 for information on adding atlases, or inspect the included datasets for
 requirements. If anything is unclear in the wiki, give us a shout out in
 the issues\!
