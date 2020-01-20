@@ -4,14 +4,18 @@
 #'
 #' @param name String name of atlas
 #' @param n Number of colours to return (or "all" [default])
+#' @param package package to get brain_pals data from (ggseg or ggsegExtra)
 #' @param direction Direction of  HEX, -1 reverses order
 #' @param unname logical, if colours are to be unnamed before returning.
 #' Neccessary if applying palette to other data than the brain atlas it comes from.
 #'
 #' @export
-brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
+brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
+                      package="ggseg"){
 
-  info <- brain_pals_info()
+  brain_pals <- get_pals(package)
+
+  info <- brain_pals_info(package = package)
 
   if(!(name %in% info$atlas)){
     stop(paste(name,"is not a valid palette name for brain_pal\n"))
@@ -50,34 +54,33 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE){
 #'
 #' \code{display_brain_pal} plots all the colours for each atlas.
 #'
-#' @param name String name of atlas
-#' @param n Number of colours to return (or "all" [default])
+#' @inheritParams brain_pal
 #' @importFrom dplyr row_number bind_rows group_by mutate filter
 #' @importFrom ggplot2 ggplot geom_tile labs aes
 #' @export
 #' @examples
 #' display_brain_pal()
 #' display_brain_pal("dkt", 1:8)
-display_brain_pal <- function (name="all",
-                               n="all") {
+display_brain_pal <- function (name = "all",
+                               n = "all",
+                               package = "ggseg") {
 
+  info <- brain_pals_info(package = package)
 
-  info <- brain_pals_info()
-  if(name == "all"){
-    name = info$atlas
-  }else if(!(any(name %in% info$atlas))){
+  name <- match.arg(name,
+            c("all", info$atlas),
+            several.ok = TRUE)
 
-    name = paste0("'", name[!(name %in% info$atlas)], "'", collapse=", ")
-
-    stop(paste0("Did you specify the correct atlases, could not find ",
-                name))
+  if(any("all" %in% name)){
+    name <- info$atlas
   }
 
   pals = do.call(bind_rows,
                  lapply(info$atlas,
-                        function(nm) data.frame(atlas = nm,
-                                                colour = brain_pal(nm, n=n, unname=T),
-                                                stringsAsFactors = FALSE))
+                        get_colours,
+                        n=n,
+                        unname=TRUE,
+                        package=package)
   )
 
   pals %>%
@@ -94,13 +97,16 @@ display_brain_pal <- function (name="all",
 
 #' Get info on brain palettes
 #'
+#' @inheritParams brain_pal
 #' @return data.frame
 #' @export
 #'
 #' @examples
 #' brain_pals_info()
+brain_pals_info <- function(package="ggseg"){
 
-brain_pals_info <- function(){
+  brain_pals <- get_pals(package)
+
   data.frame(
     atlas=names(unlist(lapply(brain_pals,length))),
     maxcol=unname(unlist(lapply(brain_pals,length))),
@@ -109,6 +115,31 @@ brain_pals_info <- function(){
     stringsAsFactors = FALSE)
 }
 
+
+#' Get colours from brain palettes
+#'
+#' Needed to display the colours, and inspect
+#' the number of colours of each palette
+#'
+#' @inheritParams brain_pal
+get_colours <- function(nm, n, unname, package){
+  data.frame(atlas = nm,
+             colour = brain_pal(name=nm, n=n, unname=unname,
+                                package = package),
+             stringsAsFactors = FALSE)
+}
+
+#' Get brain palettes
+#'
+#' Brain palettes can be found in either ggseg
+#' or ggsegExtra. This functions is a helper
+#' to choose which package to get the palette
+#' from.
+#'
+#' @inheritParams brain_pal
+get_pals <- function(package = "ggseg"){
+  eval(parse(text=paste(package, "brain_pals", sep=":::")))
+}
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){

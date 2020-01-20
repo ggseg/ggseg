@@ -4,12 +4,14 @@
 \alias{display_brain_pal}
 \title{Plot the colours of the atlases for selection}
 \usage{
-display_brain_pal(name = "all", n = "all")
+display_brain_pal(name = "all", n = "all", package = "ggseg")
 }
 \arguments{
 \item{name}{String name of atlas}
 
 \item{n}{Number of colours to return (or "all" [default])}
+
+\item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }
 \description{
 \code{display_brain_pal} plots all the colours for each atlas.

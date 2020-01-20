@@ -46,6 +46,6 @@ brain_pals = list(
 )
 
 usethis::use_data(brain_pals,
-                  internal = FALSE, overwrite = TRUE, compress="xz")
+                  internal = TRUE, overwrite = TRUE, compress="xz")
 
 
