@@ -60,16 +60,5 @@
 #' data(aseg)
 "aseg"
 
-## Other utilities ----
-#' ggseg palettes
-#'
-#' @docType data
-#' @name brain_pals
-#' @usage data(brain_pals)
-#'
-#' @format A list of palettes for each atlas in ggseg.
-#'
-#' @keywords palettes
-"brain_pals"
 
 

@@ -63,11 +63,21 @@ ggseg(colour="black", size=.7, mapping=aes(fill=area)) +
   theme_void()
 ```
 
+There are built-in functions to use the colour palettes as seen in the source articles for the atlases.
+Using the `scale_..._brain` functions, these can be applied by supplying the name of the
+atlas as a string.
 
-You can also choose to only view one of the hemispheres by adding the `hemisphere` option
-```{r hemisphere, fig.width=5}
-ggseg(hemisphere="right") +
+```{r fill3, fig.width=5}
+ggseg(mapping=aes(fill=area),
+      position = "stacked") +
+  scale_fill_brain("dkt") +
   theme_void()
+```
+
+You can have a look at the available palettes with:
+
+```{r fill4, fig.width=5}
+display_brain_pal("all")
 ```
 
 If you want to plot the entire brain, but hightlight specific areas with colour, you will need to provide the function with some data.
@@ -95,6 +105,13 @@ ggseg(.data=someData, colour="black", mapping=aes(fill=p)) +
 ```
 
 ## Single hemisphere results
+
+You can also choose to only view one of the hemispheres by adding the `hemisphere` option
+```{r hemisphere, fig.width=5}
+ggseg(hemisphere="right") +
+  theme_void()
+```
+
 If the results are only in one hemisphere, but you still want to plot both of them, make sure your data.fame includes the column `hemi` with either "rh" or "lh" for this to happen.
 ```{r datasuppX, fig.width=5}
 someData$hemi = "right"

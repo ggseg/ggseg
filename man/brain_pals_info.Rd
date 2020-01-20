@@ -4,7 +4,10 @@
 \alias{brain_pals_info}
 \title{Get info on brain palettes}
 \usage{
-brain_pals_info()
+brain_pals_info(package = "ggseg")
+}
+\arguments{
+\item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }
 \value{
 data.frame
