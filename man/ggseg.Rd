@@ -6,8 +6,15 @@
 \alias{ggseg-package}
 \title{ggseg: Plot brain segmentations with ggplot and plotly}
 \usage{
-ggseg(.data = NULL, atlas = "dkt", position = "dispersed",
-  view = NULL, hemisphere = NULL, adapt_scales = TRUE, ...)
+ggseg(
+  .data = NULL,
+  atlas = "dkt",
+  position = "dispersed",
+  view = NULL,
+  hemisphere = NULL,
+  adapt_scales = TRUE,
+  ...
+)
 }
 \arguments{
 \item{.data}{A .data.frame to use for plot aesthetics. Should include a
@@ -78,11 +85,11 @@ Useful links:
 [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
 }
 \author{
-\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (0000-0002-5756-0223)
+\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (\href{https://orcid.org/0000-0002-5756-0223}{ORCID})
 
 Authors:
 \itemize{
-  \item Didac Vidal-Piñeiro \email{d.v.pineiro@psykologi.uio.no} (0000-0001-9997-9156)
+  \item Didac Vidal-Piñeiro \email{d.v.pineiro@psykologi.uio.no} (\href{https://orcid.org/0000-0001-9997-9156}{ORCID})
 }
 
 

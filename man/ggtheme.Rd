@@ -10,8 +10,12 @@ theme_brain(text.size = 12, text.family = "mono")
 
 theme_darkbrain(text.size = 12, text.family = "mono")
 
-theme_custombrain(plot.background = "white", text.colour = "darkgrey",
-  text.size = 12, text.family = "mono")
+theme_custombrain(
+  plot.background = "white",
+  text.colour = "darkgrey",
+  text.size = 12,
+  text.family = "mono"
+)
 }
 \arguments{
 \item{text.size}{Specify size of plot text}

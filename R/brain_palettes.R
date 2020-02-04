@@ -55,8 +55,6 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
 #' \code{display_brain_pal} plots all the colours for each atlas.
 #'
 #' @inheritParams brain_pal
-#' @importFrom dplyr row_number bind_rows group_by mutate filter
-#' @importFrom ggplot2 ggplot geom_tile labs aes
 #' @export
 #' @examples
 #' display_brain_pal()
@@ -75,7 +73,7 @@ display_brain_pal <- function (name = "all",
     name <- info$atlas
   }
 
-  pals = do.call(bind_rows,
+  pals = do.call(dplyr::bind_rows,
                  lapply(info$atlas,
                         get_colours,
                         n=n,
@@ -83,15 +81,15 @@ display_brain_pal <- function (name = "all",
                         package=package)
   )
 
-  pals %>%
-    group_by(atlas) %>%
-    mutate(x = row_number()) %>%
-    filter(atlas %in% name) %>%
+  pals <- dplyr::group_by(pals, atlas)
+  pals <- dplyr::mutate(pals, x = dplyr::row_number())
+  pals <- dplyr::filter(pals, atlas %in% name)
 
-    ggplot(aes(x=x, y=atlas, fill=I(colour))) +
-    geom_tile() +
+  ggplot2::ggplot(pals,
+                  ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
+    ggplot2::geom_tile() +
     theme_brain() +
-    labs(x="")
+    ggplot2::labs(x="")
 }
 
 
@@ -122,9 +120,9 @@ brain_pals_info <- function(package="ggseg"){
 #' the number of colours of each palette
 #'
 #' @inheritParams brain_pal
-get_colours <- function(nm, n, unname, package){
-  data.frame(atlas = nm,
-             colour = brain_pal(name=nm, n=n, unname=unname,
+get_colours <- function(name, n, unname, package){
+  data.frame(atlas = name,
+             colour = brain_pal(name=name, n=n, unname=unname,
                                 package = package),
              stringsAsFactors = FALSE)
 }

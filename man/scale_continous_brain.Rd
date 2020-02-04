@@ -7,15 +7,17 @@
 \alias{scale_labs_brain}
 \title{Axis and label scales from the ggseg atlases}
 \usage{
-scale_continous_brain(atlas = dkt, position = "dispersed",
-  aesthetics = c("y", "x"))
+scale_continous_brain(
+  atlas = dkt,
+  position = "dispersed",
+  aesthetics = c("y", "x")
+)
 
 scale_x_brain(...)
 
 scale_y_brain(...)
 
-scale_labs_brain(atlas = dkt, position = "dispersed",
-  aesthetics = "labs")
+scale_labs_brain(atlas = dkt, position = "dispersed", aesthetics = "labs")
 }
 \arguments{
 \item{atlas}{data.frame containing the atlas}

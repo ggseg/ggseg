@@ -5,16 +5,15 @@ data_merge <- function(.data, geobrain){
 
   if(dplyr::is_grouped_df(.data)){
 
-    .data <- .data %>%
-      tidyr::nest()
+    .data <- tidyr::nest(.data)
 
     cols = stats::na.omit(cols[!names(.data) %in% cols])
 
-    geobrain <- .data %>%
-      dplyr::mutate(data = purrr::map(data,
-                                      ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE))) %>%
-      tidyr::unnest(cols = c(data)) %>%
-      dplyr::ungroup()
+    geobrain <- dplyr::mutate(.data,
+                              data = purrr::map(data,
+                                                ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE)))
+    geobrain <- tidyr::unnest(geobrain, cols = c(data))
+    geobrain <- dplyr::ungroup(geobrain)
 
   }else{
     # Merge the brain with the .data
@@ -23,19 +22,18 @@ data_merge <- function(.data, geobrain){
 
   # Find if there are instances of those columns that
   # are not present in the geobrain. Maybe mispelled?
-  errs = geobrain %>%
-    dplyr::filter(is.na(.lat)) %>%
-    dplyr::select(!!cols) %>%
-    dplyr::distinct() %>%
-    tidyr::unite_("tt", cols, sep = " - ") %>%
-    dplyr::summarise(value = paste0(tt, collapse = ", "))
+  errs = dplyr::filter(geobrain, is.na(.lat))
+  errs <- dplyr::select(errs, !!cols)
+  errs <- dplyr::distinct(errs)
+  errs <- tidyr::unite_(errs, "tt", cols, sep = " - ")
+  errs <- dplyr::summarise(errs, xvalue = paste0(tt, collapse = ", "))
 
   if(errs != ""){
     warning(paste("Some .data is not merged properly into the geobrain. Check for spelling mistakes in:",
                   errs$value))
   }
 
-    return(geobrain)
+  return(geobrain)
 }
 
 ## quiets concerns of R CMD check

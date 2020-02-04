@@ -23,8 +23,6 @@
 #' }
 #'
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
-
-#' @importFrom ggplot2 theme element_blank element_text
 #' @export
 #' @rdname ggtheme
 theme_brain = function(text.size=12,

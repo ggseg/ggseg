@@ -32,12 +32,6 @@
 #'
 #' @return a ggplot object
 #'
-#' @import ggplot2
-#' @importFrom dplyr select group_by summarise_at vars funs mutate filter full_join distinct summarise case_when
-#' @importFrom tidyr unite_ unnest
-#' @importFrom magrittr "%>%"
-#' @importFrom stats na.omit sd
-#'
 #' @examples
 #' library(ggplot2)
 #' ggseg()
@@ -70,16 +64,17 @@ ggseg = function(.data = NULL,
     geobrain <- as_ggseg_atlas(geobrain)
   }
 
-  geobrain <- unnest(geobrain, ggseg)
+  geobrain <- tidyr::unnest(geobrain, ggseg)
 
-  stack <- case_when(
+  stack <- dplyr::case_when(
     grepl("stack", position) ~ "stacked",
     grepl("disperse", position) ~ "dispersed",
     TRUE ~ "unknown"
   )
 
   if(stack == "stacked"){
-    if(any(!geobrain %>% dplyr::select(side) %>% unique %>% unlist() %in% c("medial","lateral"))){
+    ss_check <- unlist(unique(dplyr::select(geobrain, side))) %in% c("medial","lateral")
+    if(any(!ss_check)){
       warning("Cannot stack atlas. Check if atlas has medial views.")
     }else{
       geobrain <- stack_brain(geobrain)

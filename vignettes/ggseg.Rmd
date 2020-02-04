@@ -22,7 +22,6 @@ It will create a base plot of the aparc brain segmentations.
 
 ```{r start}
 library(ggseg)
-library(magrittr)
 library(dplyr)
 ggseg()
 ```

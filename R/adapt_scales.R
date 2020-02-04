@@ -8,9 +8,6 @@
 #' @param aesthetics String of which aesthetics to adapt scale of, either "x","y", or "labs".
 #'
 #' @return nested list
-#'
-#' @importFrom dplyr group_by summarise summarise_at vars funs
-#' @importFrom tidyr unnest
 adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
   atlas = ifelse(any(names(geobrain) %in% "atlas"),
@@ -18,18 +15,19 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
                  "unknown")
 
    if(!".pos" %in% names(geobrain)){
+     y <- dplyr::group_by(geobrain, hemi)
+     y <- dplyr::summarise(y, val=gap(.lat))
+
+     x <- dplyr::group_by(geobrain, side)
+     x <- dplyr::summarise(x, val=gap(.long))
+
     stk = list(
-      y = geobrain %>%
-        dplyr::group_by(hemi) %>%
-        dplyr::summarise(val=gap(.lat)),
-      x = geobrain %>%
-        dplyr::group_by(side) %>%
-        dplyr::summarise(val=gap(.long))
+      y = y,
+      x = x
     )
 
-    disp = geobrain %>%
-      dplyr::group_by(hemi) %>%
-      dplyr::summarise_at(dplyr::vars(.long,.lat), list(gap))
+    disp <- dplyr::group_by(geobrain, hemi)
+    disp <- dplyr::summarise_at(disp, dplyr::vars(.long,.lat), list(gap))
 
     ad_scale <- list(
       stacked =
@@ -61,10 +59,7 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 }
 
 gap <- function(x){
-  mi <- min(x)
-  ma <- max(x)
-
-  (mi+ma)/2
+(min(x) + max(x)) / 2
 }
 
 ## quiets concerns of R CMD check
