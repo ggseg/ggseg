@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggseg plot theme — theme_brain • ggseg</title>
+<title>Get brain palettes — get_pals • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,11 @@
 
 
 
-<meta property="og:title" content="ggseg plot theme — theme_brain" />
-<meta property="og:description" content="a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak." />
+<meta property="og:title" content="Get brain palettes — get_pals" />
+<meta property="og:description" content="Brain palettes can be found in either ggseg
+or ggsegExtra. This functions is a helper
+to choose which package to get the palette
+from." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -131,76 +134,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ggseg plot theme</h1>
-    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/theme_brain.R'><code>R/theme_brain.R</code></a></small>
-    <div class="hidden name"><code>ggtheme.Rd</code></div>
+    <h1>Get brain palettes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/brain_palettes.R'><code>R/brain_palettes.R</code></a></small>
+    <div class="hidden name"><code>get_pals.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.</p>
+    <p>Brain palettes can be found in either ggseg
+or ggsegExtra. This functions is a helper
+to choose which package to get the palette
+from.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>theme_brain</span>(<span class='kw'>text.size</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>text.family</span> <span class='kw'>=</span> <span class='st'>"mono"</span>)
-
-<span class='fu'>theme_darkbrain</span>(<span class='kw'>text.size</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>text.family</span> <span class='kw'>=</span> <span class='st'>"mono"</span>)
-
-<span class='fu'>theme_custombrain</span>(
-  <span class='kw'>plot.background</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>text.colour</span> <span class='kw'>=</span> <span class='st'>"darkgrey"</span>,
-  <span class='kw'>text.size</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>text.family</span> <span class='kw'>=</span> <span class='st'>"mono"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_pals</span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ggseg"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>text.size</th>
-      <td><p>Specify size of plot text</p></td>
-    </tr>
-    <tr>
-      <th>text.family</th>
-      <td><p>Speficy font family</p></td>
-    </tr>
-    <tr>
-      <th>plot.background</th>
-      <td><p>Specify fill of plot background (`theme_custombrain` only)</p></td>
-    </tr>
-    <tr>
-      <th>text.colour</th>
-      <td><p>Speficy colour of plot text</p></td>
+      <th>package</th>
+      <td><p>package to get brain_pals data from (ggseg or ggsegExtra)</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    
-<dl class='dl-horizontal'>
-
-<dt>`theme_brain`</dt><dd><p>Default theme for ggseg. Transparent background, no axis lines, and no grid.</p></dd>
-
-<dt>`theme_darkbrain`</dt><dd><p>Dark equivalent to theme_brain, with black background, and light text.</p></dd>
-
-<dt>`theme_custombrain`</dt><dd><p>Theme for easy customisation of the brain themes.</p></dd>
-
-
-</dl>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>[ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Athanasia Mowinckel</p>
   </div>
 </div>
 
