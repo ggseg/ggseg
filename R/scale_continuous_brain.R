@@ -13,7 +13,6 @@
 #'
 #' @rdname scale_continous_brain
 #' @export
-#' @importFrom ggplot2 scale_colour_manual
 #' @examples
 #' \dontrun{
 #' scale_x_brain()
@@ -35,21 +34,18 @@ scale_continous_brain = function(atlas = dkt, position = "dispersed",
 
 #' @export
 #' @rdname scale_continous_brain
-#' @importFrom ggplot2 scale_x_continuous
 scale_x_brain <- function(...) {
   scale_continous_brain(..., aesthetics = "x")
 }
 
 #' @export
 #' @rdname scale_continous_brain
-#' @importFrom ggplot2 scale_y_continuous
 scale_y_brain <- function(...) {
   scale_continous_brain(..., aesthetics = "y")
 }
 
 #' @export
 #' @rdname scale_continous_brain
-#' @importFrom ggplot2 labs
 scale_labs_brain <- function(atlas = dkt, position = "dispersed", aesthetics = "labs") {
 
   positions = adapt_scales(atlas, position, aesthetics)

@@ -21,9 +21,6 @@
 #'   [`tibble`][tibble::tibble()]-package
 #'
 #' @name ggseg_atlas-class
-#' @importFrom dplyr tibble as_tibble one_of select everything
-#' @importFrom dplyr group_by_at rename_at rename
-#' @importFrom tidyr nest unnest
 #' @aliases ggseg_atlas ggseg_atlas-class
 #' @export
 #' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()], [glimpse()]
@@ -36,7 +33,7 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
 ) {
   stopifnot(is.data.frame(x))
 
-  if("ggseg" %in% names(x)) x <- unnest(x, cols = c(ggseg))
+  if("ggseg" %in% names(x)) x <- tidyr::unnest(x, cols = c(ggseg))
 
   necessaries <- c(".long", ".lat", ".id", "hemi", "area", "side")
   miss <- necessaries %in% names(x)
@@ -44,7 +41,7 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
     if(any(c("long", "lat", "id") %in% names(x))){
       warning(paste0("Old naming convention found, renaming to new"))
     }else{
-      miss <- na.omit(necessaries[!miss])
+      miss <- stats::na.omit(necessaries[!miss])
       stop(paste0("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
                   paste0(as.character(miss), "'", collapse=" '"))
       )
@@ -60,21 +57,22 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
   renames <- renames[!grepl("^[.]", renames)]
 
   x <- suppressWarnings(
-    select(x,
-           one_of(c(necessaries, "label","atlas")), everything())
+    dplyr::select(x,
+           dplyr::one_of(c(necessaries, "label","atlas")), dplyr::everything())
   )
 
-  if(length(renames) != 0) x <- rename_at(x,
-                                          vars(one_of(renames)),
+  if(length(renames) != 0) x <- dplyr::rename_at(x,
+                                          dplyr::vars(dplyr::one_of(renames)),
                                           rename_ggseg_cols)
 
-  x <- group_by_at(x, vars(one_of(group_variables))) %>%
-    nest() %>%
-    rename(ggseg = data)
+  x <- suppressWarnings(
+    dplyr::group_by_at(x, dplyr::vars(dplyr::one_of(group_variables)))
+  )
+  x <- tidyr::nest(x)
+  x <- dplyr::rename(x, ggseg = data)
 
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
   return(x)
-
 }
 
 rename_ggseg_cols <- function(x) paste0(".", x)

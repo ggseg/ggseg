@@ -8,7 +8,8 @@
 #' @section Palettes:
 #' The following palettes are available for use with these scales:
 #' \describe{
-#'   \item{Qualitative}{dkt, yeo7, yeo17, aseg, midsagittal,tracula}
+#'   \item{ggseg - }{dkt, aseg}
+#'   \item{ggsegExtra - }{tracula, jhu, yeo7, yeo17, glasser, chenAr, chenTh,}
 #' }
 #'
 #' @param name String name of atlas
@@ -18,7 +19,6 @@
 #'
 #' @rdname scale_brain
 #' @export
-#' @importFrom ggplot2 scale_colour_manual scale_fill_manual scale_colour_manual
 #' @examples
 #' scale_brain()
 #' scale_colour_brain()
@@ -37,21 +37,18 @@ scale_brain = function(name = "dkt", na.value="grey", ..., aesthetics = c("colou
 
 #' @rdname scale_brain
 #' @export
-#' @importFrom ggplot2 scale_colour_manual
 scale_colour_brain <- function(...) {
   scale_brain(..., aesthetics = "colour")
   }
 
 #' @rdname scale_brain
 #' @export
-#' @importFrom ggplot2 scale_color_manual
 scale_color_brain <- function(...) {
   scale_brain(..., aesthetics = "color")
 }
 
 #' @export
 #' @rdname scale_brain
-#' @importFrom ggplot2 scale_fill_manual
 scale_fill_brain <- function(...) {
   scale_brain(..., aesthetics = "fill")
 }
