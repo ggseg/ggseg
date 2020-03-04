@@ -3,5 +3,6 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   externalData: externalData.html
+  freesurfer_files: freesurfer_files.html
   ggseg: ggseg.html
 
