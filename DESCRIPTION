@@ -20,9 +20,11 @@ Imports:
     dplyr,
     tidyr,
     purrr,
-    remotes
+    remotes,
+    utils
 Suggests:
     knitr,
+    here, 
     rmarkdown,
     covr,
     testthat (>= 2.1.0),
