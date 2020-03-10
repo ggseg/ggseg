@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/img/README-",
   echo = TRUE
 )
-library(ggseg)
+devtools::load_all(".")
 ```
  
 
@@ -32,7 +32,7 @@ This package aims to make it possible to plot results directly through R.
 ## Atlases
 There are currently four atlases available in the package:  
 
-1. `dkt` - Desikan-Killany atlas (aparc).   
+1. `dk` - Desikan-Killany atlas (aparc).   
 2. `aseg` - Automatic subcortical segmentation.  
 
 We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package.
@@ -62,7 +62,7 @@ All functions are documented in standard R fashion.
 ## Use
 ```{r, out.width='50%'}
 library(ggseg)
-ggseg(atlas=dkt)
+ggseg(atlas=dk)
 ggseg(atlas=aseg)
 ```
 

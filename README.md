@@ -41,7 +41,7 @@ you have it, but is must correspond to certain specifications to work.
 
 **Note:** As of version 1.5.3, `ggseg` was split into two packages: one
 for 2d polygon plots in ggplot, and another for 3d mesh plots through
-plotly. This was done to reduce package size, dependencies and also to
+plotly. This was done to reduce package size, dependencies, and also to
 simplify maintenance. If you want the 3d plotting tool, please go the
 [ggseg3d repository](https://github.com/LCBC-UiO/ggseg3d).
 
@@ -72,7 +72,7 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
-ggseg(atlas=dkt)
+ggseg(atlas=dk)
 ```
 
 <img src="man/img/README-unnamed-chunk-3-1.png" width="50%" />
@@ -83,9 +83,9 @@ ggseg(atlas=aseg)
 
 <img src="man/img/README-unnamed-chunk-3-2.png" width="50%" />
 
-The package also has a vignette, to help you get started using it. You
-can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or
-via R:
+The package also has several vignettes, to help you get started using
+it. You can access it [here](https://lcbc-uio.github.io/ggseg/), or via
+R:
 
 ``` r
 vignette("ggseg")
