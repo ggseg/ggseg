@@ -47,7 +47,7 @@ This data should be well-suited for use with ggseg.
 ```{r}
 data %>% 
   mutate(label = paste0("lh_", label)) %>% 
-  ggseg(atlas = dkt, mapping = aes(fill = ThickAvg))
+  ggseg(atlas = dk, mapping = aes(fill = ThickAvg))
 ```
 
 
@@ -120,7 +120,7 @@ Alternatively, you will need to do string manipulation on the label column your 
 ggseg(dat, mapping = aes(fill = volume))
 ```
 
-The error thrown is because the Freesurfer tables also include measures of total volume/area/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
+The error thrown is because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
 To avoid this, you can remove those labels before plotting.
 
 ```{r}

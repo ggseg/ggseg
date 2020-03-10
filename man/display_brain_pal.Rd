@@ -18,5 +18,5 @@ display_brain_pal(name = "all", n = "all", package = "ggseg")
 }
 \examples{
 display_brain_pal()
-display_brain_pal("dkt", 1:8)
+display_brain_pal("dk", 1:8)
 }

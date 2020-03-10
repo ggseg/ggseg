@@ -1,31 +1,31 @@
 #' #' @export
-#' ggseg_area <- function(.long , .lat, .id ) {
-#'   ggseg_area(tibble(.long = .long, .lat = .lat, .id = .id))
+#' ggseg_region <- function(.long , .lat, .id ) {
+#'   ggseg_region(tibble(.long = .long, .lat = .lat, .id = .id))
 #' }
 #'
 #' #' @export
-#' as_ggseg_area <- function(x) {
-#'   structure(x, class = "ggseg_area")
+#' as_ggseg_region <- function(x) {
+#'   structure(x, class = "ggseg_region")
 #' }
 #'
 #' #' @export
-#' c.ggseg_area <- function(x, ...) {
-#'   as_ggseg_area(NextMethod())
+#' c.ggseg_region <- function(x, ...) {
+#'   as_ggseg_region(NextMethod())
 #' }
 #'
 #' #' @export
-#' `[.ggseg_area` <- function(x, i) {
-#'   as_ggseg_area(NextMethod())
+#' `[.ggseg_region` <- function(x, i) {
+#'   as_ggseg_region(NextMethod())
 #' }
 #'
 #' #' @export
-#' format.ggseg_area <- function(x, ...) {
-#'   ret <- sprintf("< ggseg area [%sx%s] >", length(x$.id), length(x))
+#' format.ggseg_region <- function(x, ...) {
+#'   ret <- sprintf("< ggseg region [%sx%s] >", length(x$.id), length(x))
 #'   format(ret, justify = "right")
 #' }
 #'
 #' #' @export
-#' print.ggseg_area <- function(x, ...) {
+#' print.ggseg_region <- function(x, ...) {
 #'   cat(format(x), sep = "\n")
 #'   invisible(x)
 #' }

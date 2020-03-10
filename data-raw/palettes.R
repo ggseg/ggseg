@@ -1,5 +1,5 @@
 brain_pals = list(
-  dkt  = c(`banks superior temporal`	= "#196428",
+  dk  = c(`banks superior temporal`	= "#196428",
            `caudal anterior cingulate`	= "#7D64A0",
            `caudal middle frontal`	= "#641900",
            cuneus	= "#DC1464",

@@ -2,7 +2,7 @@ context("test-data_merge")
 
 
 someData <- data.frame(
-  area = c("transverse temporal", "insula",
+  region = c("transverse temporal", "insula",
            "pre central","superior parietal",
            "transverse temporal", "insula",
            "pre central","superior parietal"),
@@ -13,7 +13,7 @@ someData <- data.frame(
 
 test_that("Check that merging with grouped data works", {
 
-    testData <- data_merge(someData, unnest(dkt, cols = ggseg))
+    testData <- data_merge(someData, unnest(dk, cols = ggseg))
 
     expect_equal(names(testData)[1], "Group")
     expect_equal(unique(testData$Group), c("G1", "G2"))
@@ -33,7 +33,7 @@ test_that("Check that simple data merge works", {
     #tidyr::unnest() %>%
     dplyr::filter(Group == "G1")
 
-  testData <- data_merge(someData, unnest(dkt, ggseg))
+  testData <- data_merge(someData, unnest(dk, ggseg))
 
   expect_equal(names(testData)[1], "Group")
   expect_equal(unique(testData$Group), "G1")

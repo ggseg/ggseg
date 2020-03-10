@@ -27,7 +27,7 @@ aseg_labs <- data.frame(
     "right-cerebellum-white-matter",
     "right-cerebellum-cortex"
   ),
-  area =  c(
+  region =  c(
     "lateral ventricle",
     "thalamus proper",
     "caudate",
@@ -79,11 +79,14 @@ aseg <- ggseg::aseg %>%
              .long = ((.long-min(.long)) * 1.18) + 3.5,
              .id = as.integer(.id) + 30,
              hemi = "midline",
-             area = ifelse(area %in% "cerebral cortex", NA, area)) %>%
+             region = ifelse(region %in% "cerebral cortex", NA, region)) %>%
       select(-.pos)
   )  %>%
   select(-label) %>%
-  left_join(aseg_labs, by = "area") %>%
+  left_join(aseg_labs, by = "region") %>%
   as_ggseg_atlas()
+
+
+aseg <- aseg %>% rename(region = area)
 
 usethis::use_data(aseg, internal = FALSE, overwrite = TRUE)

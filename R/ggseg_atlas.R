@@ -1,5 +1,6 @@
 #' `ggseg_atlas` class
 #' @param x dataframe to be made a ggseg-atlas
+#' @param return return logical
 #'
 #' @description
 #' The `ggseg_atlas` class is a subclass of [`data.frame`][base::data.frame()],
@@ -27,29 +28,34 @@
 as_ggseg_atlas <- function(x = data.frame(.long = double(),
                                           .lat = double(),
                                           .id = character(),
-                                          area = as.character(),
+                                          region = as.character(),
                                           hemi = character(),
-                                          side = character())
+                                          side = character()),
+                           return = FALSE
 ) {
   stopifnot(is.data.frame(x))
-
+  ret <- TRUE
   if("ggseg" %in% names(x)) x <- tidyr::unnest(x, cols = c(ggseg))
 
-  necessaries <- c(".long", ".lat", ".id", "hemi", "area", "side")
+  necessaries <- c(".long", ".lat", ".id", "hemi", "region", "side")
   miss <- necessaries %in% names(x)
   if(!all(miss)){
     if(any(c("long", "lat", "id") %in% names(x))){
       warning(paste0("Old naming convention found, renaming to new"))
     }else{
       miss <- stats::na.omit(necessaries[!miss])
-      stop(paste0("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
-                  paste0(as.character(miss), "'", collapse=" '"))
-      )
+
+      if(!return){
+        stop(paste0("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
+                    paste0(as.character(miss), "'", collapse=" '")))
+      }else{
+        ret <- FALSE
+      }
     }
   }
 
   # Variables to group the df by
-  group_variables <- c("atlas", "area", "hemi", "side", "label")
+  group_variables <- c("atlas", "region", "hemi", "side", "label")
   group_variables <- group_variables[group_variables %in% names(x)]
 
   # columns to be renamed to avoid possible name collisions
@@ -72,7 +78,12 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
   x <- dplyr::rename(x, ggseg = data)
 
   class(x) <- c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
-  return(x)
+
+  if(!return){
+    return(x)
+  }else{
+    return(ret)
+  }
 }
 
 rename_ggseg_cols <- function(x) paste0(".", x)
@@ -84,10 +95,20 @@ rename_ggseg_cols <- function(x) paste0(".", x)
 #' @return logical
 #' @export
 is_ggseg_atlas <- function(x){
-  class(x)[1] == "ggseg_atlas"
+
+  # try to convert to check
+  k <- suppressWarnings(
+    as_ggseg_atlas(x, return = TRUE)
+    )
+
+  # check if class is set
+  j <- class(x)[1] == "ggseg_atlas"
+
+  # Both should be true
+  all(c(k,j))
 }
 
-## quiets concerns of R CMD check
+# quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
   utils::globalVariables(c("x", "ggseg_3d"))
 }

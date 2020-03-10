@@ -35,17 +35,17 @@ test_that("Check that ggseg is working", {
   expect_is(ggseg(),c("gg","ggplot"))
   expect_is(
     ggseg(data=data.frame(
-      area = c("transverse temporal", "insula",
+      region = c("transverse temporal", "insula",
                "pre central","superior parietal"),
       p = sample(seq(0,.5,.001), 4),
       stringsAsFactors = FALSE),mapping=aes(fill=p)),
     c("gg","ggplot"))
-  expect_is(ggseg(atlas = dkt, mapping=aes(fill=area), position="stacked"),c("gg","ggplot"))
+  expect_is(ggseg(atlas = dk, mapping=aes(fill=region), position="stacked"),c("gg","ggplot"))
   expect_warning(ggseg(atlas = aseg, position="stacked"))
 
   expect_warning(
     ggseg(.data=data.frame(
-      area = c("transverse tempral", "insula",
+      region = c("transverse tempral", "insula",
                "pre central","superior parietal"),
       p = sample(seq(0,.5,.001), 4),
       stringsAsFactors = FALSE),mapping=aes(fill=p))
@@ -59,7 +59,7 @@ test_that("Check that ggseg is working", {
 })
 
 test_that("Check that plotting non ggseg_atlas-class tries conversion", {
-  atlas <- dkt %>% unnest(ggseg)
+  atlas <- unnest(dk, ggseg)
 
   expect_warning(p <- ggseg(atlas=atlas))
 

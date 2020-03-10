@@ -12,15 +12,15 @@ test_that("check that ggseg_atlas is correct", {
                    id = character(),
                    hemi = character(),
                    side = character(),
-                   area = character())
+                   region = character())
   expect_warning(as_ggseg_atlas(tt))
 
-  expect_equal(dim(as_ggseg_atlas(dkt)), c(80,6))
+  expect_equal(dim(as_ggseg_atlas(dk)), c(80,6))
 
 })
 
 test_that("check that is_ggseg_atlas works", {
-  expect_true(is_ggseg_atlas(dkt))
+  expect_true(is_ggseg_atlas(dk))
 
   dt <- data.frame(.long = double(),
                    .lat = double(),

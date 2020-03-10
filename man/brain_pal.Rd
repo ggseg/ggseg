@@ -17,10 +17,10 @@ brain_pal(
 
 \item{n}{Number of colours to return (or "all" [default])}
 
-\item{direction}{Direction of  HEX, -1 reverses order}
-
-\item{unname}{logical, if colours are to be unnamed before returning.
+\item{direction}{Direction of  HEX, -1 reverses order
 Neccessary if applying palette to other data than the brain atlas it comes from.}
+
+\item{unname}{return unnamed vector (default = FALSE)}
 
 \item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }

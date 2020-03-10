@@ -8,7 +8,7 @@
 \title{Colour and fill scales from the ggseg atlases}
 \usage{
 scale_brain(
-  name = "dkt",
+  name = "dk",
   na.value = "grey",
   ...,
   aesthetics = c("colour", "color", "fill")
@@ -38,7 +38,7 @@ atlases where first introduced.
 
 The following palettes are available for use with these scales:
 \describe{
-  \item{ggseg - }{dkt, aseg}
+  \item{ggseg - }{dk, aseg}
   \item{ggsegExtra - }{tracula, jhu, yeo7, yeo17, glasser, chenAr, chenTh,}
 }
 }
