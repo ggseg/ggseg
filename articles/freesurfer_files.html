@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -136,7 +136,7 @@
 <p>This data should be well-suited for use with ggseg.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">data <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">label =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"lh_"</span>, label)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas =</span> dkt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> ThickAvg))</a></code></pre></div>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas =</span> dk, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> ThickAvg))</a></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div id="read-in-raw-stats-files-for-an-atlas-for-all-subjects" class="section level2">
@@ -221,7 +221,7 @@
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; Warning in data_merge(.data, geobrain): Some .data is not merged properly into</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; the geobrain. Check for spelling mistakes in:</span></a></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>The error thrown is because the Freesurfer tables also include measures of total volume/area/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. To avoid this, you can remove those labels before plotting.</p>
+<p>The error thrown is because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. To avoid this, you can remove those labels before plotting.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dat <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"lh|rh"</span>, label)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> volume))</a></code></pre></div>

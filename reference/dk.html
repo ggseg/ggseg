@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if is ggseg_atlas-class — is_ggseg_atlas • ggseg</title>
+<title>Desikan-Killiany Cortical Atlas — dk • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Check if is ggseg_atlas-class — is_ggseg_atlas" />
-<meta property="og:description" content="Check if is ggseg_atlas-class" />
+<meta property="og:title" content="Desikan-Killiany Cortical Atlas — dk" />
+<meta property="og:description" content="Coordinate data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -134,36 +135,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if is ggseg_atlas-class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/ggseg_atlas.R'><code>R/ggseg_atlas.R</code></a></small>
-    <div class="hidden name"><code>is_ggseg_atlas.Rd</code></div>
+    <h1>Desikan-Killiany Cortical Atlas</h1>
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>dk.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if is ggseg_atlas-class</p>
+    <p>Coordinate data for the Desikan-Killany Cortical atlas,
+with 40 regions in on the cortical surface of the brain.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is_ggseg_atlas</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dk</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>atlas object to check</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>logical</p>
+    <p>A data.frame with 10913 observations and 11 variables</p><dl class='dl-horizontal'>
+  <dt>long</dt><dd><p>coordinates for the x-axis</p></dd>
+  <dt>lat</dt><dd><p>coordinates for the y-axis</p></dd>
+  <dt>region</dt><dd><p>name of region</p></dd>
+  <dt>hemi</dt><dd><p>name of the hemisphere (left, right)</p></dd>
+  <dt>side</dt><dd><p>which side to view (medial, lateral)</p></dd>
+  <dt>acronym</dt><dd><p>abbreviated name of region</p></dd>
+  <dt>lobe</dt><dd><p>lobe location</p></dd>
+  <dt>label</dt><dd><p>label from recon-all segmentation</p></dd>
+  <dt>atlas</dt><dd><p>name of the atlas</p></dd>
 
+</dl>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Fischl et al. (2004) Cerebral Cortex 14:11-22
+(<a href='https://academic.oup.com/cercor/article/14/1/11/433466'>PubMed</a>)</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other ggseg_atlases: 
+<code><a href='aseg.html'>aseg</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dk</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

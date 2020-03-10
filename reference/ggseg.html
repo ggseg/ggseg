@@ -49,7 +49,7 @@ Results from such analyses are usually easier to interpret if
 the plot can mimmick the shape and position in the brain it
 represents.
 ggseg plots and returns a ggplot object of plotted
-aparc areas." />
+aparc regions." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -83,7 +83,7 @@ aparc areas." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -152,12 +152,12 @@ Results from such analyses are usually easier to interpret if
 the plot can mimmick the shape and position in the brain it
 represents.</p>
 <p><code>ggseg</code> plots and returns a ggplot object of plotted
-aparc areas.</p>
+aparc regions.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggseg</span>(
   <span class='kw'>.data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>atlas</span> <span class='kw'>=</span> <span class='st'>"dkt"</span>,
+  <span class='kw'>atlas</span> <span class='kw'>=</span> <span class='st'>"dk"</span>,
   <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dispersed"</span>,
   <span class='kw'>view</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>hemisphere</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -171,7 +171,7 @@ aparc areas.</p>
     <tr>
       <th>.data</th>
       <td><p>A .data.frame to use for plot aesthetics. Should include a
-column called "area" corresponding to aparc areas.</p></td>
+column called "region" corresponding to aparc regions.</p></td>
     </tr>
     <tr>
       <th>atlas</th>
@@ -213,7 +213,7 @@ with convenient functions to inspect the results directly on
 a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 <dl class='dl-horizontal'>
 
-<dt>`dkt`</dt><dd><p>The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.</p></dd>
+<dt>`dk`</dt><dd><p>The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.</p></dd>
 
 <dt>`aseg`</dt><dd><p>Freesurfer automatic subcortical segmentation of a brain volume</p></dd>
 
@@ -233,7 +233,7 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'>ggseg</span>()</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>))</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='st'>"black"</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.7</span>, <span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>area</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>ggseg</span>()</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>region</span>))</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='st'>"black"</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.7</span>, <span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>region</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

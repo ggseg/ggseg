@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -108,14 +108,14 @@
 <div id="basic-use" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-use" class="anchor"></a>Basic use</h2>
-<p>Plotting areas from different brain atlases ggplot2 is a handy way of displaying results or grouping of aparc data.</p>
+<p>Plotting regions from different brain atlases ggplot2 is a handy way of displaying results or grouping of aparc data.</p>
 <p>The function <code><a href="../reference/ggseg.html">ggseg()</a></code>, is based in the ggplot2 format, it is recommended to get familiarized with with <a href="http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html">plotting data with ggplot2</a>.</p>
 <p>Out-of-the-box, ggseg() works without supplying any extra information. It will create a base plot of the aparc brain segmentations.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggseg)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>()</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/start-1.png" width="700"></p>
-<p>The plot is kept as simple as possible, with as little extra information to ggplot as possible. This is done for it to be easy to extend the plot with the many ggplot options available. By default it plots <code><a href="https://rdrr.io/r/utils/data.html">data(dkt)</a></code>. For instance, you might want to only see the brain and it’s segments, without any grid or axis information. You can add ggplot2’s <code>theme_void</code> to achieve this.</p>
+<p>The plot is kept as simple as possible, with as little extra information to ggplot as possible. This is done for it to be easy to extend the plot with the many ggplot options available. By default it plots <code><a href="https://rdrr.io/r/utils/data.html">data(dk)</a></code>. For instance, you might want to only see the brain and it’s segments, without any grid or axis information. You can add ggplot2’s <code>theme_void</code> to achieve this.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/void-1.png" width="480"></p>
 <p>You can supply some extra options to ggseg, to alter the plot as you wish.</p>
@@ -127,26 +127,26 @@
 <div id="using-fill-and-colour" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-fill-and-colour" class="anchor"></a>Using fill and colour</h2>
-<p>Maybe you want each area to have a different colour. ggseg has a built column called <code>area</code> wich you can use as fill to achieve this. <strong>Note:</strong> unlike other ggplots, before using <code>aes</code> you must indicate <code>mapping=aes</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area)) <span class="op">+</span></a>
+<p>Maybe you want each region to have a different colour. ggseg has a built column called <code>region</code> wich you can use as fill to achieve this. <strong>Note:</strong> unlike other ggplots, before using <code>aes</code> you must indicate <code>mapping=aes</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>region)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/fill-1.png" width="480"></p>
 <p>Maybe you also want the contour lines to be black rather than white, and also a little thicker?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">colour=</span><span class="st">"black"</span>, <span class="dt">size=</span>.<span class="dv">7</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area)) <span class="op">+</span></a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">colour=</span><span class="st">"black"</span>, <span class="dt">size=</span>.<span class="dv">7</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>region)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/fill2-1.png" width="480"></p>
 <p>There are built-in functions to use the colour palettes as seen in the source articles for the atlases. Using the <code>scale_..._brain</code> functions, these can be applied by supplying the name of the atlas as a string.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area),</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>region),</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">      <span class="dt">position =</span> <span class="st">"stacked"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/scale_brain.html">scale_fill_brain</a></span>(<span class="st">"dkt"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/scale_brain.html">scale_fill_brain</a></span>(<span class="st">"dk"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/fill3-1.png" width="480"></p>
 <p>You can have a look at the available palettes with:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/display_brain_pal.html">display_brain_pal</a></span>(<span class="st">"all"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/fill4-1.png" width="480"></p>
-<p>If you want to plot the entire brain, but hightlight specific areas with colour, you will need to provide the function with some data. The data <strong>must</strong> include a column that overlaps with the columns in the atlas data. Here we create some data with 4 rows, and an <code>area</code> and <code>p</code> column. We provide the <code>p</code> column as the column that dictates the colour of the area. The <code>area</code> column matches a column in the dkt atlas.</p>
+<p>If you want to plot the entire brain, but hightlight specific regions with colour, you will need to provide the function with some data. The data <strong>must</strong> include a column that overlaps with the columns in the atlas data. Here we create some data with 4 rows, and an <code>region</code> and <code>p</code> column. We provide the <code>p</code> column as the column that dictates the colour of the region. The <code>region</code> column matches a column in the dk atlas.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">region =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">           <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>), </a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">4</span>),</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
@@ -190,7 +190,7 @@
 <a href="#facetting" class="anchor"></a>Facetting</h2>
 <p>If your data has different statistics for different groups, and you want to plot them all, we can use ggplot’s <code>facet_wrap</code> or <code>facet_grid</code> for that. The data needs to be in long format for this to work, like ggplot likes it. Also, you’ll need to merge the data <strong>outside</strong> of the plotting function for it to work nicely. This is because the atlas data must be completely duplicated for plotting to look nice.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">someData =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">area =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">region =</span> <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">               <span class="st">"pre central"</span>,<span class="st">"superior parietal"</span>),<span class="dv">2</span>), </a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="dt">p =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">001</span>), <span class="dv">8</span>),</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="dt">AgeG =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Young"</span>,<span class="dv">4</span>), <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"Old"</span>,<span class="dv">4</span>)),</a>
@@ -205,19 +205,19 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">someData =<span class="st"> </span>someData <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(AgeG)</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dk, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/duplicate-1.png" width="480"></p>
 <p>You can read more about more complex functions like this in the vignette for external data</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"externalData"</span>)</a></code></pre></div>
 <pre><code>## Warning: vignette 'externalData' not found</code></pre>
-<p>We can change how this looks quite a bit. Maybe you want it on a dark background, and the areas without any data to be transparent?</p>
+<p>We can change how this looks quite a bit. Maybe you want it on a dark background, and the regions without any data to be transparent?</p>
 </div>
 <div id="changing-the-look-of-the-plot" class="section level1">
 <h1 class="hasAnchor">
 <a href="#changing-the-look-of-the-plot" class="anchor"></a>Changing the look of the plot</h1>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dk, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>,</a>
@@ -227,7 +227,7 @@
 <a class="sourceLine" id="cb17-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_continuous</span>(<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/datasupp4-1.png" width="480"></p>
 <p>Depending on what type of column is used for fill (continuous or discrete), you can also use the differenct <code>scales</code> to alter the colours.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dkt, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">.data =</span> someData, <span class="dt">atlas=</span>dk, <span class="dt">colour=</span><span class="st">"white"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>p)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>AgeG, <span class="dt">ncol=</span><span class="dv">1</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"bottom"</span>,</a>
@@ -237,7 +237,7 @@
 <a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">high=</span><span class="st">"goldenrod"</span>,<span class="dt">low=</span><span class="st">"firebrick"</span>,<span class="dt">na.value=</span><span class="st">"transparent"</span>)</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/datasupp5-1.png" width="480"></p>
 <p>You can try other atlases too, and also get many more atlases is in the ggseg atlas library, <a href="https://github.com/LCBC-UiO/ggsegExtra">ggsegExtra</a>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span><span class="st">"aseg"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>area))</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/ggseg.html">ggseg</a></span>(<span class="dt">atlas=</span><span class="st">"aseg"</span>, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">fill=</span>region))</a></code></pre></div>
 <p><img src="ggseg_files/figure-html/atlases-1.png" width="480"></p>
 </div>
   </div>
