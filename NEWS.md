@@ -1,5 +1,13 @@
 # ggseg 1.5
 
+# ggseg 1.5.4
+* dkt renamed to dk  
+    - the dkt (Desikan-Killany-Tourville) atlas is not yet available  
+* atlas columns `area` renamed to `region`  
+    - to avoid confusion with the calculation of cortical/surface area  
+* dk atlas region name "medial orbito frontal" changed to "medial orbitofrontal"  
+
+
 ## ggseg 1.5.3
 * Split ggseg, and ggseg3d into two different packages
 
@@ -7,7 +15,6 @@
 * Adapted to work with dplyr 0.8.1
 
 ## ggseg 1.5.1
-
 * Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling
 
 ## ggseg 1.5
