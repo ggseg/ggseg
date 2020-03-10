@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   echo = TRUE
 )
 devtools::load_all(".")
-```
+``` 
  
 
 # ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />  
