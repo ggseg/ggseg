@@ -31,7 +31,7 @@ R.
 
 There are currently four atlases available in the package:
 
-1.  `dkt` - Desikan-Killany atlas (aparc).  
+1.  `dk` - Desikan-Killany atlas (aparc).  
 2.  `aseg` - Automatic subcortical segmentation.
 
 We are working on creating a detailed description in the wiki on how to
