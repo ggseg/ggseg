@@ -8,7 +8,7 @@
 \usage{
 ggseg(
   .data = NULL,
-  atlas = "dkt",
+  atlas = "dk",
   position = "dispersed",
   view = NULL,
   hemisphere = NULL,
@@ -18,7 +18,7 @@ ggseg(
 }
 \arguments{
 \item{.data}{A .data.frame to use for plot aesthetics. Should include a
-column called "area" corresponding to aparc areas.}
+column called "region" corresponding to aparc regions.}
 
 \item{atlas}{Either a string with the name of atlas to use,
 or a .data.frame containing atlas information (i.e. pre-loaded atlas).}
@@ -47,7 +47,7 @@ the plot can mimmick the shape and position in the brain it
 represents.
 
 \code{ggseg} plots and returns a ggplot object of plotted
-aparc areas.
+aparc regions.
 }
 \details{
 This package contains data from various brain parcellations,
@@ -56,7 +56,7 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
 
 \describe{
 
-\item{`dkt`}{
+\item{`dk`}{
 The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
 
 \item{`aseg`}{
@@ -67,8 +67,8 @@ Freesurfer automatic subcortical segmentation of a brain volume}
 \examples{
 library(ggplot2)
 ggseg()
-ggseg(mapping=aes(fill=area))
-ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
+ggseg(mapping=aes(fill=region))
+ggseg(colour="black", size=.7, mapping=aes(fill=region)) + theme_void()
 ggseg(position = "stacked")
 ggseg(adapt_scales = FALSE)
 

@@ -1,11 +1,11 @@
 #' Plot brain parcellations
 #'
 #' \code{ggseg} plots and returns a ggplot object of plotted
-#' aparc areas.
+#' aparc regions.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
 #' @param .data A .data.frame to use for plot aesthetics. Should include a
-#' column called "area" corresponding to aparc areas.
+#' column called "region" corresponding to aparc regions.
 #'
 #' @param atlas Either a string with the name of atlas to use,
 #' or a .data.frame containing atlas information (i.e. pre-loaded atlas).
@@ -22,7 +22,7 @@
 #' @details
 #' \describe{
 #'
-#' \item{`dkt`}{
+#' \item{`dk`}{
 #' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
 #'
 #' \item{`aseg`}{
@@ -35,8 +35,8 @@
 #' @examples
 #' library(ggplot2)
 #' ggseg()
-#' ggseg(mapping=aes(fill=area))
-#' ggseg(colour="black", size=.7, mapping=aes(fill=area)) + theme_void()
+#' ggseg(mapping=aes(fill=region))
+#' ggseg(colour="black", size=.7, mapping=aes(fill=region)) + theme_void()
 #' ggseg(position = "stacked")
 #' ggseg(adapt_scales = FALSE)
 #'
@@ -45,7 +45,7 @@
 #'
 #' @export
 ggseg = function(.data = NULL,
-                 atlas = "dkt",
+                 atlas = "dk",
                  position = "dispersed",
                  view = NULL,
                  hemisphere = NULL,
@@ -126,6 +126,6 @@ ggseg = function(.data = NULL,
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c(".data","dkt"))
+  utils::globalVariables(c(".data","dk"))
 }
 

@@ -6,8 +6,8 @@
 #' @param n Number of colours to return (or "all" [default])
 #' @param package package to get brain_pals data from (ggseg or ggsegExtra)
 #' @param direction Direction of  HEX, -1 reverses order
-#' @param unname logical, if colours are to be unnamed before returning.
 #' Neccessary if applying palette to other data than the brain atlas it comes from.
+#' @param unname return unnamed vector (default = FALSE)
 #'
 #' @export
 brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
@@ -58,7 +58,7 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
 #' @export
 #' @examples
 #' display_brain_pal()
-#' display_brain_pal("dkt", 1:8)
+#' display_brain_pal("dk", 1:8)
 display_brain_pal <- function (name = "all",
                                n = "all",
                                package = "ggseg") {

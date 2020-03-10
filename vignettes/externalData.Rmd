@@ -23,7 +23,7 @@ There are several ways you can inspect what the data in the atlas looks like.
 While each atlas has some small differences, they all share six main columns:  
 **1. .long** - x-axis  
 **2. .lat **- y-axis  
-**3. .area **- name of area/network  
+**3. .region **- name of region/network  
 **4. .hemi** - hemisphere (left or right)  
 **5. .side** - side of view (medial, lateral, sagittal or axial)  
 
@@ -36,29 +36,29 @@ library(ggseg)
 library(dplyr)
 library(ggplot2)
 
-head(dkt, 10)
+head(dk, 10)
 ```
 
-Here you can see information about the `dkt` atlas, and the main attributes of this atlas. 
+Here you can see information about the `dk` atlas, and the main attributes of this atlas. 
 If you want to use external data with your `ggseg` plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using. 
 
 ## Structuring data for merging
-For instance, here we make some data for the "default" and "visual" networks in the `dkt` atlas, and two p values for those two networks.
+For instance, here we make some data for the "default" and "visual" networks in the `dk` atlas, and two p values for those two networks.
 
 ```{r}
 someData = tibble(
-  area=c("superior temporal","pre central", "lateral orbitofrontal"),
+  region=c("superior temporal","pre central", "lateral orbitofrontal"),
   p=c(.03,.6, .05)
 )
 someData
 ```
 
-Notice you we have spelled both the column name and the area names **exactly** as they appear in the data. 
+Notice you we have spelled both the column name and the region names **exactly** as they appear in the data. 
 This is necessary for the merging within the `ggseg` function to work properly.
 This merge can be attempted before supplying the data to `ggseg` to see if there are any errors.
 
 ```{r}
-dkt %>% 
+dk %>% 
   left_join(someData) %>% 
   head(10) #only added to truncate output
 ```
@@ -68,7 +68,7 @@ Yes, the `p` column is seemingly full of `NA`s, but that is just because the top
 We can sort the data differently, so we can see the `p`has been added correctly.
 
 ```{r}
-dkt %>% 
+dk %>% 
   left_join(someData) %>% 
   arrange(p) %>% 
   head(10) #only added to truncate output
@@ -81,29 +81,29 @@ Add the column you want to match on, with the **exact** same name, and make sure
 someData$hemi = rep("left", nrow(someData))
 someData
 
-dkt %>% 
+dk %>% 
   left_join(someData) %>% 
   arrange(p) %>% 
   head(10)
 ```
 
-Notice how the message now states that it is joining `by = c("area", "hemi")`.
+Notice how the message now states that it is joining `by = c("region", "hemi")`.
 The merge function has recognized that there are two equally named columns, and assumes (in this case correctly) that these are equivalent.  
-**Notice** that everything is case-sensitive, so writing `Area` or `Left` will not result in matching.
+**Notice** that everything is case-sensitive, so writing `Region` or `Left` will not result in matching.
 
 ## Providing data to `ggseg`
 When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.
 
 ```{r}
 library(ggplot2)
-ggseg(someData, atlas=dkt, mapping=aes(fill=p))
+ggseg(someData, atlas=dk, mapping=aes(fill=p))
 ```
 
 You can actually also supply it directly as an atlas. 
 For instance, if you had saved the merged data from the previous steps, you can supply this directly to the `atlas` option.
 
 ```{r}
-newAtlas = dkt %>% 
+newAtlas = dk %>% 
   left_join(someData)
 
 ggseg(atlas=newAtlas, mapping=aes(fill=p), position="stacked")
@@ -115,7 +115,7 @@ Lets do a recap of the unwanted results:
 
 ```{r datasupp3}
 someData = data.frame(
-  area = rep(c("transverse temporal", "insula",
+  region = rep(c("transverse temporal", "insula",
                "pre central","superior parietal"),2), 
   p = sample(seq(0,.5,.001), 8),
   AgeG = c(rep("Young",4), rep("Old",4)),
@@ -137,7 +137,7 @@ someData = someData %>%
   group_by(AgeG)
 
 # We can now supply the newAtlas as an atlas to ggseg
-ggseg(.data = someData, atlas=dkt, colour="white", mapping=aes(fill=p)) +
+ggseg(.data = someData, atlas=dk, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom") +
   scale_fill_gradientn(colours = c("royalblue","firebrick","goldenrod"),na.value="grey")
@@ -150,7 +150,7 @@ This whole procedure can be piped together, so you dont have to save all the int
 someData %>% 
   group_by(AgeG) %>% 
 
-  ggseg(atlas=dkt, colour="white", mapping=aes(fill=p)) +
+  ggseg(atlas=dk, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +
   theme(legend.position = "bottom") +
   scale_fill_gradientn(colours = c("royalblue","firebrick","goldenrod"),na.value="grey")

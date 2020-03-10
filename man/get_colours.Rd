@@ -11,8 +11,7 @@ get_colours(name, n, unname, package)
 
 \item{n}{Number of colours to return (or "all" [default])}
 
-\item{unname}{logical, if colours are to be unnamed before returning.
-Neccessary if applying palette to other data than the brain atlas it comes from.}
+\item{unname}{return unnamed vector (default = FALSE)}
 
 \item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }

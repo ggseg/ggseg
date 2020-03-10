@@ -8,7 +8,7 @@
 \describe{
   \item{lat}{coordinates for the x-axis}
   \item{long}{coordinates for the y-axis}
-  \item{area}{acronym of network}
+  \item{region}{acronym of network}
   \item{name}{full name of network}
   \item{hemi}{name of the hemisphere (left, right)}
   \item{side}{which side to view (medial, lateral,axial)}
@@ -30,7 +30,7 @@ Fischl et al., (2002). Neuron, 33:341-355
 }
 \seealso{
 Other ggseg_atlases: 
-\code{\link{dkt}}
+\code{\link{dk}}
 }
 \concept{ggseg_atlases}
 \keyword{datasets}
