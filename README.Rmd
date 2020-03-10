@@ -66,8 +66,8 @@ ggseg(atlas=dkt)
 ggseg(atlas=aseg)
 ```
 
-The package also has a vignette, to help you get started using it. 
-You can access it [here](https://lcbc-uio.github.io/ggseg/ggseg.html), or via R:
+The package also has several vignettes, to help you get started using it. 
+You can access it [here](https://lcbc-uio.github.io/ggseg/), or via R:
 
 ```{r eval=F}
 vignette("ggseg")
