@@ -2,6 +2,9 @@
 
 language: R
 cache: packages
+os:
+  - linux
+  - osx
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
