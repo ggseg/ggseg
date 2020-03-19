@@ -1,1 +1,5 @@
 destination: docs
+url: https://lcbc-uio.github.io/ggseg/
+template:
+  params:
+    bootswatch: cerulean
