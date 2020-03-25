@@ -12,7 +12,7 @@ Authors@R: c(person("Athanasia Mo", "Mowinckel",
 Description: This package mainly contains one plotting functions: `ggseg`, and data.frames or tibbles of different brain atlases for plotting. By far, the largestbit of the package is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true

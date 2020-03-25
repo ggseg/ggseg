@@ -35,10 +35,10 @@ stack_brain <- function (atlas){
 }
 
 
-data_merge <- function(.data, geobrain){
+data_merge <- function(.data, atlas){
 
   # Find columns they have in common
-  cols = names(geobrain)[names(geobrain) %in% names(.data)]
+  cols = names(atlas)[names(atlas) %in% names(.data)]
 
   if(dplyr::is_grouped_df(.data)){
 
@@ -46,31 +46,31 @@ data_merge <- function(.data, geobrain){
 
     cols = stats::na.omit(cols[!names(.data) %in% cols])
 
-    geobrain <- dplyr::mutate(.data,
+    atlas <- dplyr::mutate(.data,
                               data = purrr::map(data,
-                                                ~dplyr::full_join(geobrain, ., by=cols, copy=TRUE)))
-    geobrain <- tidyr::unnest(geobrain, cols = c(data))
-    geobrain <- dplyr::ungroup(geobrain)
+                                                ~dplyr::full_join(atlas, ., by=cols, copy=TRUE)))
+    atlas <- tidyr::unnest(atlas, cols = c(data))
+    atlas <- dplyr::ungroup(atlas)
 
   }else{
     # Merge the brain with the .data
-    geobrain = dplyr::full_join(geobrain, .data, by = cols, copy=TRUE)
+    atlas = dplyr::full_join(atlas, .data, by = cols, copy=TRUE)
   }
 
   # Find if there are instances of those columns that
-  # are not present in the geobrain. Maybe mispelled?
-  errs = dplyr::filter(geobrain, is.na(.lat))
+  # are not present in the atlas. Maybe mispelled?
+  errs = dplyr::filter(atlas, is.na(.lat))
   errs <- dplyr::select(errs, !!cols)
   errs <- dplyr::distinct(errs)
   errs <- tidyr::unite_(errs, "tt", cols, sep = " - ")
-  errs <- dplyr::summarise(errs, xvalue = paste0(tt, collapse = ", "))
+  errs <- dplyr::summarise(errs, value = paste0(tt, collapse = ", "))
 
   if(errs != ""){
-    warning(paste("Some .data is not merged properly into the geobrain. Check for spelling mistakes in:",
+    warning(paste("Some .data is not merged properly into the atlas. Check for spelling mistakes in:",
                   errs$value))
   }
 
-  return(geobrain)
+  return(atlas)
 }
 
 
