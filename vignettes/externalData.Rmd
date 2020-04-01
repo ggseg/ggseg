@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r setup, include=F}
-knitr::opts_chunk$set(eval=TRUE)
+knitr::opts_chunk$set(eval=TRUE, out.width = "100%")
 devtools::load_all(".")
 ```
 
@@ -47,7 +47,7 @@ For instance, here we make some data for the "default" and "visual" networks in 
 
 ```{r}
 someData = tibble(
-  region=c("superior temporal","pre central", "lateral orbitofrontal"),
+  region=c("superior temporal","precentral", "lateral orbitofrontal"),
   p=c(.03,.6, .05)
 )
 someData
@@ -116,7 +116,7 @@ Lets do a recap of the unwanted results:
 ```{r datasupp3}
 someData = data.frame(
   region = rep(c("transverse temporal", "insula",
-               "pre central","superior parietal"),2), 
+               "precentral","superior parietal"),2), 
   p = sample(seq(0,.5,.001), 8),
   AgeG = c(rep("Young",4), rep("Old",4)),
   stringsAsFactors = FALSE)

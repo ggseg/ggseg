@@ -1,48 +1,37 @@
+
+j <- dplyr::slice(ggseg3d::dk_3d, 1) %>%
+  tidyr::unnest(ggseg_3d) %>%
+  select(region, colour) %>%
+  distinct() %>%
+  na.omit()
+
+dk_palette <- setNames(
+  j$colour,
+  j$region
+)
+
+
+j <- dplyr::slice(ggseg3d::aseg_3d, 1) %>%
+  tidyr::unnest(ggseg_3d) %>%
+  select(region, colour) %>%
+  mutate(region = gsub("-|_", " ", region),
+         region = tolower(region),
+         region = gsub("left |right ", "", region),
+         region = gsub("cc ", "CC ", region),
+         region = gsub("inf", "", region),
+         region = gsub("ventraldc", "ventral DC", region)
+         ) %>%
+  distinct() %>%
+  na.omit()
+
+aseg_palette <- setNames(
+  j$colour,
+  j$region
+)
+
 brain_pals = list(
-  dk  = c(`banks superior temporal`	= "#196428",
-           `caudal anterior cingulate`	= "#7D64A0",
-           `caudal middle frontal`	= "#641900",
-           cuneus	= "#DC1464",
-           entorhinal	= "#DC140A",
-           fusiform	= "#B4DC8C",
-           `inferior parietal`	= "#DC3CDC",
-           `inferior temporal`	= "#B42878",
-           `isthmus cingulate`	= "#8C148C",
-           `lateral occipital`	= "#141E8C",
-           `lateral orbitofrontal`	= "#234B32",
-           lingual	= "#E18C8C",
-           `medial orbitofrontal`	= "#C8234B",
-           `middle temporal`	= "#A06432",
-           parahippocampal	= "#14DC3C",
-           `para central`	= "#3CDC3C",
-           `pars opercularis`	= "#DCB48C",
-           `pars orbitalis`	= "#146432",
-           `pars triangularis`	= "#DC3C14",
-           pericalcarine	= "#78643C",
-           `post central`	= "#DC1414",
-           `posterior cingulate`	= "#DCB4DC",
-           `pre central`	= "#3C14DC",
-           precuneus	= "#A08CB4",
-           `rostral anterior cingulate`	= "#50148C",
-           `rostral middle frontal`	= "#4B327D",
-           `superior frontal`	= "#14DCA0",
-           `superior parietal`	= "#14B48C",
-           `superior temporal`	= "#8CDCDC",
-           supramarginal	= "#50A014",
-           `frontal pole`	= "#640064",
-           `temporal pole`	= "#464646",
-           `transverse temporal`	= "#9696C8",
-           insula	= "#FFC020"
-  ),
-  aseg =  c(amygdala	= "#67FFFF",
-            caudate	= "#7ABADC",
-            hippocampus	= "#DCD814",
-            `lateral ventricle`	= "#781286",
-            pallidum	= "#0D30FF",
-            putamen	= "#EC0DB0",
-            `thalamus proper`	= "#00760E",
-            `ventral DC`	= "#A52A2A"
-  )
+  dk  = dk_palette,
+  aseg = aseg_palette
 )
 
 usethis::use_data(brain_pals,

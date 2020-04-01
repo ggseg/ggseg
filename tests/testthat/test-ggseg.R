@@ -1,5 +1,3 @@
-context("test-ggseg")
-
 
 test_that("Check that ggseg ggplot object is correct", {
   expect_is(ggseg(),c("gg","ggplot"))
@@ -13,7 +11,7 @@ test_that("Check that ggseg ggplot object is correct", {
   expect_equal(length(p$scales$scales), 2)
 
   ## p$data
-  expect_equal(dim(p$data)[1], 65478)
+  expect_equal(dim(p$data)[1], 185226)
   expect_equal(colnames(p$data)[1], "atlas")
 
   ## p$layers
@@ -36,11 +34,14 @@ test_that("Check that ggseg is working", {
   expect_is(
     ggseg(data=data.frame(
       region = c("transverse temporal", "insula",
-               "pre central","superior parietal"),
+               "precentral","superior parietal"),
       p = sample(seq(0,.5,.001), 4),
       stringsAsFactors = FALSE),mapping=aes(fill=p)),
     c("gg","ggplot"))
-  expect_is(ggseg(atlas = dk, mapping=aes(fill=region), position="stacked"),c("gg","ggplot"))
+
+  expect_is(ggseg(atlas = dk, mapping=aes(fill=region), position="stacked"),
+            c("gg","ggplot"))
+
   expect_warning(ggseg(atlas = aseg, position="stacked"))
 
   expect_warning(

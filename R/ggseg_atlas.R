@@ -28,6 +28,8 @@
 as_ggseg_atlas <- function(x = data.frame(.long = double(),
                                           .lat = double(),
                                           .id = character(),
+                                          .subid = character(),
+                                          atlas = as.character(),
                                           region = as.character(),
                                           hemi = character(),
                                           side = character()),
@@ -37,11 +39,12 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
   ret <- TRUE
   if("ggseg" %in% names(x)) x <- tidyr::unnest(x, cols = c(ggseg))
 
-  necessaries <- c(".long", ".lat", ".id", "hemi", "region", "side")
+  necessaries <- c(".long", ".lat", ".id", ".subid",
+                   "atlas", "hemi", "region", "side")
   miss <- necessaries %in% names(x)
   if(!all(miss)){
-    if(any(c("long", "lat", "id") %in% names(x))){
-      warning(paste0("Old naming convention found, renaming to new"))
+    if(any(c("long", "lat", "id", "subid") %in% names(x))){
+      #warning("Old naming convention found, renaming to new")
     }else{
       miss <- stats::na.omit(necessaries[!miss])
 
@@ -110,5 +113,5 @@ is_ggseg_atlas <- function(x){
 
 # quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("x", "ggseg_3d"))
+  utils::globalVariables(c("x", "ggseg_3d", ".subid"))
 }

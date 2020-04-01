@@ -7,8 +7,9 @@
 \title{`ggseg_atlas` class}
 \usage{
 as_ggseg_atlas(
-  x = data.frame(.long = double(), .lat = double(), .id = character(), region =
-    as.character(), hemi = character(), side = character()),
+  x = data.frame(.long = double(), .lat = double(), .id = character(), .subid =
+    character(), atlas = as.character(), region = as.character(), hemi = character(),
+    side = character()),
   return = FALSE
 )
 }

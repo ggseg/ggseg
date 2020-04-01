@@ -1,6 +1,5 @@
 ^doc$
 ^Meta$
-^doc$
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
@@ -14,3 +13,4 @@
 img
 logo.png
 ^_pkgdown\.yml$
+^doc$
