@@ -86,7 +86,7 @@ Here we create some data with 4 rows, and an `region` and `p` column. We provide
 ```{r datasupp, fig.width=5}
 someData = data.frame(
   region = c("transverse temporal", "insula",
-           "pre central","superior parietal"), 
+           "precentral","superior parietal"), 
   p = sample(seq(0,.5,.001), 4),
   stringsAsFactors = FALSE)
 
@@ -100,7 +100,6 @@ ggseg(.data=someData, colour="black", mapping=aes(fill=p)) +
   theme_void() +
   scale_fill_gradient(low="firebrick",high="goldenrod") +
   labs(title="Aparc plots rule", fill="p-value")
-
 ```
 
 ## Single hemisphere results
@@ -143,7 +142,7 @@ This is because the atlas data must be completely duplicated for plotting to loo
 ```{r datasupp3, fig.width=5}
 someData = data.frame(
   region = rep(c("transverse temporal", "insula",
-               "pre central","superior parietal"),2), 
+               "precentral","superior parietal"),2), 
   p = sample(seq(0,.5,.001), 8),
   AgeG = c(rep("Young",4), rep("Old",4)),
   stringsAsFactors = FALSE)

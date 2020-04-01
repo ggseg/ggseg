@@ -106,7 +106,10 @@ ggseg = function(.data = NULL,
   }
 
   # Create the plot
-  gg <- ggplot2::ggplot(data = geobrain, ggplot2::aes(x=.long, y=.lat, group=.id)) +
+  gg <- ggplot2::ggplot(data = geobrain,
+                        ggplot2::aes(x=.long, y=.lat,
+                                     group=.id,
+                                     subgroup = .subid)) +
     ggplot2::geom_polygon(...) +
     ggplot2::coord_fixed()
 

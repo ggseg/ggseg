@@ -2,6 +2,7 @@ test_that("check that ggseg_atlas is correct", {
   tt <- data.frame(.long = double(),
                    .lat = double(),
                    .id = character(),
+                   .subid = character(),
                    hemi = character(),
                    side = character())
 
@@ -15,7 +16,7 @@ test_that("check that ggseg_atlas is correct", {
                    region = character())
   expect_warning(as_ggseg_atlas(tt))
 
-  expect_equal(dim(as_ggseg_atlas(dk)), c(80,6))
+  expect_equal(dim(as_ggseg_atlas(dk)), c(90, 6))
 
 })
 

@@ -3,9 +3,9 @@ context("test-data_merge")
 
 someData <- data.frame(
   region = c("transverse temporal", "insula",
-           "pre central","superior parietal",
+           "precentral","superior parietal",
            "transverse temporal", "insula",
-           "pre central","superior parietal"),
+           "precentral","superior parietal"),
   p = sample(seq(0,.5,.001), 8),
   Group = c(rep("G1",4), rep("G2",4)),
   stringsAsFactors = FALSE) %>%

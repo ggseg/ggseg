@@ -33,11 +33,16 @@ When using this file, remembering which hemisphere is read in is important, as t
 
 ```{r, eval=FALSE}
 library(ggseg)
-subject_dir <- "/Applications/freesurfer/subjects/"
-stats_file <- paste0(subject_dir, "bert/stats/lh.aparc.stats")
+subjects_dir <- "/Applications/freesurfer/subjects/"
+```
+
+```{r, echo = FALSE}
+library(ggseg)
+subjects_dir <- here::here("tests/testthat/data")
 ```
 
 ```{r}
+stats_file <- file.path(subjects_dir, "bert/stats/lh.aparc.stats")
 data <- read_freesurfer_stats(stats_file)
 data
 ```
@@ -116,11 +121,12 @@ dat
 This will do two things: 1) remove the label suffix, and 2) rename the `value` column to the measure supplied.
 Alternatively, you will need to do string manipulation on the label column your self, we recommend the [stringr](https://stringr.tidyverse.org/index.html) package in that case.
 
-```{r}
-ggseg(dat, mapping = aes(fill = volume))
+```{r, eval = FALSE}
+dat %>% 
+  ggseg(mapping = aes(fill = volume))
 ```
 
-The error thrown is because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
+An error will be thrown because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
 To avoid this, you can remove those labels before plotting.
 
 ```{r}
