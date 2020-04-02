@@ -5,11 +5,12 @@ library(ggplot2)
 devtools::load_all("../ggsegExtra/")
 
 dk <- ggsegExtra::make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
-                                       steps = 5:6,
+                                       steps = 6:7,
                                        smoothness = 8,
+                                       keep = 0.05,
                                        output_dir = "~/Desktop/test/")
-dk <- mutate(dk, atlas = "dk")
-dk <- as_ggseg_atlas(dk)
+
+nrow(unnest(dk, ggseg))
 
 ggseg(atlas=dk, show.legend = FALSE,
       colour = "black", position="stacked",

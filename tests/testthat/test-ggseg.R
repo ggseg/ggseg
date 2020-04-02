@@ -11,7 +11,7 @@ test_that("Check that ggseg ggplot object is correct", {
   expect_equal(length(p$scales$scales), 2)
 
   ## p$data
-  expect_equal(dim(p$data)[1], 185226)
+  expect_equal(dim(p$data)[1], 9583)
   expect_equal(colnames(p$data)[1], "atlas")
 
   ## p$layers
