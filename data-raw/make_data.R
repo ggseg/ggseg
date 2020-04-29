@@ -10,12 +10,11 @@ someData <- data.frame(
   Group = c(rep("G1",4), rep("G2",4)),
   stringsAsFactors = FALSE)
 
-dk <- ggsegExtra::make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
-                                       steps = 7,
-                                       tolerance = .5,
-                                       smoothness = 5,
-                                       keep = 0.05,
-                                       output_dir = "~/Desktop/test/")
+dk <- make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
+                           steps = 6:7,
+                           tolerance = .5,
+                           smoothness = 5,
+                           output_dir = "data-raw")
 
 
 ggseg(atlas=dk, show.legend = FALSE,
@@ -26,15 +25,14 @@ ggseg(atlas=dk, show.legend = FALSE,
 plot(dk)
 
 ggplot() +
-  geom_brain(data = dk, aes(fill = region),
+  geom_brain(atlas = dk, aes(fill = region),
              position = position_brain("vertical"),
              show.legend = FALSE) +
   scale_fill_brain()
 
 
-ggplot(someData) +
-  geom_brain(data = someData, atlas = dk, aes(fill = region), show.legend = FALSE) +
-  scale_fill_brain()
+ggplot() +
+  geom_brain(atlas = dk, show.legend = FALSE)
 
 usethis::use_data(dk,
                   internal = FALSE,

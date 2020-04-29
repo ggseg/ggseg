@@ -52,13 +52,20 @@ layer_brain <- function(geom = NULL, stat = NULL,
 }
 
 LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
+
                       setup_layer = function(self, data, plot) {
                         # process generic layer setup first
                         data <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
 
-                        browser()
                         common_vars <- names(data)[names(data) %in% names(self$geom_params$atlas)]
-                        data <- dplyr::left_join(self$geom_params$atlas, data)
+
+                        if(length(common_vars) > 0){
+                          cat("merging atlas and data by '", common_vars, "'\n", sep="")
+
+                          data <- dplyr::left_join(self$geom_params$atlas, data, by = common_vars)
+                        }else{
+                          data <- self$geom_params$atlas
+                        }
 
                         # automatically determine the name of the geometry column
                         # and add the mapping if it doesn't exist
@@ -139,14 +146,13 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                        stroke = 0.5
                      ),
 
-                     draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
+                    draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
                                            lineend = "butt", linejoin = "round", linemitre = 10,
                                            na.rm = TRUE) {
                        if (!inherits(coord, "CoordSf")) {
+                         #TODO replace with own coords that detect side/hemi
                          abort("geom_brain() must be used with coord_sf()")
                        }
-
-                       browser()
 
                        df2 <- dplyr::group_by(data, label)
 
@@ -255,7 +261,6 @@ PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
 
                          compute_layer = function(self, data, params, layout) {
 
-                            browser()
                            df3 <- frame_2_position(params, data)
 
                            # rescale layout to reflect new coordinates
@@ -275,30 +280,50 @@ PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
 
 # geometry movers ----
 
-frame_2_position <- function(params, data){
-  chosen <- all.vars(params$position, unique = FALSE)
-  chosen <- chosen[!grepl("\\.", chosen)]
-  if(any(duplicated(chosen)))
-    stop("Cannot position brain with the same data as columns and rows")
-
-  df2 <- dplyr::group_by_at(data, chosen)
-  df2 <- dplyr::group_split(df2)
-
-  # get all into same 0-space
-  df2 <- purrr::map(df2, ~ gather_geometry(.x))
-
+position_formula <- function(pos){
   # browser()
-  pos <- if(length(grep("\\+", params$position))>0){
-    ifelse(grep("\\+", params$position) == 2,
+
+  chosen <- all.vars(pos, unique = FALSE)
+  chosen <- chosen[!grepl("\\.", chosen)]
+
+  if(any(duplicated(chosen)))
+    stop("Cannot position brain with the same data as columns and rows",
+         call. = FALSE)
+
+  if(length(chosen) < 2)
+    stop(paste0("position formula not correct. ",
+                "Missing '", c("side","hemi")[!c("side","hemi") %in% chosen], "'")
+    )
+
+  position <- if(length(grep("\\+", pos))>0){
+    ifelse(grep("\\+", pos) == 2,
            "rows", "columns")
   }else{
     chosen
   }
 
-  df3 <- if(length(pos) == 2){
-    stack_grid(df2, pos[1], pos[2])
+  if(all(sum(grepl("\\.|~", pos)) != 2 & position %in% c("rows", "columns")))
+    stop("Formula for a single row or column must contain both a . and ~")
+
+  return(list(position = position,
+              chosen = chosen))
+
+}
+
+frame_2_position <- function(params, data){
+
+  pos <- position_formula(params$position)
+
+  df2 <- dplyr::group_by_at(data, pos$chosen)
+  df2 <- dplyr::group_split(df2)
+
+  # get all into same 0-space
+  df2 <- purrr::map(df2, ~ gather_geometry(.x))
+
+  df3 <- if(length(pos$position) == 2){
+    stack_grid(df2, pos$position[1], pos$position[2])
   }else{
-    switch(pos,
+    switch(pos$position,
            "rows" = stack_vertical(df2),
            "columns" = stack_horizontal(df2)
     )
@@ -346,6 +371,15 @@ stack_vertical <- function(df){
 
 stack_grid <- function(df, rows, columns){
   bx <- list()
+
+  if(length(df) == 4){
+    # switch columns if they are not the same
+    # so grid aligns properly
+    if(unique(df[[3]][columns]) != unique(df[[2]][columns])){
+      df <- list(df[[1]], df[[2]],
+                 df[[4]], df[[3]])
+    }
+  }
 
   # move second and fourth on x
   for(k in c(2,3)){
