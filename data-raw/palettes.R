@@ -11,15 +11,27 @@ dk_palette <- setNames(
 )
 
 
-j <- dplyr::slice(ggseg3d::aseg_3d, 1) %>%
-  tidyr::unnest(ggseg_3d) %>%
-  select(region, colour) %>%
-  mutate(region = gsub("-|_", " ", region),
+# aseg full palette
+j <- read.table(file.path(freesurfer::fs_dir(), "ASegStatsLUT.txt"),
+                skip = 7,
+                col.names = c("roi","label","r", "g","b","a")) %>%
+  mutate(colour = rgb(r,g,b, maxColorValue = 255)) %>%
+  filter(label != "Unknown",
+         label != "Right-Cerebral-White-Matter",
+         label != "Left-Cerebral-White-Matter") %>%
+
+#j <- dplyr::slice(ggseg3d::aseg_3d, 1) %>%
+ # tidyr::unnest(ggseg_3d) %>%
+  #select(region, colour) %>%
+  mutate(region = gsub("-|_", " ", label),
          region = tolower(region),
          region = gsub("left |right ", "", region),
          region = gsub("cc ", "CC ", region),
-         region = gsub("inf", "", region),
-         region = gsub("ventraldc", "ventral DC", region)
+         region = gsub("inf", "inferior", region),
+         region = gsub("lat", "lateral", region),
+         region = gsub("non wm", "non-wm", region),
+         region = gsub("ventraldc", "ventral DC", region),
+         region = ifelse(region == "cerebral cortex", NA, region)
          ) %>%
   distinct() %>%
   na.omit()

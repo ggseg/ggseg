@@ -29,8 +29,9 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
                                           .lat = double(),
                                           .id = character(),
                                           .subid = character(),
-                                          atlas = as.character(),
-                                          region = as.character(),
+                                          atlas = character(),
+                                          type = character(),
+                                          region = character(),
                                           hemi = character(),
                                           side = character()),
                            return = FALSE
@@ -40,7 +41,7 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
   if("ggseg" %in% names(x)) x <- tidyr::unnest(x, cols = c(ggseg))
 
   necessaries <- c(".long", ".lat", ".id", ".subid",
-                   "atlas", "hemi", "region", "side")
+                   "atlas", "hemi", "region", "side", "type")
   miss <- necessaries %in% names(x)
   if(!all(miss)){
     if(any(c("long", "lat", "id", "subid") %in% names(x))){
@@ -58,7 +59,7 @@ as_ggseg_atlas <- function(x = data.frame(.long = double(),
   }
 
   # Variables to group the df by
-  group_variables <- c("atlas", "region", "hemi", "side", "label")
+  group_variables <- c("atlas", "type", "region", "hemi", "side", "label")
   group_variables <- group_variables[group_variables %in% names(x)]
 
   # columns to be renamed to avoid possible name collisions

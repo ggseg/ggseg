@@ -12,28 +12,53 @@ squish_position <- function(geobrain, hemisphere, stack){
 
 
 stack_brain <- function (atlas){
-  stack <- dplyr::group_by(atlas, hemi, side)
+  if(unique(atlas$type) == "cortical"){
+    stack <- dplyr::group_by(atlas, hemi, side)
+    stack <- calc_stack(stack)
+
+    atlas = dplyr::mutate(atlas,
+                          .lat = ifelse(hemi %in% "right",
+                                        .lat + (stack$.lat_max[1]), .lat),
+                          .long = ifelse(hemi %in% "right" & side %in% "lateral",
+                                         .long - stack$.long_min[3], .long),
+                          .long = ifelse(hemi %in% "right" & side %in%  "medial",
+                                         .long + (stack$.long_min[2] - stack$.long_min[4]),
+                                         .long))
+
+  }else if(unique(atlas$type) == "subcortical"){
+    stack <- dplyr::group_by(atlas, side)
+    stack <- calc_stack(stack)
+    stack <- arrange(stack, .long_min)
+
+    for(k in 1:nrow(stack)){
+      atlas <-  dplyr::mutate(atlas,
+                            .lat = ifelse(side %in% stack$side[k],
+                                          .lat + mean(stack$.lat_max)*k, .lat),
+                            .long = ifelse(side %in% stack$side[k],
+                                           .long - stack$.long_mean[k],
+                                           .long))
+    }
+    # browser()
+  }else{
+    cat("Atlas .type not set, stacking not possible.")
+  }
+
+
+  return(atlas)
+}
+
+calc_stack <- function(stack){
   stack <- dplyr::summarise_at(stack,
                                dplyr::vars(.long,
                                            .lat),
-                               list(min = min, max = max, sd = stats::sd))
+                               list(min = min, max = max, sd = stats::sd, mean = mean))
   stack <- dplyr::mutate(stack, sd = .lat_sd + .long_sd)
 
   stack$.lat_max[1] = ifelse(stack$.lat_max[1]/4.5 < stack$.lat_sd[1],
                              stack$.lat_max[1] + stack$.lat_sd[1],
                              stack$.lat_max[1])
-
-  atlas = dplyr::mutate(atlas,
-                        .lat = ifelse(hemi %in% "right",
-                                      .lat + (stack$.lat_max[1]), .lat),
-                        .long = ifelse(hemi %in% "right" & side %in% "lateral",
-                                       .long - stack$.long_min[3], .long),
-                        .long = ifelse(hemi %in% "right" & side %in%  "medial",
-                                       .long + (stack$.long_min[2] - stack$.long_min[4]),
-                                       .long))
-  return(atlas)
+  return(stack)
 }
-
 
 data_merge <- function(.data, atlas){
 
@@ -47,8 +72,8 @@ data_merge <- function(.data, atlas){
     cols = stats::na.omit(cols[!names(.data) %in% cols])
 
     atlas <- dplyr::mutate(.data,
-                              data = purrr::map(data,
-                                                ~dplyr::full_join(atlas, ., by=cols, copy=TRUE)))
+                           data = purrr::map(data,
+                                             ~dplyr::full_join(atlas, ., by=cols, copy=TRUE)))
     atlas <- tidyr::unnest(atlas, cols = c(data))
     atlas <- dplyr::ungroup(atlas)
 
@@ -91,7 +116,7 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
                  unique(geobrain$atlas),
                  "unknown")
 
-  if(!".pos" %in% names(geobrain)){
+  if(unique(geobrain$type) == "cortical"){
     y <- dplyr::group_by(geobrain, hemi)
     y <- dplyr::summarise(y, val=gap(.lat))
 
@@ -123,8 +148,38 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
              labs = list(y = NULL, x = "hemisphere")
         )
     )
-  }else{
-    ad_scale = geobrain$.pos[[1]]
+  }else if(unique(geobrain$type) == "subcortical"){
+    y <- dplyr::group_by(geobrain, side)
+    y <- dplyr::summarise(y, val=gap(.lat))
+
+    x <- dplyr::group_by(geobrain, side)
+    x <- dplyr::summarise(x, val=gap(.long))
+
+    stk = list(
+      y = y,
+      x = x
+    )
+
+    disp <- dplyr::group_by(geobrain, side)
+    disp <- dplyr::summarise_at(disp, dplyr::vars(.long,.lat), list(gap))
+
+    ad_scale <- list(
+      stacked =
+        list(x = list(breaks = NULL,
+                      labels = ""),
+             y = list(breaks = stk$y$val,
+                      labels = stk$y$side),
+             labs = list(y = "side", x = NULL)
+        ),
+
+      dispersed =
+        list(x = list(breaks = disp$.long,
+                      labels = disp$side),
+             y = list(breaks = NULL,
+                      labels = ""),
+             labs = list(y = NULL, x = "side")
+        )
+    )
   }
 
   if(is.null(ad_scale[[position]])){

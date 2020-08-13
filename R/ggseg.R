@@ -72,25 +72,19 @@ ggseg = function(.data = NULL,
 
   geobrain <- tidyr::unnest(geobrain, ggseg)
 
-  stack <- dplyr::case_when(
-    grepl("stack", position) ~ "stacked",
-    grepl("disperse", position) ~ "dispersed",
-    TRUE ~ "unknown"
+  stack <- match.arg(position,
+                      c("stacked", "dispersed"),
+                     several.ok = FALSE
   )
 
   if(stack == "stacked"){
-    ss_check <- unlist(unique(dplyr::select(geobrain, side))) %in% c("medial","lateral")
-    if(any(!ss_check)){
-      warning("Cannot stack atlas. Check if atlas has medial views.")
-    }else{
+  #  ss_check <- unlist(unique(dplyr::select(geobrain, side))) %in% c("medial","lateral")
+  #  if(any(!ss_check)){
+  #    warning("Cannot stack atlas. Check if atlas has medial views.")
+  #  }else{
       geobrain <- stack_brain(geobrain)
-    } # If possible to stack
-  }else if(stack == "unknown"){
-    warning(paste0("Cannot recognise position = '", position,
-                   "'. Please use either 'stacked' or 'dispersed', returning dispersed.")
-    )
-    stack <- "dispersed"
-  } # If stacked
+   # } # If possible to stack
+  }
 
   # Remove .data we don't want to plot
   if(!is.null(hemisphere)) geobrain <- dplyr::filter(geobrain, hemi %in% hemisphere)

@@ -87,10 +87,16 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           self$mapping$side <- as.name("side")
                         }
 
+                        if ((isTRUE(self$inherit.aes) && is.null(self$mapping$type) && is.null(plot$mapping$type)) ||
+                            (!isTRUE(self$inherit.aes) && is.null(self$mapping$type))) {
+                          self$mapping$type <- as.name("type")
+                        }
+
                         if ((isTRUE(self$inherit.aes) && is.null(self$mapping$fill) && is.null(plot$mapping$fill)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$mapping$fill))) {
                           self$mapping$fill <- as.name("region")
                         }
+
 
                         # work around for later merging.
                         # shitty solution
@@ -146,7 +152,7 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                        stroke = 0.5
                      ),
 
-                    draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
+                     draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
                                            lineend = "butt", linejoin = "round", linemitre = 10,
                                            na.rm = TRUE) {
                        if (!inherits(coord, "CoordSf")) {
@@ -280,7 +286,7 @@ PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
 
 # geometry movers ----
 
-position_formula <- function(pos){
+position_formula <- function(pos, type){
   # browser()
 
   chosen <- all.vars(pos, unique = FALSE)
@@ -290,16 +296,20 @@ position_formula <- function(pos){
     stop("Cannot position brain with the same data as columns and rows",
          call. = FALSE)
 
-  if(length(chosen) < 2)
-    stop(paste0("position formula not correct. ",
-                "Missing '", c("side","hemi")[!c("side","hemi") %in% chosen], "'")
-    )
+  if(type == "cortical"){
+    if(length(chosen) < 2)
+      stop(paste0("position formula not correct. ",
+                  "Missing '", c("side","hemi")[!c("side","hemi") %in% chosen], "'")
+      )
 
-  position <- if(length(grep("\\+", pos))>0){
-    ifelse(grep("\\+", pos) == 2,
-           "rows", "columns")
+    position <- if(length(grep("\\+", pos))>0){
+      ifelse(grep("\\+", pos) == 2,
+             "rows", "columns")
+    }else{
+      chosen
+    }
   }else{
-    chosen
+    cat("dont know how to position subcortical data")
   }
 
   if(all(sum(grepl("\\.|~", pos)) != 2 & position %in% c("rows", "columns")))
@@ -312,7 +322,7 @@ position_formula <- function(pos){
 
 frame_2_position <- function(params, data){
 
-  pos <- position_formula(params$position)
+  pos <- position_formula(params$position, unique(data$type))
 
   df2 <- dplyr::group_by_at(data, pos$chosen)
   df2 <- dplyr::group_split(df2)
