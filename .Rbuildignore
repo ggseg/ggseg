@@ -14,3 +14,4 @@ img
 logo.png
 ^_pkgdown\.yml$
 ^doc$
+^\.github$
