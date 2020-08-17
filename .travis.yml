@@ -5,11 +5,11 @@ cache: packages
 os:
   - linux
   - osx
-osx_image: xcode11
+osx_image: xcode12u
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
   script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then Rscript -e 'pkgdown::deploy_site_github(ssh_id = Sys.getenv("TRAVIS_DEPLOY_KEY_COM", ""))'; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew cask install mactex-no-gui; fi
+#  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew cask install mactex-no-gui; fi
   skip_cleanup: true
