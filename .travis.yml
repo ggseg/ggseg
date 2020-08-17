@@ -5,7 +5,7 @@ cache: packages
 os:
   - linux
   - osx
-osx_image: xcode9.2
+osx_image: xcode11
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
