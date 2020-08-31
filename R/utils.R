@@ -1,69 +1,74 @@
+#' @importFrom dplyr group_by summarise_at mutate
+#' @importFrom stats sd
 squish_position <- function(geobrain, hemisphere, stack){
-  mm <- dplyr::group_by(geobrain, hemi)
-  mm <- dplyr::summarise_at(mm, dplyr::vars(.long),
-                            list(max = max, min = min, sd = stats::sd))
+  mm <- group_by(geobrain, hemi)
+  mm <- summarise_at(mm, vars(.long),
+                     list(max = max, min = min, sd = sd))
   diff <- mm$min[2] - mm$max[1]
 
-  dplyr::mutate(geobrain,
-                .long = ifelse(hemi == "right",
-                               .long - diff + mm$sd[1]*.5,
-                               .long))
+  mutate(geobrain,
+         .long = ifelse(hemi == "right",
+                        .long - diff + mm$sd[1]*.5,
+                        .long))
 }
 
-
+#' @importFrom dplyr group_by summarise_at mutate vars
 stack_brain <- function (atlas){
-  stack <- dplyr::group_by(atlas, hemi, side)
-  stack <- dplyr::summarise_at(stack,
-                               dplyr::vars(.long,
-                                           .lat),
-                               list(min = min, max = max, sd = stats::sd))
-  stack <- dplyr::mutate(stack, sd = .lat_sd + .long_sd)
+  stack <- group_by(atlas, hemi, side)
+  stack <- summarise_at(stack,
+                        vars(.long,
+                             .lat),
+                        list(min = min, max = max, sd = stats::sd))
+  stack <- mutate(stack, sd = .lat_sd + .long_sd)
 
   stack$.lat_max[1] = ifelse(stack$.lat_max[1]/4.5 < stack$.lat_sd[1],
                              stack$.lat_max[1] + stack$.lat_sd[1],
                              stack$.lat_max[1])
 
-  atlas = dplyr::mutate(atlas,
-                        .lat = ifelse(hemi %in% "right",
-                                      .lat + (stack$.lat_max[1]), .lat),
-                        .long = ifelse(hemi %in% "right" & side %in% "lateral",
-                                       .long - stack$.long_min[3], .long),
-                        .long = ifelse(hemi %in% "right" & side %in%  "medial",
-                                       .long + (stack$.long_min[2] - stack$.long_min[4]),
-                                       .long))
+  atlas = mutate(atlas,
+                 .lat = ifelse(hemi %in% "right",
+                               .lat + (stack$.lat_max[1]), .lat),
+                 .long = ifelse(hemi %in% "right" & side %in% "lateral",
+                                .long - stack$.long_min[3], .long),
+                 .long = ifelse(hemi %in% "right" & side %in%  "medial",
+                                .long + (stack$.long_min[2] - stack$.long_min[4]),
+                                .long))
   return(atlas)
 }
 
-
+#' @importFrom dplyr ungroup group_by  filter select distinct summarise full_join is_grouped_df
+#' @importFrom tidyr unnest nest unite unite_
+#' @importFrom purrr map
+#' @importFrom stats na.omit
 data_merge <- function(.data, atlas){
 
   # Find columns they have in common
   cols = names(atlas)[names(atlas) %in% names(.data)]
 
-  if(dplyr::is_grouped_df(.data)){
+  if(is_grouped_df(.data)){
 
-    .data <- tidyr::nest(.data)
+    .data <- nest(.data)
 
-    cols = stats::na.omit(cols[!names(.data) %in% cols])
+    cols = na.omit(cols[!names(.data) %in% cols])
 
-    atlas <- dplyr::mutate(.data,
-                              data = purrr::map(data,
-                                                ~dplyr::full_join(atlas, ., by=cols, copy=TRUE)))
-    atlas <- tidyr::unnest(atlas, cols = c(data))
-    atlas <- dplyr::ungroup(atlas)
+    atlas <- mutate(.data,
+                    data = map(data,
+                               ~full_join(atlas, ., by=cols, copy=TRUE)))
+    atlas <- unnest(atlas, cols = c(data))
+    atlas <- ungroup(atlas)
 
   }else{
     # Merge the brain with the .data
-    atlas = dplyr::full_join(atlas, .data, by = cols, copy=TRUE)
+    atlas = full_join(atlas, .data, by = cols, copy=TRUE)
   }
 
   # Find if there are instances of those columns that
   # are not present in the atlas. Maybe mispelled?
-  errs = dplyr::filter(atlas, is.na(.lat))
-  errs <- dplyr::select(errs, !!cols)
-  errs <- dplyr::distinct(errs)
-  errs <- tidyr::unite_(errs, "tt", cols, sep = " - ")
-  errs <- dplyr::summarise(errs, value = paste0(tt, collapse = ", "))
+  errs <- filter(atlas, is.na(.lat))
+  errs <- select(errs, !!cols)
+  errs <- distinct(errs)
+  errs <- unite_(errs, "tt", cols, sep = " - ")
+  errs <- summarise(errs, value = paste0(tt, collapse = ", "))
 
   if(errs != ""){
     warning(paste("Some .data is not merged properly into the atlas. Check for spelling mistakes in:",
@@ -85,6 +90,7 @@ data_merge <- function(.data, atlas){
 #' @param aesthetics String of which aesthetics to adapt scale of, either "x","y", or "labs".
 #'
 #' @return nested list
+#' @importFrom dplyr group_by summarise vars
 adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
   atlas = ifelse(any(names(geobrain) %in% "atlas"),
@@ -92,19 +98,19 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
                  "unknown")
 
   if(!".pos" %in% names(geobrain)){
-    y <- dplyr::group_by(geobrain, hemi)
-    y <- dplyr::summarise(y, val=gap(.lat))
+    y <- group_by(geobrain, hemi)
+    y <- summarise(y, val=gap(.lat))
 
-    x <- dplyr::group_by(geobrain, side)
-    x <- dplyr::summarise(x, val=gap(.long))
+    x <- group_by(geobrain, side)
+    x <- summarise(x, val=gap(.long))
 
     stk = list(
       y = y,
       x = x
     )
 
-    disp <- dplyr::group_by(geobrain, hemi)
-    disp <- dplyr::summarise_at(disp, dplyr::vars(.long,.lat), list(gap))
+    disp <- group_by(geobrain, hemi)
+    disp <- summarise_at(disp, vars(.long,.lat), list(gap))
 
     ad_scale <- list(
       stacked =

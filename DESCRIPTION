@@ -15,7 +15,7 @@ Description: Contains one plotting functions: `ggseg`,
     is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
@@ -24,7 +24,9 @@ Imports:
     tidyr,
     purrr,
     remotes,
-    utils
+    utils,
+    vctrs,
+    pillar
 Suggests:
     knitr,
     here, 

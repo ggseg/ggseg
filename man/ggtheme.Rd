@@ -27,7 +27,7 @@ theme_custombrain(
 \item{text.colour}{Speficy colour of plot text}
 }
 \description{
-a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.
+a set of themes created for the ggseg plots. Use theme() to tweak.
 }
 \details{
 \describe{

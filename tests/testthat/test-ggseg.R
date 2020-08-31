@@ -70,8 +70,7 @@ test_that("Check that plotting non ggseg_atlas-class tries conversion", {
 
 test_that("Check brain stacking", {
 
-  expect_warning(p <- ggseg(position = "rr"), "Cannot recognise position")
-  expect_is(p, c("gg","ggplot"))
+  expect_error(ggseg(position = "rr"), 'should be one of')
 
   expect_is(ggseg(position = "stack"), c("gg","ggplot"))
   expect_is(ggseg(position = "stacked"), c("gg","ggplot"))

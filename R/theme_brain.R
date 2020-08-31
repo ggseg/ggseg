@@ -1,6 +1,6 @@
 #' ggseg plot theme
 #'
-#' @description a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.
+#' @description a set of themes created for the ggseg plots. Use theme() to tweak.
 #' @author Athanasia Mowinckel
 #'
 #' @param text.size Specify size of plot text
@@ -25,20 +25,21 @@
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #' @export
 #' @rdname ggtheme
+#' @importFrom ggplot2 theme element_blank element_text
 theme_brain = function(text.size=12,
                        text.family="mono"){
 
-  ggplot2::theme(
-    axis.ticks = ggplot2::element_blank(),
-    panel.grid = ggplot2::element_blank(),
-    panel.background = ggplot2::element_blank(),
-    plot.background = ggplot2::element_blank(),
-    legend.background = ggplot2::element_blank(),
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    plot.background = element_blank(),
+    legend.background = element_blank(),
 
-    text = ggplot2::element_text(family=text.family,
+    text = element_text(family=text.family,
                                  size=text.size),
 
-    axis.text = ggplot2::element_text(family=text.family,
+    axis.text = element_text(family=text.family,
                                       size=text.size)
   )
 }
@@ -49,16 +50,16 @@ theme_brain = function(text.size=12,
 theme_darkbrain = function(text.size=12,
                            text.family="mono"){
 
-  ggplot2::theme(
-    axis.ticks = ggplot2::element_blank(),
-    panel.grid = ggplot2::element_blank(),
-    panel.background = ggplot2::element_blank(),
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
 
-    legend.background = ggplot2::element_rect(fill="black"),
-    plot.background = ggplot2::element_rect(fill="black"),
+    legend.background = element_rect(fill="black"),
+    plot.background = element_rect(fill="black"),
 
-    text = ggplot2::element_text(colour="lightgrey"),
-    axis.text = ggplot2::element_text(colour="lightgrey",
+    text = element_text(colour="lightgrey"),
+    axis.text = element_text(colour="lightgrey",
                                       family=text.family,
                                       size=text.size)
   )
@@ -73,19 +74,19 @@ theme_custombrain = function(plot.background="white",
                              text.size=12,
                              text.family="mono"){
 
-  ggplot2::theme(
-    axis.ticks = ggplot2::element_blank(),
-    panel.grid = ggplot2::element_blank(),
-    panel.background = ggplot2::element_blank(),
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
 
-    legend.background = ggplot2::element_rect(fill=plot.background),
-    plot.background = ggplot2::element_rect(fill=plot.background),
+    legend.background = element_rect(fill=plot.background),
+    plot.background = element_rect(fill=plot.background),
 
-    text = ggplot2::element_text(colour=text.colour,
+    text = element_text(colour=text.colour,
                                  family=text.family,
                                  size=text.size),
 
-    axis.text = ggplot2::element_text(colour=text.colour,
+    axis.text = element_text(colour=text.colour,
                                       family=text.family,
                                       size=text.size)
   )
