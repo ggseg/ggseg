@@ -12,7 +12,7 @@ Authors@R: c(person("Athanasia Mo", "Mowinckel",
 Description: This package mainly contains one plotting functions: `ggseg`, and data.frames or tibbles of different brain atlases for plotting. By far, the largestbit of the package is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
@@ -21,7 +21,9 @@ Imports:
     tidyr,
     purrr,
     remotes,
-    utils
+    grid,
+    utils,
+    ggplot2
 Suggests:
     knitr,
     here, 
@@ -32,3 +34,20 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/LCBC-UiO/ggseg
 BugReports: https://github.com/LCBC-UiO/ggseg/issues
+Collate: 
+    'brain_palettes.R'
+    'coord-brain.R'
+    'data.R'
+    'layer.r'
+    'geom.R'
+    'ggseg-package.R'
+    'ggseg.R'
+    'ggseg_atlas.R'
+    'ggseg_atlas2.R'
+    'layer.R'
+    'position-brain.R'
+    'read_freesurfer.R'
+    'scale_brain.R'
+    'theme_brain.R'
+    'utils.R'
+    'zzz.R'

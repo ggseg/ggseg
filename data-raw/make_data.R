@@ -7,10 +7,12 @@ dk <- make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
                            tolerance = .5,
                            smoothness = 5,
                            output_dir = "data-raw")
-
-
-ggseg(atlas=dk, show.legend = FALSE,
-      colour = "black", position="stacked",
+# dk <- mutate(dk, type = "cortical")
+dk2 <- dk
+dk2$geometry <- NULL
+dk2 <- as_ggseg_atlas(dk2)
+ggseg(atlas=dk2, show.legend = FALSE,
+      colour = "black", #position="stacked",
       mapping = aes(fill=region)) +
   scale_fill_brain()
 
@@ -18,7 +20,7 @@ plot(dk)
 
 ggplot() +
   geom_brain(atlas = dk, aes(fill = region),
-             position = position_brain(hemi + side ~ .),
+             # position = position_brain(hemi + side ~ .),
              show.legend = FALSE) +
   scale_fill_brain()
 

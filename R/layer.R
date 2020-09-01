@@ -1,36 +1,7 @@
-#' Brain geom
-#'
-#' call to \code{\link[sfr]{geom_sf}}
-#'
-#' @param ... arguments to \code{\link[sfr]{geom_sf}}
-#'
-#' @return
-#' @export
-#'
-#' @examples
-geom_brain <- function (mapping = aes(), data = NULL, atlas = NULL,
-                        stat = "sf", position = "identity",
-                        na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, ...)
-{
-  c(layer_brain(geom = GeomBrain,
-                data = data,
-                mapping = mapping,
-                stat = stat,
-                position = position,
-                show.legend = show.legend,
-                inherit.aes = inherit.aes,
-                params = list(na.rm = na.rm,
-                              atlas = atlas,
-                              ...)),
-    coord_sf(default = TRUE, clip = "off")
-    # coord_brain(default = TRUE, clip = "off")
-  )
-}
-
 # layer ----
 #' Create a new sf layer that auto-maps geometry data
 #'
-#' The `layer_brain()` function is a variant of [`layer_sf()`] meant to be used by
+#' The `layer_sf()` function is a variant of [`layer()`] meant to be used by
 #' extension developers who are writing new sf-based geoms or stats.
 #' The sf layer checks whether the data contains a geometry column, and
 #' if one is found it is automatically mapped to the `geometry` aesthetic.
@@ -53,7 +24,7 @@ layer_brain <- function(geom = NULL, stat = NULL,
   )
 }
 
-LayerBrain <- ggproto("LayerBrain", ggplot2:::LayerSf,
+LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                       setup_layer = function(self, data, plot) {
                         # process generic layer setup first
@@ -123,77 +94,3 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::LayerSf,
                         data
                       }
 )
-
-# helper function to find the geometry column
-geom_column <- function(data) {
-  w <- which(vapply(data, inherits, TRUE, what = "sfc"))
-  if (length(w) == 0) {
-    "geometry" # avoids breaks when objects without geometry list-column are examined
-  } else {
-    # this may not be best in case more than one geometry list-column is present:
-    if (length(w) > 1)
-      warn("more than one geometry column present: taking the first")
-    w[[1]]
-  }
-}
-
-# geom ----
-#' @export
-#' @rdname ggbrain
-#' @usage NULL
-#' @format NULL
-GeomBrain <- ggproto("GeomBrain", Geom,
-                     default_aes = aes(
-                       shape = NULL,
-                       colour = NULL,
-                       fill = NULL,
-                       size = NULL,
-                       linetype = 1,
-                       alpha = NA,
-                       stroke = 0.5
-                     ),
-
-                     draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
-                                           lineend = "butt", linejoin = "round", linemitre = 10,
-                                           na.rm = TRUE) {
-                       if (!inherits(coord, "CoordSf") ) {
-                         # TODO replace with own coords that detect side/hemi
-                         abort("geom_brain() must be used with coord_sf()")
-                       }
-
-                       df2 <- dplyr::group_by(data, label)
-
-                       coord <- coord$transform(data, panel_params)
-                       brain_grob(coord,
-                                  lineend = lineend,
-                                  linejoin = linejoin,
-                                  linemitre = linemitre,
-                                  na.rm = na.rm)
-                     },
-
-                     draw_key = function(data, params, size) {
-                       data <- ggplot2:::modify_list(default_aesthetics(params$legend), data)
-                       if (params$legend == "point") {
-                         draw_key_point(data, params, size)
-                       } else if (params$legend == "line") {
-                         draw_key_path(data, params, size)
-                       } else {
-                         draw_key_polygon(data, params, size)
-                       }
-                     }
-)
-
-default_aesthetics <- function(type) {
-  if (type == "point") {
-    GeomPoint$default_aes
-  } else if (type == "line") {
-    GeomLine$default_aes
-  } else  {
-    ggplot2:::modify_list(GeomPolygon$default_aes, list(fill = "grey90", colour = "grey35"))
-  }
-}
-
-brain_grob <- function(...) {
- ggplot2:::sf_grob(...)
-}
-

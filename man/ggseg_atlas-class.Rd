@@ -8,8 +8,8 @@
 \usage{
 as_ggseg_atlas(
   x = data.frame(.long = double(), .lat = double(), .id = character(), .subid =
-    character(), atlas = as.character(), region = as.character(), hemi = character(),
-    side = character()),
+    character(), atlas = character(), type = character(), region = character(), hemi =
+    character(), side = character()),
   return = FALSE
 )
 }

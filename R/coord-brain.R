@@ -1,250 +1,160 @@
-#' #' @export
-#' #' @rdname ggsf
-#' #' @usage NULL
-#' #' @format NULL
-#' CoordBrain <- ggproto("CoordBrain", CoordCartesian,
-#'
-#'                    setup_panel_params = function(self, scale_x, scale_y, params = list()) {
-#'                      browser()
-#'                      # Bounding box of the data
-#'                      expansion_x <- ggplot2:::default_expansion(scale_x, expand = self$expand)
-#'                      x_range <- ggplot2:::expand_limits_scale(scale_x, expansion_x, coord_limits = self$limits$x)
-#'                      expansion_y <- ggplot2:::default_expansion(scale_y, expand = self$expand)
-#'                      y_range <- ggplot2:::expand_limits_scale(scale_y, expansion_y, coord_limits = self$limits$y)
-#'                      bbox <- c(
-#'                        x_range[1], y_range[1],
-#'                        x_range[2], y_range[2]
-#'                      )
-#'
-#'                      # Generate graticule and rescale to plot coords
-#'                      graticule <- sf::st_graticule(
-#'                        bbox,
-#'                        crs = params$crs,
-#'                        lat = scale_y$breaks %|W|% NULL,
-#'                        lon = scale_x$breaks %|W|% NULL,
-#'                        datum = self$datum,
-#'                        ndiscr = self$ndiscr
-#'                      )
-#'
-#'                       sf::st_geometry(graticule) <- sf_rescale01(sf::st_geometry(graticule),
-#'                                                                  x_range, y_range)
-#'                      graticule$x_start <- sf_rescale01_x(graticule$x_start, x_range)
-#'                      graticule$x_end <- sf_rescale01_x(graticule$x_end, x_range)
-#'                      graticule$y_start <- sf_rescale01_x(graticule$y_start, y_range)
-#'                      graticule$y_end <- sf_rescale01_x(graticule$y_end, y_range)
-#'
-#'                      list(
-#'                        x_range = x_range,
-#'                        y_range = y_range,
-#'                        graticule = graticule,
-#'                        crs = params$crs,
-#'                        label_axes = self$label_axes,
-#'                        label_graticule = self$label_graticule
-#'                      )
-#'                    },
-#'
-#'                    labels = function(labels, panel_params) labels,
-#'
-#'                    render_axis_h = function(self, panel_params, theme) {
-#'                      graticule <- panel_params$graticule
-#'
-#'                      # top axis
-#'                      id1 <- id2 <- integer(0)
-#'                      # labels based on panel side
-#'                      id1 <- c(id1, which(graticule$type == panel_params$label_axes$top & graticule$y_start > 0.999))
-#'                      id2 <- c(id2, which(graticule$type == panel_params$label_axes$top & graticule$y_end > 0.999))
-#'
-#'                      # labels based on graticule direction
-#'                      if ("S" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "E" & graticule$y_start > 0.999))
-#'                      }
-#'                      if ("N" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "E" & graticule$y_end > 0.999))
-#'                      }
-#'                      if ("W" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "N" & graticule$y_start > 0.999))
-#'                      }
-#'                      if ("E" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "N" & graticule$y_end > 0.999))
-#'                      }
-#'
-#'                      ticks1 <- graticule[unique(id1), ]
-#'                      ticks2 <- graticule[unique(id2), ]
-#'                      tick_positions <- c(ticks1$x_start, ticks2$x_end)
-#'                      tick_labels <- c(ticks1$degree_label, ticks2$degree_label)
-#'
-#'                      if (length(tick_positions) > 0) {
-#'                        top <- draw_axis(
-#'                          tick_positions,
-#'                          tick_labels,
-#'                          axis_position = "top",
-#'                          theme = theme
-#'                        )
-#'                      } else {
-#'                        top <- zeroGrob()
-#'                      }
-#'
-#'                      # bottom axis
-#'                      id1 <- id2 <- integer(0)
-#'                      # labels based on panel side
-#'                      id1 <- c(id1, which(graticule$type == panel_params$label_axes$bottom & graticule$y_start < 0.001))
-#'                      id2 <- c(id2, which(graticule$type == panel_params$label_axes$bottom & graticule$y_end < 0.001))
-#'
-#'                      # labels based on graticule direction
-#'                      if ("S" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "E" & graticule$y_start < 0.001))
-#'                      }
-#'                      if ("N" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "E" & graticule$y_end < 0.001))
-#'                      }
-#'                      if ("W" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "N" & graticule$y_start < 0.001))
-#'                      }
-#'                      if ("E" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "N" & graticule$y_end < 0.001))
-#'                      }
-#'
-#'                      ticks1 <- graticule[unique(id1), ]
-#'                      ticks2 <- graticule[unique(id2), ]
-#'                      tick_positions <- c(ticks1$x_start, ticks2$x_end)
-#'                      tick_labels <- c(ticks1$degree_label, ticks2$degree_label)
-#'
-#'                      if (length(tick_positions) > 0) {
-#'                        bottom <- draw_axis(
-#'                          tick_positions,
-#'                          tick_labels,
-#'                          axis_position = "bottom",
-#'                          theme = theme
-#'                        )
-#'                      } else {
-#'                        bottom <- zeroGrob()
-#'                      }
-#'
-#'                      list(top = top, bottom = bottom)
-#'                    },
-#'
-#'                    render_axis_v = function(self, panel_params, theme) {
-#'                      graticule <- panel_params$graticule
-#'
-#'                      # right axis
-#'                      id1 <- id2 <- integer(0)
-#'                      # labels based on panel side
-#'                      id1 <- c(id1, which(graticule$type == panel_params$label_axes$right & graticule$x_end > 0.999))
-#'                      id2 <- c(id2, which(graticule$type == panel_params$label_axes$right & graticule$x_start > 0.999))
-#'
-#'                      # labels based on graticule direction
-#'                      if ("N" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "E" & graticule$x_end > 0.999))
-#'                      }
-#'                      if ("S" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "E" & graticule$x_start > 0.999))
-#'                      }
-#'                      if ("E" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "N" & graticule$x_end > 0.999))
-#'                      }
-#'                      if ("W" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "N" & graticule$x_start > 0.999))
-#'                      }
-#'
-#'                      ticks1 <- graticule[unique(id1), ]
-#'                      ticks2 <- graticule[unique(id2), ]
-#'                      tick_positions <- c(ticks1$y_end, ticks2$y_start)
-#'                      tick_labels <- c(ticks1$degree_label, ticks2$degree_label)
-#'
-#'                      if (length(tick_positions) > 0) {
-#'                        right <- draw_axis(
-#'                          tick_positions,
-#'                          tick_labels,
-#'                          axis_position = "right",
-#'                          theme = theme
-#'                        )
-#'                      } else {
-#'                        right <- zeroGrob()
-#'                      }
-#'
-#'                      # left axis
-#'                      id1 <- id2 <- integer(0)
-#'                      # labels based on panel side
-#'                      id1 <- c(id1, which(graticule$type == panel_params$label_axes$left & graticule$x_end < 0.001))
-#'                      id2 <- c(id2, which(graticule$type == panel_params$label_axes$left & graticule$x_start < 0.001))
-#'
-#'                      # labels based on graticule direction
-#'                      if ("N" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "E" & graticule$x_end < 0.001))
-#'                      }
-#'                      if ("S" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "E" & graticule$x_start < 0.001))
-#'                      }
-#'                      if ("E" %in% panel_params$label_graticule) {
-#'                        id1 <- c(id1, which(graticule$type == "N" & graticule$x_end < 0.001))
-#'                      }
-#'                      if ("W" %in% panel_params$label_graticule) {
-#'                        id2 <- c(id2, which(graticule$type == "N" & graticule$x_start < 0.001))
-#'                      }
-#'
-#'                      ticks1 <- graticule[unique(id1), ]
-#'                      ticks2 <- graticule[unique(id2), ]
-#'                      tick_positions <- c(ticks1$y_end, ticks2$y_start)
-#'                      tick_labels <- c(ticks1$degree_label, ticks2$degree_label)
-#'
-#'                      if (length(tick_positions) > 0) {
-#'                        left <- draw_axis(
-#'                          tick_positions,
-#'                          tick_labels,
-#'                          axis_position = "left",
-#'                          theme = theme
-#'                        )
-#'                      } else {
-#'                        left <- zeroGrob()
-#'                      }
-#'
-#'                      list(left = left, right = right)
-#'                    }
-#' )
-#'
-#' #shamefully stolen from ggplot2
-#' sf_rescale01 <- function(x, x_range, y_range) {
-#'   if (is.null(x)) {
-#'     return(x)
-#'   }
-#'
-#'   sf::st_normalize(x, c(x_range[1], y_range[1], x_range[2], y_range[2]))
-#' }
-#'
-#' #shamefully stolen from ggplot2
-#' sf_rescale01_x <- function(x, range) {
-#'   (x - range[1]) / diff(range)
-#' }
-#'
-#'
-#' #' @inheritParams coord_cartesian
-#' #' @export
-#' #' @rdname ggbrain
-#' coord_brain <- function(xlim = NULL,
-#'                         ylim = NULL,
-#'                         expand = TRUE,
-#'                         label_x = waiver(),
-#'                         label_y = waiver(),
-#'                         default = FALSE,
-#'                         clip = "on") {
-#'
-#'   if (ggplot2:::is.waive(label_x) && ggplot2:::is.waive(label_y)) {
-#'     # if both `label_graticule` and `label_axes` are set to waive then we
-#'     # use the default of labels on the left and at the bottom
-#'     labels <- list(x = "",
-#'                    y = "")
-#'   } else {
-#'     # if at least one is set we ignore the other
-#'     label_graticule <- label_graticule %|W|% ""
-#'     label_axes <- label_axes %|W|% ""
-#'   }
-#'
-#'   ggproto(NULL, CoordBrain,
-#'           limits = list(x = xlim, y = ylim),
-#'           labels = labels,
-#'           expand = expand,
-#'           default = default,
-#'           clip = clip
-#'   )
-#' }
-#'
+
+#' @export
+#' @rdname ggbrain
+#' @usage NULL
+#' @format NULL
+CoordBrain <- ggproto("CoordBrain", CoordSf,
+                      setup_params = function(self, data) {
+                        params <- list(
+                          crs = NULL,
+                          default_crs = NULL,
+                          data = data
+                        )
+                        self$params <- params
+
+                        params
+                      },
+
+                      labels = function(labels, panel_params) labels,
+
+                      # labels = function(self, labels, panel_params) {
+                      #   browser()
+                      #   positions_x <- c("top", "bottom")
+                      #   positions_y <- c("left", "right")
+                      #
+                      #   list(
+                      #     x = lapply(c(1, 2), function(i) {
+                      #       panel_guide_label(
+                      #         panel_params$guides,
+                      #         position = positions_x[[i]],
+                      #         default_label = labels$x[[i]]
+                      #       )
+                      #     }),
+                      #     y = lapply(c(1, 2), function(i) {
+                      #       panel_guide_label(
+                      #         panel_params$guides,
+                      #         position = positions_y[[i]],
+                      #         default_label = labels$y[[i]])
+                      #     })
+                      #   )
+                      # },
+
+                      # internal function used by setup_panel_params,
+                      # overrides the graticule labels based on scale settings if necessary
+                      fixup_graticule_labels = function(self, graticule, scale_x, scale_y, params = list()) {
+                        browser()
+                        needs_parsing <- rep(FALSE, nrow(graticule))
+                        needs_autoparsing <- rep(FALSE, nrow(graticule))
+
+                        x_breaks <- graticule$degree[graticule$type == "E"]
+                        if (is.null(scale_x$labels)) {
+                          x_labels <- rep(NA, length(x_breaks))
+                        } else if (is.waive(scale_x$labels)) {
+                          x_labels <- graticule$degree_label[graticule$type == "E"]
+                          needs_autoparsing[graticule$type == "E"] <- TRUE
+                        } else {
+                          if (is.function(scale_x$labels)) {
+                            x_labels <- scale_x$labels(x_breaks)
+                          } else {
+                            x_labels <- scale_x$labels
+                          }
+
+                          # all labels need to be temporarily stored as character vectors,
+                          # but expressions need to be parsed afterwards
+                          needs_parsing[graticule$type == "E"] <- !(is.character(x_labels) || is.factor(x_labels))
+                          x_labels <- as.character(x_labels)
+                        }
+
+                        if (length(x_labels) != length(x_breaks)) {
+                          abort("Breaks and labels along x direction are different lengths")
+                        }
+                        graticule$degree_label[graticule$type == "E"] <- x_labels
+
+
+                        y_breaks <- graticule$degree[graticule$type == "N"]
+                        if (is.null(scale_y$labels)) {
+                          y_labels <- rep(NA, length(y_breaks))
+                        } else if (is.waive(scale_y$labels)) {
+                          y_labels <- graticule$degree_label[graticule$type == "N"]
+                          needs_autoparsing[graticule$type == "N"] <- TRUE
+                        } else {
+                          if (is.function(scale_y$labels)) {
+                            y_labels <- scale_y$labels(y_breaks)
+                          } else {
+                            y_labels <- scale_y$labels
+                          }
+
+                          # all labels need to be temporarily stored as character vectors,
+                          # but expressions need to be parsed afterwards
+                          needs_parsing[graticule$type == "N"] <- !(is.character(y_labels) || is.factor(y_labels))
+                          y_labels <- as.character(y_labels)
+                        }
+
+                        if (length(y_labels) != length(y_breaks)) {
+                          abort("Breaks and labels along y direction are different lengths")
+                        }
+                        graticule$degree_label[graticule$type == "N"] <- y_labels
+
+                        # Parse labels if requested/needed
+                        has_degree <- grepl("\\bdegree\\b", graticule$degree_label)
+                        needs_parsing <- needs_parsing | (needs_autoparsing & has_degree)
+                        if (any(needs_parsing)) {
+                          labels <- as.list(graticule$degree_label)
+                          labels[needs_parsing] <- parse_safe(graticule$degree_label[needs_parsing])
+                          graticule$degree_label <- labels
+                        }
+
+                        graticule
+                      }
+)
+
+
+
+# #' @inheritParams coord_cartesian
+#' @export
+#' @rdname ggbrain
+coord_brain <- function(xlim = NULL,
+                        ylim = NULL,
+                        expand = TRUE,
+                        label_x = waiver(),
+                        label_y = waiver(),
+                        default = FALSE,
+                        clip = "on") {
+
+  if (class(label_x) == "waive" && class(label_y) == "waive") {
+    # if both `label_graticule` and `label_axes` are set to waive then we
+    # use the default of labels on the left and at the bottom
+    labels <- list(x = "",
+                   y = "")
+  } #else {
+  #   # if at least one is set we ignore the other
+  #   label_graticule <- label_graticule %|W|% ""
+  #   label_axes <- label_axes %|W|% ""
+  # }
+
+  ggproto(NULL, CoordBrain,
+          limits = list(x = xlim, y = ylim),
+          labels = labels,
+          expand = expand,
+          default = default,
+          clip = clip
+  )
+}
+
+# Stolen from ggplot2
+# Name ggplot grid object
+# Convenience function to name grid objects
+#
+# @keyword internal
+ggname <- function(prefix, grob) {
+  grob$name <- grid::grobName(grob, prefix)
+  grob
+}
+
+grobTree <- function(...){
+  grid::grobTree(...)
+}
+
+len0_null <- function(...){
+ ggplot2:::len0_null(...)
+}
