@@ -34,20 +34,4 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/LCBC-UiO/ggseg
 BugReports: https://github.com/LCBC-UiO/ggseg/issues
-Collate: 
-    'brain_palettes.R'
-    'coord-brain.R'
-    'data.R'
-    'layer.r'
-    'geom.R'
-    'ggseg-package.R'
-    'ggseg.R'
-    'ggseg_atlas.R'
-    'ggseg_atlas2.R'
-    'layer.R'
-    'position-brain.R'
-    'read_freesurfer.R'
-    'scale_brain.R'
-    'theme_brain.R'
-    'utils.R'
-    'zzz.R'
+

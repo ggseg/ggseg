@@ -20,9 +20,28 @@ plot(dk)
 
 ggplot() +
   geom_brain(atlas = dk, aes(fill = region),
-             # position = position_brain(hemi + side ~ .),
              show.legend = FALSE) +
   scale_fill_brain()
+
+ggplot() +
+  geom_brain(atlas = dk, aes(fill = region),
+             position = position_brain(hemi ~ side),
+             show.legend = FALSE) +
+  scale_fill_brain()
+
+tibble(
+  region = rep(c("transverse temporal", "insula",
+                 "precentral","superior parietal"),2),
+  p = sample(seq(0,.5,.001), 8),
+  AgeG = c(rep("Young",4), rep("Old",4))
+  ) %>%
+ggplot() +
+  geom_brain(atlas = dk, aes(fill = region),
+             position = position_brain(hemi + side ~ .),
+             show.legend = FALSE) +
+  scale_fill_brain()
+
+
 
 ggplot() +
   geom_brain(atlas = dk, show.legend = FALSE)

@@ -10,6 +10,8 @@ vignette: >
 ```{r setup, include=F}
 knitr::opts_chunk$set(eval=TRUE, out.width = "100%")
 devtools::load_all(".")
+library(dplyr)
+library(ggplot2)
 ```
 
 ## Introduction
@@ -31,11 +33,13 @@ Most atlases also have a `label` column, which are raw names assigned from the p
 
 This information is stored in a list of data.frames called `atlas.info`, which is loaded when ggseg is loaded, just like the atlases and palettes.
 
-```{r start}
+```{r, eval = FALSE}
 library(ggseg)
 library(dplyr)
 library(ggplot2)
+```
 
+```{r start}
 head(dk, 10)
 ```
 

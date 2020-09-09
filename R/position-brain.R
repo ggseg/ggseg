@@ -1,14 +1,28 @@
 # position ----
 
+#' Alter brain atlas position
+#'
+#' Function to be used in the position argument in geom_brain
+#' to alter the position of the brain slice/views.
+#'
+#' @param position formula describing the rows ~ columns organisation.
+#'
+#' @export
+#'
+#' @examples
+#' ggplot() +
+#'   geom_brain(atlas = dk, aes(fill = region),
+#'              position = position_brain(. ~ side + hemi ),
+#'              show.legend = FALSE)
+#'
+#' ggplot() +
+#'   geom_brain(atlas = dk, aes(fill = region),
+#'              position = position_brain(side ~ hemi ),
+#'              show.legend = FALSE)
 position_brain <- function(position = "horizontal") {
-  ggproto(NULL, PositionBrain, position = position)
+   ggproto(NULL, PositionBrain, position = position)
 }
 
-
-#' @rdname ggplot2-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
 PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
                          position = hemi + side ~ .,
 

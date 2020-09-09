@@ -1,14 +1,3 @@
-# layer ----
-#' Create a new sf layer that auto-maps geometry data
-#'
-#' The `layer_sf()` function is a variant of [`layer()`] meant to be used by
-#' extension developers who are writing new sf-based geoms or stats.
-#' The sf layer checks whether the data contains a geometry column, and
-#' if one is found it is automatically mapped to the `geometry` aesthetic.
-# #' @include layer.r
-# #' @inheritParams layer
-#' @keywords internal
-#' @export
 layer_brain <- function(geom = NULL, stat = NULL,
                         data = NULL, mapping = NULL,
                         position = NULL, params = list(),
@@ -28,14 +17,30 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                       setup_layer = function(self, data, plot) {
                         # process generic layer setup first
-                        data <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
+                        dt <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
 
-                        common_vars <- names(data)[names(data) %in% names(self$geom_params$atlas)]
+                        common_vars <- names(dt)[names(dt) %in% names(self$geom_params$atlas)]
 
                         if(length(common_vars) > 0){
-                          cat("merging atlas and data by '", common_vars, "'\n", sep="")
+                          cat("merging atlas and data by ", paste(common_vars, collapse = ", "), "\n", sep="")
 
-                          data <- dplyr::left_join(self$geom_params$atlas, data, by = common_vars)
+                        if(dplyr::is.grouped_df(dt)){
+
+                          data2 <- tidyr::nest(dt)
+                          data2$data <- lapply(1:nrow(data2), function(x) dplyr::left_join(self$geom_params$atlas,
+                                                                             data2$data[[x]],
+                                                                             by = common_vars))
+
+                          data <- tidyr::unnest(data2, data)
+                          data <- sf::st_as_sf(data)
+                          # browser()
+                        }else{
+                          data <- dplyr::left_join(self$geom_params$atlas,
+                                                   data,
+                                                   by = common_vars)
+                        }
+
+
                         }else{
                           data <- self$geom_params$atlas
                         }
@@ -94,3 +99,17 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                         data
                       }
 )
+
+
+# helper function to find the geometry column
+geom_column <- function(data) {
+  w <- which(vapply(data, inherits, TRUE, what = "sfc"))
+  if (length(w) == 0) {
+    "geometry" # avoids breaks when objects without geometry list-column are examined
+  } else {
+    # this may not be best in case more than one geometry list-column is present:
+    if (length(w) > 1)
+      warn("more than one geometry column present: taking the first")
+    w[[1]]
+  }
+}
