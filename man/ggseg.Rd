@@ -33,7 +33,7 @@ or a .data.frame containing atlas information (i.e. pre-loaded atlas).}
 be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 longitude values.  Also affected by \code{position} argument}
 
-\item{...}{other options sent to ggplot2::geom_polygon for plotting, including
+\item{...}{other options sent to geom_polygon for plotting, including
 mapping aes (cannot include x, y, and group aethetics).}
 }
 \value{
@@ -81,8 +81,8 @@ Useful links:
 }
 
 
-[ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
-[geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
+[ggplot2][ggplot], [aes][aes],
+[geom_polygon][geom_polygon], [coord_fixed][coord_fixed]
 }
 \author{
 \strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (\href{https://orcid.org/0000-0002-5756-0223}{ORCID})

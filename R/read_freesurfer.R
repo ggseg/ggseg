@@ -58,10 +58,11 @@ read_atlas_files <- function(subjects_dir, atlas){
   hemi <- unname(sapply(stats_files, find_hemi_fromfile))
 
   if(all(hemi %in% c("rh", "lh"))){
-    names(stats) <- paste(subject, hemi, sep = "_")
-
+    names(stats) <- paste(subject, hemi,
+                          sep = "___")
     stats <- dplyr::bind_rows(stats, .id = "id")
-    stats <- tidyr::separate(stats, id, c("subject", "hemi"))
+    stats <- tidyr::separate(stats, id, c("subject", "hemi"),
+                             sep="___")
     stats <- tidyr::unite(stats, label, hemi, label)
 
   }else{

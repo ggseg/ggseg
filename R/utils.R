@@ -194,19 +194,6 @@ gap <- function(x){
   (min(x) + max(x)) / 2
 }
 
-# Borrowed from ggplot2 to help get things working
-is.waive <- function(x) class(x) == "waiver"
-
-"%|W|%" <- function(a, b) {
-  if (!is.waive(a)) a else b
-}
-
-"%||%" <- function(a, b) {
-  if (!is.null(a)) a else b
-}
-
-waiver <- function() structure(list(), class = "waiver")
-
 
 ## quiets concerns of R CMD checs
 utils::globalVariables(c("area", "atlas", "colour", "group", "hemi", ".lat", ".long",

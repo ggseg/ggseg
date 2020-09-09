@@ -41,8 +41,6 @@ ggplot() +
              show.legend = FALSE) +
   scale_fill_brain()
 
-
-
 ggplot() +
   geom_brain(atlas = dk, show.legend = FALSE)
 

@@ -1,6 +1,4 @@
 ---
-title: "Plotting tool for brain atlases"
-author: "Athanasia Mowinckel & Didac Vidal Pineiro"
 output: github_document
 ---
 
@@ -11,7 +9,7 @@ knitr::opts_chunk$set(
   fig.path = "man/img/README-",
   echo = TRUE
 )
-devtools::load_all(".")
+# devtools::load_all(".")
 ``` 
  
 
@@ -22,6 +20,7 @@ devtools::load_all(".")
   [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R build status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.

@@ -1,6 +1,3 @@
-Plotting tool for brain atlases
-================
-Athanasia Mowinckel & Didac Vidal Pineiro
 
 # ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />
 
@@ -16,6 +13,8 @@ status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](htt
 status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![R build
+status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames
@@ -72,6 +71,7 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
+#> Loading required package: ggplot2
 ggseg(atlas=dk)
 ```
 

@@ -55,6 +55,8 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
 #' \code{display_brain_pal} plots all the colours for each atlas.
 #'
 #' @inheritParams brain_pal
+#' @importFrom dplyr mutate filter group_by bind_rows row_number
+#' @importFrom ggplot2 ggplot aes geom_tile labs
 #' @export
 #' @examples
 #' display_brain_pal()
@@ -73,7 +75,7 @@ display_brain_pal <- function (name = "all",
     name <- info$atlas
   }
 
-  pals = do.call(dplyr::bind_rows,
+  pals = do.call(bind_rows,
                  lapply(info$atlas,
                         get_colours,
                         n=n,
@@ -81,15 +83,15 @@ display_brain_pal <- function (name = "all",
                         package=package)
   )
 
-  pals <- dplyr::group_by(pals, atlas)
-  pals <- dplyr::mutate(pals, x = dplyr::row_number())
-  pals <- dplyr::filter(pals, atlas %in% name)
+  pals <- group_by(pals, atlas)
+  pals <- mutate(pals, x = row_number())
+  pals <- filter(pals, atlas %in% name)
 
-  ggplot2::ggplot(pals,
-                  ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
-    ggplot2::geom_tile() +
+  ggplot(pals,
+         aes(x=x, y=atlas, fill=I(colour))) +
+    geom_tile() +
     theme_brain() +
-    ggplot2::labs(x="")
+    labs(x="")
 }
 
 
@@ -141,5 +143,5 @@ get_pals <- function(package = "ggseg"){
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("info","brain_pals"))
+  globalVariables(c("info","brain_pals"))
 }

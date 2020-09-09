@@ -9,7 +9,7 @@
 #'
 #' @param atlas Either a string with the name of atlas to use,
 #' or a .data.frame containing atlas information (i.e. pre-loaded atlas).
-#' @param ... other options sent to ggplot2::geom_polygon for plotting, including
+#' @param ... other options sent to geom_polygon for plotting, including
 #' mapping aes (cannot include x, y, and group aethetics).
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the .data. Any of c("lateral","medial")[default].
@@ -17,7 +17,10 @@
 #' @param adapt_scales if \code{TRUE}, then the axes will
 #' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 #' longitude values.  Also affected by \code{position} argument
-
+#'
+#' @importFrom dplyr as_tibble select filter
+#' @importFrom ggplot2 ggplot aes geom_polygon coord_fixed
+#' @importFrom tidyr unnest
 #'
 #' @details
 #' \describe{
@@ -40,8 +43,8 @@
 #' ggseg(position = "stacked")
 #' ggseg(adapt_scales = FALSE)
 #'
-#' @seealso [ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
-#' [geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]
+#' @seealso [ggplot2][ggplot], [aes][aes],
+#' [geom_polygon][geom_polygon], [coord_fixed][coord_fixed]
 #'
 #' @export
 ggseg = function(.data = NULL,
@@ -62,7 +65,7 @@ ggseg = function(.data = NULL,
   # Remove geometry if it's there
   if("geometry" %in% names(geobrain)){
     geobrain$geometry <- NULL
-    geobrain <- dplyr::as_tibble(geobrain)
+    geobrain <- as_tibble(geobrain)
   }
 
   if(!is_ggseg_atlas(geobrain)){
@@ -70,7 +73,7 @@ ggseg = function(.data = NULL,
     geobrain <- as_ggseg_atlas(geobrain)
   }
 
-  geobrain <- tidyr::unnest(geobrain, ggseg)
+  geobrain <- unnest(geobrain, ggseg)
 
   stack <- match.arg(position,
                       c("stacked", "dispersed"),
@@ -87,10 +90,10 @@ ggseg = function(.data = NULL,
   }
 
   # Remove .data we don't want to plot
-  if(!is.null(hemisphere)) geobrain <- dplyr::filter(geobrain, hemi %in% hemisphere)
+  if(!is.null(hemisphere)) geobrain <- filter(geobrain, hemi %in% hemisphere)
 
   if(!is.null(view)){
-    geobrain <- dplyr::filter(geobrain, grepl(view, side))
+    geobrain <- filter(geobrain, grepl(view, side))
 
     # Lateral sides are on the far of eachother, squish them together
     if(view == "lateral" &
@@ -106,12 +109,12 @@ ggseg = function(.data = NULL,
   }
 
   # Create the plot
-  gg <- ggplot2::ggplot(data = geobrain,
-                        ggplot2::aes(x=.long, y=.lat,
+  gg <- ggplot(data = geobrain,
+                        aes(x=.long, y=.lat,
                                      group=.id,
                                      subgroup = .subid)) +
-    ggplot2::geom_polygon(...) +
-    ggplot2::coord_fixed()
+    geom_polygon(...) +
+    coord_fixed()
 
 
   # Scales may be adapted, for more convenient vieweing
@@ -129,6 +132,6 @@ ggseg = function(.data = NULL,
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c(".data","dk"))
+  globalVariables(c(".data","dk"))
 }
 
