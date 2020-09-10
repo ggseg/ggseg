@@ -2,13 +2,27 @@
 % Please edit documentation in R/ggseg_atlas.R
 \name{is_ggseg_atlas}
 \alias{is_ggseg_atlas}
+<<<<<<< HEAD
 \title{Validate ggseg_atlas}
+=======
+\title{Check if is ggseg_atlas-class}
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 \usage{
 is_ggseg_atlas(x)
 }
 \arguments{
+<<<<<<< HEAD
 \item{x}{an object}
 }
 \description{
 Validate ggseg_atlas
+=======
+\item{x}{atlas object to check}
+}
+\value{
+logical
+}
+\description{
+Check if is ggseg_atlas-class
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 }

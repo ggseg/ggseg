@@ -140,7 +140,6 @@ plot.ggseg_atlas <- function(x, ..., package = "ggseg"){
     labs( title = paste(unique(x$atlas), unique(x$type), "atlas"))
 }
 
-
 # quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
   utils::globalVariables(c("x", "ggseg_3d", ".subid"))

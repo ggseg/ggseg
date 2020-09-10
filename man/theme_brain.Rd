@@ -4,7 +4,10 @@
 \alias{theme_brain}
 \alias{theme_darkbrain}
 \alias{theme_custombrain}
+<<<<<<< HEAD:man/theme_brain.Rd
 \alias{theme_brain2}
+=======
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a:man/ggtheme.Rd
 \title{ggseg plot theme}
 \usage{
 theme_brain(text.size = 12, text.family = "mono")
@@ -17,6 +20,7 @@ theme_custombrain(
   text.size = 12,
   text.family = "mono"
 )
+<<<<<<< HEAD:man/theme_brain.Rd
 
 theme_brain2(
   plot.background = "white",
@@ -24,6 +28,8 @@ theme_brain2(
   text.size = 12,
   text.family = "mono"
 )
+=======
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a:man/ggtheme.Rd
 }
 \arguments{
 \item{text.size}{Specify size of plot text}
@@ -35,7 +41,11 @@ theme_brain2(
 \item{text.colour}{Speficy colour of plot text}
 }
 \description{
+<<<<<<< HEAD:man/theme_brain.Rd
 a set of themes created for the ggseg plots. Use theme() to tweak.
+=======
+a set of themes created for the ggseg plots. Use ggplot2::theme() to tweak.
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a:man/ggtheme.Rd
 }
 \details{
 \describe{

@@ -83,15 +83,15 @@ display_brain_pal <- function (name = "all",
                         package=package)
   )
 
-  pals <- group_by(pals, atlas)
-  pals <- mutate(pals, x = row_number())
-  pals <- filter(pals, atlas %in% name)
+  pals <- dplyr::group_by(pals, atlas)
+  pals <- dplyr::mutate(pals, x = dplyr::row_number())
+  pals <- dplyr::filter(pals, atlas %in% name)
 
-  ggplot(pals,
-         aes(x=x, y=atlas, fill=I(colour))) +
-    geom_tile() +
+  ggplot2::ggplot(pals,
+                  ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
+    ggplot2::geom_tile() +
     theme_brain() +
-    labs(x="")
+    ggplot2::labs(x="")
 }
 
 
@@ -143,5 +143,5 @@ get_pals <- function(package = "ggseg"){
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  globalVariables(c("info","brain_pals"))
+  utils::globalVariables(c("info","brain_pals"))
 }

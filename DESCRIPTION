@@ -15,7 +15,11 @@ Description: Contains one plotting functions: `ggseg`,
     is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
+<<<<<<< HEAD
 RoxygenNote: 7.1.1
+=======
+RoxygenNote: 7.1.0
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
@@ -24,10 +28,14 @@ Imports:
     tidyr,
     purrr,
     remotes,
+<<<<<<< HEAD
     grid,
     utils,
     vctrs,
     pillar
+=======
+    utils
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 Suggests:
     knitr,
     here, 
@@ -38,4 +46,7 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/LCBC-UiO/ggseg
 BugReports: https://github.com/LCBC-UiO/ggseg/issues
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
