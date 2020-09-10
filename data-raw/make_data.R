@@ -84,7 +84,7 @@ usethis::use_data(dk,
 aseg_n <- make_subcort_ggseg(output_dir = "data-raw/aseg",
                              steps = 8, tolerance = .4, smoothness = 4, dilate = 5)
 
-# Do some data cleanup
+# Do some data clea-nup
 aseg_n$data <- aseg_n$data %>%
   filter(!is.na(region)) %>%
   mutate(region = gsub("cc ", "CC ", region),
