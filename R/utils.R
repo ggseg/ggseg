@@ -194,6 +194,15 @@ gap <- function(x){
   (min(x) + max(x)) / 2
 }
 
+guess_type <- function(x){
+  x <- if("type" %in% names(x)){
+    x$type
+  }else{
+    ifelse(any("medial" %in% x$side), "cortical", "subcortical")
+  }
+  unique(x)
+}
+
 
 ## quiets concerns of R CMD checs
 utils::globalVariables(c("area", "atlas", "colour", "group", "hemi", ".lat", ".long",

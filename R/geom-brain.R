@@ -58,18 +58,18 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                                   linejoin = linejoin,
                                   linemitre = linemitre,
                                   na.rm = na.rm)
-                     }#,
+                     },
 
-                     # draw_key = function(data, params, size) {
-                     #   data <- ggplot2:::modify_list(default_aesthetics(params$legend), data)
-                     #   if (params$legend == "point") {
-                     #     draw_key_point(data, params, size)
-                     #   } else if (params$legend == "line") {
-                     #     draw_key_path(data, params, size)
-                     #   } else {
-                     #     draw_key_polygon(data, params, size)
-                     #   }
-                     # }
+                     draw_key = function(data, params, size) {
+                       data <- ggplot2:::modify_list(default_aesthetics(params$legend), data)
+                       if (params$legend == "point") {
+                         draw_key_point(data, params, size)
+                       } else if (params$legend == "line") {
+                         draw_key_path(data, params, size)
+                       } else {
+                         draw_key_polygon(data, params, size)
+                       }
+                     }
 )
 
 default_aesthetics <- function(type) {

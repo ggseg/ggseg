@@ -2,15 +2,13 @@
 % Please edit documentation in R/ggseg_atlas.R
 \name{ggseg_atlas-class}
 \alias{ggseg_atlas-class}
-\alias{as_ggseg_atlas}
 \alias{ggseg_atlas}
 \title{`ggseg_atlas` class}
 \usage{
-as_ggseg_atlas(
+ggseg_atlas(
   x = data.frame(.long = double(), .lat = double(), .id = character(), .subid =
     character(), atlas = character(), type = character(), region = character(), hemi =
-    character(), side = character()),
-  return = FALSE
+    character(), side = character())
 )
 }
 \arguments{
@@ -39,6 +37,3 @@ Objects of class `ggseg_atlas` have:
   [`tibble`][tibble::tibble()]-package
 }
 
-\seealso{
-[tibble()], [as_tibble()], [tribble()], [print.tbl()], [glimpse()]
-}

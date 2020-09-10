@@ -4,7 +4,7 @@
 \alias{brain_atlas}
 \title{Constructor for brain atlas}
 \usage{
-brain_atlas(atlas, type, data)
+brain_atlas(atlas, type, data, palette = NULL)
 }
 \arguments{
 \item{atlas}{atlas short name, length one}

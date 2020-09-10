@@ -7,7 +7,7 @@
 as_brain_atlas(x)
 }
 \arguments{
-\item{x}{list to make brain atlas}
+\item{x}{object to make into a brain_atlas}
 }
 \description{
 Create brain atlas

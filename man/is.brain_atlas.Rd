@@ -5,10 +5,14 @@
 \title{Validate brain atlas}
 \usage{
 is.brain_atlas(x)
+
+is.brain_atlas(x)
 }
 \arguments{
 \item{x}{an object}
 }
 \description{
 Validate brain atlas
+
+Validate brain data
 }

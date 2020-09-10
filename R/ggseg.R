@@ -62,17 +62,14 @@ ggseg = function(.data = NULL,
     get(atlas)
   }
 
+  if(!is_brain_atlas(geobrain))
+    geobrain <- as_brain_atlas(geobrain)
+
   # Remove geometry if it's there
-  if("geometry" %in% names(geobrain)){
+  if("geometry" %in% names(geobrain))
     geobrain$geometry <- NULL
-    geobrain <- as_tibble(geobrain)
-  }
 
-  if(!is_ggseg_atlas(geobrain)){
-    warning("This is not a ggseg_atlas-class. Attempting to convert with `as_ggseg_atlas()`")
-    geobrain <- as_ggseg_atlas(geobrain)
-  }
-
+  geobrain <- as_tibble(geobrain)
   geobrain <- unnest(geobrain, ggseg)
 
   stack <- match.arg(position,

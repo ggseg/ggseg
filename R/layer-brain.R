@@ -18,32 +18,36 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                       setup_layer = function(self, data, plot) {
                         # process generic layer setup first
                         dt <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
+                        atlas <- as.data.frame(self$geom_params$atlas)
 
-                        common_vars <- names(dt)[names(dt) %in% names(self$geom_params$atlas)]
+                        if(class(dt)[1] != "waiver"){
+                          common_vars <- names(dt)[names(dt) %in% names(atlas)]
 
-                        if(length(common_vars) > 0){
                           cat("merging atlas and data by ", paste(common_vars, collapse = ", "), "\n", sep="")
 
-                        if(dplyr::is.grouped_df(dt)){
+                          if(dplyr::is.grouped_df(dt)){
 
-                          data2 <- tidyr::nest(dt)
-                          data2$data <- lapply(1:nrow(data2), function(x) dplyr::left_join(self$geom_params$atlas,
-                                                                             data2$data[[x]],
-                                                                             by = common_vars))
+                            data2 <- tidyr::nest(dt)
+                            data2$data <- lapply(1:nrow(data2), function(x) dplyr::left_join(atlas,
+                                                                                             data2$data[[x]],
+                                                                                             by = common_vars))
 
-                          data <- tidyr::unnest(data2, data)
-                          data <- sf::st_as_sf(data)
-                          # browser()
+                            data <- tidyr::unnest(data2, data)
+
+                            # browser()
+                          }else{
+                            data <- dplyr::left_join(atlas,
+                                                     data,
+                                                     by = common_vars)
+                          }
+
+
                         }else{
-                          data <- dplyr::left_join(self$geom_params$atlas,
-                                                   data,
-                                                   by = common_vars)
+                          data <- as.data.frame(self$geom_params$atlas)
+
                         }
 
-
-                        }else{
-                          data <- self$geom_params$atlas
-                        }
+                        data <- sf::st_as_sf(data)
 
                         # automatically determine the name of the geometry column
                         # and add the mapping if it doesn't exist

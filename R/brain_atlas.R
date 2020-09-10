@@ -5,34 +5,23 @@
 #' @param data data.frame with atlas data
 #'
 #' @export
-brain_atlas <- function(atlas, type, data, palette) {
+brain_atlas <- function(atlas, type, data, palette = NULL) {
   type <- match.arg(type,
                     c("cortical", "subcortical"))
 
-  stopifnot(length(palette) == length(unique(na.omit(data$region))))
-  stopifnot(all(unique(names(data$region)) %in% names(palette)))
+  if(!is.null(palette)) stopifnot(length(palette) == length(unique(na.omit(data$region))))
+  if(!is.null(palette)) stopifnot(all(unique(names(data$region)) %in% names(palette)))
 
   structure(list(
     atlas = atlas,
     type = type,
-    data = data,
+    data = brain_data(data),
     palette = palette
   ),
-  class = 'brain_atlas')
+  class = 'brain_atlas'
+  )
 }
 
-#' Create brain atlas
-#' @param x list to make brain atlas
-#'
-#' @export
-as_brain_atlas <- function(x) {
-  if(!is.null(names(x)) &
-     all(names(x) %in% c("atlas", "type", "data"))){
-    brain_atlas(x$atlas, x$type, x$data)
-  }else{
-    stop("Cannot make object to brain atlas")
-  }
-}
 
 #' Validate brain atlas
 #' @param x an object
@@ -42,7 +31,7 @@ is_brain_atlas <- function(x) inherits(x,'brain_atlas')
 #' Validate brain atlas
 #' @export
 #' @inheritParams is_brain_atlas
-is.brain_atlas <- function(x) is_brain_atlas(x)
+is.brain_atlas <- is_brain_atlas
 
 
 #' @export
@@ -50,16 +39,24 @@ is.brain_atlas <- function(x) is_brain_atlas(x)
 #' @importFrom utils capture.output
 format.brain_atlas <- function(x, ...) {
   dt <- x$data
-  idx <- grep("ggseg", names(dt))
-  dt <- dt[!is.na(dt$region), -idx]
+
+  sf <- ifelse(any("geometry" %in% names(dt)), TRUE, FALSE)
+
+  idx <- !grepl("ggseg|geometry", names(dt))
+  dt <- dplyr::as_tibble(dt)
+  dt <- dt[!is.na(dt$region), idx]
+  dt_print <- capture.output(dt)[-1]
 
   c(
     sprintf("# %s %s brain atlas", x$atlas, x$type),
-    sprintf("  regions: %s ", length(na.omit(x$data$region))),
+    sprintf("  regions: %s ", length(na.omit(unique(x$data$region)))),
     sprintf("  hemispheres: %s ", paste0(unique(x$data$hemi), collapse = ", ")),
     sprintf("  side views: %s ", paste0(unique(x$data$side), collapse = ", ")),
+    sprintf("  palette: %s ", ifelse(is.null(x$palette), "no", "yes")),
+    sprintf("  use: %s ", ifelse(sf, "ggplot() + geom_brain()", "ggseg()")),
     "----",
-    capture.output(dt)[-1])
+    dt_print
+  )
 }
 
 #' @export
@@ -69,16 +66,19 @@ print.brain_atlas <- function(x, ...) {
 }
 
 #' @export
-#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 labs ggplot
 #' @importFrom tidyr as_tibble
-plot.brain_atlas <- function(x, ...){
-  atl <- as_tibble(x)
-  atl <- as_ggseg_atlas(atl)
-  ggseg(atlas = atl,
-        colour = "grey30",
-        mapping = aes(fill = region),
-        ...) +
-    scale_fill_brain2(x$palette)
+plot.brain_atlas <- function(x,  ...){
+  if("geometry" %in% names(x$data)){
+    ggplot() +
+      geom_brain(atlas = x,
+                 ...) +
+      scale_fill_brain2(x$palette) +
+      labs(title = paste(x$atlas, x$type, "atlas"))
+  }else{
+    x <- as_ggseg_atlas(x)
+    plot(x, ...)
+  }
 }
 
 #' @export
@@ -93,73 +93,156 @@ as.data.frame.brain_atlas <- function(x, ...){
   )
 }
 
-# brain_atlas_data ----
-
-
-# brain_polygon ----
-#' Create brain polygon
-#' @param x data.frame
 #' @export
-brain_polygon <- function(x) {
-  vec_assert(x)
-  stopifnot(all(c(".long", ".lat", ".id", ".subid",".order") %in% names(x)))
-  stopifnot(!is.null(names(x)))
-  invisible(x)
-
-  new_vctr(x, class =  c('ggseg_brain_polygon', class(x)))
+as.list.brain_atlas <- function(x, ...){
+  list(
+    atlas = x$atlas,
+    type = x$type,
+    data = x$data,
+    palette = x$palette
+  )
 }
 
-#' coerce to brain polygon
-#' @param x dataframe
+
+## as_brain_atlas ----
+#' Create brain atlas
+#'
+#' @param x object to make into a brain_atlas
+#'
 #' @export
-as_brain_polygon <- function(x) {
-  brain_polygon(x)
+as_brain_atlas <- function(x){
+  UseMethod("as_brain_atlas")
 }
 
-#' Validate brain polygon
-#'  @export
-#' @inheritParams is.brain_polygon
-is_brain_polygon <- function(x) inherits(x,'brain_polygon')
-
-#' validate brain polygon
-#' @param x object
 #' @export
-is.brain_polygon <- function(x) is_brain_atlas(x)
+as_brain_atlas.default <- function(x){
+  warning(paste("Cannot make object of class", class(x)[1], "into a brain_atlas"),
+          call. = FALSE)
+}
 
 #' @export
-#' @importFrom tidyr as_tibble
+as_brain_atlas.data.frame <- function(x){
+
+  if(is.null(names(x)) | !all(c("atlas", "hemi", "region", "side", "label") %in% names(x)))
+    stop("Cannot make object to brain_atlas", call. = FALSE)
+
+  if(!any(c("ggseg", "geometry") %in% names(x)))
+    stop("Object does not contain a 'ggseg' og 'geometry' column.", call. = FALSE)
+
+  type <- guess_type(x)
+
+  dt <- x[, !names(x) %in% c("atlas", "type")]
+
+  brain_atlas(unique(x$atlas), type, dt)
+}
+
+#' @export
+as_brain_atlas.ggseg_atlas <- function(x){
+  dt <- x[, !names(x) %in% c("atlas", "type")]
+
+  brain_atlas(unique(x$atlas), guess_type(x), dt)
+}
+
+
+#' @export
+as_brain_atlas.list <- function(x){
+
+  if(is.null(names(x)) | !all(c("atlas", "type", "data") %in% names(x)))
+    stop("Cannot make object to brain_atlas", call. = FALSE)
+
+  type <- if("type" %in% names(x)){
+    x$type
+  }else{
+    ifelse(any("medial" %in% x$side), "cortical", "subcortical")
+  }
+
+  dt <- x$data[, !names(x$data) %in% c("atlas", "type")]
+
+  brain_atlas(unique(x$atlas), type, dt)
+}
+
+#' @export
+as_brain_atlas.brain_atlas <- function(x){
+  brain_atlas(x$atlas, x$type, x$data, x$palette)
+}
+
+
+# brain data ----
+#' `brain_data` class
+#' @param x dataframe to be made a brain_data
+#'
+#' @name brain_data-class
+#' @aliases brain_data brain_data-class
+#' @export
+brain_data <- function(x = data.frame(atlas = character(),
+                                      type = character(),
+                                      region = character(),
+                                      hemi = character(),
+                                      side = character(),
+                                      ggseg = character(),
+                                      geometry = character())
+) {
+
+  stopifnot(is.data.frame(x))
+  stopifnot(all(c("hemi", "region", "side") %in% names(x)))
+  stopifnot(any(c("ggseg", "geometry") %in% names(x)))
+
+  if("ggseg" %in% names(x)){
+    x$ggseg <- lapply(x$ggseg, brain_polygon)
+  }
+
+  if("geometry" %in% names(x)){
+    stopifnot(inherits(x$geometry, 'sfc_MULTIPOLYGON'))
+  }
+
+  class(x) <- c("brain_data", class(x))
+
+  x
+}
+
+#' @export
+as_brain_data <- function(x) brain_data(x)
+
+#' @export
+brain_polygon <- function(x = data.frame(.long = numeric(),
+                                         .lat = numeric(),
+                                         .id = character(),
+                                         .subid = character(),
+                                         .order = integer())
+){
+
+  stopifnot(all(c(".long", ".lat", ".subid", ".id", ".order") %in% names(x)))
+  stopifnot(is.numeric(x$.long) & is.numeric(x$.lat) & is.integer(x$.order))
+
+  structure(x, class = c("brain_polygon", class(x)))
+}
+
+#' @export
+as_brain_polygon <- function(x) brain_polygon(x)
+
+#' Validate brain data
+#' @param x an object
+#' @export
+is_brain_atlas <- function(x) inherits(x, 'brain_data')
+
+#' Validate brain data
+#' @export
+#' @inheritParams is_brain_atlas
+is.brain_atlas <- is_brain_atlas
+
+#' @export
 #' @importFrom utils capture.output
 format.brain_polygon <- function(x, ...) {
   c(
     sprintf("# brain polygon with %s vertices", nrow(x)),
-    capture.output(as_tibble(x))[-1])
+    capture.output(dplyr::tibble(x))[-1]
+  )
 }
-
 
 #' @export
 print.brain_polygon <- function(x, ...) {
   cat(format(x), sep = "\n")
-  invisible(x)
 }
-
-#' @name brain-vctrs
-#' @export
-vec_is.brain_polygon <- function(x) TRUE
-
-
-#' Internal vctrs methods
-#'
-#' @import vctrs
-#' @keywords internal
-#' @name brain-vctrs
-NULL
-
-# register_vctrs_methods = function() {
-#   register_s3_method("vctrs", "vec_proxy", "sfc")
-#   register_s3_method("vctrs", "vec_restore", "sfc")
-#   register_s3_method("vctrs", "vec_ptype2", "sfc")
-#   register_s3_method("vctrs", "vec_cast", "sfc")
-# }
 
 ## quiets concerns of R CMD checks
 utils::globalVariables(c("region"))

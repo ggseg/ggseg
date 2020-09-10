@@ -7,11 +7,8 @@ dk <- make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
                            tolerance = .5,
                            smoothness = 5,
                            output_dir = "data-raw")
-# dk <- mutate(dk, type = "cortical")
-dk2 <- dk
-dk2$geometry <- NULL
-dk2 <- as_ggseg_atlas(dk2)
-ggseg(atlas=dk2, show.legend = FALSE,
+
+ggseg(atlas=dk, show.legend = FALSE,
       colour = "black", #position="stacked",
       mapping = aes(fill=region)) +
   scale_fill_brain()
@@ -35,17 +32,14 @@ tibble(
   p = sample(seq(0,.5,.001), 8),
   AgeG = c(rep("Young",4), rep("Old",4))
   ) %>%
-ggplot() +
-  geom_brain(atlas = dk, aes(fill = region),
+  group_by(AgeG) %>%
+
+  ggplot() +
+  geom_brain(atlas = dk, aes(fill = p),
              position = position_brain(hemi + side ~ .),
              show.legend = FALSE) +
-  scale_fill_brain()
+  facet_wrap(~AgeG)
 
-ggplot() +
-  geom_brain(atlas = dk, show.legend = FALSE)
-
-dk <- as_ggseg_atlas(dk)
-ggseg(atlas = dk)
 usethis::use_data(dk,
                   internal = FALSE,
                   overwrite = TRUE,
@@ -88,29 +82,32 @@ usethis::use_data(dk,
 #          atlas = "aseg")
 
 aseg_n <- make_subcort_ggseg(output_dir = "data-raw/aseg",
-                             steps = 8) %>%
+                             steps = 8, tolerance = .4, smoothness = 4, dilate = 5)
+
+# Do some data cleanup
+aseg_n$data <- aseg_n$data %>%
   filter(!is.na(region)) %>%
-  mutate(ggseg = ifelse(side == "sagittal",
-                        purrr::map(ggseg, ~ mutate(.x, .long = .long + 20)),
-                        ggseg),
-         region = gsub("cc ", "CC ", region),
+  mutate(region = gsub("cc ", "CC ", region),
          region = gsub("dc", " DC", region),
          region = ifelse(region == "cerebral cortex", NA, region)
-  )
+  ) %>%
+  filter(!grepl("white|csf", region))
+
+
+names(aseg_n$palette) <- gsub("cc", "CC", names(aseg_n$palette))
+names(aseg_n$palette) <- gsub("dc", "DC", names(aseg_n$palette))
+aseg_n$palette <- aseg_n$palette[!grepl("white|csf|cerebral cortex", names(aseg_n$palette))]
 
 aseg_n %>%
-  filter(!grepl("white|csf", region)) %>%
   ggseg(atlas = ., show.legend = TRUE,
         colour = "black",
         # position = "s",
-        mapping = aes(fill=region)) +
-  scale_fill_brain("aseg")
+        mapping = aes(fill=region))
 
 plot(aseg_n)
 
 ggplot() +
-  geom_brain(data = aseg_n) +
-  scale_fill_brain("aseg")
+  geom_brain(atlas = aseg_n)
 
 aseg <- aseg_n
 usethis::use_data(aseg,
