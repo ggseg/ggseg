@@ -12,6 +12,8 @@ brain_atlas(atlas, type, data, palette = NULL)
 \item{type}{atlas type, cortical or subcortical, length one}
 
 \item{data}{data.frame with atlas data}
+
+\item{palette}{named character vector of colours}
 }
 \description{
 Constructor for brain atlas

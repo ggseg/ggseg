@@ -1,41 +1,32 @@
 Package: ggseg
 Title: Plotting Tool for Brain Atlases
-Version: 1.5.5
-Authors@R: c(person("Athanasia Mo", "Mowinckel", 
-                    email = "a.m.mowinckel@psykologi.uio.no", 
-                    role = c("aut", "cre"),
-                    comment = c(ORCID = "0000-0002-5756-0223")),
-            person("Didac", "Vidal-Piñeiro", 
-                    email = "d.v.pineiro@psykologi.uio.no", 
-                    role = c("aut"),
-                    comment = c(ORCID = "0000-0001-9997-9156")))
+Version: 1.6.00
+Authors@R: c(
+    person("Athanasia Mo", "Mowinckel", 
+            email = "a.m.mowinckel@psykologi.uio.no", 
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0002-5756-0223")),
+    person("Didac", "Vidal-Piñeiro", 
+            email = "d.v.pineiro@psykologi.uio.no", 
+            role = c("aut"),
+        comment = c(ORCID = "0000-0001-9997-9156"))
+        )
 Description: Contains one plotting functions: `ggseg`, 
     and data.frames or tibbles of different brain atlases for plotting,
     mainly in 2 dimensions.  By far, the largest component of the package 
     is the data for each of the atlases.
 License: MIT + file LICENSE
 Encoding: UTF-8
-<<<<<<< HEAD
 RoxygenNote: 7.1.1
-=======
-RoxygenNote: 7.1.0
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 Depends: R (>= 2.10),
     ggplot2
 LazyData: true
 Imports:
-    dplyr,
-    tidyr,
-    purrr,
-    remotes,
-<<<<<<< HEAD
+    dplyr (>= 1.0.0),
+    tidyr (>= 1.0.0),
+    sf (>= 0.9-2),
     grid,
-    utils,
-    vctrs,
-    pillar
-=======
     utils
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 Suggests:
     knitr,
     here, 
@@ -46,7 +37,3 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/LCBC-UiO/ggseg
 BugReports: https://github.com/LCBC-UiO/ggseg/issues
-<<<<<<< HEAD
-
-=======
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a

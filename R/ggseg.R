@@ -18,7 +18,7 @@
 #' be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 #' longitude values.  Also affected by \code{position} argument
 #'
-#' @importFrom dplyr as_tibble select filter
+#' @importFrom dplyr as_tibble select filter across
 #' @importFrom ggplot2 ggplot aes geom_polygon coord_fixed
 #' @importFrom tidyr unnest
 #'
@@ -56,70 +56,64 @@ ggseg = function(.data = NULL,
                  ...){
 
   # Grab the atlas, even if it has been provided as character string
-  geobrain <- if(!is.character(atlas)){
+  atlas <- if(!is.character(atlas)){
     atlas
   }else{
     get(atlas)
   }
 
-  if(!is_brain_atlas(geobrain))
-    geobrain <- as_brain_atlas(geobrain)
+  if(!is_ggseg_atlas(atlas))
+    atlas <- as_ggseg_atlas(atlas)
 
-  # Remove geometry if it's there
-  if("geometry" %in% names(geobrain))
-    geobrain$geometry <- NULL
-
-  geobrain <- as_tibble(geobrain)
-  geobrain <- unnest(geobrain, ggseg)
+  atlas <- unnest(atlas, ggseg)
 
   stack <- match.arg(position,
-                      c("stacked", "dispersed"),
+                     c("stacked", "dispersed"),
                      several.ok = FALSE
   )
 
   if(stack == "stacked"){
-  #  ss_check <- unlist(unique(dplyr::select(geobrain, side))) %in% c("medial","lateral")
-  #  if(any(!ss_check)){
-  #    warning("Cannot stack atlas. Check if atlas has medial views.")
-  #  }else{
-      geobrain <- stack_brain(geobrain)
-   # } # If possible to stack
+    atlas <- stack_brain(atlas)
   }
 
   # Remove .data we don't want to plot
-  if(!is.null(hemisphere)) geobrain <- filter(geobrain, hemi %in% hemisphere)
+  if(!is.null(hemisphere)) atlas <- filter(atlas, hemi %in% hemisphere)
 
   if(!is.null(view)){
-    geobrain <- filter(geobrain, grepl(view, side))
+    atlas <- filter(atlas, grepl(view, side))
 
     # Lateral sides are on the far of eachother, squish them together
     if(view == "lateral" &
        (all(c("left", "right") %in% hemisphere) | is.null(hemisphere) ) &
        stack == "dispersed"){
-      geobrain <- squish_position(geobrain, hemisphere, stack)
+      atlas <- squish_position(atlas, hemisphere, stack)
     }
   }
 
   # If .data has been supplied, merge it
   if(!is.null(.data)){
-    geobrain <- data_merge(.data, geobrain)
+    if(is_brain_atlas(.data) | is_ggseg_atlas(.data))
+      stop("Atlas given as '.data', did you mean to give it to 'atlas'?")
+    atlas <- data_merge(.data, atlas)
   }
 
   # Create the plot
-  gg <- ggplot(data = geobrain,
-                        aes(x=.long, y=.lat,
-                                     group=.id,
-                                     subgroup = .subid)) +
+  gg <- ggplot(data = atlas,
+               aes(x = .long,
+                   y = .lat,
+                   group = .id,
+                   subgroup = .subid
+                   )) +
     geom_polygon(...) +
     coord_fixed()
 
 
-  # Scales may be adapted, for more convenient vieweing
+  # Scales may be adapted, for more convenient viewing
   if(adapt_scales){
     gg <- gg +
-      scale_y_brain(geobrain, stack) +
-      scale_x_brain(geobrain, stack) +
-      scale_labs_brain(geobrain, stack)
+      scale_y_brain(atlas, stack) +
+      scale_x_brain(atlas, stack) +
+      scale_labs_brain(atlas, stack)
   }
 
   gg + theme_brain()

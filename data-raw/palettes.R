@@ -11,7 +11,7 @@ dk_palette <- setNames(
 )
 
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
 # aseg full palette
 j <- read.table(file.path(freesurfer::fs_dir(), "ASegStatsLUT.txt"),
                 skip = 7,
@@ -33,17 +33,17 @@ j <- read.table(file.path(freesurfer::fs_dir(), "ASegStatsLUT.txt"),
          region = gsub("non wm", "non-wm", region),
          region = gsub("ventraldc", "ventral DC", region),
          region = ifelse(region == "cerebral cortex", NA, region)
-=======
-j <- dplyr::slice(ggseg3d::aseg_3d, 1) %>%
-  tidyr::unnest(ggseg_3d) %>%
-  select(region, colour) %>%
-  mutate(region = gsub("-|_", " ", region),
-         region = tolower(region),
-         region = gsub("left |right ", "", region),
-         region = gsub("cc ", "CC ", region),
-         region = gsub("inf", "", region),
-         region = gsub("ventraldc", "ventral DC", region)
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
+# =======
+# j <- dplyr::slice(ggseg3d::aseg_3d, 1) %>%
+#   tidyr::unnest(ggseg_3d) %>%
+#   select(region, colour) %>%
+#   mutate(region = gsub("-|_", " ", region),
+#          region = tolower(region),
+#          region = gsub("left |right ", "", region),
+#          region = gsub("cc ", "CC ", region),
+#          region = gsub("inf", "", region),
+#          region = gsub("ventraldc", "ventral DC", region)
+# >>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
          ) %>%
   distinct() %>%
   na.omit()

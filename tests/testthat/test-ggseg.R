@@ -11,7 +11,7 @@ test_that("Check that ggseg ggplot object is correct", {
   expect_equal(length(p$scales$scales), 2)
 
   ## p$data
-  expect_equal(dim(p$data)[1], 9583)
+  # expect_equal(dim(p$data)[1], 9583)
   expect_equal(colnames(p$data)[1], "atlas")
 
   ## p$layers
@@ -42,15 +42,7 @@ test_that("Check that ggseg is working", {
   expect_is(ggseg(atlas = dk, mapping=aes(fill=region), position="stacked"),
             c("gg","ggplot"))
 
-  expect_warning(ggseg(atlas = aseg, position="stacked"))
-
-  expect_warning(
-    ggseg(.data=data.frame(
-      region = c("transverse tempral", "insula",
-               "pre central","superior parietal"),
-      p = sample(seq(0,.5,.001), 4),
-      stringsAsFactors = FALSE),mapping=aes(fill=p))
-  )
+  expect_is(ggseg(atlas = aseg, position="stacked"), c("gg","ggplot"))
 
   expect_is(ggseg(hemisphere = "left", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(hemisphere = "right", adapt_scales = T),c("gg","ggplot"))
@@ -60,9 +52,9 @@ test_that("Check that ggseg is working", {
 })
 
 test_that("Check that plotting non ggseg_atlas-class tries conversion", {
-  atlas <- unnest(dk, ggseg)
+  atlas <- unnest(as_ggseg_atlas(dk), ggseg)
 
-  expect_warning(p <- ggseg(atlas=atlas))
+  p <- ggseg(atlas=atlas)
 
   expect_is(p, c("gg","ggplot"))
 
@@ -70,12 +62,7 @@ test_that("Check that plotting non ggseg_atlas-class tries conversion", {
 
 test_that("Check brain stacking", {
 
-<<<<<<< HEAD
   expect_error(ggseg(position = "rr"), 'should be one of')
-=======
-  expect_warning(p <- ggseg(position = "rr"), "Cannot recognise position")
-  expect_is(p, c("gg","ggplot"))
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 
   expect_is(ggseg(position = "stack"), c("gg","ggplot"))
   expect_is(ggseg(position = "stacked"), c("gg","ggplot"))
@@ -83,3 +70,4 @@ test_that("Check brain stacking", {
   expect_is(ggseg(position = "dispersed"), c("gg","ggplot"))
 
 })
+

@@ -11,7 +11,7 @@ read_freesurfer_table(path, measure = NULL, ...)
 
 \item{measure}{which measure is the table of}
 
-\item{...}{additional arguments to \code{utils::read.table}}
+\item{...}{additional arguments to \code{read.table}}
 }
 \value{
 tibble

@@ -9,7 +9,7 @@
 #'
 #' @param path path to stats file
 #' @param rename logical. rename headers for ggseg compatibility
-#'
+#' @importFrom dplyr rename as_tibble
 #' @return tibble
 #' @export
 read_freesurfer_stats <- function(path, rename = TRUE){
@@ -25,11 +25,11 @@ read_freesurfer_stats <- function(path, rename = TRUE){
   headers <- headers[!grepl("ColHeaders", headers)]
   headers <- headers[headers != ""]
 
-  data <- dplyr::as_tibble(utils::read.table(path,
-                                      stringsAsFactors = FALSE))
+  data <- as_tibble(read.table(path,
+                               stringsAsFactors = FALSE))
   names(data) <- headers
 
-  if(rename) data <- dplyr::rename(data, label = StructName)
+  if(rename) data <- rename(data, label = StructName)
 
   return(data)
 }
@@ -43,7 +43,8 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #'
 #' @param subjects_dir Freesurfer subject directory
 #' @param atlas unique character combination identifying the atlas
-#'
+#' @importFrom dplyr bind_rows
+#' @importFrom tidyr separate unite
 #' @return tibble
 #' @export
 read_atlas_files <- function(subjects_dir, atlas){
@@ -60,14 +61,14 @@ read_atlas_files <- function(subjects_dir, atlas){
   if(all(hemi %in% c("rh", "lh"))){
     names(stats) <- paste(subject, hemi,
                           sep = "___")
-    stats <- dplyr::bind_rows(stats, .id = "id")
-    stats <- tidyr::separate(stats, id, c("subject", "hemi"),
-                             sep="___")
-    stats <- tidyr::unite(stats, label, hemi, label)
+    stats <- bind_rows(stats, .id = "id")
+    stats <- separate(stats, id, c("subject", "hemi"),
+                      sep="___")
+    stats <- unite(stats, label, hemi, label)
 
   }else{
     names(stats) <- subject
-    stats <- dplyr::bind_rows(stats, .id = "subject")
+    stats <- bind_rows(stats, .id = "subject")
   }
 
   return(stats)
@@ -85,18 +86,20 @@ read_atlas_files <- function(subjects_dir, atlas){
 #'
 #' @param path path to the table file
 #' @param measure which measure is the table of
-#' @param ... additional arguments to \code{utils::read.table}
-#'
+#' @param ... additional arguments to \code{read.table}
+#' @importFrom tidyr gather
+#' @importFrom utils read.table
+#' @importFrom dplyr mutate
 #' @return tibble
 #' @export
 read_freesurfer_table <- function(path, measure = NULL, ...){
-  dat <- utils::read.table(path, header = TRUE, ...)
+  dat <- read.table(path, header = TRUE, ...)
   names(dat)[1] <- "subject"
 
-  dat <- tidyr::gather(dat, label, value, -subject)
+  dat <- gather(dat, label, value, -subject)
 
   if(!is.null(measure)){
-    dat <- dplyr::mutate(dat, label = gsub(paste0("_", measure), "", label))
+    dat <- mutate(dat, label = gsub(paste0("_", measure), "", label))
 
     names(dat)[names(dat) %in% "value"] <- measure
   }
@@ -105,7 +108,7 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
     dat$label <- gsub("\\.", "-", dat$label)
   }
 
-  dplyr::as_tibble(dat)
+  as_tibble(dat)
 }
 
 
@@ -125,6 +128,6 @@ find_hemi_fromfile <- function(path){
 
 ## quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("id", "label", "StructName",
-                           "subject", "value"))
+  globalVariables(c("id", "label", "StructName",
+                    "subject", "value"))
 }

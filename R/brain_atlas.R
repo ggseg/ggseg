@@ -3,14 +3,17 @@
 #' @param atlas atlas short name, length one
 #' @param type atlas type, cortical or subcortical, length one
 #' @param data data.frame with atlas data
+#' @param palette named character vector of colours
 #'
 #' @export
 brain_atlas <- function(atlas, type, data, palette = NULL) {
   type <- match.arg(type,
                     c("cortical", "subcortical"))
 
-  if(!is.null(palette)) stopifnot(length(palette) == length(unique(na.omit(data$region))))
+  if(!is.null(palette)) stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
   if(!is.null(palette)) stopifnot(all(unique(names(data$region)) %in% names(palette)))
+
+  stopifnot(length(atlas) == 1)
 
   structure(list(
     atlas = atlas,
@@ -26,7 +29,7 @@ brain_atlas <- function(atlas, type, data, palette = NULL) {
 #' Validate brain atlas
 #' @param x an object
 #' @export
-is_brain_atlas <- function(x) inherits(x,'brain_atlas')
+is_brain_atlas <- function(x) inherits(x, "brain_atlas")
 
 #' Validate brain atlas
 #' @export
@@ -41,15 +44,16 @@ format.brain_atlas <- function(x, ...) {
   dt <- x$data
 
   sf <- ifelse(any("geometry" %in% names(dt)), TRUE, FALSE)
+  dt$geometry <- NULL
 
   idx <- !grepl("ggseg|geometry", names(dt))
   dt <- dplyr::as_tibble(dt)
   dt <- dt[!is.na(dt$region), idx]
-  dt_print <- capture.output(dt)[-1]
+  dt_print <- utils::capture.output(dt)[-1]
 
   c(
     sprintf("# %s %s brain atlas", x$atlas, x$type),
-    sprintf("  regions: %s ", length(na.omit(unique(x$data$region)))),
+    sprintf("  regions: %s ", length(stats::na.omit(unique(x$data$region)))),
     sprintf("  hemispheres: %s ", paste0(unique(x$data$hemi), collapse = ", ")),
     sprintf("  side views: %s ", paste0(unique(x$data$side), collapse = ", ")),
     sprintf("  palette: %s ", ifelse(is.null(x$palette), "no", "yes")),
@@ -66,18 +70,21 @@ print.brain_atlas <- function(x, ...) {
 }
 
 #' @export
-#' @importFrom ggplot2 labs ggplot
-#' @importFrom tidyr as_tibble
 plot.brain_atlas <- function(x,  ...){
+
   if("geometry" %in% names(x$data)){
-    ggplot() +
+    p <- ggplot2::ggplot() +
       geom_brain(atlas = x,
                  ...) +
-      scale_fill_brain2(x$palette) +
-      labs(title = paste(x$atlas, x$type, "atlas"))
+      ggplot2::labs(title = paste(x$atlas, x$type, "atlas"))
+
+    if(!is.null(x$palette))
+      p <- p + scale_fill_brain2(x$palette)
+
+    p
   }else{
     x <- as_ggseg_atlas(x)
-    plot(x, ...)
+    graphics::plot(x, ...)
   }
 }
 
@@ -93,6 +100,7 @@ as.data.frame.brain_atlas <- function(x, ...){
   )
 }
 
+
 #' @export
 as.list.brain_atlas <- function(x, ...){
   list(
@@ -102,7 +110,6 @@ as.list.brain_atlas <- function(x, ...){
     palette = x$palette
   )
 }
-
 
 ## as_brain_atlas ----
 #' Create brain atlas
@@ -138,8 +145,21 @@ as_brain_atlas.data.frame <- function(x){
 
 #' @export
 as_brain_atlas.ggseg_atlas <- function(x){
-  dt <- x[, !names(x) %in% c("atlas", "type")]
 
+  dt <- x[, !names(x) %in% c("atlas", "type")]
+  dt$lab <- 1:nrow(dt)
+  dt_l <- dplyr::group_by(dt, lab)
+  dt_l <- dplyr::group_split(dt_l)
+
+  geom <- lapply(dt_l, coords2sf)
+  geom <- do.call(rbind, geom)
+  dt <- dplyr::left_join(dplyr::select(dt, -ggseg), geom, by="lab")
+  dt <- st_as_sf(dt)
+
+  names(dt)[length(names(dt))] <- "geometry"
+  sf::st_geometry(dt) <- "geometry"
+
+  dt$lab <- NULL
   brain_atlas(unique(x$atlas), guess_type(x), dt)
 }
 
@@ -173,7 +193,6 @@ as_brain_atlas.brain_atlas <- function(x){
 #'
 #' @name brain_data-class
 #' @aliases brain_data brain_data-class
-#' @export
 brain_data <- function(x = data.frame(atlas = character(),
                                       type = character(),
                                       region = character(),
@@ -195,15 +214,14 @@ brain_data <- function(x = data.frame(atlas = character(),
     stopifnot(inherits(x$geometry, 'sfc_MULTIPOLYGON'))
   }
 
-  class(x) <- c("brain_data", class(x))
-
-  x
+  structure(
+    x,
+    class = c("brain_data", class(x))
+  )
 }
 
-#' @export
 as_brain_data <- function(x) brain_data(x)
 
-#' @export
 brain_polygon <- function(x = data.frame(.long = numeric(),
                                          .lat = numeric(),
                                          .id = character(),
@@ -217,32 +235,31 @@ brain_polygon <- function(x = data.frame(.long = numeric(),
   structure(x, class = c("brain_polygon", class(x)))
 }
 
-#' @export
 as_brain_polygon <- function(x) brain_polygon(x)
 
-#' Validate brain data
-#' @param x an object
-#' @export
-is_brain_atlas <- function(x) inherits(x, 'brain_data')
+# Validate brain data
+is_brain_polygon <- function(x) inherits(x, 'brain_polygon')
 
-#' Validate brain data
-#' @export
-#' @inheritParams is_brain_atlas
-is.brain_atlas <- is_brain_atlas
+# Validate brain data
+is.brain_polygon <- is_brain_polygon
 
-#' @export
-#' @importFrom utils capture.output
 format.brain_polygon <- function(x, ...) {
   c(
     sprintf("# brain polygon with %s vertices", nrow(x)),
-    capture.output(dplyr::tibble(x))[-1]
+    utils::capture.output(dplyr::tibble(x))[-1]
   )
 }
 
-#' @export
 print.brain_polygon <- function(x, ...) {
   cat(format(x), sep = "\n")
 }
 
+# sf ----
+# import internal sf methods
+#
+#' @import sf
+#' @keywords internal
+NULL
+
 ## quiets concerns of R CMD checks
-utils::globalVariables(c("region"))
+utils::globalVariables(c("region", "lab"))

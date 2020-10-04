@@ -8,7 +8,7 @@
 #' @param position formula describing the rows ~ columns organisation.
 #'
 #' @export
-#'
+#' @importFrom ggplot2 ggproto
 #' @examples
 #' ggplot() +
 #'   geom_brain(atlas = dk, aes(fill = region),
@@ -23,7 +23,7 @@ position_brain <- function(position = "horizontal") {
    ggproto(NULL, PositionBrain, position = position)
 }
 
-PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
+PositionBrain <- ggplot2::ggproto("PositionBrain", ggplot2:::Position,
                          position = hemi + side ~ .,
 
                          setup_params = function(self, data) {
@@ -51,8 +51,6 @@ PositionBrain <- ggproto("PositionBrain", ggplot2:::Position,
 # geometry movers ----
 
 position_formula <- function(pos, type){
-  # browser()
-
   chosen <- all.vars(pos, unique = FALSE)
   chosen <- chosen[!grepl("\\.", chosen)]
 
@@ -92,7 +90,7 @@ frame_2_position <- function(params, data){
   df2 <- dplyr::group_split(df2)
 
   # get all into same 0-space
-  df2 <- purrr::map(df2, ~ gather_geometry(.x))
+  df2 <- lapply(df2, gather_geometry)
 
   df3 <- if(length(pos$position) == 2){
     stack_grid(df2, pos$position[1], pos$position[2])
@@ -103,7 +101,7 @@ frame_2_position <- function(params, data){
     )
   }
 
-  df4 <- sf::st_as_sf(df3$df)
+  df4 <- st_as_sf(df3$df)
   attr(sf::st_geometry(df4), "bbox") = df3$box
 
   df4
@@ -114,7 +112,6 @@ gather_geometry <- function(df){
   df$geometry <- df$geometry - bbx[c("xmin", "ymin")]
   df
 }
-
 
 stack_horizontal <- function(df){
 
@@ -187,7 +184,7 @@ get_box <- function(bx, pad = 10){
   bx <- c(-pad, -pad,
           ceiling(max(bx[,"xmax"]))+pad,
           ceiling(max(bx[,"ymax"])+pad))
-  x <- setNames(10*round(bx/10), c("xmin", "ymin", "xmax", "ymax"))
+  x <- stats::setNames(10*round(bx/10), c("xmin", "ymin", "xmax", "ymax"))
   class(x) <- "bbox"
   return(x)
 }

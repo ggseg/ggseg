@@ -1,4 +1,3 @@
-context("test-theme_brain")
 
 test_that("Check that themes are working", {
   expect_is(ggseg() + theme_brain(),c("gg","ggplot"))

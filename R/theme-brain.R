@@ -57,10 +57,12 @@ theme_darkbrain = function(text.size=12,
     legend.background = element_rect(fill="black"),
     plot.background = element_rect(fill="black"),
 
-    text = element_text(colour="lightgrey"),
+    text = element_text(colour="lightgrey",
+                        family=text.family,
+                        size=text.size),
     axis.text = element_text(colour="lightgrey",
-                                      family=text.family,
-                                      size=text.size)
+                             family=text.family,
+                             size=text.size)
   )
 
 }
