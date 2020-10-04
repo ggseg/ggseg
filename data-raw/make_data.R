@@ -3,9 +3,9 @@ devtools::load_all("../ggsegExtra/")
 
 # dk ----
 dk <- make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
-                           steps = 4:7,
-                           tolerance = .5,
-                           smoothness = 5,
+                           steps = 5:7,
+                           tolerance = 1.5,
+                           smoothness = 4,
                            output_dir = here::here("data-raw"))
 
 
@@ -17,8 +17,8 @@ ggseg(atlas=dk, show.legend = FALSE,
 plot(dk)
 
 ggplot() +
-  geom_brain(data = dk, aes(fill = region),
-             position = position_brain("vertical"),
+  geom_brain(atlas = dk, aes(fill = region),
+             position = position_brain(hemi ~ side),
              show.legend = FALSE) +
   scale_fill_brain()
 
@@ -32,6 +32,7 @@ someData <- dplyr::tibble(
   Group = c(rep("G1",4), rep("G2",4))
 )
 someData %>%
+  group_by(Group) %>%
   ggplot() +
   geom_brain(atlas = dk, aes(fill = p),
              show.legend = FALSE) +
