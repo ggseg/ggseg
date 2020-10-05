@@ -223,11 +223,11 @@ coords2sf <- function(coords, vertex_size_limits = NULL) {
   dt <- lapply(dt, as.matrix)
   dt <- lapply(dt, function(x) rbind(x[,1:4], x[1, 1:4]))
 
-  dt <- st_polygon(dt)
-  dt <- st_sfc(dt)
-  dt <- st_sf(dt)
-  dt <- st_zm(dt)
-  dt <- st_cast(dt, "MULTIPOLYGON")
+  dt <- sf::st_polygon(dt)
+  dt <- sf::st_sfc(dt)
+  dt <- sf::st_sf(dt)
+  dt <- sf::st_zm(dt)
+  dt <- sf::st_cast(dt, "MULTIPOLYGON")
   dt$lab <- coords$lab
   dt
 }
