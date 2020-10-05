@@ -82,6 +82,99 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                      }
 )
 
+#' @export
+#' @rdname ggbrain
+geom_brain_label <- function(mapping = aes(),
+                          data = NULL,
+                          atlas = NULL,
+                          stat = "sf_coordinates",
+                          position = "identity",
+                          ...,
+                          parse = FALSE,
+                          nudge_x = 0,
+                          nudge_y = 0,
+                          label.padding = unit(0.25, "lines"),
+                          label.r = unit(0.15, "lines"),
+                          label.size = 0.25,
+                          na.rm = FALSE,
+                          show.legend = NA,
+                          inherit.aes = TRUE,
+                          fun.geometry = NULL) {
+
+  if (!missing(nudge_x) || !missing(nudge_y)) {
+    if (!missing(position)) {
+      abort("Specify either `position` or `nudge_x`/`nudge_y`")
+    }
+
+    position <- ggplot2::position_nudge(nudge_x, nudge_y)
+  }
+
+  layer_brain(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomLabel,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      label.padding = label.padding,
+      label.r = label.r,
+      label.size = label.size,
+      na.rm = na.rm,
+      fun.geometry = fun.geometry,
+      atlas = atlas,
+      ...
+    )
+  )
+}
+
+#' @export
+#' @rdname ggbrain
+geom_brain_text <- function(mapping = aes(),
+                         data = NULL,
+                         atlas = NULL,
+                         stat = "sf_coordinates",
+                         position = "identity",
+                         ...,
+                         parse = FALSE,
+                         nudge_x = 0,
+                         nudge_y = 0,
+                         check_overlap = FALSE,
+                         na.rm = FALSE,
+                         show.legend = NA,
+                         inherit.aes = TRUE,
+                         fun.geometry = NULL) {
+
+  if (!missing(nudge_x) || !missing(nudge_y)) {
+    if (!missing(position)) {
+      abort("You must specify either `position` or `nudge_x`/`nudge_y`.")
+    }
+
+    position <- ggplot2::position_nudge(nudge_x, nudge_y)
+  }
+
+  layer_brain(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      fun.geometry = fun.geometry,
+      atlas = atlas,
+      ...
+    )
+  )
+}
+
+# helpers ----
 default_aesthetics <- function(type) {
     modify_list(GeomPolygon$default_aes,
                 list(fill = "grey90", colour = "grey35"))

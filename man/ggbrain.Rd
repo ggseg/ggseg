@@ -4,6 +4,8 @@
 \name{geom_brain}
 \alias{geom_brain}
 \alias{GeomBrain}
+\alias{geom_brain_label}
+\alias{geom_brain_text}
 \title{Brain geom}
 \usage{
 geom_brain(
@@ -14,6 +16,42 @@ geom_brain(
   show.legend = NA,
   inherit.aes = TRUE,
   ...
+)
+
+geom_brain_label(
+  mapping = aes(),
+  data = NULL,
+  atlas = dk,
+  stat = "sf_coordinates",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  nudge_x = 0,
+  nudge_y = 0,
+  label.padding = unit(0.25, "lines"),
+  label.r = unit(0.15, "lines"),
+  label.size = 0.25,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  fun.geometry = NULL
+)
+
+geom_brain_text(
+  mapping = aes(),
+  data = NULL,
+  atlas = dk,
+  stat = "sf_coordinates",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  nudge_x = 0,
+  nudge_y = 0,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  fun.geometry = NULL
 )
 }
 \arguments{
