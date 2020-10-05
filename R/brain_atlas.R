@@ -255,10 +255,8 @@ print.brain_polygon <- function(x, ...) {
 }
 
 # sf ----
-# import internal sf methods
-#
-#' @import sf
-#' @keywords internal
+# import sf methods
+#' @importFrom sf st_as_sf st_as_sfc
 NULL
 
 ## quiets concerns of R CMD checks
