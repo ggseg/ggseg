@@ -31,12 +31,14 @@ someData <- dplyr::tibble(
   p = sample(seq(0,.5,.001), 8),
   Group = c(rep("G1",4), rep("G2",4))
 )
+
 someData %>%
   group_by(Group) %>%
   ggplot() +
   geom_brain(atlas = dk, aes(fill = p),
              show.legend = FALSE) +
-  facet_wrap(~Group)
+  facet_wrap(~Group) +
+  geom_sf_label(aes(label = region))
 
 
 usethis::use_data(dk,
