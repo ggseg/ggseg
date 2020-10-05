@@ -92,7 +92,7 @@ data_merge <- function(.data, atlas){
   errs <- tidyr::unite_(errs, "tt", cols, sep = " - ")
   errs <- dplyr::summarise(errs, value = paste0(tt, collapse = ", "))
 
-  if(errs != ""){
+  if(errs$value != ""){
     warning(paste("Some .data is not merged properly into the atlas. Check for spelling mistakes in:",
                   errs$value))
   }

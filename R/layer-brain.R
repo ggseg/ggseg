@@ -16,28 +16,31 @@ layer_brain <- function(geom = NULL, stat = NULL,
 LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                       setup_layer = function(self, data, plot) {
+
                         # process generic layer setup first
                         dt <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
+
                         atlas <- as.data.frame(self$geom_params$atlas)
+                        if(is.null(atlas) | nrow(atlas) == 0)
+                          stop("No atlas supplied, please provide a brain atlas to the geom.", call. = FALSE)
 
                         if(class(dt)[1] != "waiver"){
                           common_vars <- names(dt)[names(dt) %in% names(atlas)]
 
-                          cat("merging atlas and data by ", paste(common_vars, collapse = ", "), "\n", sep="")
+                          message(paste0("merging atlas and data by ", paste(sapply(common_vars, function(x) paste0("'", x, "'")), collapse = ", ")))
 
                           if(dplyr::is.grouped_df(dt)){
 
                             data2 <- tidyr::nest(dt)
-                            data2$data <- lapply(1:nrow(data2), function(x) dplyr::left_join(atlas,
+                            data2$data <- lapply(1:nrow(data2), function(x) dplyr::full_join(atlas,
                                                                                              data2$data[[x]],
                                                                                              by = common_vars))
 
                             data <- tidyr::unnest(data2, data)
 
-                            # browser()
                           }else{
-                            data <- dplyr::left_join(atlas,
-                                                     data,
+                            data <- dplyr::full_join(atlas,
+                                                     dt,
                                                      by = common_vars)
                           }
 
@@ -46,6 +49,21 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           data <- as.data.frame(self$geom_params$atlas)
 
                         }
+
+                        merge_errs <- sapply(data$geometry, function(x) ifelse(length(is.na(x)) > 0, TRUE, FALSE))
+
+                        if(any(merge_errs)){
+                          k <- data[!merge_errs,]
+                          k <- k[,apply(k, 2, function(x) all(!is.na(x)))]
+                          k$geometry <- NULL
+                          k <- paste(utils::capture.output(k), collapse="\n")
+
+                          warning(paste("Some data not merged. Check for spelling mistakes in:\n",
+                                        k, collapse="\n "),
+                                  call. = FALSE)
+                          data <- data[merge_errs,]
+                        }
+
 
                         data <- sf::st_as_sf(data)
 
