@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -43,8 +47,7 @@
 
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.00</span>
       </span>
     </div>
 
@@ -107,6 +110,12 @@
     <li>
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
+    <li>
+      <a href="../articles/geom-brain.html">Using geom_brain</a>
+    </li>
+    <li>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -115,7 +124,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/LCBC-UiO/ggseg">
+  <a href="https://github.com/LCBC-UiO/ggseg/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -133,17 +142,89 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="ggseg-1-5" class="section level1">
-<h1 class="page-header">
-<a href="#ggseg-1-5" class="anchor"></a>ggseg 1.5</h1>
+    <div id="ggseg-16" class="section level1">
+<h1 class="page-header" data-toc-text="1.6">
+<a href="#ggseg-16" class="anchor"></a>ggseg 1.6</h1>
+<div id="ggseg-1600" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1600" class="anchor"></a>ggseg 1.6.00</h2>
+<p>New large update, many new features. Of particular note is the introduction of the brain sf geom, which improved speed, and adaptability of the plots.</p>
+<ul>
+<li>
+<code><a href="../reference/ggseg.html">ggseg()</a></code> will stay for a while, but is superseded by a simple features geom<br>
+</li>
+<li>
+<code>geom_brain</code> introduced as a new function to plot the atlas data
+<ul>
+<li>an sf geom provides a lot of new features to the package<br>
+</li>
+<li>more control over display of the slices through <code><a href="../reference/position_brain.html">position_brain()</a></code><br>
+</li>
+<li>improved capabilities for atlases with regions that have holes<br>
+</li>
+</ul>
+</li>
+<li>new atlas class <code>brain_atlas</code> which contains simple features data<br>
+</li>
+<li>new functions to allow compatibility between sf and polygon data<br>
+</li>
+<li>utility functions to use on the atlas data for easy access to information
+<ul>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> functions for ggseg_atlas and brain_atlas classes for a quick look at atlases<br>
+</li>
+<li>
+<code>brain_regions</code> functions to easily extract the unique names of regions for an atlas<br>
+</li>
+<li>improved <code>print</code> method for atlases classes ggseg_atlas and brain_atlas</li>
+</ul>
+</li>
+</ul>
 </div>
-    <div id="ggseg-1-5-4" class="section level1">
-<h1 class="page-header">
-<a href="#ggseg-1-5-4" class="anchor"></a>ggseg 1.5.4</h1>
+</div>
+    <div id="ggseg-15" class="section level1">
+<h1 class="page-header" data-toc-text="1.5">
+<a href="#ggseg-15" class="anchor"></a>ggseg 1.5</h1>
+<div id="ggseg-155" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-155" class="anchor"></a>ggseg 1.5.5</h2>
+<ul>
+<li>dk atlas regions renamed to better reflect correct naming
+<ul>
+<li>pre central and post central are precentral and postcentral<br>
+</li>
+</ul>
+</li>
+<li>dk atlas now also includes the corpus callosum, as the original atlas contains</li>
+</ul>
+</div>
+</div>
+    <div id="ggseg-15-1" class="section level1">
+<h1 class="page-header" data-toc-text="1.5">
+<a href="#ggseg-15-1" class="anchor"></a>ggseg 1.5</h1>
+</div>
+    <div id="ggseg-154" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.4">
+<a href="#ggseg-154" class="anchor"></a>ggseg 1.5.4</h1>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>refs/remotes/origin/master</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <ul>
 <li>dkt renamed to dk
 <ul>
@@ -159,61 +240,35 @@
 </li>
 <li>dk atlas region name “medial orbito frontal” changed to “medial orbitofrontal”</li>
 </ul>
-<div id="ggseg-1-5-3" class="section level2">
+<div id="ggseg-153" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ggseg-1-5-3" class="anchor"></a>ggseg 1.5.3</h2>
+<a href="#ggseg-153" class="anchor"></a>ggseg 1.5.3</h2>
 <ul>
 <li>Split ggseg, and ggseg3d into two different packages</li>
 </ul>
 </div>
-<div id="ggseg-1-5-2" class="section level2">
+<div id="ggseg-152" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ggseg-1-5-2" class="anchor"></a>ggseg 1.5.2</h2>
+<a href="#ggseg-152" class="anchor"></a>ggseg 1.5.2</h2>
 <ul>
 <li>Adapted to work with dplyr 0.8.1</li>
 </ul>
 </div>
-<div id="ggseg-1-5-1" class="section level2">
+<div id="ggseg-151" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ggseg-1-5-1" class="anchor"></a>ggseg 1.5.1</h2>
+<a href="#ggseg-151" class="anchor"></a>ggseg 1.5.1</h2>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <ul>
-<li>Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling</li>
-</ul>
-</div>
-<div id="ggseg-1-5-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ggseg-1-5-1" class="anchor"></a>ggseg 1.5</h2>
-<ul>
-<li>Changed atlas.info to function <code>atlas_info()</code>
-</li>
-<li>Changed brain.pal to function <code><a href="../reference/brain_pal.html">brain_pal()</a></code>
-</li>
-<li>Changed atlas.info to function <code>atlas_info()</code>
-</li>
-<li>Reduced code necessary for <code>brain_pals_info</code>
-</li>
-<li>Simplified <code><a href="../reference/display_brain_pal.html">display_brain_pal()</a></code>
-</li>
-<li><p>Moved paletted of ggsegExtra atlases to ggsegExtra package</p></li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Changes all <code>data</code> options to <code>.data</code> to decrease possibility of column nameing overlap</li>
-<li>Added compatibility with <code>grouped</code> data.frames</li>
-<li>Reduced internal atlases, to improve CRAN compatibility</li>
-<li>Added function to install extra atlases from github easily</li>
-<li><p>Changes vignettes to comply with new functionality</p></li>
+<li>Changed ggseg_atlas-class to have nested columns for easier viewing and wrangling</li>
 </ul>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ggseg-1-5">1.5</a></li>
-        <li><a href="#ggseg-1-5-4">1.5.4</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -225,7 +280,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

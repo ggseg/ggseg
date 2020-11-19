@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -50,8 +54,7 @@ the plot can mimmick the shape and position in the brain it
 represents.
 ggseg plots and returns a ggplot object of plotted
 aparc regions." />
-<meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
 
@@ -69,7 +72,7 @@ aparc regions." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -83,7 +86,7 @@ aparc regions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.00</span>
       </span>
     </div>
 
@@ -114,6 +117,12 @@ aparc regions." />
     <li>
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
+    <li>
+      <a href="../articles/geom-brain.html">Using geom_brain</a>
+    </li>
+    <li>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -122,7 +131,7 @@ aparc regions." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/LCBC-UiO/ggseg">
+  <a href="https://github.com/LCBC-UiO/ggseg/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -155,15 +164,15 @@ represents.</p>
 aparc regions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggseg</span>(
-  <span class='kw'>.data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>atlas</span> <span class='kw'>=</span> <span class='st'>"dk"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"dispersed"</span>,
-  <span class='kw'>view</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hemisphere</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ggseg</span><span class='op'>(</span>
+  .data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  atlas <span class='op'>=</span> <span class='st'>"dk"</span>,
+  position <span class='op'>=</span> <span class='st'>"dispersed"</span>,
+  view <span class='op'>=</span> <span class='cn'>NULL</span>,
+  hemisphere <span class='op'>=</span> <span class='cn'>NULL</span>,
+  adapt_scales <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,7 +207,7 @@ longitude values.  Also affected by <code>position</code> argument</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>other options sent to ggplot2::geom_polygon for plotting, including
+      <td><p>other options sent to geom_polygon for plotting, including
 mapping aes (cannot include x, y, and group aethetics).</p></td>
     </tr>
     </table>
@@ -211,7 +220,7 @@ mapping aes (cannot include x, y, and group aethetics).</p></td>
     <p>This package contains data from various brain parcellations,
 with convenient functions to inspect the results directly on
 a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
-<dl class='dl-horizontal'>
+<dl>
 
 <dt>`dk`</dt><dd><p>The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.</p></dd>
 
@@ -228,25 +237,10 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 </ul>
 
 
-<p>[ggplot2][ggplot2::ggplot], [aes][ggplot2::aes],
-[geom_polygon][ggplot2::geom_polygon], [coord_fixed][ggplot2::coord_fixed]</p></div>
+<p>[ggplot2][ggplot], [aes][aes],
+[geom_polygon][geom_polygon], [coord_fixed][coord_fixed]</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'>ggseg</span>()</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>region</span>))</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>colour</span><span class='kw'>=</span><span class='st'>"black"</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.7</span>, <span class='kw'>mapping</span><span class='kw'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span><span class='kw'>=</span><span class='no'>region</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span>()</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"stacked"</span>)</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span>(<span class='kw'>adapt_scales</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
     <p><strong>Maintainer</strong>: Athanasia Mo Mowinckel <a href='mailto:a.m.mowinckel@psykologi.uio.no'>a.m.mowinckel@psykologi.uio.no</a> (<a href='https://orcid.org/0000-0002-5756-0223'>ORCID</a>)</p>
 <p>Authors:</p><ul>
 <li><p>Didac Vidal-Piñeiro <a href='mailto:d.v.pineiro@psykologi.uio.no'>d.v.pineiro@psykologi.uio.no</a> (<a href='https://orcid.org/0000-0001-9997-9156'>ORCID</a>)</p></li>
@@ -254,6 +248,21 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 
 
 <p>Athanasia Mowinckel and Didac Pineiro</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'>ggseg</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='ggseg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span><span class='op'>(</span>mapping<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='va'>region</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ggseg-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span><span class='op'>(</span>colour<span class='op'>=</span><span class='st'>"black"</span>, size<span class='op'>=</span><span class='fl'>.7</span>, mapping<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='va'>region</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_void</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='ggseg-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"stacked"</span><span class='op'>)</span>
+</div><div class='img'><img src='ggseg-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggseg</span><span class='op'>(</span>adapt_scales <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='img'><img src='ggseg-5.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -264,7 +273,7 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
