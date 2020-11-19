@@ -30,7 +30,6 @@ read_freesurfer_stats <- function(path, rename = TRUE){
   names(data) <- headers
 
   if(rename) data <- rename(data, label = StructName)
-
   return(data)
 }
 
@@ -100,7 +99,6 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
 
   if(!is.null(measure)){
     dat <- mutate(dat, label = gsub(paste0("_", measure), "", label))
-
     names(dat)[names(dat) %in% "value"] <- measure
   }
 
@@ -109,6 +107,7 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
   }
 
   as_tibble(dat)
+
 }
 
 

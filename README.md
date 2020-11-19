@@ -71,10 +71,6 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
-<<<<<<< HEAD
-#> Loading required package: ggplot2
-=======
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
 ggseg(atlas=dk)
 ```
 

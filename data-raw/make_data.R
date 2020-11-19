@@ -20,6 +20,7 @@ dk$data$ggseg <- NULL
 plot(dk)
 
 
+
 usethis::use_data(dk,
                   internal = FALSE,
                   overwrite = TRUE,

@@ -42,8 +42,8 @@ Further inspection of the atlas data can be explored by turning them into tibble
 
 ```{r}
 as_tibble(dk)
-```
 
+```
 
 Here you can see information about the `dk` atlas, and the main attributes of this atlas. 
 If you want to use external data with your `ggseg` plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using. 

@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include=F}
 knitr::opts_chunk$set(eval=TRUE)
-devtools::load_all(".")
+library(ggseg)
 ```
 
 ## Basic use

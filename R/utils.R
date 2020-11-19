@@ -66,6 +66,7 @@ brain_join <- function(data, atlas, by = NULL){
   }
 }
 
+
 squish_position <- function(geobrain, hemisphere, stack){
   mm <- dplyr::group_by(geobrain, hemi)
   mm <- dplyr::summarise_at(mm, dplyr::vars(.long),
@@ -125,6 +126,7 @@ calc_stack <- function(stack){
   return(stack)
 }
 
+
 #' Scale ggseg plot axes.
 #'
 #' \code{adapt_scales} returns a list of coordinate breaks and labels
@@ -135,6 +137,7 @@ calc_stack <- function(stack){
 #' @param aesthetics String of which aesthetics to adapt scale of, either "x","y", or "labs".
 #'
 #' @importFrom dplyr group_by summarise
+#' @return nested list
 adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
   atlas = ifelse(any(names(geobrain) %in% "atlas"),
@@ -214,7 +217,6 @@ adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
     ad_scale[[position]][[aesthetics]]
   }
 }
-
 
 gap <- function(x){
   (min(x) + max(x)) / 2

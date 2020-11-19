@@ -139,6 +139,7 @@ plot.ggseg_atlas <- function(x, ..., package = "ggseg"){
         mapping = ggplot2::aes(fill = region),
         ...) +
     ggplot2::labs( title = paste(unique(x$atlas), unique(x$type), "atlas"))
+
 }
 
 # quiets concerns of R CMD check

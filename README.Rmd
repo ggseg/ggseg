@@ -9,11 +9,8 @@ knitr::opts_chunk$set(
   fig.path = "man/img/README-",
   echo = TRUE
 )
-<<<<<<< HEAD
-# devtools::load_all(".")
-=======
-devtools::load_all(".")
->>>>>>> 9330d878f2fd8bca2b91eab6cb80021f5e3d370a
+
+library(ggseg)
 ``` 
  
 

@@ -21,7 +21,6 @@ test_that("check that ggseg_atlas is correct", {
   expect_equal(typeof(atlas$ggseg), "list")
 
   expect_equal(dim(as_ggseg_atlas(dk)), c(90, 8))
-
 })
 
 test_that("check that is_ggseg_atlas works", {
