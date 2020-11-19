@@ -100,7 +100,6 @@ as.data.frame.brain_atlas <- function(x, ...){
   )
 }
 
-
 #' @export
 as.list.brain_atlas <- function(x, ...){
   list(
@@ -120,6 +119,7 @@ as.list.brain_atlas <- function(x, ...){
 as_brain_atlas <- function(x){
   UseMethod("as_brain_atlas")
 }
+
 
 #' @export
 as_brain_atlas.default <- function(x){
@@ -255,10 +255,8 @@ print.brain_polygon <- function(x, ...) {
 }
 
 # sf ----
-# import internal sf methods
-#
-#' @import sf
-#' @keywords internal
+# import sf methods
+#' @importFrom sf st_as_sf st_as_sfc
 NULL
 
 ## quiets concerns of R CMD checks

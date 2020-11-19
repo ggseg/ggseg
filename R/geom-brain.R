@@ -71,17 +71,14 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                      },
 
                      draw_key = function(data, params, size) {
-                       data <- modify_list(default_aesthetics(params$legend), data)
-                       if (params$legend == "point") {
-                         draw_key_point(data, params, size)
-                       } else if (params$legend == "line") {
-                         draw_key_path(data, params, size)
-                       } else {
+
                          draw_key_polygon(data, params, size)
-                       }
                      }
 )
 
+
+
+# helpers ----
 default_aesthetics <- function(type) {
     modify_list(GeomPolygon$default_aes,
                 list(fill = "grey90", colour = "grey35"))
@@ -94,24 +91,21 @@ brain_grob <- function (x, lineend = "butt", linejoin = "round", linemitre = 10,
   type <- "other"
   names(type) <- "MULTIPOLYGON"
   is_other <- type == "other"
-  type_ind <- match(type, c("point", "line", "other", "collection"))
 
   defaults <- modify_list(GeomPolygon$default_aes,
                           list(colour = "grey35",
                                size = 0.2))
 
-  alpha <- if(!is.null(x$alpha)) x$alpha else defaults$alpha[type_ind]
-  col <- if(!is.null(x$colour)) x$colour else defaults$colour[type_ind]
+  alpha <- if(!is.null(x$alpha)) x$alpha else defaults$alpha
+  col <- if(!is.null(x$colour)) x$colour else defaults$colour
 
-  fill <- if(!is.null(x$fill)) x$fill else defaults$fill[type_ind]
+  fill <- if(!is.null(x$fill)) x$fill else defaults$fill
   fill <- alpha(fill, alpha)
-  size <- if(!is.null(x$size)) x$size else defaults$size[type_ind]
+  size <- if(!is.null(x$size)) x$size else defaults$size
   point_size <- size
 
-  stroke <- if(!is.null(x$stroke)) x$stroke else defaults$stroke[1]
-  stroke <- stroke * .stroke/2
   lwd <- size * .pt
-  lty <- if(!is.null(x$linetype)) x$linetype else defaults$linetype[type_ind]
+  lty <- if(!is.null(x$linetype)) x$linetype else defaults$linetype
   gp <- grid::gpar(col = col, fill = fill, lwd = lwd,
              lty = lty, lineend = lineend, linejoin = linejoin,
              linemitre = linemitre)

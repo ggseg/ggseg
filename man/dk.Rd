@@ -6,17 +6,6 @@
 \title{Desikan-Killiany Cortical Atlas}
 \format{
 A data.frame with 10913 observations and 11 variables
-\describe{
-  \item{long}{coordinates for the x-axis}
-  \item{lat}{coordinates for the y-axis}
-  \item{region}{name of region}
-  \item{hemi}{name of the hemisphere (left, right)}
-  \item{side}{which side to view (medial, lateral)}
-  \item{acronym}{abbreviated name of region}
-  \item{lobe}{lobe location}
-  \item{label}{label from recon-all segmentation}
-  \item{atlas}{name of the atlas}
-}
 }
 \usage{
 data(dk)

@@ -44,6 +44,14 @@ test_that("Check that ggseg is working", {
 
   expect_is(ggseg(atlas = aseg, position="stacked"), c("gg","ggplot"))
 
+  expect_warning(
+    ggseg(.data=data.frame(
+      region = c("transverse tempral", "insula",
+               "pre central","superior parietal"),
+      p = sample(seq(0,.5,.001), 4),
+      stringsAsFactors = FALSE), mapping=aes(fill=p))
+  )
+
   expect_is(ggseg(hemisphere = "left", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(hemisphere = "right", adapt_scales = T),c("gg","ggplot"))
   expect_is(ggseg(view = "lateral", adapt_scales = T),c("gg","ggplot"))

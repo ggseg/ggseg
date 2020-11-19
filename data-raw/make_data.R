@@ -1,41 +1,23 @@
 devtools::load_all(".")
 devtools::load_all("../ggsegExtra/")
 
+
 # dk ----
+dk_3d <- make_aparc_2_3datlas(output_dir = "data-raw") %>%
+  mutate(atlas = "dk_3d")%>%
+  unnest(ggseg_3d) %>%
+  select(-region) %>%
+  left_join(select(dk$data, hemi, region, label)) %>%
+  nest_by(atlas, surf, hemi, .key = "ggseg_3d") %>%
+  as_ggseg3d_atlas()
+
 dk <- make_ggseg3d_2_ggseg(ggseg3d::dk_3d,
-                           steps = 4:7,
-                           tolerance = .5,
-                           smoothness = 5,
+                           steps = 1:7,
+                           tolerance = 1.5,
+                           smoothness = 4,
                            output_dir = here::here("data-raw"))
-
-
-ggseg(atlas=dk, show.legend = FALSE,
-      colour = "black", position="stacked",
-      mapping = aes(fill=region)) +
-  scale_fill_brain()
-
+dk$data$ggseg <- NULL
 plot(dk)
-
-ggplot() +
-  geom_brain(data = dk, aes(fill = region),
-             position = position_brain("vertical"),
-             show.legend = FALSE) +
-  scale_fill_brain()
-
-
-someData <- dplyr::tibble(
-  region = c("transverse temporal", "insula",
-             "precentral","superior parietal",
-             "transverse temporal", "insula",
-             "precentral","superior parietal"),
-  p = sample(seq(0,.5,.001), 8),
-  Group = c(rep("G1",4), rep("G2",4))
-)
-someData %>%
-  ggplot() +
-  geom_brain(atlas = dk, aes(fill = p),
-             show.legend = FALSE) +
-  facet_wrap(~Group)
 
 
 usethis::use_data(dk,
