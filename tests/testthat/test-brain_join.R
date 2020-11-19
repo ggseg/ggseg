@@ -10,7 +10,7 @@ someData <- data.frame(
 
 test_that("Check that merging with grouped data works", {
     dk2 <- as_ggseg_atlas(dk)
-    testData <- data_merge(someData, unnest(dk2, cols = ggseg))
+    testData <- brain_join(someData, unnest(dk2, cols = ggseg))
 
     expect_equal(names(testData)[1], "Group")
     expect_equal(unique(testData$Group), c("G1", "G2"))
@@ -25,14 +25,24 @@ test_that("Check that plotting with grouped data works", {
   expect_true("Group" %in% names(pp$data))
 })
 
-test_that("Check that simple data merge works", {
+test_that("Check that simple brain_join works", {
   someData <- someData %>%
     #tidyr::unnest() %>%
     dplyr::filter(Group == "G1")
   dk2 <- as_ggseg_atlas(dk)
 
-  testData <- data_merge(someData, unnest(dk2, ggseg))
+  testData <- brain_join(someData, unnest(dk2, ggseg))
 
+  expect_equal(names(testData)[1], "Group")
+  expect_equal(unique(testData$Group), "G1")
+})
+
+test_that("Check that simple-features brain_join works", {
+  someData <- someData %>%
+    dplyr::filter(Group == "G1")
+
+  testData <- brain_join(someData, dk)
+  expect_true(inherits(testData, "sf"))
   expect_equal(names(testData)[1], "Group")
   expect_equal(unique(testData$Group), "G1")
 })

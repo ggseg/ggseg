@@ -16,54 +16,38 @@ layer_brain <- function(geom = NULL, stat = NULL,
 LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                       setup_layer = function(self, data, plot) {
-
                         # process generic layer setup first
                         dt <- ggproto_parent(ggplot2:::Layer, self)$setup_layer(data, plot)
 
                         atlas <- as.data.frame(self$geom_params$atlas)
                         if(is.null(atlas) | nrow(atlas) == 0)
-                          stop("No atlas supplied, please provide a brain atlas to the geom.", call. = FALSE)
+                          stop("No atlas supplied, please provide a brain atlas to the geom.",
+                               call. = FALSE)
 
                         if(class(dt)[1] != "waiver"){
-                          common_vars <- names(dt)[names(dt) %in% names(atlas)]
 
-                          message(paste0("merging atlas and data by ", paste(sapply(common_vars, function(x) paste0("'", x, "'")), collapse = ", ")))
+                          data <- brain_join(dt, atlas)
 
-                          if(dplyr::is.grouped_df(dt)){
+                          merge_errs <- sapply(data$geometry,
+                                               function(x) ifelse(length(!is.na(x)) > 0,
+                                                                  TRUE, FALSE))
 
-                            data2 <- tidyr::nest(dt)
-                            data2$data <- lapply(1:nrow(data2), function(x) dplyr::full_join(atlas,
-                                                                                             data2$data[[x]],
-                                                                                             by = common_vars))
+                          if(any(!merge_errs)){
+                            k <- data[!merge_errs,]
+                            k <- k[,apply(k, 2, function(x) all(!is.na(x)))]
+                            k$geometry <- NULL
+                            k <- paste(utils::capture.output(k), collapse="\n")
 
-                            data <- tidyr::unnest(data2, data)
-
-                          }else{
-                            data <- dplyr::full_join(atlas,
-                                                     dt,
-                                                     by = common_vars)
+                            warning(paste("Some data not merged. Check for spelling mistakes in:\n",
+                                          k, collapse="\n "),
+                                    call. = FALSE)
+                            data <- data[merge_errs,]
                           }
-
 
                         }else{
                           data <- as.data.frame(self$geom_params$atlas)
 
                         }
-
-                        merge_errs <- sapply(data$geometry, function(x) ifelse(length(is.na(x)) > 0, TRUE, FALSE))
-
-                        if(any(merge_errs)){
-                          k <- data[!merge_errs,]
-                          k <- k[,apply(k, 2, function(x) all(!is.na(x)))]
-                          k$geometry <- NULL
-                          k <- paste(utils::capture.output(k), collapse="\n")
-
-                          warning(paste("Some data not merged. Check for spelling mistakes in:\n",
-                                        k, collapse="\n "),
-                                  call. = FALSE)
-                          data <- data[merge_errs,]
-                        }
-
 
                         data <- sf::st_as_sf(data)
 
@@ -122,19 +106,6 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                       }
 )
 
-
-# helper function to find the geometry column
-geom_column <- function(data) {
-  w <- which(vapply(data, inherits, TRUE, what = "sfc"))
-  if (length(w) == 0) {
-    "geometry" # avoids breaks when objects without geometry list-column are examined
-  } else {
-    # this may not be best in case more than one geometry list-column is present:
-    if (length(w) > 1)
-      warn("more than one geometry column present: taking the first")
-    w[[1]]
-  }
-}
 
 # quiets concerns of R CMD check
 if(getRversion() >= "2.15.1"){

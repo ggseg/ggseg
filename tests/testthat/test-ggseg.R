@@ -49,7 +49,7 @@ test_that("Check that ggseg is working", {
       region = c("transverse tempral", "insula",
                "pre central","superior parietal"),
       p = sample(seq(0,.5,.001), 4),
-      stringsAsFactors = FALSE),mapping=aes(fill=p))
+      stringsAsFactors = FALSE), mapping=aes(fill=p))
   )
 
   expect_is(ggseg(hemisphere = "left", adapt_scales = T),c("gg","ggplot"))

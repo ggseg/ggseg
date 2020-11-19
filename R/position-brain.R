@@ -1,5 +1,37 @@
 # position ----
 
+#' Reposition brain slices
+#'
+#' Function for repositioning
+#' pre-joined atlas data (i.e. data and atlas
+#' already joined to a single data frame).
+#' This makes it possible for users to
+#' reposition the geometry data for the atlas
+#' for control over final plot layout. For even
+#' more detailed control over the positioning,
+#' the "hemi" and "side" columns should be
+#' converted into factors and ordered by wanted
+#' order of appearance.
+#'
+#' @param data sf-data.frame of joined brain atlas and tata
+#' @param position position formula for slices
+#'
+#' @return sf-data.frame with repositioned slices
+#' @export
+#'
+#' @examples
+#' reposition_brain(dk, hemi ~ side)
+#' reposition_brain(dk, side ~ hemi)
+#' reposition_brain(dk, hemi + side ~ .)
+#' reposition_brain(dk, . ~ hemi + side)
+reposition_brain <- function(data, position = "horizontal"){
+  data <- as.data.frame(data)
+
+  pos <- position_formula(position, unique(data$type))
+
+  frame_2_position(data, pos)
+}
+
 #' Alter brain atlas position
 #'
 #' Function to be used in the position argument in geom_brain
@@ -31,7 +63,10 @@ PositionBrain <- ggplot2::ggproto("PositionBrain", ggplot2:::Position,
                          },
 
                          compute_layer = function(self, data, params, layout) {
-                           df3 <- frame_2_position(params, data)
+
+                           pos <- position_formula(params$position, unique(data$type))
+
+                           df3 <- frame_2_position(data, pos)
                            bbx <- sf::st_bbox(df3$geometry)
 
                            # rescale layout to reflect new coordinates
@@ -82,10 +117,7 @@ position_formula <- function(pos, type){
 
 }
 
-frame_2_position <- function(params, data){
-
-  pos <- position_formula(params$position, unique(data$type))
-
+frame_2_position <- function(data, pos){
   df2 <- dplyr::group_by_at(data, pos$chosen)
   df2 <- dplyr::group_split(df2)
 
@@ -103,9 +135,9 @@ frame_2_position <- function(params, data){
 
   df4 <- st_as_sf(df3$df)
   attr(sf::st_geometry(df4), "bbox") = df3$box
-
   df4
 }
+
 
 gather_geometry <- function(df){
   bbx <- sf::st_bbox(df$geometry)

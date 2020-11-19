@@ -100,7 +100,6 @@ as.data.frame.brain_atlas <- function(x, ...){
   )
 }
 
-
 #' @export
 as.list.brain_atlas <- function(x, ...){
   list(

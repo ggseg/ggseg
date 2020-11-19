@@ -94,7 +94,8 @@ ggseg = function(.data = NULL,
   if(!is.null(.data)){
     if(is_brain_atlas(.data) | is_ggseg_atlas(.data))
       stop("Atlas given as '.data', did you mean to give it to 'atlas'?")
-    atlas <- data_merge(.data, atlas)
+    atlas <- brain_join(.data, atlas)
+    atlas <- filter(atlas, !is.na(.long))
   }
 
   # Create the plot
