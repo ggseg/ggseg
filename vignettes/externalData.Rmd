@@ -8,7 +8,9 @@ vignette: >
 ---
 
 ```{r setup, include=F}
-knitr::opts_chunk$set(eval=TRUE, out.width = "100%")
+knitr::opts_chunk$set(eval=TRUE, 
+                      out.width = "100%", 
+                      fig.retina = 3)
 library(ggseg)
 library(dplyr)
 ```
