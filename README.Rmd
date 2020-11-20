@@ -45,10 +45,7 @@ correspond to certain specifications to work.
 This was done to reduce package size, dependencies, and also to simplify maintenance. 
 If you want the 3d plotting tool, please go the [ggseg3d repository](https://github.com/LCBC-UiO/ggseg3d).
 
-Please see the [wiki](https://github.com/LCBC-UiO/ggsegExtra/wiki/Contributing%3A-polygon-atlases-new) for information on adding atlases, or inspect the included datasets for requirements. 
-If anything is unclear in the wiki, give us a shout out in the issues!
-
-You may find more atlases in the companion package [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
+You may find more atlases and functions to create new atlases in the companion package [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
 
 ## Installation
 The package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.
@@ -83,11 +80,7 @@ ggplot() +
 ```
 
 The package also has several vignettes, to help you get started using it. 
-You can access it [here](https://lcbc-uio.github.io/ggseg/), or via R:
-
-```{r eval=F}
-vignette("ggseg")
-```
+You can access it [here](https://lcbc-uio.github.io/ggseg/)
 
 You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
 
