@@ -72,7 +72,7 @@ ggplot() +
         legend.text = element_text(size = 7)) +
   guides(fill = guide_legend(ncol = 4))
 
-ggseg(atlas=aseg)
+ggseg(atlas = aseg)
 
 ggplot() +
   geom_brain(atlas = aseg) +

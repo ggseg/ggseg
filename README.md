@@ -89,7 +89,7 @@ ggplot() +
 
 ``` r
 
-ggseg(atlas=aseg)
+ggseg(atlas = aseg)
 ```
 
 <img src="man/img/README-unnamed-chunk-3-3.png" width="50%" />
