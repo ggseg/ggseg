@@ -77,10 +77,33 @@ ggseg(atlas=dk)
 <img src="man/img/README-unnamed-chunk-3-1.png" width="50%" />
 
 ``` r
-ggseg(atlas=aseg)
+
+ggplot() +
+  geom_brain(atlas = dk) +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 7)) +
+  guides(fill = guide_legend(ncol = 4))
 ```
 
 <img src="man/img/README-unnamed-chunk-3-2.png" width="50%" />
+
+``` r
+
+ggseg(atlas=aseg)
+```
+
+<img src="man/img/README-unnamed-chunk-3-3.png" width="50%" />
+
+``` r
+
+ggplot() +
+  geom_brain(atlas = aseg) +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 7)) +
+  guides(fill = guide_legend(ncol = 4))
+```
+
+<img src="man/img/README-unnamed-chunk-3-4.png" width="50%" />
 
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://lcbc-uio.github.io/ggseg/), or via

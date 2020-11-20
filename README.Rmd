@@ -6,7 +6,9 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  out.width = "100%",
   fig.path = "man/img/README-",
+  fig.retina = 3,
   echo = TRUE
 )
 
@@ -63,7 +65,21 @@ All functions are documented in standard R fashion.
 ```{r, out.width='50%'}
 library(ggseg)
 ggseg(atlas=dk)
+
+ggplot() +
+  geom_brain(atlas = dk) +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 7)) +
+  guides(fill = guide_legend(ncol = 4))
+
 ggseg(atlas=aseg)
+
+ggplot() +
+  geom_brain(atlas = aseg) +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 7)) +
+  guides(fill = guide_legend(ncol = 4))
+
 ```
 
 The package also has several vignettes, to help you get started using it. 
