@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -84,7 +84,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/LCBC-UiO/ggseg/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,8 +98,7 @@
 
       
 
-      </header><script src="geom-sf_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="geom-sf_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="geom-sf_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="geom-sf_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using atlases with geom_sf</h1>
@@ -282,10 +281,10 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.069</span>
-<span class="co">#&gt; 2 insula              0.019</span>
-<span class="co">#&gt; 3 precentral          0.025</span>
-<span class="co">#&gt; 4 superior parietal   0.153</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.17 </span>
+<span class="co">#&gt; 2 insula              0.2  </span>
+<span class="co">#&gt; 3 precentral          0.111</span>
+<span class="co">#&gt; 4 superior parietal   0.081</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -372,14 +371,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.164 g1    </span>
-<span class="co">#&gt; 2 insula              0.237 g1    </span>
-<span class="co">#&gt; 3 precentral          0.324 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.312 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.096 g2    </span>
-<span class="co">#&gt; 6 insula              0.419 g2    </span>
-<span class="co">#&gt; 7 precentral          0.319 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.307 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.097 g1    </span>
+<span class="co">#&gt; 2 insula              0.082 g1    </span>
+<span class="co">#&gt; 3 precentral          0.249 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.084 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.357 g2    </span>
+<span class="co">#&gt; 6 insula              0.132 g2    </span>
+<span class="co">#&gt; 7 precentral          0.067 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.226 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 
