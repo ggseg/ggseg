@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.00</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.01</span>
       </span>
     </div>
 
@@ -281,10 +281,10 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.17 </span>
-<span class="co">#&gt; 2 insula              0.2  </span>
-<span class="co">#&gt; 3 precentral          0.111</span>
-<span class="co">#&gt; 4 superior parietal   0.081</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.159</span>
+<span class="co">#&gt; 2 insula              0.099</span>
+<span class="co">#&gt; 3 precentral          0.268</span>
+<span class="co">#&gt; 4 superior parietal   0.045</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -371,14 +371,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.097 g1    </span>
-<span class="co">#&gt; 2 insula              0.082 g1    </span>
-<span class="co">#&gt; 3 precentral          0.249 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.084 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.357 g2    </span>
-<span class="co">#&gt; 6 insula              0.132 g2    </span>
-<span class="co">#&gt; 7 precentral          0.067 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.226 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.483 g1    </span>
+<span class="co">#&gt; 2 insula              0.48  g1    </span>
+<span class="co">#&gt; 3 precentral          0.319 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.38  g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.031 g2    </span>
+<span class="co">#&gt; 6 insula              0.11  g2    </span>
+<span class="co">#&gt; 7 precentral          0.251 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.492 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 

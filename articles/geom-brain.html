@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.00</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.01</span>
       </span>
     </div>
 
@@ -325,10 +325,10 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.166</span>
-<span class="co">#&gt; 2 insula              0.5  </span>
-<span class="co">#&gt; 3 precentral          0.349</span>
-<span class="co">#&gt; 4 superior parietal   0.093</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.257</span>
+<span class="co">#&gt; 2 insula              0.26 </span>
+<span class="co">#&gt; 3 precentral          0.261</span>
+<span class="co">#&gt; 4 superior parietal   0.023</span></code></pre></div>
 <p>And such plots can be further adapted with standard ggplot themes, scales etc, to your liking.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span>
@@ -358,14 +358,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.369 g1    </span>
-<span class="co">#&gt; 2 insula              0.125 g1    </span>
-<span class="co">#&gt; 3 precentral          0.443 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.301 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.157 g2    </span>
-<span class="co">#&gt; 6 insula              0.327 g2    </span>
-<span class="co">#&gt; 7 precentral          0.435 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.422 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.314 g1    </span>
+<span class="co">#&gt; 2 insula              0.465 g1    </span>
+<span class="co">#&gt; 3 precentral          0.249 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.195 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.433 g2    </span>
+<span class="co">#&gt; 6 insula              0.105 g2    </span>
+<span class="co">#&gt; 7 precentral          0.227 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.146 g2</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span>
