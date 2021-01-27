@@ -18,8 +18,8 @@ Description: Contains one plotting functions: `ggseg`,
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.1.1
-Depends: R (>= 2.10),
-    ggplot2
+Depends: R (>= 3.3),
+    ggplot2 (>= 3.3)
 LazyData: true
 Imports:
     dplyr (>= 1.0.0),
