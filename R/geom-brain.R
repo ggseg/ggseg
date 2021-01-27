@@ -44,6 +44,7 @@ geom_brain <- function (mapping = aes(), data = NULL,
 #' @rdname ggbrain
 #' @usage NULL
 #' @format NULL
+#' @importFrom ggplot2 Geom aes
 GeomBrain <- ggproto("GeomBrain", Geom,
                      default_aes = aes(
                        shape = NULL,

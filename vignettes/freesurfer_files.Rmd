@@ -33,11 +33,15 @@ When using this file, remembering which hemisphere is read in is important, as t
 
 ```{r, eval=FALSE}
 library(ggseg)
+library(ggplot2)
+
 subjects_dir <- "/Applications/freesurfer/subjects/"
 ```
 
 ```{r, echo = FALSE}
 library(ggseg)
+library(ggplot2)
+
 subjects_dir <- here::here("tests/testthat/data")
 ```
 

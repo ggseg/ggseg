@@ -23,6 +23,7 @@ It will create a base plot of the aparc brain segmentations.
 ```{r start}
 library(ggseg)
 library(dplyr)
+library(ggplot2)
 ggseg()
 ```
 

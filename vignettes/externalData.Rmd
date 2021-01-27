@@ -36,6 +36,7 @@ TO inspect the atlases, call them in the console.
 ```{r start}
 library(ggseg)
 library(dplyr)
+library(ggplot2)
 
 dk
 ```
