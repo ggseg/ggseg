@@ -10,8 +10,11 @@ brain_atlas <- function(atlas, type, data, palette = NULL) {
   type <- match.arg(type,
                     c("cortical", "subcortical"))
 
-  if(!is.null(palette)) stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
-  if(!is.null(palette)) stopifnot(all(unique(names(data$region)) %in% names(palette)))
+  if(!is.null(palette))
+    stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
+  if(!is.null(palette))
+    stopifnot(all(brain_regions(data) %in% names(palette)) &&
+                all(names(palette) %in% brain_regions(data)))
 
   stopifnot(length(atlas) == 1)
 
