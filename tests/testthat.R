@@ -2,5 +2,5 @@ library(testthat)
 
 test_check("ggseg")
 
-# covr::zero_coverage(covr::package_coverage("."))
-
+# z <-covr::package_coverage(".")
+# covr::zero_coverage(z)
