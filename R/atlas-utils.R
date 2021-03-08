@@ -20,6 +20,13 @@ brain_regions.brain_atlas <- function(x){
   x[order(x)]
 }
 
+#' @export
+brain_regions.data.frame <- function(x){
+  x <- unique(x$region)
+  x <- x[!is.na(x)]
+  x[order(x)]
+}
+
 
 #' Extract unique labels of brain regions
 #'
