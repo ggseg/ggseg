@@ -3,16 +3,16 @@
 \name{brain_data-class}
 \alias{brain_data-class}
 \alias{brain_data}
-\title{`brain_data` class}
+\title{\code{brain_data} class}
 \usage{
 brain_data(
   x = data.frame(atlas = character(), type = character(), region = character(), hemi =
-    character(), side = character(), ggseg = character(), geometry = character())
+    character(), side = character(), geometry = character())
 )
 }
 \arguments{
-\item{x}{dataframe to be made a brain_data}
+\item{x}{data.frame to be made a brain_data}
 }
 \description{
-`brain_data` class
+\code{brain_data} class
 }

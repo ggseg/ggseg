@@ -11,7 +11,7 @@ scale_brain(
   name = "dk",
   na.value = "grey",
   ...,
-  aesthetics = c("colour", "color", "fill")
+  aesthetics = c("fill", "colour", "color")
 )
 
 scale_colour_brain(...)
