@@ -1,5 +1,9 @@
 # ggseg 1.6
 
+## ggseg 1.6.03
+* bug fixes in atlas objects and method internals
+* tests in vdiffr
+
 ## ggseg 1.6.02
 
 * No longer depends on ggplot2, but imports it.
