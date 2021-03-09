@@ -205,9 +205,11 @@ brain_data <- function(x = data.frame(atlas = character(),
   stopifnot(any(c("geometry") %in% names(x)))
   stopifnot(inherits(x$geometry, 'sfc_MULTIPOLYGON'))
 
+  x <- sf::st_as_sf(x)
+
   structure(
     x,
-    class = c("sf", "brain_data", "tbl_df", "tbl", "data.frame")
+    class = c("brain_data", class(x))
   )
 }
 
