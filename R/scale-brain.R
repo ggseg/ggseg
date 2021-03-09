@@ -27,7 +27,7 @@
 #'
 
 #' @importFrom ggplot2 scale_color_manual scale_colour_manual scale_fill_manual
-scale_brain = function(name = "dk", na.value="grey", ..., aesthetics = c("colour", "color", "fill")) {
+scale_brain = function(name = "dk", na.value="grey", ..., aesthetics = c("fill", "colour", "color")) {
   pal = brain_pal(name = name, ...)
   aesthetics = match.arg(aesthetics)
   func = switch(aesthetics,
@@ -81,7 +81,7 @@ scale_fill_brain <- function(...) {
 #' scale_colour_brain()
 #' scale_fill_brain()
 #'
-scale_brain2 = function(palette, na.value="grey", ..., aesthetics = c("colour", "color", "fill")) {
+scale_brain2 = function(palette, na.value="grey", ..., aesthetics = c("fill", "colour", "color")) {
   aesthetics = match.arg(aesthetics)
   func = switch(aesthetics,
                 color =   ggplot2::scale_color_manual,
