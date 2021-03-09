@@ -129,17 +129,16 @@ frame_2_position <- function(data, pos){
   df2 <- dplyr::group_by_at(data, pos$chosen)
   df2 <- dplyr::group_split(df2)
 
+  posi <- ifelse(length(pos$position) > 1,
+                 "grid", pos$position)
+
   # get all into same 0-space
   df2 <- lapply(df2, gather_geometry)
-
-  df3 <- if(length(pos$position) == 2){
-    stack_grid(df2, pos$position[1], pos$position[2])
-  }else{
-    switch(pos$position,
-           "rows" = stack_vertical(df2),
-           "columns" = stack_horizontal(df2)
-    )
-  }
+  df3 <- switch(posi,
+                rows = stack_vertical(df2),
+                columns = stack_horizontal(df2),
+                grid = stack_grid(df2, pos$position[1], pos$position[2])
+  )
 
   df4 <- st_as_sf(df3$df)
   attr(sf::st_geometry(df4), "bbox") = df3$box
