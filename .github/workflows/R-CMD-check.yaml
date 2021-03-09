@@ -14,9 +14,6 @@ on:
 
 name: R-CMD-check
 
-env:
-  cache-version: v3
-
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
@@ -39,6 +36,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CI: true
 
     steps:
       - uses: actions/checkout@v2
