@@ -7,6 +7,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/img/README-",
+  fig.retina = 3,
   echo = TRUE
 )
 
@@ -16,12 +17,10 @@ library(ggseg)
 
 # ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />  
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
-  [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
-  [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
-[![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
+[![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.
@@ -60,10 +59,11 @@ The functions are now installed, and you may load them when you want to use them
 All functions are documented in standard R fashion.
 
 ## Use
-```{r, out.width='50%'}
+```{r, out.width='100%'}
 library(ggseg)
-ggseg(atlas=dk)
-ggseg(atlas=aseg)
+library(ggplot2)
+plot(dk)
+plot(aseg)
 ```
 
 The package also has several vignettes, to help you get started using it. 

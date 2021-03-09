@@ -3,18 +3,14 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/LCBC-UiO/ggseg.svg?branch=master)](https://travis-ci.com/LCBC-UiO/ggseg)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/LCBC-UiO/ggseg?branch=master&svg=true)](https://ci.appveyor.com/project/LCBC-UiO/ggseg)
-[![Coverage
-status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
-[![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build
 status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
+[![Coverage
+status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames
@@ -48,7 +44,7 @@ Please see the
 [wiki](https://github.com/LCBC-UiO/ggsegExtra/wiki/Contributing%3A-polygon-atlases-new)
 for information on adding atlases, or inspect the included datasets for
 requirements. If anything is unclear in the wiki, give us a shout out in
-the issues\!
+the issues!
 
 You may find more atlases in the companion package
 [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
@@ -71,16 +67,17 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
-ggseg(atlas=dk)
+library(ggplot2)
+plot(dk)
 ```
 
-<img src="man/img/README-unnamed-chunk-3-1.png" width="50%" />
+<img src="man/img/README-unnamed-chunk-3-1.png" width="100%" />
 
 ``` r
-ggseg(atlas=aseg)
+plot(aseg)
 ```
 
-<img src="man/img/README-unnamed-chunk-3-2.png" width="50%" />
+<img src="man/img/README-unnamed-chunk-3-2.png" width="100%" />
 
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://lcbc-uio.github.io/ggseg/), or via
