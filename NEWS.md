@@ -1,8 +1,9 @@
 # ggseg 1.6
 
-## ggseg 1.6.03
+## ggseg 1.6.02
 * bug fixes in atlas objects and method internals
 * tests in vdiffr
+* vctrs class for polygon ggseg data
 
 ## ggseg 1.6.02
 
