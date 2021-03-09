@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
       </span>
     </div>
 
@@ -122,24 +122,26 @@
 <p>The function <code>read_freesurfer_stats</code> is made to easily read in raw stats tables from each individual, without needing to go through Freesurfers internal converters. When using this file, remembering which hemisphere is read in is important, as this information must be added to the <code>label</code> column for <code>ggseg</code> to recognise the region labels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LCBC-UiO/ggseg">ggseg</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+
 <span class="va">subjects_dir</span> <span class="op">&lt;-</span> <span class="st">"/Applications/freesurfer/subjects/"</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stats_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">subjects_dir</span>, <span class="st">"bert/stats/lh.aparc.stats"</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_freesurfer_stats.html">read_freesurfer_stats</a></span><span class="op">(</span><span class="va">stats_file</span><span class="op">)</span>
 <span class="va">data</span>
 <span class="co">#&gt; # A tibble: 34 x 10</span>
-<span class="co">#&gt;    label NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1 bank…    1181      831    2297     2.77    0.428    0.116    0.024      11</span>
-<span class="co">#&gt;  2 caud…     843      572    1534     2.72    0.469    0.124    0.013      10</span>
-<span class="co">#&gt;  3 caud…    2758     1840    5772     2.80    0.526    0.114    0.021      26</span>
-<span class="co">#&gt;  4 cune…    2683     1654    3074     1.81    0.471    0.14     0.033      39</span>
-<span class="co">#&gt;  5 ento…     581      416    1840     3.33    0.667    0.116    0.032       5</span>
-<span class="co">#&gt;  6 fusi…    4113     2875    8519     2.72    0.599    0.131    0.025      52</span>
-<span class="co">#&gt;  7 infe…    4948     3466   10559     2.70    0.509    0.131    0.029      65</span>
-<span class="co">#&gt;  8 infe…    5056     3542   12358     2.98    0.625    0.138    0.033      74</span>
-<span class="co">#&gt;  9 isth…    1561      990    2350     2.09    0.745    0.113    0.023      19</span>
-<span class="co">#&gt; 10 late…    7961     5077   12743     2.30    0.588    0.139    0.033     104</span>
+<span class="co">#&gt;    label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd</span>
+<span class="co">#&gt;    &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;</span>
+<span class="co">#&gt;  1 bankssts    1181      831    2297     2.77    0.428    0.116    0.024      11</span>
+<span class="co">#&gt;  2 caudala…     843      572    1534     2.72    0.469    0.124    0.013      10</span>
+<span class="co">#&gt;  3 caudalm…    2758     1840    5772     2.80    0.526    0.114    0.021      26</span>
+<span class="co">#&gt;  4 cuneus      2683     1654    3074     1.81    0.471    0.14     0.033      39</span>
+<span class="co">#&gt;  5 entorhi…     581      416    1840     3.33    0.667    0.116    0.032       5</span>
+<span class="co">#&gt;  6 fusiform    4113     2875    8519     2.72    0.599    0.131    0.025      52</span>
+<span class="co">#&gt;  7 inferio…    4948     3466   10559     2.70    0.509    0.131    0.029      65</span>
+<span class="co">#&gt;  8 inferio…    5056     3542   12358     2.98    0.625    0.138    0.033      74</span>
+<span class="co">#&gt;  9 isthmus…    1561      990    2350     2.09    0.745    0.113    0.023      19</span>
+<span class="co">#&gt; 10 lateral…    7961     5077   12743     2.30    0.588    0.139    0.033     104</span>
 <span class="co">#&gt; # … with 24 more rows, and 1 more variable: CurvInd &lt;dbl&gt;</span></code></pre></div>
 <p>This data should be well-suited for use with ggseg.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -157,18 +159,18 @@
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_atlas_files.html">read_atlas_files</a></span><span class="op">(</span><span class="va">subject_dir</span>, <span class="st">"aparc.stats$"</span><span class="op">)</span>
 <span class="va">dat</span>
 <span class="co">#&gt; # A tibble: 68 x 11</span>
-<span class="co">#&gt;    subject label NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 bert    lh_b…    1181      831    2297     2.77    0.428    0.116    0.024</span>
-<span class="co">#&gt;  2 bert    lh_c…     843      572    1534     2.72    0.469    0.124    0.013</span>
-<span class="co">#&gt;  3 bert    lh_c…    2758     1840    5772     2.80    0.526    0.114    0.021</span>
-<span class="co">#&gt;  4 bert    lh_c…    2683     1654    3074     1.81    0.471    0.14     0.033</span>
-<span class="co">#&gt;  5 bert    lh_e…     581      416    1840     3.33    0.667    0.116    0.032</span>
-<span class="co">#&gt;  6 bert    lh_f…    4113     2875    8519     2.72    0.599    0.131    0.025</span>
-<span class="co">#&gt;  7 bert    lh_i…    4948     3466   10559     2.70    0.509    0.131    0.029</span>
-<span class="co">#&gt;  8 bert    lh_i…    5056     3542   12358     2.98    0.625    0.138    0.033</span>
-<span class="co">#&gt;  9 bert    lh_i…    1561      990    2350     2.09    0.745    0.113    0.023</span>
-<span class="co">#&gt; 10 bert    lh_l…    7961     5077   12743     2.30    0.588    0.139    0.033</span>
+<span class="co">#&gt;    subject label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv</span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 bert    lh_bank…    1181      831    2297     2.77    0.428    0.116    0.024</span>
+<span class="co">#&gt;  2 bert    lh_caud…     843      572    1534     2.72    0.469    0.124    0.013</span>
+<span class="co">#&gt;  3 bert    lh_caud…    2758     1840    5772     2.80    0.526    0.114    0.021</span>
+<span class="co">#&gt;  4 bert    lh_cune…    2683     1654    3074     1.81    0.471    0.14     0.033</span>
+<span class="co">#&gt;  5 bert    lh_ento…     581      416    1840     3.33    0.667    0.116    0.032</span>
+<span class="co">#&gt;  6 bert    lh_fusi…    4113     2875    8519     2.72    0.599    0.131    0.025</span>
+<span class="co">#&gt;  7 bert    lh_infe…    4948     3466   10559     2.70    0.509    0.131    0.029</span>
+<span class="co">#&gt;  8 bert    lh_infe…    5056     3542   12358     2.98    0.625    0.138    0.033</span>
+<span class="co">#&gt;  9 bert    lh_isth…    1561      990    2350     2.09    0.745    0.113    0.023</span>
+<span class="co">#&gt; 10 bert    lh_late…    7961     5077   12743     2.30    0.588    0.139    0.033</span>
 <span class="co">#&gt; # … with 58 more rows, and 2 more variables: FoldInd &lt;int&gt;, CurvInd &lt;dbl&gt;</span></code></pre></div>
 <p>Since all files are read in, the hemisphere in the label is already fixed, so it is easy to plot.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">

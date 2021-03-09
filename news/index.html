@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
       </span>
     </div>
 
@@ -149,6 +149,34 @@
     <div id="ggseg-16" class="section level1">
 <h1 class="page-header" data-toc-text="1.6">
 <a href="#ggseg-16" class="anchor"></a>ggseg 1.6</h1>
+<div id="ggseg-1602" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1602" class="anchor"></a>ggseg 1.6.02</h2>
+<ul>
+<li>bug fixes in atlas objects and method internals</li>
+<li>tests in vdiffr</li>
+<li>vctrs class for polygon ggseg data</li>
+</ul>
+</div>
+<div id="ggseg-1602-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1602-1" class="anchor"></a>ggseg 1.6.02</h2>
+<ul>
+<li>No longer depends on ggplot2, but imports it.
+<ul>
+<li>as is advised practice</li>
+<li>users must explicitly load ggplot2 to access further ggplot2 functions</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="ggseg-1601" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-1601" class="anchor"></a>ggseg 1.6.01</h2>
+<ul>
+<li>fixed installation issues by making sure package depends on R&gt;3.3 for polygon holes.</li>
+</ul>
+</div>
 <div id="ggseg-1600" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggseg-1600" class="anchor"></a>ggseg 1.6.00</h2>
@@ -210,21 +238,6 @@
     <div id="ggseg-154" class="section level1">
 <h1 class="page-header" data-toc-text="1.5.4">
 <a href="#ggseg-154" class="anchor"></a>ggseg 1.5.4</h1>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>refs/remotes/origin/master</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <ul>
 <li>dkt renamed to dk
 <ul>
@@ -257,9 +270,26 @@
 <div id="ggseg-151" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ggseg-151" class="anchor"></a>ggseg 1.5.1</h2>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <ul>
-<li>Changed ggseg_atlas-class to have nested columns for easier viewing and wrangling</li>
+<li>Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling</li>
+</ul>
+</div>
+<div id="ggseg-15-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ggseg-15-2" class="anchor"></a>ggseg 1.5</h2>
+<ul>
+<li><p>Changed atlas.info to function <code>atlas_info()</code></p></li>
+<li><p>Changed brain.pal to function <code><a href="../reference/brain_pal.html">brain_pal()</a></code></p></li>
+<li><p>Changed atlas.info to function <code>atlas_info()</code></p></li>
+<li><p>Reduced code necessary for <code>brain_pals_info</code></p></li>
+<li><p>Simplified <code><a href="../reference/display_brain_pal.html">display_brain_pal()</a></code></p></li>
+<li><p>Moved paletted of ggsegExtra atlases to ggsegExtra package</p></li>
+<li><p>Added a <code>NEWS.md</code> file to track changes to the package.</p></li>
+<li><p>Changes all <code>data</code> options to <code>.data</code> to decrease possibility of column nameing overlap</p></li>
+<li><p>Added compatibility with <code>grouped</code> data.frames</p></li>
+<li><p>Reduced internal atlases, to improve CRAN compatibility</p></li>
+<li><p>Added function to install extra atlases from github easily</p></li>
+<li><p>Changes vignettes to comply with new functionality</p></li>
 </ul>
 </div>
 </div>

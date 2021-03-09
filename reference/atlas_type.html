@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Freesurfer automatic subcortical segmentation of a brain volume — aseg • ggseg</title>
+<title>Detect atlas type — atlas_type • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Freesurfer automatic subcortical segmentation of a brain volume — aseg" />
-<meta property="og:description" content="Coordinate data for the subcortical parcellations implemented
-in Freesurfer." />
+<meta property="og:title" content="Detect atlas type — atlas_type" />
+<meta property="og:description" content="Detect atlas type" />
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
@@ -144,44 +143,27 @@ in Freesurfer." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Freesurfer automatic subcortical segmentation of a brain volume</h1>
-    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>aseg.Rd</code></div>
+    <h1>Detect atlas type</h1>
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/atlas-utils.R'><code>R/atlas-utils.R</code></a></small>
+    <div class="hidden name"><code>atlas_type.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Coordinate data for the subcortical parcellations implemented
-in Freesurfer.</p>
+    <p>Detect atlas type</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>aseg</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>atlas_type</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>brain atlas</p></td>
+    </tr>
+    </table>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data.frame with 2702 observations and 9 variables</p><dl>
-  <dt>lat</dt><dd><p>coordinates for the x-axis</p></dd>
-  <dt>long</dt><dd><p>coordinates for the y-axis</p></dd>
-  <dt>region</dt><dd><p>acronym of network</p></dd>
-  <dt>name</dt><dd><p>full name of network</p></dd>
-  <dt>hemi</dt><dd><p>name of the hemisphere (left, right)</p></dd>
-  <dt>side</dt><dd><p>which side to view (medial, lateral,axial)</p></dd>
-  <dt>atlas</dt><dd><p>name of the atlas</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Fischl et al., (2002). Neuron, 33:341-355
-(<a href='https://www.ncbi.nlm.nih.gov/pubmed/11832223'>PubMed</a>)</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other ggseg_atlases: 
-<code><a href='dk.html'>dk</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>aseg</span><span class='op'>)</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

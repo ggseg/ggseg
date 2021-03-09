@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
       </span>
     </div>
 
@@ -119,7 +119,8 @@
 <p>Firstly, you need to make sure that the atlas you are working on had simple features (sf) geometry column in it. The easiest way to do this is to simply call the atlas in the R terminal and look for information on <code>use</code> in the console printout. The dk-atlas has <code>use: ggplot() + geom_brain()</code> letting us know that it is set up to work with simple features.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LCBC-UiO/ggseg">ggseg</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+
 <span class="va">dk</span>
 <span class="co">#&gt; # dk cortical brain atlas</span>
 <span class="co">#&gt;   regions: 35 </span>
@@ -216,18 +217,18 @@
 <code class="sourceCode R"><span class="va">dk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_ggseg_atlas.html">as_ggseg_atlas</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span>
 <span class="va">dk2</span>
 <span class="co">#&gt; # ggseg atlas</span>
-<span class="co">#&gt;    atlas type    hemi  side    region          label           roi   ggseg      </span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt; &lt;list&gt;     </span>
-<span class="co">#&gt;  1 dk    cortic… left  lateral &lt;NA&gt;            &lt;NA&gt;            0001  &lt;tibble [1…</span>
-<span class="co">#&gt;  2 dk    cortic… left  lateral bankssts        lh_bankssts     0002  &lt;tibble [2…</span>
-<span class="co">#&gt;  3 dk    cortic… left  lateral caudal middle … lh_caudalmiddl… 0004  &lt;tibble [2…</span>
-<span class="co">#&gt;  4 dk    cortic… left  lateral fusiform        lh_fusiform     0008  &lt;tibble [1…</span>
-<span class="co">#&gt;  5 dk    cortic… left  lateral inferior parie… lh_inferiorpar… 0009  &lt;tibble [3…</span>
-<span class="co">#&gt;  6 dk    cortic… left  lateral inferior tempo… lh_inferiortem… 0010  &lt;tibble [3…</span>
-<span class="co">#&gt;  7 dk    cortic… left  lateral lateral occipi… lh_lateralocci… 0012  &lt;tibble [3…</span>
-<span class="co">#&gt;  8 dk    cortic… left  lateral lateral orbito… lh_lateralorbi… 0013  &lt;tibble [2…</span>
-<span class="co">#&gt;  9 dk    cortic… left  lateral middle temporal lh_middletempo… 0016  &lt;tibble [4…</span>
-<span class="co">#&gt; 10 dk    cortic… left  lateral pars opercular… lh_parsopercul… 0019  &lt;tibble [2…</span>
+<span class="co">#&gt;    atlas type    hemi  side   region        label         roi              ggseg</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;       &lt;brn_plyg&gt;</span>
+<span class="co">#&gt;  1 dk    cortic… left  later… &lt;NA&gt;          &lt;NA&gt;          0001  &lt; p:  1 - v: 12&gt;</span>
+<span class="co">#&gt;  2 dk    cortic… left  later… bankssts      lh_bankssts   0002  &lt; p:  1 - v: 23&gt;</span>
+<span class="co">#&gt;  3 dk    cortic… left  later… caudal middl… lh_caudalmid… 0004  &lt; p:  1 - v: 29&gt;</span>
+<span class="co">#&gt;  4 dk    cortic… left  later… fusiform      lh_fusiform   0008  &lt; p:  1 - v: 19&gt;</span>
+<span class="co">#&gt;  5 dk    cortic… left  later… inferior par… lh_inferiorp… 0009  &lt; p:  1 - v: 31&gt;</span>
+<span class="co">#&gt;  6 dk    cortic… left  later… inferior tem… lh_inferiort… 0010  &lt; p:  1 - v: 34&gt;</span>
+<span class="co">#&gt;  7 dk    cortic… left  later… lateral occi… lh_lateraloc… 0012  &lt; p:  1 - v: 31&gt;</span>
+<span class="co">#&gt;  8 dk    cortic… left  later… lateral orbi… lh_lateralor… 0013  &lt; p:  1 - v: 25&gt;</span>
+<span class="co">#&gt;  9 dk    cortic… left  later… middle tempo… lh_middletem… 0016  &lt; p:  1 - v: 46&gt;</span>
+<span class="co">#&gt; 10 dk    cortic… left  later… pars opercul… lh_parsoperc… 0019  &lt; p:  1 - v: 23&gt;</span>
 <span class="co">#&gt; # … with 80 more rows</span></code></pre></div>
 <p>If the ggseg-atlas is set up correctly, we should be able to convert it into a simple-features atlas.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -281,10 +282,10 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.159</span>
-<span class="co">#&gt; 2 insula              0.099</span>
-<span class="co">#&gt; 3 precentral          0.268</span>
-<span class="co">#&gt; 4 superior parietal   0.045</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.045</span>
+<span class="co">#&gt; 2 insula              0.178</span>
+<span class="co">#&gt; 3 precentral          0.298</span>
+<span class="co">#&gt; 4 superior parietal   0.286</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -371,14 +372,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.483 g1    </span>
-<span class="co">#&gt; 2 insula              0.48  g1    </span>
-<span class="co">#&gt; 3 precentral          0.319 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.38  g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.031 g2    </span>
-<span class="co">#&gt; 6 insula              0.11  g2    </span>
-<span class="co">#&gt; 7 precentral          0.251 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.492 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.486 g1    </span>
+<span class="co">#&gt; 2 insula              0.369 g1    </span>
+<span class="co">#&gt; 3 precentral          0.164 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.429 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.228 g2    </span>
+<span class="co">#&gt; 6 insula              0.316 g2    </span>
+<span class="co">#&gt; 7 precentral          0.062 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.134 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 

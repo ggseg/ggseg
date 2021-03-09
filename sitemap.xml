@@ -16,6 +16,9 @@
     <loc>https://lcbc-uio.github.io/ggseg//reference/aseg.html</loc>
   </url>
   <url>
+    <loc>https://lcbc-uio.github.io/ggseg//reference/atlas_type.html</loc>
+  </url>
+  <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/brain_atlas.html</loc>
   </url>
   <url>
@@ -62,12 +65,6 @@
   </url>
   <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/ggseg_atlas.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/is.brain_atlas.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/is.ggseg_atlas.html</loc>
   </url>
   <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/is_brain_atlas.html</loc>
