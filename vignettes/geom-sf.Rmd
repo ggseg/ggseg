@@ -34,6 +34,8 @@ The dk-atlas has `use: ggplot() + geom_brain()` letting us know that it is set u
 
 ```{r setup}
 library(ggseg)
+library(ggplot2)
+
 dk
 ```
 

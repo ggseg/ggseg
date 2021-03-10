@@ -21,6 +21,8 @@ This has introduced alot of new functionality into the package, in addition to s
 
 ```{r setup}
 library(ggseg)
+library(ggplot2)
+
 ```
 
 

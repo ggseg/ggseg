@@ -14,6 +14,7 @@ Function to be used in the position argument in geom_brain
 to alter the position of the brain slice/views.
 }
 \examples{
+library(ggplot2)
 ggplot() +
   geom_brain(atlas = dk, aes(fill = region),
              position = position_brain(. ~ side + hemi ),

@@ -10,8 +10,11 @@ brain_atlas <- function(atlas, type, data, palette = NULL) {
   type <- match.arg(type,
                     c("cortical", "subcortical"))
 
-  if(!is.null(palette)) stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
-  if(!is.null(palette)) stopifnot(all(unique(names(data$region)) %in% names(palette)))
+  if(!is.null(palette))
+    stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
+  if(!is.null(palette))
+    stopifnot(all(brain_regions(data) %in% names(palette)) &&
+                all(names(palette) %in% brain_regions(data)))
 
   stopifnot(length(atlas) == 1)
 
@@ -31,19 +34,14 @@ brain_atlas <- function(atlas, type, data, palette = NULL) {
 #' @export
 is_brain_atlas <- function(x) inherits(x, "brain_atlas")
 
-#' Validate brain atlas
-#' @export
-#' @inheritParams is_brain_atlas
-is.brain_atlas <- is_brain_atlas
-
-
 #' @export
 #' @importFrom stats na.omit
 #' @importFrom utils capture.output
 format.brain_atlas <- function(x, ...) {
   dt <- x$data
 
-  sf <- ifelse(any("geometry" %in% names(dt)), TRUE, FALSE)
+  sf <- ifelse(any("geometry" %in% names(dt)),
+               TRUE, FALSE)
   dt$geometry <- NULL
 
   idx <- !grepl("ggseg|geometry", names(dt))
@@ -83,8 +81,9 @@ plot.brain_atlas <- function(x,  ...){
 
     p
   }else{
-    x <- as_ggseg_atlas(x)
-    graphics::plot(x, ...)
+    stop("This is not a correctly formatted brain atlas. ",
+         "It is missing geometry data, and cannot be plotted.",
+         call. = FALSE)
   }
 }
 
@@ -123,8 +122,8 @@ as_brain_atlas <- function(x){
 
 #' @export
 as_brain_atlas.default <- function(x){
-  warning(paste("Cannot make object of class", class(x)[1], "into a brain_atlas"),
-          call. = FALSE)
+  stop(paste("Cannot make object of class", class(x)[1], "into a brain_atlas"),
+       call. = FALSE)
 }
 
 #' @export
@@ -144,16 +143,18 @@ as_brain_atlas.data.frame <- function(x){
 }
 
 #' @export
+#' @importFrom dplyr ungroup left_join group_split select
+#' @importFrom sf st_geometry st_as_sf
 as_brain_atlas.ggseg_atlas <- function(x){
 
   dt <- x[, !names(x) %in% c("atlas", "type")]
   dt$lab <- 1:nrow(dt)
-  dt_l <- dplyr::group_by(dt, lab)
-  dt_l <- dplyr::group_split(dt_l)
+  dt_l <- group_by(dt, lab)
+  dt_l <- group_split(dt_l)
 
   geom <- lapply(dt_l, coords2sf)
   geom <- do.call(rbind, geom)
-  dt <- dplyr::left_join(dplyr::select(dt, -ggseg), geom, by="lab")
+  dt <- left_join(select(dt, -ggseg), geom, by="lab")
   dt <- st_as_sf(dt)
 
   names(dt)[length(names(dt))] <- "geometry"
@@ -170,15 +171,13 @@ as_brain_atlas.list <- function(x){
   if(is.null(names(x)) | !all(c("atlas", "type", "data") %in% names(x)))
     stop("Cannot make object to brain_atlas", call. = FALSE)
 
-  type <- if("type" %in% names(x)){
-    x$type
-  }else{
-    ifelse(any("medial" %in% x$side), "cortical", "subcortical")
-  }
+  if(is.na(x$type))
+    x$type <- ifelse(any("medial" %in% x$side),
+                 "cortical", "subcortical")
 
   dt <- x$data[, !names(x$data) %in% c("atlas", "type")]
 
-  brain_atlas(unique(x$atlas), type, dt)
+  brain_atlas(unique(x$atlas), x$type, dt)
 }
 
 #' @export
@@ -188,8 +187,8 @@ as_brain_atlas.brain_atlas <- function(x){
 
 
 # brain data ----
-#' `brain_data` class
-#' @param x dataframe to be made a brain_data
+#' \code{brain_data} class
+#' @param x data.frame to be made a brain_data
 #'
 #' @name brain_data-class
 #' @aliases brain_data brain_data-class
@@ -198,21 +197,15 @@ brain_data <- function(x = data.frame(atlas = character(),
                                       region = character(),
                                       hemi = character(),
                                       side = character(),
-                                      ggseg = character(),
                                       geometry = character())
 ) {
 
   stopifnot(is.data.frame(x))
   stopifnot(all(c("hemi", "region", "side") %in% names(x)))
-  stopifnot(any(c("ggseg", "geometry") %in% names(x)))
+  stopifnot(any(c("geometry") %in% names(x)))
+  stopifnot(inherits(x$geometry, 'sfc_MULTIPOLYGON'))
 
-  if("ggseg" %in% names(x)){
-    x$ggseg <- lapply(x$ggseg, brain_polygon)
-  }
-
-  if("geometry" %in% names(x)){
-    stopifnot(inherits(x$geometry, 'sfc_MULTIPOLYGON'))
-  }
+  x <- sf::st_as_sf(x)
 
   structure(
     x,
@@ -220,39 +213,9 @@ brain_data <- function(x = data.frame(atlas = character(),
   )
 }
 
-as_brain_data <- function(x) brain_data(x)
+as_brain_data <- brain_data
 
-brain_polygon <- function(x = data.frame(.long = numeric(),
-                                         .lat = numeric(),
-                                         .id = character(),
-                                         .subid = character(),
-                                         .order = integer())
-){
 
-  stopifnot(all(c(".long", ".lat", ".subid", ".id", ".order") %in% names(x)))
-  stopifnot(is.numeric(x$.long) & is.numeric(x$.lat) & is.integer(x$.order))
-
-  structure(x, class = c("brain_polygon", class(x)))
-}
-
-as_brain_polygon <- function(x) brain_polygon(x)
-
-# Validate brain data
-is_brain_polygon <- function(x) inherits(x, 'brain_polygon')
-
-# Validate brain data
-is.brain_polygon <- is_brain_polygon
-
-format.brain_polygon <- function(x, ...) {
-  c(
-    sprintf("# brain polygon with %s vertices", nrow(x)),
-    utils::capture.output(dplyr::tibble(x))[-1]
-  )
-}
-
-print.brain_polygon <- function(x, ...) {
-  cat(format(x), sep = "\n")
-}
 
 # sf ----
 # import sf methods

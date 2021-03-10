@@ -1,5 +1,19 @@
-<<<<<<< HEAD
 # ggseg 1.6
+
+## ggseg 1.6.02
+* bug fixes in atlas objects and method internals
+* tests in vdiffr
+* vctrs class for polygon ggseg data
+
+## ggseg 1.6.02
+
+* No longer depends on ggplot2, but imports it.
+   * as is advised practice
+   * users must explicitly load ggplot2 to access further ggplot2 functions
+
+## ggseg 1.6.01
+
+* fixed installation issues by making sure package depends on R>3.3 for polygon holes.
 
 ## ggseg 1.6.00
 
@@ -28,12 +42,10 @@ and adaptability of the plots.
 - dk atlas now also includes the corpus callosum, as the original atlas contains  
 
 
-## ggseg 1.5.4
-=======
 # ggseg 1.5
 
 # ggseg 1.5.4
->>>>>>> refs/remotes/origin/master
+
 * dkt renamed to dk  
     - the dkt (Desikan-Killany-Tourville) atlas is not yet available  
 * atlas columns `area` renamed to `region`  
@@ -48,15 +60,10 @@ and adaptability of the plots.
 * Adapted to work with dplyr 0.8.1
 
 ## ggseg 1.5.1
-<<<<<<< HEAD
-* Changed ggseg_atlas-class to have nested columns for easier viewing and wrangling
 
-## ggseg 1.5.0
-=======
 * Changed ggseg_atlas-class to have nested columns for easier vieweing and wrangling
 
 ## ggseg 1.5
->>>>>>> refs/remotes/origin/master
 
 * Changed atlas.info to function `atlas_info()`
 * Changed brain.pal to function `brain_pal()`
@@ -66,11 +73,7 @@ and adaptability of the plots.
 * Moved paletted of ggsegExtra atlases to ggsegExtra package
 
 * Added a `NEWS.md` file to track changes to the package.
-<<<<<<< HEAD
-* Changes all `data` options to `.data` to decrease possibility of column naming overlap
-=======
 * Changes all `data` options to `.data` to decrease possibility of column nameing overlap
->>>>>>> refs/remotes/origin/master
 * Added compatibility with `grouped` data.frames
 * Reduced internal atlases, to improve CRAN compatibility
 * Added function to install extra atlases from github easily

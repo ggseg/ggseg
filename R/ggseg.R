@@ -86,7 +86,7 @@ ggseg = function(.data = NULL,
     if(view == "lateral" &
        (all(c("left", "right") %in% hemisphere) | is.null(hemisphere) ) &
        stack == "dispersed"){
-      atlas <- squish_position(atlas, hemisphere, stack)
+      atlas <- squish_position(atlas, hemisphere)
     }
   }
 

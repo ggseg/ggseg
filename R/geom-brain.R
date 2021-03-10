@@ -44,6 +44,7 @@ geom_brain <- function (mapping = aes(), data = NULL,
 #' @rdname ggbrain
 #' @usage NULL
 #' @format NULL
+#' @importFrom ggplot2 Geom aes
 GeomBrain <- ggproto("GeomBrain", Geom,
                      default_aes = aes(
                        shape = NULL,
@@ -56,7 +57,9 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                      ),
 
                      draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
-                                           lineend = "butt", linejoin = "round", linemitre = 10,
+                                           lineend = "butt",
+                                           linejoin = "round",
+                                           linemitre = 10,
                                            na.rm = TRUE) {
                        if (!inherits(coord, "CoordSf") ) {
                          stop("geom_brain() must be used with coord_sf()", call.. = FALSE)
@@ -71,8 +74,7 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                      },
 
                      draw_key = function(data, params, size) {
-
-                         draw_key_polygon(data, params, size)
+                       draw_key_polygon(data, params, size)
                      }
 )
 
@@ -80,14 +82,14 @@ GeomBrain <- ggproto("GeomBrain", Geom,
 
 # helpers ----
 default_aesthetics <- function(type) {
-    modify_list(GeomPolygon$default_aes,
-                list(fill = "grey90", colour = "grey35"))
+  modify_list(GeomPolygon$default_aes,
+              list(fill = "grey90", colour = "grey35"))
 }
 
 
 # adapted from ggplot2::sf_grob
-brain_grob <- function (x, lineend = "butt", linejoin = "round", linemitre = 10,
-                        na.rm = TRUE) {
+brain_grob <- function(x, lineend = "butt", linejoin = "round", linemitre = 10,
+                       na.rm = TRUE) {
   type <- "other"
   names(type) <- "MULTIPOLYGON"
   is_other <- type == "other"
@@ -107,8 +109,8 @@ brain_grob <- function (x, lineend = "butt", linejoin = "round", linemitre = 10,
   lwd <- size * .pt
   lty <- if(!is.null(x$linetype)) x$linetype else defaults$linetype
   gp <- grid::gpar(col = col, fill = fill, lwd = lwd,
-             lty = lty, lineend = lineend, linejoin = linejoin,
-             linemitre = linemitre)
+                   lty = lty, lineend = lineend, linejoin = linejoin,
+                   linemitre = linemitre)
   sf::st_as_grob(x$geometry, gp = gp)
 }
 
@@ -117,8 +119,7 @@ detect_missing <- function(df, vars, finite = FALSE) {
   !cases(df[, vars, drop = FALSE], if (finite) is_finite else is_complete)
 }
 
-modify_list <- function (old, new)
-{
+modify_list <- function (old, new){
   for (i in names(new)) old[[i]] <- new[[i]]
   old
 }

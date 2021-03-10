@@ -5,4 +5,6 @@ test_that("Check that scales are working", {
 
   aseg2 <- as_ggseg_atlas(aseg)
   expect_equal(class(adapt_scales(unnest(aseg2, ggseg))), "list")
+
+
 })

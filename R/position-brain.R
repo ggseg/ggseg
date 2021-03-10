@@ -43,6 +43,7 @@ reposition_brain <- function(data, position = "horizontal"){
 #' @export
 #' @importFrom ggplot2 ggproto
 #' @examples
+#' library(ggplot2)
 #' ggplot() +
 #'   geom_brain(atlas = dk, aes(fill = region),
 #'              position = position_brain(. ~ side + hemi ),
@@ -53,35 +54,35 @@ reposition_brain <- function(data, position = "horizontal"){
 #'              position = position_brain(side ~ hemi ),
 #'              show.legend = FALSE)
 position_brain <- function(position = "horizontal") {
-   ggproto(NULL, PositionBrain, position = position)
+  ggproto(NULL, PositionBrain, position = position)
 }
 
 PositionBrain <- ggplot2::ggproto("PositionBrain", ggplot2:::Position,
-                         position = hemi + side ~ .,
+                                  position = hemi + side ~ .,
 
-                         setup_params = function(self, data) {
-                           list(position = self$position)
-                         },
+                                  setup_params = function(self, data) {
+                                    list(position = self$position)
+                                  },
 
-                         compute_layer = function(self, data, params, layout) {
+                                  compute_layer = function(self, data, params, layout) {
 
-                           pos <- position_formula(params$position, unique(data$type))
+                                    pos <- position_formula(params$position, unique(data$type))
 
-                           df3 <- frame_2_position(data, pos)
-                           bbx <- sf::st_bbox(df3$geometry)
+                                    df3 <- frame_2_position(data, pos)
+                                    bbx <- sf::st_bbox(df3$geometry)
 
-                           # rescale layout to reflect new coordinates
-                           if(is.null(layout$coord$limits$y))
-                             layout$coord$limits$y <- bbx[c(2,4)]
+                                    # rescale layout to reflect new coordinates
+                                    if(is.null(layout$coord$limits$y))
+                                      layout$coord$limits$y <- bbx[c(2,4)]
 
-                           # rescale layout to reflect new coordinates
-                           if(is.null(layout$coord$limits$x))
-                             layout$coord$limits$x <- bbx[c(1,3)]
+                                    # rescale layout to reflect new coordinates
+                                    if(is.null(layout$coord$limits$x))
+                                      layout$coord$limits$x <- bbx[c(1,3)]
 
-                           data <- df3
+                                    data <- df3
 
-                           df3
-                         }
+                                    df3
+                                  }
 )
 
 # geometry movers ----
@@ -96,8 +97,9 @@ position_formula <- function(pos, type){
 
   if(type == "cortical"){
     if(length(chosen) < 2)
-      stop(paste0("position formula not correct. ",
-                  "Missing '", c("side","hemi")[!c("side","hemi") %in% chosen], "'")
+      stop("position formula not correct. ",
+           "Missing ", paste0(c("side","hemi")[!c("side","hemi") %in% chosen], collapse=" & "), "",
+           call. = FALSE
       )
 
     position <- if(length(grep("\\+", pos))>0){
@@ -107,14 +109,18 @@ position_formula <- function(pos, type){
       chosen
     }
   }else{
-    cat("dont know how to position subcortical data")
+    stop("Don't know how to position subcortical data",
+         call. = FALSE)
   }
 
   if(all(sum(grepl("\\.|~", pos)) != 2 & position %in% c("rows", "columns")))
-    stop("Formula for a single row or column must contain both a . and ~")
+    stop("Formula for a single row or column must contain both a . and ~",
+         call. = FALSE)
 
-  return(list(position = position,
-              chosen = chosen))
+  list(
+    position = position,
+    chosen = chosen
+  )
 
 }
 
@@ -123,17 +129,16 @@ frame_2_position <- function(data, pos){
   df2 <- dplyr::group_by_at(data, pos$chosen)
   df2 <- dplyr::group_split(df2)
 
+  posi <- ifelse(length(pos$position) > 1,
+                 "grid", pos$position)
+
   # get all into same 0-space
   df2 <- lapply(df2, gather_geometry)
-
-  df3 <- if(length(pos$position) == 2){
-    stack_grid(df2, pos$position[1], pos$position[2])
-  }else{
-    switch(pos$position,
-           "rows" = stack_vertical(df2),
-           "columns" = stack_horizontal(df2)
-    )
-  }
+  df3 <- switch(posi,
+                rows = stack_vertical(df2),
+                columns = stack_horizontal(df2),
+                grid = stack_grid(df2, pos$position[1], pos$position[2])
+  )
 
   df4 <- st_as_sf(df3$df)
   attr(sf::st_geometry(df4), "bbox") = df3$box
@@ -155,11 +160,9 @@ stack_horizontal <- function(df){
     bx[[k]] <- sf::st_bbox(df[[k]]$geometry )
   }
 
-  return(
-    list(
-      df = do.call(rbind, df),
-      box = get_box(bx)
-    )
+  list(
+    df = do.call(rbind, df),
+    box = get_box(bx)
   )
 }
 
@@ -170,11 +173,9 @@ stack_vertical <- function(df){
     bx[[k]] <- sf::st_bbox(df[[k]]$geometry )
   }
 
-  return(
-    list(
-      df = do.call(rbind, df),
-      box = get_box(bx)
-    )
+  list(
+    df = do.call(rbind, df),
+    box = get_box(bx)
   )
 }
 
@@ -205,11 +206,9 @@ stack_grid <- function(df, rows, columns){
 
   df[, c("xmin", "xmax", "ymin", "ymax")] <- NULL
 
-  return(
-    list(
-      df = df,
-      box = get_box(bx)
-    )
+  list(
+    df = df,
+    box = get_box(bx)
   )
 }
 
@@ -220,6 +219,6 @@ get_box <- function(bx, pad = 10){
           ceiling(max(bx[,"ymax"])+pad))
   x <- stats::setNames(10*round(bx/10), c("xmin", "ymin", "xmax", "ymax"))
   class(x) <- "bbox"
-  return(x)
+  x
 }
 
