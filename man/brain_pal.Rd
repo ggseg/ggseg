@@ -4,13 +4,7 @@
 \alias{brain_pal}
 \title{Generate palettes from the ggseg atlases}
 \usage{
-brain_pal(
-  name = NULL,
-  n = "all",
-  direction = 1,
-  unname = FALSE,
-  package = "ggseg"
-)
+brain_pal(name, n = "all", direction = 1, unname = FALSE, package = "ggseg")
 }
 \arguments{
 \item{name}{String name of atlas}
@@ -26,4 +20,8 @@ Neccessary if applying palette to other data than the brain atlas it comes from.
 }
 \description{
 \code{brain_pal} return HEX colours for the different ggseg atlases.
+}
+\examples{
+brain_pal("dk")
+brain_pal("aseg")
 }

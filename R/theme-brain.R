@@ -25,6 +25,17 @@
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #' @export
 #' @importFrom ggplot2 theme element_blank element_rect element_text
+#' @examples
+#' library(ggplot2)
+#'
+#' ggplot() +
+#'   geom_brain(atlas = dk) +
+#'   theme_brain()
+#'
+# ggplot() +
+#'   geom_brain(atlas = dk) +
+#'   theme_darkbrain()
+#'
 theme_brain = function(text.size=12,
                        text.family="mono"){
 

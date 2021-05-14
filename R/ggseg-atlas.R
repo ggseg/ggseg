@@ -27,16 +27,7 @@
 #' @importFrom tidyr unnest
 #' @importFrom stats na.omit
 #' @export
-ggseg_atlas <- function(x = data.frame(.long = double(),
-                                       .lat = double(),
-                                       .id = character(),
-                                       .subid = character(),
-                                       atlas = character(),
-                                       type = character(),
-                                       region = character(),
-                                       hemi = character(),
-                                       side = character())
-) {
+ggseg_atlas <- function(x){
 
   stopifnot(is.data.frame(x))
 

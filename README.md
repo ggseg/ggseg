@@ -10,7 +10,7 @@ status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/
 [![Coverage
 status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames
@@ -73,11 +73,43 @@ plot(aseg)
 
 <img src="man/img/README-unnamed-chunk-3-2.png" width="100%" />
 
+While default atlas plots wil give you an idea of how the atlases look,
+you will likely want to project your own data onto the plot.
+
+``` r
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+someData <- tibble(
+  region = rep(c("transverse temporal", "insula",
+           "precentral","superior parietal"), 2), 
+  p = sample(seq(0,.5,.001), 8),
+  groups = c(rep("g1", 4), rep("g2", 4))
+)
+
+someData %>%
+  group_by(groups) %>%
+  ggplot() +
+  geom_brain(atlas = dk, 
+             position = position_brain(hemi ~ side),
+             aes(fill = p)) +
+  facet_wrap(~groups)
+#> merging atlas and data by 'region'
+```
+
+<img src="man/img/README-unnamed-chunk-4-1.png" width="100%" />
+
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://lcbc-uio.github.io/ggseg/)
 
 You can also see one of the creators blog for introductions to its use
-[here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
+[here](https://drmowinckels.io/blog/2021-03-14-new-ggseg-with-geom/)
 
 ### Report bugs or requests
 

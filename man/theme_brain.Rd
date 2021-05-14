@@ -51,6 +51,17 @@ Theme for easy customisation of the brain themes.}
 
 }
 }
+\examples{
+library(ggplot2)
+
+ggplot() +
+  geom_brain(atlas = dk) +
+  theme_brain()
+
+  geom_brain(atlas = dk) +
+  theme_darkbrain()
+
+}
 \seealso{
 [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 }

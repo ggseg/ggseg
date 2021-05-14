@@ -21,3 +21,10 @@ This function takes a raw stats-file from the
 subjects directory and reads it in as a
 data.frame.
 }
+\examples{
+\dontrun{
+subj_dir <- freesurfer::fs_subj_dir()
+aseg_stats <- file.path(subj_dir, "bert/stats/aseg.stats")
+read_freesurfer_stats(aseg_stats)
+}
+}

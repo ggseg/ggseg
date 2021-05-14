@@ -11,8 +11,6 @@ knitr::opts_chunk$set(
   fig.retina = 3,
   echo = TRUE
 )
-
-library(ggseg)
 ``` 
  
 
@@ -21,7 +19,7 @@ library(ggseg)
 [![R build status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
 [![Coverage status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
 This package mainly contains a plotting function `ggseg` and data.frames of different brain atlases for plotting.
@@ -64,10 +62,31 @@ plot(dk)
 plot(aseg)
 ```
 
+While default atlas plots wil give you an idea of how the atlases look, you will likely want to project your own data onto the plot.
+
+
+```{r}
+library(dplyr)
+someData <- tibble(
+  region = rep(c("transverse temporal", "insula",
+           "precentral","superior parietal"), 2), 
+  p = sample(seq(0,.5,.001), 8),
+  groups = c(rep("g1", 4), rep("g2", 4))
+)
+
+someData %>%
+  group_by(groups) %>%
+  ggplot() +
+  geom_brain(atlas = dk, 
+             position = position_brain(hemi ~ side),
+             aes(fill = p)) +
+  facet_wrap(~groups)
+```
+
 The package also has several vignettes, to help you get started using it. 
 You can access it [here](https://lcbc-uio.github.io/ggseg/)
 
-You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/introducing-the-ggseg-r-package-for-brain-segmentations/)
+You can also see one of the creators blog for introductions to its use [here](https://drmowinckels.io/blog/2021-03-14-new-ggseg-with-geom/)
 
 
 ### Report bugs or requests  

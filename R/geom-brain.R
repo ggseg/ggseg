@@ -17,7 +17,11 @@
 #' @rdname ggbrain
 #' @export
 #'
-# #' @examples
+#' @examples
+#' library(ggplot2)
+#'
+#' ggplot() +
+#'  geom_brain(atlas = dk)
 geom_brain <- function (mapping = aes(), data = NULL,
                         atlas = NULL,
                         position = "identity",

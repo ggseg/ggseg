@@ -4,11 +4,7 @@
 \alias{ggseg_atlas}
 \title{`ggseg_atlas` class}
 \usage{
-ggseg_atlas(
-  x = data.frame(.long = double(), .lat = double(), .id = character(), .subid =
-    character(), atlas = character(), type = character(), region = character(), hemi =
-    character(), side = character())
-)
+ggseg_atlas(x)
 }
 \arguments{
 \item{x}{data.frame to be made a ggseg-atlas}

@@ -1,5 +1,3 @@
-
-
 #' Scale ggseg plot axes.
 #'
 #' \code{adapt_scales} returns a list of coordinate breaks and labels

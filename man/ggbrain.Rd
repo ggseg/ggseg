@@ -40,4 +40,10 @@ ggplot object#'
 \description{
 call to \code{\link[ggplot2]{geom_sf}}
 }
+\examples{
+library(ggplot2)
+
+ggplot() +
+ geom_brain(atlas = dk)
+}
 \keyword{datasets}

@@ -12,6 +12,12 @@
 #' @importFrom dplyr rename as_tibble
 #' @return tibble
 #' @export
+#' @examples
+#' \dontrun{
+#' subj_dir <- freesurfer::fs_subj_dir()
+#' aseg_stats <- file.path(subj_dir, "bert/stats/aseg.stats")
+#' read_freesurfer_stats(aseg_stats)
+#' }
 read_freesurfer_stats <- function(path, rename = TRUE){
 
   # get headers
@@ -29,8 +35,10 @@ read_freesurfer_stats <- function(path, rename = TRUE){
                                stringsAsFactors = FALSE))
   names(data) <- headers
 
-  if(rename) data <- rename(data, label = StructName)
-  return(data)
+  if(rename)
+    data <- rename(data, label = StructName)
+
+  data
 }
 
 #' Read in atlas data from all subjects
@@ -46,6 +54,13 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #' @importFrom tidyr separate unite
 #' @return tibble
 #' @export
+#' @examples
+#' \dontrun{
+#' subj_dir <- freesurfer::fs_subj_dir()
+#' read_atlas_files(subj_dir, "aseg.stats")
+#'
+#' read_atlas_files(subj_dir, "lh.aparc.stats")
+#' }
 read_atlas_files <- function(subjects_dir, atlas){
   stats_files <- list.files(subjects_dir, pattern = atlas,
                             full.names = TRUE, recursive = TRUE)
@@ -91,6 +106,11 @@ read_atlas_files <- function(subjects_dir, atlas){
 #' @importFrom dplyr mutate
 #' @return tibble
 #' @export
+#' @examples
+#' \dontrun{
+#' file_path <- "all_subj_aseg.txt"
+#' read_freesurfer_table(file_path)
+#' }
 read_freesurfer_table <- function(path, measure = NULL, ...){
   dat <- read.table(path, header = TRUE, ...)
   names(dat)[1] <- "subject"
@@ -107,7 +127,6 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
   }
 
   as_tibble(dat)
-
 }
 
 

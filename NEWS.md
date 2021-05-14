@@ -1,5 +1,11 @@
 # ggseg 1.6
 
+## ggseg 1.6.03
+* removed function to display ggseg palettes
+* preparations for CRAN submission
+    * added examples to more functions
+    * updated links
+
 ## ggseg 1.6.02
 * bug fixes in atlas objects and method internals
 * tests in vdiffr

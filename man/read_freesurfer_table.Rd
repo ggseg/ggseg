@@ -24,3 +24,9 @@ or \code{asegstats2table} from Freesurfer,
 this function will read in the data and prepare it
 for ggseg.
 }
+\examples{
+\dontrun{
+file_path <- "all_subj_aseg.txt"
+read_freesurfer_table(file_path)
+}
+}

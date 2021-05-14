@@ -13,18 +13,3 @@ test_that("Check that palette extraction happens ok", {
   expect_error(brain_pal("yeo"))
 })
 
-test_that("Test that palette display works", {
-
-  expect_is(display_brain_pal(),c("gg","ggplot"))
-  expect_is(display_brain_pal(n=1:7),c("gg","ggplot"))
-  expect_is(display_brain_pal(n=7),c("gg","ggplot"))
-  expect_is(display_brain_pal(name="aseg", n=7),c("gg","ggplot"))
-  expect_is(display_brain_pal(name="aseg", n="all"),c("gg","ggplot"))
-
-  expect_warning(display_brain_pal(name = "dk",n=2))
-  expect_warning(display_brain_pal(name = "dk",n=48))
-  expect_error(display_brain_pal(name = "et", n=48))
-  expect_error(display_brain_pal(name = "et"))
-})
-
-

@@ -10,7 +10,10 @@
 #' @param unname return unnamed vector (default = FALSE)
 #'
 #' @export
-brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
+#' @examples
+#' brain_pal("dk")
+#' brain_pal("aseg")
+brain_pal <- function(name, n="all", direction=1, unname=FALSE,
                       package="ggseg"){
 
   brain_pals <- get_pals(package)
@@ -49,51 +52,6 @@ brain_pal <- function(name=NULL, n="all", direction=1, unname=FALSE,
 
   pal[n]
 }
-
-#' Plot the colours of the atlases for selection
-#'
-#' \code{display_brain_pal} plots all the colours for each atlas.
-#'
-#' @inheritParams brain_pal
-#' @importFrom dplyr mutate filter group_by bind_rows row_number
-#' @importFrom ggplot2 ggplot aes geom_tile labs
-#' @export
-#' @examples
-#' display_brain_pal()
-#' display_brain_pal("dk", 1:8)
-display_brain_pal <- function (name = "all",
-                               n = "all",
-                               package = "ggseg") {
-
-  info <- brain_pals_info(package = package)
-
-  name <- match.arg(name,
-            c("all", info$atlas),
-            several.ok = TRUE)
-
-  if(any("all" %in% name)){
-    name <- info$atlas
-  }
-
-  pals = do.call(bind_rows,
-                 lapply(info$atlas,
-                        get_colours,
-                        n=n,
-                        unname=TRUE,
-                        package=package)
-  )
-
-  pals <- dplyr::group_by(pals, atlas)
-  pals <- dplyr::mutate(pals, x = dplyr::row_number())
-  pals <- dplyr::filter(pals, atlas %in% name)
-
-  ggplot2::ggplot(pals,
-                  ggplot2::aes(x=x, y=atlas, fill=I(colour))) +
-    ggplot2::geom_tile() +
-    theme_brain() +
-    ggplot2::labs(x="")
-}
-
 
 #' Get info on brain palettes
 #'

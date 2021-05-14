@@ -1,6 +1,6 @@
 Package: ggseg
 Title: Plotting Tool for Brain Atlases
-Version: 1.6.02
+Version: 1.6.03
 Authors@R: c(
     person("Athanasia Mo", "Mowinckel", 
             email = "a.m.mowinckel@psykologi.uio.no", 
@@ -30,12 +30,15 @@ Imports:
     vctrs
 Suggests:
     knitr,
-    here, 
+    here,
     rmarkdown,
+    freesurfer,
     covr,
     vdiffr,
     testthat (>= 2.1.0),
-    devtools
+    devtools,
+    spelling
 VignetteBuilder: knitr
 URL: https://github.com/LCBC-UiO/ggseg
 BugReports: https://github.com/LCBC-UiO/ggseg/issues
+Language: en-US

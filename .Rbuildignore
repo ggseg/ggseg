@@ -15,3 +15,6 @@ logo.png
 ^_pkgdown\.yml$
 ^doc$
 ^\.github$
+vignettes/ggseg-old*
+
+^cran-comments\.md$
