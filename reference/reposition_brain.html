@@ -89,7 +89,7 @@ order of appearance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.03</span>
       </span>
     </div>
 
@@ -121,10 +121,10 @@ order of appearance." />
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
     <li>
-      <a href="../articles/geom-brain.html">Using geom_brain</a>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
     </li>
     <li>
-      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+      <a href="../articles/ggseg-old.html">Plotting brain atlases in ggplot</a>
     </li>
   </ul>
 </li>
@@ -192,10 +192,10 @@ order of appearance.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>reposition_brain</span><span class='op'>(</span><span class='va'>dk</span>, <span class='va'>hemi</span> <span class='op'>~</span> <span class='va'>side</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 90 features and 7 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: -10 ymin: -10 xmax: 670 ymax: 470
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: -10 ymin: -10 xmax: 670 ymax: 470
+#&gt; CRS:           NA
 #&gt; <span style='color: #949494;'># A tibble: 90 x 8</span><span>
 #&gt;    atlas type   hemi  side   region  label  roi                         geometry
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;MULTIPOLYGON&gt;</span><span>
@@ -211,10 +211,10 @@ order of appearance.</p>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> dk    corti… left  later… pars o… lh_pa… 0019  (((79.03391 126.496, 74.24232…
 #&gt; </span><span style='color: #949494;'># … with 80 more rows</span><span></div><div class='input'><span class='fu'>reposition_brain</span><span class='op'>(</span><span class='va'>dk</span>, <span class='va'>side</span> <span class='op'>~</span> <span class='va'>hemi</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 90 features and 7 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: -10 ymin: -10 xmax: 660 ymax: 460
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: -10 ymin: -10 xmax: 660 ymax: 460
+#&gt; CRS:           NA
 #&gt; </span><span style='color: #949494;'># A tibble: 90 x 8</span><span>
 #&gt;    atlas type   hemi  side   region  label  roi                         geometry
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;MULTIPOLYGON&gt;</span><span>
@@ -230,10 +230,10 @@ order of appearance.</p>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> dk    corti… left  later… pars o… lh_pa… 0019  (((79.03391 126.496, 74.24232…
 #&gt; </span><span style='color: #949494;'># … with 80 more rows</span><span></div><div class='input'><span class='fu'>reposition_brain</span><span class='op'>(</span><span class='va'>dk</span>, <span class='va'>hemi</span> <span class='op'>+</span> <span class='va'>side</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 90 features and 7 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: -10 ymin: -10 xmax: 320 ymax: 960
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: -10 ymin: -10 xmax: 320 ymax: 960
+#&gt; CRS:           NA
 #&gt; </span><span style='color: #949494;'># A tibble: 90 x 8</span><span>
 #&gt;    atlas type   hemi  side   region  label  roi                         geometry
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;MULTIPOLYGON&gt;</span><span>
@@ -249,10 +249,10 @@ order of appearance.</p>
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> dk    corti… left  later… pars o… lh_pa… 0019  (((79.03391 126.496, 74.24232…
 #&gt; </span><span style='color: #949494;'># … with 80 more rows</span><span></div><div class='input'><span class='fu'>reposition_brain</span><span class='op'>(</span><span class='va'>dk</span>, <span class='va'>.</span> <span class='op'>~</span> <span class='va'>hemi</span> <span class='op'>+</span> <span class='va'>side</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 90 features and 7 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: -10 ymin: -10 xmax: 1360 ymax: 220
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: -10 ymin: -10 xmax: 1360 ymax: 220
+#&gt; CRS:           NA
 #&gt; </span><span style='color: #949494;'># A tibble: 90 x 8</span><span>
 #&gt;    atlas type   hemi  side   region  label  roi                         geometry
 #&gt;  </span><span style='color: #BCBCBC;'>*</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;MULTIPOLYGON&gt;</span><span>

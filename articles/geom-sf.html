@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.03</span>
       </span>
     </div>
 
@@ -70,10 +70,10 @@
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
     <li>
-      <a href="../articles/geom-brain.html">Using geom_brain</a>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
     </li>
     <li>
-      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+      <a href="../articles/ggseg-old.html">Plotting brain atlases in ggplot</a>
     </li>
   </ul>
 </li>
@@ -191,10 +191,10 @@
 <span class="co">#&gt;                  "#FFC020"</span>
 <span class="va">dk</span><span class="op">$</span><span class="va">data</span>
 <span class="co">#&gt; Simple feature collection with 90 features and 5 fields</span>
-<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
-<span class="co">#&gt; CRS:            NA</span>
+<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
+<span class="co">#&gt; CRS:           NA</span>
 <span class="co">#&gt; # A tibble: 90 x 6</span>
 <span class="co">#&gt;    hemi  side   region     label     roi                                geometry</span>
 <span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                        &lt;MULTIPOLYGON&gt;</span>
@@ -282,20 +282,20 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.401</span>
-<span class="co">#&gt; 2 insula              0.409</span>
-<span class="co">#&gt; 3 precentral          0.497</span>
-<span class="co">#&gt; 4 superior parietal   0.081</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.042</span>
+<span class="co">#&gt; 2 insula              0.028</span>
+<span class="co">#&gt; 3 precentral          0.277</span>
+<span class="co">#&gt; 4 superior parietal   0.274</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/brain_join.html">brain_join</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'region'</span>
 <span class="co">#&gt; Simple feature collection with 90 features and 8 fields</span>
-<span class="co">#&gt; geometry type:  MULTIPOLYGON</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
-<span class="co">#&gt; CRS:            NA</span>
+<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
+<span class="co">#&gt; CRS:           NA</span>
 <span class="co">#&gt; First 10 features:</span>
 <span class="co">#&gt;    atlas     type hemi    side                region                   label</span>
 <span class="co">#&gt; 1     dk cortical left lateral                  &lt;NA&gt;                    &lt;NA&gt;</span>
@@ -372,14 +372,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.027 g1    </span>
-<span class="co">#&gt; 2 insula              0.232 g1    </span>
-<span class="co">#&gt; 3 precentral          0.19  g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.432 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.101 g2    </span>
-<span class="co">#&gt; 6 insula              0.408 g2    </span>
-<span class="co">#&gt; 7 precentral          0.392 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.098 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.408 g1    </span>
+<span class="co">#&gt; 2 insula              0.074 g1    </span>
+<span class="co">#&gt; 3 precentral          0.108 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.401 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.478 g2    </span>
+<span class="co">#&gt; 6 insula              0.42  g2    </span>
+<span class="co">#&gt; 7 precentral          0.097 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.48  g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 

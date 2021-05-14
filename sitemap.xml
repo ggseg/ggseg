@@ -40,9 +40,6 @@
     <loc>https://lcbc-uio.github.io/ggseg//reference/brain_regions.html</loc>
   </url>
   <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/display_brain_pal.html</loc>
-  </url>
-  <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/dk.html</loc>
   </url>
   <url>
@@ -106,10 +103,10 @@
     <loc>https://lcbc-uio.github.io/ggseg//articles/freesurfer_files.html</loc>
   </url>
   <url>
-    <loc>https://lcbc-uio.github.io/ggseg//articles/geom-brain.html</loc>
+    <loc>https://lcbc-uio.github.io/ggseg//articles/geom-sf.html</loc>
   </url>
   <url>
-    <loc>https://lcbc-uio.github.io/ggseg//articles/geom-sf.html</loc>
+    <loc>https://lcbc-uio.github.io/ggseg//articles/ggseg-old.html</loc>
   </url>
   <url>
     <loc>https://lcbc-uio.github.io/ggseg//articles/ggseg.html</loc>

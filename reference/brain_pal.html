@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.03</span>
       </span>
     </div>
 
@@ -112,10 +112,10 @@
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
     <li>
-      <a href="../articles/geom-brain.html">Using geom_brain</a>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
     </li>
     <li>
-      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+      <a href="../articles/ggseg-old.html">Plotting brain atlases in ggplot</a>
     </li>
   </ul>
 </li>
@@ -152,13 +152,7 @@
     <p><code>brain_pal</code> return HEX colours for the different ggseg atlases.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>brain_pal</span><span class='op'>(</span>
-  name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  n <span class='op'>=</span> <span class='st'>"all"</span>,
-  direction <span class='op'>=</span> <span class='fl'>1</span>,
-  unname <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  package <span class='op'>=</span> <span class='st'>"ggseg"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>brain_pal</span><span class='op'>(</span><span class='va'>name</span>, n <span class='op'>=</span> <span class='st'>"all"</span>, direction <span class='op'>=</span> <span class='fl'>1</span>, unname <span class='op'>=</span> <span class='cn'>FALSE</span>, package <span class='op'>=</span> <span class='st'>"ggseg"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,6 +181,74 @@ Neccessary if applying palette to other data than the brain atlas it comes from.
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>brain_pal</span><span class='op'>(</span><span class='st'>"dk"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                   bankssts  caudal anterior cingulate 
+#&gt;                  "#196428"                  "#7D64A0" 
+#&gt;      caudal middle frontal            corpus callosum 
+#&gt;                  "#641900"                  "#784632" 
+#&gt;                     cuneus                 entorhinal 
+#&gt;                  "#DC1464"                  "#DC140A" 
+#&gt;                   fusiform          inferior parietal 
+#&gt;                  "#B4DC8C"                  "#DC3CDC" 
+#&gt;          inferior temporal          isthmus cingulate 
+#&gt;                  "#B42878"                  "#8C148C" 
+#&gt;          lateral occipital      lateral orbitofrontal 
+#&gt;                  "#141E8C"                  "#234B32" 
+#&gt;                    lingual       medial orbitofrontal 
+#&gt;                  "#E18C8C"                  "#C8234B" 
+#&gt;            middle temporal            parahippocampal 
+#&gt;                  "#A06432"                  "#14DC3C" 
+#&gt;                paracentral           pars opercularis 
+#&gt;                  "#3CDC3C"                  "#DCB48C" 
+#&gt;             pars orbitalis          pars triangularis 
+#&gt;                  "#146432"                  "#DC3C14" 
+#&gt;              pericalcarine                postcentral 
+#&gt;                  "#78643C"                  "#DC1414" 
+#&gt;        posterior cingulate                 precentral 
+#&gt;                  "#DCB4DC"                  "#3C14DC" 
+#&gt;                  precuneus rostral anterior cingulate 
+#&gt;                  "#A08CB4"                  "#50148C" 
+#&gt;     rostral middle frontal           superior frontal 
+#&gt;                  "#4B327D"                  "#14DCA0" 
+#&gt;          superior parietal          superior temporal 
+#&gt;                  "#14B48C"                  "#8CDCDC" 
+#&gt;              supramarginal               frontal pole 
+#&gt;                  "#50A014"                  "#640064" 
+#&gt;              temporal pole        transverse temporal 
+#&gt;                  "#464646"                  "#9696C8" 
+#&gt;                     insula 
+#&gt;                  "#FFC020" </div><div class='input'><span class='fu'>brain_pal</span><span class='op'>(</span><span class='st'>"aseg"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   lateraleral ventricle   inferior lateral vent cerebellum white matter 
+#&gt;               "#781286"               "#C43AFA"               "#DCF8A4" 
+#&gt;       cerebellum cortex         thalamus proper                 caudate 
+#&gt;               "#E69422"               "#00760E"               "#7ABADC" 
+#&gt;                 putamen                pallidum           3rd ventricle 
+#&gt;               "#EC0DB0"               "#0C30FF"               "#CCB68E" 
+#&gt;           4th ventricle              brain stem             hippocampus 
+#&gt;               "#2ACCA4"               "#779FB0"               "#DCD814" 
+#&gt;                amygdala                     csf          accumbens area 
+#&gt;               "#67FFFF"               "#3C3C3C"               "#FFA500" 
+#&gt;              ventral DC                  vessel          choroid plexus 
+#&gt;               "#A52A2A"               "#A020F0"               "#00C8C8" 
+#&gt;   lateraleral ventricle   inferior lateral vent cerebellum white matter 
+#&gt;               "#781286"               "#C43AFA"               "#DCF8A4" 
+#&gt;       cerebellum cortex         thalamus proper                 caudate 
+#&gt;               "#E69422"               "#00760E"               "#7ABADC" 
+#&gt;                 putamen                pallidum             hippocampus 
+#&gt;               "#EC0DB0"               "#0D30FF"               "#DCD814" 
+#&gt;                amygdala          accumbens area              ventral DC 
+#&gt;               "#67FFFF"               "#FFA500"               "#A52A2A" 
+#&gt;                  vessel          choroid plexus           5th ventricle 
+#&gt;               "#A020F0"               "#00C8DD"               "#78BE96" 
+#&gt;      wm hypointensities      wm hypointensities      wm hypointensities 
+#&gt;               "#C846FF"               "#FF940A"               "#FF940A" 
+#&gt;  non-wm hypointensities  non-wm hypointensities  non-wm hypointensities 
+#&gt;               "#A46CE2"               "#A46CE2"               "#A46CE2" 
+#&gt;            optic chiasm            CC posterior        CC mid posterior 
+#&gt;               "#EAA91E"               "#000040"               "#000070" 
+#&gt;              CC central         CC mid anterior             CC anterior 
+#&gt;               "#0000A0"               "#0000D0"               "#0000FF" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

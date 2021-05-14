@@ -81,7 +81,7 @@ object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.02</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.03</span>
       </span>
     </div>
 
@@ -113,10 +113,10 @@ object." />
       <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
     </li>
     <li>
-      <a href="../articles/geom-brain.html">Using geom_brain</a>
+      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
     </li>
     <li>
-      <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
+      <a href="../articles/ggseg-old.html">Plotting brain atlases in ggplot</a>
     </li>
   </ul>
 </li>
@@ -186,10 +186,10 @@ object.</p>
 
 <span class='fu'>brain_join</span><span class='op'>(</span><span class='va'>someData</span>, <span class='va'>dk</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>merging atlas and data by 'region'</span></div><div class='output co'>#&gt; Simple feature collection with 90 features and 8 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407
+#&gt; CRS:           NA
 #&gt; First 10 features:
 #&gt;    atlas     type hemi    side                region                   label
 #&gt; 1     dk cortical left lateral                  &lt;NA&gt;                    &lt;NA&gt;
@@ -214,10 +214,10 @@ object.</p>
 #&gt; 9  0016 NA MULTIPOLYGON (((238.0128 91...
 #&gt; 10 0019 NA MULTIPOLYGON (((79.03391 12...</div><div class='input'><span class='fu'>brain_join</span><span class='op'>(</span><span class='va'>someData</span>, <span class='va'>dk</span>, <span class='st'>"region"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Simple feature collection with 90 features and 8 fields
-#&gt; geometry type:  MULTIPOLYGON
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407
-#&gt; CRS:            NA
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407
+#&gt; CRS:           NA
 #&gt; First 10 features:
 #&gt;    atlas     type hemi    side                region                   label
 #&gt; 1     dk cortical left lateral                  &lt;NA&gt;                    &lt;NA&gt;
