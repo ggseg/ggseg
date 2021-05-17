@@ -18,10 +18,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Plotting Tool for Brain Atlases">
-<meta property="og:description" content="Contains one plotting functions: `ggseg`, 
-    and data.frames or tibbles of different brain atlases for plotting,
-    mainly in 2 dimensions.  By far, the largest component of the package 
-    is the data for each of the atlases.">
+<meta property="og:description" content="Contains ggplot2 geom for plotting brain atlases using 
+    simple features. The largest component of the package is the data 
+    for the two built-in atlases. Mowinckel &amp; Vidal-Piñero (2020)
+    &lt;doi: 10.1177/2515245920928009&gt;.">
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -110,7 +110,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>This package mainly contains a plotting function <code>ggseg</code> and data.frames of different brain atlases for plotting. Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R, and software for brain imaging to correctly visualise analysis results.</p>
+<p>Contains ggplot2 geom for plotting brain atlases using simple features. The largest component of the package is the data for the two built-in atlases. Plotting results of analyses on regions or networks often involves swapping between statistical tools, like R, and software for brain imaging to correctly visualise analysis results.</p>
 <p>This package aims to make it possible to plot results directly through</p>
 <p>R.</p>
 <div id="atlases" class="section level2">
@@ -124,7 +124,6 @@
 <li>
 <code>aseg</code> - Automatic subcortical segmentation.</li>
 </ol>
-<p>We are working on creating a detailed description in the wiki on how to create and contribute atlases to the package. The <code>ggseg</code> function already allows you to provide it with a data.frame of a custom atlas if you have it, but is must correspond to certain specifications to work.</p>
 <p><strong>Note:</strong> As of version 1.5.3, <code>ggseg</code> was split into two packages: one for 2d polygon plots in ggplot, and another for 3d mesh plots through plotly. This was done to reduce package size, dependencies, and also to simplify maintenance. If you want the 3d plotting tool, please go the <a href="https://github.com/LCBC-UiO/ggseg3d">ggseg3d repository</a>.</p>
 <p>You may find more atlases and functions to create new atlases in the companion package <a href="https://github.com/LCBC-UiO/ggsegExtra">ggsegExtra</a>.</p>
 </div>
