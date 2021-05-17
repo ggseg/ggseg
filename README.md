@@ -13,11 +13,11 @@ status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](htt
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
-This package mainly contains a plotting function `ggseg` and data.frames
-of different brain atlases for plotting. Plotting results of analyses on
-regions or networks often involves swapping between statistical tools,
-like R, and software for brain imaging to correctly visualise analysis
-results.
+Contains ggplot2 geom for plotting brain atlases using simple features.
+The largest component of the package is the data for the two built-in
+atlases. Plotting results of analyses on regions or networks often
+involves swapping between statistical tools, like R, and software for
+brain imaging to correctly visualise analysis results.
 
 This package aims to make it possible to plot results directly through
 R.
@@ -28,11 +28,6 @@ There are currently four atlases available in the package:
 
 1.  `dk` - Desikan-Killany atlas (aparc).  
 2.  `aseg` - Automatic subcortical segmentation.
-
-We are working on creating a detailed description in the wiki on how to
-create and contribute atlases to the package. The `ggseg` function
-already allows you to provide it with a data.frame of a custom atlas if
-you have it, but is must correspond to certain specifications to work.
 
 **Note:** As of version 1.5.3, `ggseg` was split into two packages: one
 for 2d polygon plots in ggplot, and another for 3d mesh plots through

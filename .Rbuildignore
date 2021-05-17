@@ -18,3 +18,4 @@ logo.png
 vignettes/ggseg-old*
 
 ^cran-comments\.md$
+^CRAN-RELEASE$

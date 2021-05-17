@@ -11,10 +11,10 @@ Authors@R: c(
             role = c("aut"),
         comment = c(ORCID = "0000-0001-9997-9156"))
         )
-Description: Contains one plotting functions: `ggseg`, 
-    and data.frames or tibbles of different brain atlases for plotting,
-    mainly in 2 dimensions.  By far, the largest component of the package 
-    is the data for each of the atlases.
+Description: Contains ggplot2 geom for plotting brain atlases using 
+    simple features. The largest component of the package is the data 
+    for the two built-in atlases. Mowinckel & Vidal-Piñero (2020)
+    <doi: 10.1177/2515245920928009>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.1.1

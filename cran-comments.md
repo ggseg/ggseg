@@ -16,3 +16,6 @@
 
 * This is a new release.
 * 1 Note is for current time verification not working
+
+## By CRAN request:
+- adapted the description in DESCRIPTION to no include backticks, and added publication reference.
