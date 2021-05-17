@@ -19,3 +19,4 @@
 
 ## By CRAN request:
 - adapted the description in DESCRIPTION to no include backticks, and added publication reference.
+- removed zero leading minor version number

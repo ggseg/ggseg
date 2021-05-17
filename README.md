@@ -68,7 +68,7 @@ plot(aseg)
 
 <img src="man/img/README-unnamed-chunk-3-2.png" width="100%" />
 
-While default atlas plots wil give you an idea of how the atlases look,
+While default atlas plots will give you an idea of how the atlases look,
 you will likely want to project your own data onto the plot.
 
 ``` r

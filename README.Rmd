@@ -58,7 +58,7 @@ plot(dk)
 plot(aseg)
 ```
 
-While default atlas plots wil give you an idea of how the atlases look, you will likely want to project your own data onto the plot.
+While default atlas plots will give you an idea of how the atlases look, you will likely want to project your own data onto the plot.
 
 
 ```{r}
