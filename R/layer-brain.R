@@ -1,3 +1,4 @@
+#' @noRd
 layer_brain <- function(geom = NULL, stat = NULL,
                         data = NULL, mapping = NULL,
                         position = NULL, params = list(),
@@ -13,6 +14,7 @@ layer_brain <- function(geom = NULL, stat = NULL,
   )
 }
 
+#' @noRd
 LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                       setup_layer = function(self, data, plot) {

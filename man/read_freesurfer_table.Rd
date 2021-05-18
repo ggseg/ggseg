@@ -14,7 +14,7 @@ read_freesurfer_table(path, measure = NULL, ...)
 \item{...}{additional arguments to \code{read.table}}
 }
 \value{
-tibble
+tibble with stats information for subjects from FreeSurfer
 }
 \description{
 Freesurfer has functions to create

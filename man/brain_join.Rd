@@ -14,7 +14,8 @@ brain_join(data, atlas, by = NULL)
 \item{by}{optional character vector of column to join by}
 }
 \value{
-either an sf-object or a tibble with merged atlas and data
+either an sf-object (if brain atlas) or a tibble (if ggseg-atlas)
+        with merged atlas and data
 }
 \description{
 Joins data frame with a brain-atlas

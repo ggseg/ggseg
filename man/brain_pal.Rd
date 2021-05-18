@@ -18,6 +18,9 @@ Neccessary if applying palette to other data than the brain atlas it comes from.
 
 \item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }
+\value{
+vector of colours
+}
 \description{
 \code{brain_pal} return HEX colours for the different ggseg atlases.
 }

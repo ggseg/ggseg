@@ -35,7 +35,7 @@ main ggplot call or not}
 \item{...}{arguments to \code{\link[ggplot2]{geom_sf}}}
 }
 \value{
-ggplot object#'
+ggplot object
 }
 \description{
 call to \code{\link[ggplot2]{geom_sf}}

@@ -14,7 +14,7 @@ adapt_scales(geobrain, position = "dispersed", aesthetics = "labs")
 \item{aesthetics}{String of which aesthetics to adapt scale of, either "x","y", or "labs".}
 }
 \value{
-nested list
+nested list with coordinates for labels
 }
 \description{
 \code{adapt_scales} returns a list of coordinate breaks and labels

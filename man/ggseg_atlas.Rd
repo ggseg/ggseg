@@ -9,6 +9,9 @@ ggseg_atlas(x)
 \arguments{
 \item{x}{data.frame to be made a ggseg-atlas}
 }
+\value{
+a tibble with polygon coordinates for plotting brain regions
+}
 \description{
 The `ggseg_atlas` class is a subclass of [`data.frame`][data.frame()],
 created in order to have different default behaviour. It heavily relieas on

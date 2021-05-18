@@ -21,7 +21,7 @@
 #' Theme for easy customisation of the brain themes.}
 #'
 #' }
-#'
+#' @return function that alters the themeing of a ggplot object
 #' @seealso [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 #' @export
 #' @importFrom ggplot2 theme element_blank element_rect element_text

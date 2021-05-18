@@ -9,6 +9,10 @@ as_brain_atlas(x)
 \arguments{
 \item{x}{object to make into a brain_atlas}
 }
+\value{
+an object of class 'brain_atlas'.
+}
 \description{
-Create brain atlas
+Coerce object into an object of class
+'brain_atlas'.
 }

@@ -2,13 +2,25 @@
 % Please edit documentation in R/atlas-utils.R
 \name{brain_labels}
 \alias{brain_labels}
+\alias{brain_labels.ggseg_atlas}
+\alias{brain_labels.brain_atlas}
 \title{Extract unique labels of brain regions}
 \usage{
 brain_labels(x)
+
+\method{brain_labels}{ggseg_atlas}(x)
+
+\method{brain_labels}{brain_atlas}(x)
 }
 \arguments{
 \item{x}{brain atlas}
 }
+\value{
+Character vector of atlas region labels
+}
 \description{
-Extract unique labels of brain regions
+Convenience function to extract names of
+brain labels from a \code{\link{brain_atlas}}.
+Brain labels are usually default naming obtained
+from the original atlas data.
 }

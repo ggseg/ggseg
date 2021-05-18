@@ -6,9 +6,7 @@
 \usage{
 atlas_type(x)
 }
-\arguments{
-\item{x}{brain atlas}
-}
 \description{
 Detect atlas type
 }
+\keyword{internal}

@@ -29,6 +29,9 @@ scale_fill_brain(...)
 
 \item{aesthetics}{String vector of which aesthetics to scale c("colour", "color", "fill").}
 }
+\value{
+scaling function for altering colour of ggplot aesthetics
+}
 \description{
 The `brain` palette scales provides scales for the different atlases in the
 package. Colours are according to the colours used in the papers where the

@@ -10,7 +10,7 @@ brain_pals_info(package = "ggseg")
 \item{package}{package to get brain_pals data from (ggseg or ggsegExtra)}
 }
 \value{
-data.frame
+data.frame with palette information
 }
 \description{
 Get info on brain palettes

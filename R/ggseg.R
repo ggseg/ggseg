@@ -1,7 +1,7 @@
 #' Plot brain parcellations
 #'
 #' \code{ggseg} plots and returns a ggplot object of plotted
-#' aparc regions.
+#' aparc regions. Is supersceded by the new \code{\link{geom_brain}}.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
 #' @param .data A .data.frame to use for plot aesthetics. Should include a
@@ -10,7 +10,7 @@
 #' @param atlas Either a string with the name of atlas to use,
 #' or a .data.frame containing atlas information (i.e. pre-loaded atlas).
 #' @param ... other options sent to geom_polygon for plotting, including
-#' mapping aes (cannot include x, y, and group aethetics).
+#' mapping aes (cannot include x, y, and group aesthetics).
 #' @param hemisphere String to choose hemisphere to plot. Any of c("left","right")[default].
 #' @param view String to choose view of the .data. Any of c("lateral","medial")[default].
 #' @param position String choosing how to view the .data. Either "dispersed"[default] or "stacked".
@@ -30,7 +30,6 @@
 #'
 #' \item{`aseg`}{
 #' Freesurfer automatic subcortical segmentation of a brain volume}
-#'
 #' }
 #'
 #' @return a ggplot object

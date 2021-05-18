@@ -13,7 +13,7 @@
 #' @references Fischl et al. (2004) Cerebral Cortex 14:11-22
 #' (\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
 #'
-#' @format A data.frame with 10913 observations and 11 variables
+#' @return An object of class 'brain_atlas' for plotting with ggseg
 #' @examples
 #' data(dk)
 "dk"
@@ -34,16 +34,7 @@
 #' @references Fischl et al., (2002). Neuron, 33:341-355
 #' (\href{https://www.pubmed.ncbi.nlm.nih.gov/11832223}{PubMed})
 #'
-#' @format A data.frame with 2702 observations and 9 variables
-#' \describe{
-#'   \item{lat}{coordinates for the x-axis}
-#'   \item{long}{coordinates for the y-axis}
-#'   \item{region}{acronym of network}
-#'   \item{name}{full name of network}
-#'   \item{hemi}{name of the hemisphere (left, right)}
-#'   \item{side}{which side to view (medial, lateral,axial)}
-#'   \item{atlas}{name of the atlas}
-#' }
+#' @return An object of class 'brain_atlas' for plotting with ggseg
 #'
 #' @examples
 #' data(aseg)

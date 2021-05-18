@@ -5,10 +5,13 @@
 \alias{dk}
 \title{Desikan-Killiany Cortical Atlas}
 \format{
-A data.frame with 10913 observations and 11 variables
+An object of class \code{brain_atlas} of length 4.
 }
 \usage{
 data(dk)
+}
+\value{
+An object of class 'brain_atlas' for plotting with ggseg
 }
 \description{
 Coordinate data for the Desikan-Killany Cortical atlas,

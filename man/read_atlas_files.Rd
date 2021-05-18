@@ -12,7 +12,7 @@ read_atlas_files(subjects_dir, atlas)
 \item{atlas}{unique character combination identifying the atlas}
 }
 \value{
-tibble
+tibble with stats information for subjects from FreeSurfer
 }
 \description{
 Recursively reads in all stats files for

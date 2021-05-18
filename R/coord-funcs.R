@@ -1,6 +1,8 @@
 
 #' @importFrom dplyr group_by summarise_at vars mutate
 #' @importFrom stats sd
+#' @keywords internal
+#' @noRd
 squish_position <- function(geobrain, hemisphere){
   mm <- group_by(geobrain, hemi)
   mm <- summarise_at(mm, vars(.long),
@@ -14,6 +16,8 @@ squish_position <- function(geobrain, hemisphere){
 }
 
 #' @importFrom dplyr group_by mutate arrange
+#' @keywords internal
+#' @noRd
 stack_brain <- function (atlas){
   if(unique(atlas$type) == "cortical"){
     stack <- group_by(atlas, hemi, side)
@@ -51,6 +55,7 @@ stack_brain <- function (atlas){
 #' @importFrom dplyr summarise_at mutate
 #' @importFrom ggplot2 vars
 #' @importFrom stats sd
+#' @noRd
 calc_stack <- function(stack){
   stack <- summarise_at(
     stack,
@@ -79,6 +84,7 @@ calc_stack <- function(stack){
 #' @importFrom dplyr group_by group_split
 #' @importFrom sf st_polygon st_sfc st_sf st_zm st_cast
 #' @importFrom tidyr unnest
+#' @keywords internal
 coords2sf <- function(coords, vertex_size_limits = NULL) {
   dt <- unnest(coords, ggseg)
   dt <- dt[,c(".long", ".lat", ".id", ".subid")]
@@ -119,6 +125,8 @@ sf2coords <- function(x){
 
 #' @importFrom dplyr as_tibble group_by mutate row_number ungroup
 #' @importFrom sf st_combine st_coordinates
+#' @keywords internal
+#' @noRd
 to_coords <- function(x, n){
   k <- st_combine(x)
   k <- st_coordinates(k)
@@ -134,7 +142,8 @@ to_coords <- function(x, n){
   k
 }
 
-
+#' @keywords internal
+#' @noRd
 gap <- function(x){
   (min(x) + max(x)) / 2
 }

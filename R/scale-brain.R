@@ -18,6 +18,7 @@
 #' @param aesthetics String vector of which aesthetics to scale c("colour", "color", "fill").
 #' @param ... additional arguments to pass to \code{\link{brain_pal}}
 #'
+#' @return scaling function for altering colour of ggplot aesthetics
 #' @rdname scale_brain
 #' @export
 #' @examples
@@ -73,6 +74,7 @@ scale_fill_brain <- function(...) {
 #' @param na.value String name or hex for the colour of NA entries
 #' @param aesthetics String vector of which aesthetics to scale c("colour", "color", "fill").
 #' @param ... additional arguments to pass to \code{\link{brain_pal}}
+#' @return scaling function for altering colour of ggplot aesthetics
 #'
 #' @rdname scale_brain2
 #' @export
@@ -122,7 +124,7 @@ scale_fill_brain2 <- function(...) {
 #' @param position Character of either "dispersed" or "stacked".
 #' @param aesthetics String vector of which aesthetics to scale "x", "y", or "labs".
 #' @param ... additional arguments to pass to \code{\link{adapt_scales}}
-#'
+#' @return a scaling function to alter continuous axes labels in ggplot2
 #' @rdname scale_continous_brain
 #' @export
 #' @examples

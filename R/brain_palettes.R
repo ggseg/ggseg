@@ -8,7 +8,7 @@
 #' @param direction Direction of  HEX, -1 reverses order
 #' Neccessary if applying palette to other data than the brain atlas it comes from.
 #' @param unname return unnamed vector (default = FALSE)
-#'
+#' @return vector of colours
 #' @export
 #' @examples
 #' brain_pal("dk")
@@ -56,7 +56,7 @@ brain_pal <- function(name, n="all", direction=1, unname=FALSE,
 #' Get info on brain palettes
 #'
 #' @inheritParams brain_pal
-#' @return data.frame
+#' @return data.frame with palette information
 #' @export
 #'
 #' @examples
@@ -80,6 +80,8 @@ brain_pals_info <- function(package="ggseg"){
 #' the number of colours of each palette
 #'
 #' @inheritParams brain_pal
+#' @keywords internal
+#' @noRd
 get_colours <- function(name, n, unname, package){
   data.frame(atlas = name,
              colour = brain_pal(name=name, n=n, unname=unname,
@@ -95,6 +97,8 @@ get_colours <- function(name, n, unname, package){
 #' from.
 #'
 #' @inheritParams brain_pal
+#' @keywords internal
+#' @noRd
 get_pals <- function(package = "ggseg"){
   eval(parse(text=paste(package, "brain_pals", sep=":::")))
 }

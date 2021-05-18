@@ -41,6 +41,7 @@ reposition_brain <- function(data, position = "horizontal"){
 #' @param position formula describing the rows ~ columns organisation.
 #'
 #' @export
+#' @return a ggproto object
 #' @importFrom ggplot2 ggproto
 #' @examples
 #' library(ggplot2)

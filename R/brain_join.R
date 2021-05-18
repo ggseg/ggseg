@@ -7,7 +7,8 @@
 #' @param atlas atlas data
 #' @param by optional character vector of column to join by
 #'
-#' @return either an sf-object or a tibble with merged atlas and data
+#' @return either an sf-object (if brain atlas) or a tibble (if ggseg-atlas)
+#'         with merged atlas and data
 #' @export
 #' @importFrom dplyr is.grouped_df full_join as_tibble
 #' @importFrom tidyr nest unnest

@@ -21,7 +21,7 @@
 #'   [`tibble`][tibble()]-package
 #'
 #' @name ggseg_atlas
-#'
+#' @return a tibble with polygon coordinates for plotting brain regions
 #' @importFrom dplyr starts_with mutate across group_by
 #' @importFrom dplyr everything select ungroup
 #' @importFrom tidyr unnest
@@ -57,6 +57,7 @@ ggseg_atlas <- function(x){
 
 #' Validate ggseg_atlas
 #' @param x an object
+#' @return logical if object is of class 'ggaeg_atlas'
 #' @export
 is_ggseg_atlas <- function(x) inherits(x, 'ggseg_atlas')
 
@@ -64,24 +65,27 @@ is_ggseg_atlas <- function(x) inherits(x, 'ggseg_atlas')
 #' Create ggseg atlas
 #'
 #' @param x object to make into a ggseg_atlas
-#'
+#' @return Object of class 'ggseg_atlas'
 #' @export
 as_ggseg_atlas <- function(x){
   UseMethod("as_ggseg_atlas")
 }
 
 #' @export
+#' @rdname as_ggseg_atlas
 as_ggseg_atlas.default <- function(x){
   stop("Cannot make object of class ", class(x)[1], " into a ggseg_atlas",
           call. = FALSE)
 }
 
 #' @export
+#' @rdname as_ggseg_atlas
 as_ggseg_atlas.data.frame <- function(x){
   ggseg_atlas(x)
 }
 
 #' @export
+#' @rdname as_ggseg_atlas
 #' @importFrom tidyr unnest
 as_ggseg_atlas.ggseg_atlas <- function(x){
   x <- unnest(x, ggseg)
@@ -93,6 +97,7 @@ as_ggseg_atlas.ggseg_atlas <- function(x){
 }
 
 #' @export
+#' @rdname as_ggseg_atlas
 #' @importFrom tidyr unnest
 as_ggseg_atlas.brain_atlas <- function(x){
 

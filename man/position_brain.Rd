@@ -9,6 +9,9 @@ position_brain(position = "horizontal")
 \arguments{
 \item{position}{formula describing the rows ~ columns organisation.}
 }
+\value{
+a ggproto object
+}
 \description{
 Function to be used in the position argument in geom_brain
 to alter the position of the brain slice/views.

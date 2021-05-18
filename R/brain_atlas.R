@@ -1,10 +1,17 @@
 # brain_atlas ----
 #' Constructor for brain atlas
+#'
+#' Creates an object of class 'brain_atlas'
+#' that is compatible for plotting using the
+#' ggseg-package plot functions
+#'
 #' @param atlas atlas short name, length one
 #' @param type atlas type, cortical or subcortical, length one
 #' @param data data.frame with atlas data
 #' @param palette named character vector of colours
-#'
+#' @return an object of class 'brain_atlas' containing information
+#'        on atlas name, type, data and palette. To be used in plotting
+#'        with \code{\link{geom_brain}}.
 #' @export
 brain_atlas <- function(atlas, type, data, palette = NULL) {
   type <- match.arg(type,
@@ -31,6 +38,7 @@ brain_atlas <- function(atlas, type, data, palette = NULL) {
 
 #' Validate brain atlas
 #' @param x an object
+#' @return logical if object is of class 'brain_atlas'
 #' @export
 is_brain_atlas <- function(x) inherits(x, "brain_atlas")
 
@@ -112,8 +120,11 @@ as.list.brain_atlas <- function(x, ...){
 ## as_brain_atlas ----
 #' Create brain atlas
 #'
-#' @param x object to make into a brain_atlas
+#' Coerce object into an object of class
+#' 'brain_atlas'.
 #'
+#' @param x object to make into a brain_atlas
+#' @return an object of class 'brain_atlas'.
 #' @export
 as_brain_atlas <- function(x){
   UseMethod("as_brain_atlas")
@@ -189,16 +200,11 @@ as_brain_atlas.brain_atlas <- function(x){
 # brain data ----
 #' \code{brain_data} class
 #' @param x data.frame to be made a brain_data
-#'
+#' @return object of class brain_data, consisting of sf polygon
+#'        data for brain atlas plotting.
 #' @name brain_data-class
 #' @aliases brain_data brain_data-class
-brain_data <- function(x = data.frame(atlas = character(),
-                                      type = character(),
-                                      region = character(),
-                                      hemi = character(),
-                                      side = character(),
-                                      geometry = character())
-) {
+brain_data <- function(x){
 
   stopifnot(is.data.frame(x))
   stopifnot(all(c("hemi", "region", "side") %in% names(x)))
@@ -213,6 +219,9 @@ brain_data <- function(x = data.frame(atlas = character(),
   )
 }
 
+#' Coerce into brain_data
+#' @export
+#' @rdname brain_data
 as_brain_data <- brain_data
 
 

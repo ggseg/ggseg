@@ -15,6 +15,13 @@ brain_atlas(atlas, type, data, palette = NULL)
 
 \item{palette}{named character vector of colours}
 }
+\value{
+an object of class 'brain_atlas' containing information
+       on atlas name, type, data and palette. To be used in plotting
+       with \code{\link{geom_brain}}.
+}
 \description{
-Constructor for brain atlas
+Creates an object of class 'brain_atlas'
+that is compatible for plotting using the
+ggseg-package plot functions
 }

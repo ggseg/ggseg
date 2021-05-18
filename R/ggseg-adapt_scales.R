@@ -8,7 +8,7 @@
 #' @param aesthetics String of which aesthetics to adapt scale of, either "x","y", or "labs".
 #'
 #' @importFrom dplyr group_by summarise
-#' @return nested list
+#' @return nested list with coordinates for labels
 adapt_scales = function(geobrain, position = "dispersed", aesthetics = "labs"){
 
   atlas = ifelse(any(names(geobrain) %in% "atlas"),

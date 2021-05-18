@@ -5,19 +5,13 @@
 \alias{aseg}
 \title{Freesurfer automatic subcortical segmentation of a brain volume}
 \format{
-A data.frame with 2702 observations and 9 variables
-\describe{
-  \item{lat}{coordinates for the x-axis}
-  \item{long}{coordinates for the y-axis}
-  \item{region}{acronym of network}
-  \item{name}{full name of network}
-  \item{hemi}{name of the hemisphere (left, right)}
-  \item{side}{which side to view (medial, lateral,axial)}
-  \item{atlas}{name of the atlas}
-}
+An object of class \code{brain_atlas} of length 4.
 }
 \usage{
 data(aseg)
+}
+\value{
+An object of class 'brain_atlas' for plotting with ggseg
 }
 \description{
 Coordinate data for the subcortical parcellations implemented

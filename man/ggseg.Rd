@@ -34,7 +34,7 @@ be hemisphere without ticks.  If \code{FALSE}, then will be latitude
 longitude values.  Also affected by \code{position} argument}
 
 \item{...}{other options sent to geom_polygon for plotting, including
-mapping aes (cannot include x, y, and group aethetics).}
+mapping aes (cannot include x, y, and group aesthetics).}
 }
 \value{
 a ggplot object
@@ -47,7 +47,7 @@ the plot can mimmick the shape and position in the brain it
 represents.
 
 \code{ggseg} plots and returns a ggplot object of plotted
-aparc regions.
+aparc regions. Is supersceded by the new \code{\link{geom_brain}}.
 }
 \details{
 This package contains data from various brain parcellations,
@@ -61,7 +61,6 @@ The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations
 
 \item{`aseg`}{
 Freesurfer automatic subcortical segmentation of a brain volume}
-
 }
 }
 \examples{

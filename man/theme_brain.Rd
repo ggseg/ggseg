@@ -34,6 +34,9 @@ theme_brain2(
 
 \item{text.colour}{Speficy colour of plot text}
 }
+\value{
+function that alters the themeing of a ggplot object
+}
 \description{
 a set of themes created for the ggseg plots. Use theme() to tweak.
 }

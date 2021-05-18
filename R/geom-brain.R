@@ -13,7 +13,7 @@
 #'        main ggplot call or not
 #' @param ... arguments to \code{\link[ggplot2]{geom_sf}}
 #'
-#' @return ggplot object#'
+#' @return ggplot object
 #' @rdname ggbrain
 #' @export
 #'
@@ -85,6 +85,7 @@ GeomBrain <- ggproto("GeomBrain", Geom,
 
 
 # helpers ----
+#' @noRd
 default_aesthetics <- function(type) {
   modify_list(GeomPolygon$default_aes,
               list(fill = "grey90", colour = "grey35"))
@@ -92,6 +93,7 @@ default_aesthetics <- function(type) {
 
 
 # adapted from ggplot2::sf_grob
+#' @noRd
 brain_grob <- function(x, lineend = "butt", linejoin = "round", linemitre = 10,
                        na.rm = TRUE) {
   type <- "other"
@@ -118,11 +120,13 @@ brain_grob <- function(x, lineend = "butt", linejoin = "round", linemitre = 10,
   sf::st_as_grob(x$geometry, gp = gp)
 }
 
+#' @noRd
 detect_missing <- function(df, vars, finite = FALSE) {
   vars <- intersect(vars, names(df))
   !cases(df[, vars, drop = FALSE], if (finite) is_finite else is_complete)
 }
 
+#' @noRd
 modify_list <- function (old, new){
   for (i in names(new)) old[[i]] <- new[[i]]
   old

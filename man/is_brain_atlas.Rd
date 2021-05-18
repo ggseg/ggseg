@@ -9,6 +9,9 @@ is_brain_atlas(x)
 \arguments{
 \item{x}{an object}
 }
+\value{
+logical if object is of class 'brain_atlas'
+}
 \description{
 Validate brain atlas
 }

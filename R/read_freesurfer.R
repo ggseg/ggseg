@@ -10,7 +10,7 @@
 #' @param path path to stats file
 #' @param rename logical. rename headers for ggseg compatibility
 #' @importFrom dplyr rename as_tibble
-#' @return tibble
+#' @return tibble with stats information for subjects from FreeSurfer
 #' @export
 #' @examples
 #' \dontrun{
@@ -52,7 +52,7 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #' @param atlas unique character combination identifying the atlas
 #' @importFrom dplyr bind_rows
 #' @importFrom tidyr separate unite
-#' @return tibble
+#' @return tibble with stats information for subjects from FreeSurfer
 #' @export
 #' @examples
 #' \dontrun{
@@ -104,7 +104,7 @@ read_atlas_files <- function(subjects_dir, atlas){
 #' @importFrom tidyr gather
 #' @importFrom utils read.table
 #' @importFrom dplyr mutate
-#' @return tibble
+#' @return tibble with stats information for subjects from FreeSurfer
 #' @export
 #' @examples
 #' \dontrun{
@@ -132,6 +132,7 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
 
 #' helper function to easily grab subject information from directory path
 #' @param path file path
+#' @noRd
 find_subject_fromdir <- function(path){
   strsplit(path, "/")[[1]][2]
 }
@@ -139,6 +140,7 @@ find_subject_fromdir <- function(path){
 #' helper function to easily grab hemisphere information from file path
 #'
 #' @param path file path
+#' @noRd
 find_hemi_fromfile <- function(path){
   strsplit(basename(path), "\\.")[[1]][1]
 }

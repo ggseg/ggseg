@@ -5,13 +5,14 @@
 \alias{brain_data}
 \title{\code{brain_data} class}
 \usage{
-brain_data(
-  x = data.frame(atlas = character(), type = character(), region = character(), hemi =
-    character(), side = character(), geometry = character())
-)
+brain_data(x)
 }
 \arguments{
 \item{x}{data.frame to be made a brain_data}
+}
+\value{
+object of class brain_data, consisting of sf polygon
+       data for brain atlas plotting.
 }
 \description{
 \code{brain_data} class
