@@ -282,10 +282,10 @@
 <span class="co">#&gt; # A tibble: 4 x 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.201</span>
-<span class="co">#&gt; 2 insula              0.116</span>
-<span class="co">#&gt; 3 precentral          0.07 </span>
-<span class="co">#&gt; 4 superior parietal   0.214</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.216</span>
+<span class="co">#&gt; 2 insula              0.393</span>
+<span class="co">#&gt; 3 precentral          0.185</span>
+<span class="co">#&gt; 4 superior parietal   0.152</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -372,14 +372,14 @@
 <span class="co">#&gt; # A tibble: 8 x 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.092 g1    </span>
-<span class="co">#&gt; 2 insula              0.214 g1    </span>
-<span class="co">#&gt; 3 precentral          0.283 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.027 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.058 g2    </span>
-<span class="co">#&gt; 6 insula              0.191 g2    </span>
-<span class="co">#&gt; 7 precentral          0.102 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.138 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.177 g1    </span>
+<span class="co">#&gt; 2 insula              0.266 g1    </span>
+<span class="co">#&gt; 3 precentral          0.388 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.444 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.495 g2    </span>
+<span class="co">#&gt; 6 insula              0.002 g2    </span>
+<span class="co">#&gt; 7 precentral          0.156 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.429 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 
