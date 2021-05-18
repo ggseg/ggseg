@@ -47,7 +47,7 @@ the plot can mimmick the shape and position in the brain it
 represents.
 
 \code{ggseg} plots and returns a ggplot object of plotted
-aparc regions. Is supersceded by the new \code{\link{geom_brain}}.
+aparc regions. Is superseded by the new \code{\link{geom_brain}}.
 }
 \details{
 This package contains data from various brain parcellations,

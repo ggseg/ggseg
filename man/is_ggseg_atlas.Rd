@@ -10,7 +10,7 @@ is_ggseg_atlas(x)
 \item{x}{an object}
 }
 \value{
-logical if object is of class 'ggaeg_atlas'
+logical if object is of class 'ggseg_atlas'
 }
 \description{
 Validate ggseg_atlas

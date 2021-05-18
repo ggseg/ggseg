@@ -57,7 +57,7 @@ ggseg_atlas <- function(x){
 
 #' Validate ggseg_atlas
 #' @param x an object
-#' @return logical if object is of class 'ggaeg_atlas'
+#' @return logical if object is of class 'ggseg_atlas'
 #' @export
 is_ggseg_atlas <- function(x) inherits(x, 'ggseg_atlas')
 

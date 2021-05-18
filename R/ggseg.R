@@ -1,7 +1,7 @@
 #' Plot brain parcellations
 #'
 #' \code{ggseg} plots and returns a ggplot object of plotted
-#' aparc regions. Is supersceded by the new \code{\link{geom_brain}}.
+#' aparc regions. Is superseded by the new \code{\link{geom_brain}}.
 #' @author Athanasia Mowinckel and Didac Pineiro
 #'
 #' @param .data A .data.frame to use for plot aesthetics. Should include a

@@ -203,7 +203,7 @@ as_brain_atlas.brain_atlas <- function(x){
 #' @return object of class brain_data, consisting of sf polygon
 #'        data for brain atlas plotting.
 #' @name brain_data-class
-#' @aliases brain_data brain_data-class
+#' @noRd
 brain_data <- function(x){
 
   stopifnot(is.data.frame(x))
@@ -219,9 +219,6 @@ brain_data <- function(x){
   )
 }
 
-#' Coerce into brain_data
-#' @export
-#' @rdname brain_data
 as_brain_data <- brain_data
 
 
