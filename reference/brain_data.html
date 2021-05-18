@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read in atlas data from all subjects — read_atlas_files • ggseg</title>
+<title>Coerce into brain_data — as_brain_data • ggseg</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,8 @@
 
 
 
-<meta property="og:title" content="Read in atlas data from all subjects — read_atlas_files" />
-<meta property="og:description" content="Recursively reads in all stats files for
-an atlas (given a unique character string),
-for all subjects in the subjects directory.
-Will add hemisphere and subject id to the data." />
+<meta property="og:title" content="Coerce into brain_data — as_brain_data" />
+<meta property="og:description" content="Coerce into brain_data" />
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
@@ -146,45 +143,19 @@ Will add hemisphere and subject id to the data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read in atlas data from all subjects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/read_freesurfer.R'><code>R/read_freesurfer.R</code></a></small>
-    <div class="hidden name"><code>read_atlas_files.Rd</code></div>
+    <h1>Coerce into brain_data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/LCBC-UiO/ggseg/blob/master/R/brain_atlas.R'><code>R/brain_atlas.R</code></a></small>
+    <div class="hidden name"><code>brain_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Recursively reads in all stats files for
-an atlas (given a unique character string),
-for all subjects in the subjects directory.
-Will add hemisphere and subject id to the data.</p>
+    <p>Coerce into brain_data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_atlas_files</span><span class='op'>(</span><span class='va'>subjects_dir</span>, <span class='va'>atlas</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>as_brain_data</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>subjects_dir</th>
-      <td><p>Freesurfer subject directory</p></td>
-    </tr>
-    <tr>
-      <th>atlas</th>
-      <td><p>unique character combination identifying the atlas</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble with stats information for subjects from FreeSurfer</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>subj_dir</span> <span class='op'>&lt;-</span> <span class='fu'>freesurfer</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/freesurfer/man/fs_subj_dir.html'>fs_subj_dir</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'>read_atlas_files</span><span class='op'>(</span><span class='va'>subj_dir</span>, <span class='st'>"aseg.stats"</span><span class='op'>)</span>
-
-<span class='fu'>read_atlas_files</span><span class='op'>(</span><span class='va'>subj_dir</span>, <span class='st'>"lh.aparc.stats"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

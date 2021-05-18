@@ -25,6 +25,9 @@
     <loc>https://lcbc-uio.github.io/ggseg//reference/brain_data-class.html</loc>
   </url>
   <url>
+    <loc>https://lcbc-uio.github.io/ggseg//reference/brain_data.html</loc>
+  </url>
+  <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/brain_join.html</loc>
   </url>
   <url>
@@ -41,18 +44,6 @@
   </url>
   <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/dk.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/find_hemi_fromfile.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/find_subject_fromdir.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/get_colours.html</loc>
-  </url>
-  <url>
-    <loc>https://lcbc-uio.github.io/ggseg//reference/get_pals.html</loc>
   </url>
   <url>
     <loc>https://lcbc-uio.github.io/ggseg//reference/ggbrain.html</loc>

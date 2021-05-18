@@ -47,7 +47,10 @@
 
 
 <meta property="og:title" content="Extract unique labels of brain regions — brain_labels" />
-<meta property="og:description" content="Extract unique labels of brain regions" />
+<meta property="og:description" content="Convenience function to extract names of
+brain labels from a brain_atlas.
+Brain labels are usually default naming obtained
+from the original atlas data." />
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
@@ -149,10 +152,19 @@
     </div>
 
     <div class="ref-description">
-    <p>Extract unique labels of brain regions</p>
+    <p>Convenience function to extract names of
+brain labels from a <code><a href='brain_atlas.html'>brain_atlas</a></code>.
+Brain labels are usually default naming obtained
+from the original atlas data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>brain_labels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>brain_labels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S3 method for ggseg_atlas</span>
+<span class='fu'>brain_labels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S3 method for brain_atlas</span>
+<span class='fu'>brain_labels</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,6 +175,9 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Character vector of atlas region labels</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

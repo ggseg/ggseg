@@ -53,7 +53,7 @@ Results from such analyses are usually easier to interpret if
 the plot can mimmick the shape and position in the brain it
 represents.
 ggseg plots and returns a ggplot object of plotted
-aparc regions." />
+aparc regions. Is supersceded by the new geom_brain." />
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png" />
 
 
@@ -161,7 +161,7 @@ Results from such analyses are usually easier to interpret if
 the plot can mimmick the shape and position in the brain it
 represents.</p>
 <p><code>ggseg</code> plots and returns a ggplot object of plotted
-aparc regions.</p>
+aparc regions. Is supersceded by the new <code><a href='geom_brain.html'>geom_brain</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggseg</span><span class='op'>(</span>
@@ -208,7 +208,7 @@ longitude values.  Also affected by <code>position</code> argument</p></td>
     <tr>
       <th>...</th>
       <td><p>other options sent to geom_polygon for plotting, including
-mapping aes (cannot include x, y, and group aethetics).</p></td>
+mapping aes (cannot include x, y, and group aesthetics).</p></td>
     </tr>
     </table>
 
@@ -225,7 +225,6 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).</p>
 <dt>`dk`</dt><dd><p>The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.</p></dd>
 
 <dt>`aseg`</dt><dd><p>Freesurfer automatic subcortical segmentation of a brain volume</p></dd>
-
 
 </dl>
 
