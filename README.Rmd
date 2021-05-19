@@ -40,9 +40,16 @@ If you want the 3d plotting tool, please go the [ggseg3d repository](https://git
 You may find more atlases and functions to create new atlases in the companion package [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
 
 ## Installation
-The package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.
+The package can be installed from CRAN.
 
-```{r eval=F}
+```{r eval = FALSE}
+install.packages("ggseg")
+```
+
+
+The development version of the package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.
+
+```{r eval=FALSE}
 install.packages("remotes")
 remotes::install_github("LCBC-UiO/ggseg", build_vignettes = TRUE)
 ```

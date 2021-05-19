@@ -40,9 +40,15 @@ companion package [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
 
 ## Installation
 
-The package can be installed using devtools. The package includes some
-large datasets for the brain coordinates. Please be patient during
-download and install, it will take some time.
+The package can be installed from CRAN.
+
+``` r
+install.packages("ggseg")
+```
+
+The development version of the package can be installed using devtools.
+The package includes some large datasets for the brain coordinates.
+Please be patient during download and install, it will take some time.
 
 ``` r
 install.packages("remotes")
@@ -60,13 +66,13 @@ library(ggplot2)
 plot(dk)
 ```
 
-<img src="man/img/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/img/README-unnamed-chunk-4-1.png" width="100%" />
 
 ``` r
 plot(aseg)
 ```
 
-<img src="man/img/README-unnamed-chunk-3-2.png" width="100%" />
+<img src="man/img/README-unnamed-chunk-4-2.png" width="100%" />
 
 While default atlas plots will give you an idea of how the atlases look,
 you will likely want to project your own data onto the plot.
@@ -98,7 +104,7 @@ someData %>%
 #> merging atlas and data by 'region'
 ```
 
-<img src="man/img/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/img/README-unnamed-chunk-5-1.png" width="100%" />
 
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://lcbc-uio.github.io/ggseg/)
