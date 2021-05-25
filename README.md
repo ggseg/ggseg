@@ -4,11 +4,11 @@
 <!-- badges: start -->
 
 [![R build
-status](https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/LCBC-UiO/ggseg/actions)
+status](https://github.com/ggseg/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/ggseg/ggseg/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
 [![Coverage
-status](https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/LCBC-UiO/ggseg)
+status](https://codecov.io/gh/ggseg/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/ggseg/ggseg)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
@@ -33,10 +33,10 @@ There are currently four atlases available in the package:
 for 2d polygon plots in ggplot, and another for 3d mesh plots through
 plotly. This was done to reduce package size, dependencies, and also to
 simplify maintenance. If you want the 3d plotting tool, please go the
-[ggseg3d repository](https://github.com/LCBC-UiO/ggseg3d).
+[ggseg3d repository](https://github.com/ggseg/ggseg3d).
 
 You may find more atlases and functions to create new atlases in the
-companion package [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
+companion package [ggsegExtra](https://github.com/ggseg/ggsegExtra).
 
 ## Installation
 
@@ -52,7 +52,7 @@ Please be patient during download and install, it will take some time.
 
 ``` r
 install.packages("remotes")
-remotes::install_github("LCBC-UiO/ggseg", build_vignettes = TRUE)
+remotes::install_github("ggseg/ggseg", build_vignettes = TRUE)
 ```
 
 The functions are now installed, and you may load them when you want to
@@ -107,7 +107,7 @@ someData %>%
 <img src="man/img/README-unnamed-chunk-5-1.png" width="100%" />
 
 The package also has several vignettes, to help you get started using
-it. You can access it [here](https://lcbc-uio.github.io/ggseg/)
+it. You can access it [here](https://ggseg.github.io/ggseg/)
 
 You can also see one of the creators blog for introductions to its use
 [here](https://drmowinckels.io/blog/2021-03-14-new-ggseg-with-geom/)
@@ -115,7 +115,7 @@ You can also see one of the creators blog for introductions to its use
 ### Report bugs or requests
 
 Don’t hesitate to ask for support using [github
-issues](https://github.com/LCBC-UiO/ggseg/issues), or requesting new
+issues](https://github.com/ggseg/ggseg/issues), or requesting new
 atlases. While we would love getting help in creating new atlases, you
 may also request atlases through the issues, and we will try to get to
 it.

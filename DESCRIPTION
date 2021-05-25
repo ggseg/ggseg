@@ -40,6 +40,6 @@ Suggests:
     devtools,
     spelling
 VignetteBuilder: knitr
-URL: https://github.com/LCBC-UiO/ggseg
-BugReports: https://github.com/LCBC-UiO/ggseg/issues
+URL: https://github.com/ggseg/ggseg
+BugReports: https://github.com/ggseg/ggseg/issues
 Language: en-US

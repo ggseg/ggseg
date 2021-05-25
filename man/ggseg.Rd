@@ -75,8 +75,8 @@ ggseg(adapt_scales = FALSE)
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/LCBC-UiO/ggseg}
-  \item Report bugs at \url{https://github.com/LCBC-UiO/ggseg/issues}
+  \item \url{https://github.com/ggseg/ggseg}
+  \item Report bugs at \url{https://github.com/ggseg/ggseg/issues}
 }
 
 
