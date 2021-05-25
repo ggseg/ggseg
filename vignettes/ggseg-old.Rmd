@@ -198,7 +198,7 @@ ggseg(.data = someData, atlas=dk, colour="white", mapping=aes(fill=p)) +
 
 ```
 
-You can try other atlases too, and also get many more atlases is in the ggseg atlas library, [ggsegExtra](https://github.com/LCBC-UiO/ggsegExtra).
+You can try other atlases too, and also get many more atlases is in the ggseg atlas library, [ggsegExtra](https://github.com/ggseg/ggsegExtra).
 ```{r atlases, fig.width=5}
 ggseg(atlas="aseg", mapping=aes(fill=region))
 ```
