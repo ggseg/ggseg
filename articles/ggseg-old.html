@@ -83,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/LCBC-UiO/ggseg/">
+  <a href="https://github.com/ggseg/ggseg/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Plotting brain atlases in ggplot</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/LCBC-UiO/ggseg/blob/master/vignettes/ggseg-old.Rmd"><code>vignettes/ggseg-old.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggseg/ggseg/blob/master/vignettes/ggseg-old.Rmd"><code>vignettes/ggseg-old.Rmd</code></a></small>
       <div class="hidden name"><code>ggseg-old.Rmd</code></div>
 
     </div>
@@ -118,7 +118,7 @@
 <p>The function <code><a href="../reference/ggseg.html">ggseg()</a></code>, is based in the ggplot2 format, it is recommended to get familiarized with with <a href="http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html">plotting data with ggplot2</a>.</p>
 <p>Out-of-the-box, ggseg() works without supplying any extra information. It will create a base plot of the aparc brain segmentations.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LCBC-UiO/ggseg">ggseg</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
@@ -274,7 +274,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient2</a></span><span class="op">(</span>high<span class="op">=</span><span class="st">"goldenrod"</span>,low<span class="op">=</span><span class="st">"firebrick"</span>,na.value<span class="op">=</span><span class="st">"transparent"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
 <p><img src="ggseg-old_files/figure-html/datasupp5-1.png" width="480"></p>
-<p>You can try other atlases too, and also get many more atlases is in the ggseg atlas library, <a href="https://github.com/LCBC-UiO/ggsegExtra">ggsegExtra</a>.</p>
+<p>You can try other atlases too, and also get many more atlases is in the ggseg atlas library, <a href="https://github.com/ggseg/ggsegExtra">ggsegExtra</a>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>atlas<span class="op">=</span><span class="st">"aseg"</span>, mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">region</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggseg-old_files/figure-html/atlases-1.png" width="480"></p>

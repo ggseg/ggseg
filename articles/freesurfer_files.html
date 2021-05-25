@@ -83,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/LCBC-UiO/ggseg/">
+  <a href="https://github.com/ggseg/ggseg/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Read in files from Freesurfer</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/LCBC-UiO/ggseg/blob/master/vignettes/freesurfer_files.Rmd"><code>vignettes/freesurfer_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggseg/ggseg/blob/master/vignettes/freesurfer_files.Rmd"><code>vignettes/freesurfer_files.Rmd</code></a></small>
       <div class="hidden name"><code>freesurfer_files.Rmd</code></div>
 
     </div>
@@ -121,7 +121,7 @@
 <p>If <code>recon-all</code> from Freesurfer has been run, each participant should have a <code>stats</code> folder, with various parcellation data and summary statistics for those parcellations and measures. These have many header lines before the data acutally start, and can have some formatting difficult to handle in R.</p>
 <p>The function <code>read_freesurfer_stats</code> is made to easily read in raw stats tables from each individual, without needing to go through Freesurfers internal converters. When using this file, remembering which hemisphere is read in is important, as this information must be added to the <code>label</code> column for <code>ggseg</code> to recognise the region labels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LCBC-UiO/ggseg">ggseg</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">subjects_dir</span> <span class="op">&lt;-</span> <span class="st">"/Applications/freesurfer/subjects/"</span></code></pre></div>

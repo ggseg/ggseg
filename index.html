@@ -86,7 +86,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/LCBC-UiO/ggseg/">
+  <a href="https://github.com/ggseg/ggseg/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -124,8 +124,8 @@
 <li>
 <code>aseg</code> - Automatic subcortical segmentation.</li>
 </ol>
-<p><strong>Note:</strong> As of version 1.5.3, <code>ggseg</code> was split into two packages: one for 2d polygon plots in ggplot, and another for 3d mesh plots through plotly. This was done to reduce package size, dependencies, and also to simplify maintenance. If you want the 3d plotting tool, please go the <a href="https://github.com/LCBC-UiO/ggseg3d">ggseg3d repository</a>.</p>
-<p>You may find more atlases and functions to create new atlases in the companion package <a href="https://github.com/LCBC-UiO/ggsegExtra">ggsegExtra</a>.</p>
+<p><strong>Note:</strong> As of version 1.5.3, <code>ggseg</code> was split into two packages: one for 2d polygon plots in ggplot, and another for 3d mesh plots through plotly. This was done to reduce package size, dependencies, and also to simplify maintenance. If you want the 3d plotting tool, please go the <a href="https://github.com/ggseg/ggseg3d">ggseg3d repository</a>.</p>
+<p>You may find more atlases and functions to create new atlases in the companion package <a href="https://github.com/ggseg/ggsegExtra">ggsegExtra</a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -136,14 +136,14 @@
 <p>The development version of the package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"LCBC-UiO/ggseg"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"ggseg/ggseg"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>The functions are now installed, and you may load them when you want to use them. All functions are documented in standard R fashion.</p>
 </div>
 <div id="use" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use" class="anchor"></a>Use</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LCBC-UiO/ggseg">ggseg</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></code></pre></div>
 <p><img src="man/img/README-unnamed-chunk-4-1.png" width="100%"></p>
@@ -177,12 +177,12 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">groups</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'region'</span></code></pre></div>
 <p><img src="man/img/README-unnamed-chunk-5-1.png" width="100%"></p>
-<p>The package also has several vignettes, to help you get started using it. You can access it <a href="https://lcbc-uio.github.io/ggseg/">here</a></p>
+<p>The package also has several vignettes, to help you get started using it. You can access it <a href="https://ggseg.github.io/ggseg/">here</a></p>
 <p>You can also see one of the creators blog for introductions to its use <a href="https://drmowinckels.io/blog/2021-03-14-new-ggseg-with-geom/">here</a></p>
 <div id="report-bugs-or-requests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#report-bugs-or-requests" class="anchor"></a>Report bugs or requests</h3>
-<p>Don’t hesitate to ask for support using <a href="https://github.com/LCBC-UiO/ggseg/issues">github issues</a>, or requesting new atlases. While we would love getting help in creating new atlases, you may also request atlases through the issues, and we will try to get to it.</p>
+<p>Don’t hesitate to ask for support using <a href="https://github.com/ggseg/ggseg/issues">github issues</a>, or requesting new atlases. While we would love getting help in creating new atlases, you may also request atlases through the issues, and we will try to get to it.</p>
 </div>
 </div>
 </div>
@@ -203,9 +203,9 @@
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=ggseg">https://​cloud.r-project.org/​package=ggseg</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/LCBC-UiO/ggseg/">https://​github.com/​LCBC-UiO/​ggseg/​</a>
+<li>Browse source code at <br><a href="https://github.com/ggseg/ggseg/">https://​github.com/​ggseg/​ggseg/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/LCBC-UiO/ggseg/issues">https://​github.com/​LCBC-UiO/​ggseg/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/ggseg/ggseg/issues">https://​github.com/​ggseg/​ggseg/​issues</a>
 </li>
 </ul>
 </div>
@@ -233,9 +233,9 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/LCBC-UiO/ggseg/actions"><img src="https://github.com/LCBC-UiO/ggseg/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/ggseg/ggseg/actions"><img src="https://github.com/ggseg/ggseg/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://CRAN.R-project.org/package=ggseg"><img src="https://www.r-pkg.org/badges/version/ggseg" alt="CRAN status"></a></li>
-<li><a href="https://codecov.io/gh/LCBC-UiO/ggseg"><img src="https://codecov.io/gh/LCBC-UiO/ggseg/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://codecov.io/gh/ggseg/ggseg"><img src="https://codecov.io/gh/ggseg/ggseg/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 </ul>
 </div>
