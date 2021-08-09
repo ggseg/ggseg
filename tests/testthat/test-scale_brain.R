@@ -42,5 +42,28 @@ test_that("Check scales", {
   expect_doppelganger("geom scale color brain2",
                       p + scale_color_brain2(dk$palette))
 
+})
+
+test_that("Check other scales",{
+  aseg_r <- tibble(
+    region = brain_regions(aseg),
+    value = sample(1:100, length(brain_regions(aseg)))
+  )
+
+  p <- ggplot(aseg_r) +
+    geom_brain(atlas = aseg,
+               aes(fill = value))
+
+  expect_doppelganger("geom scale gradient",
+                      p + scale_fill_gradient(low="red", high = "blue")
+  )
+
+  expect_doppelganger("geom scale gradientn",
+                      p + scale_fill_gradientn(colors = c("firebrick", "goldenrod"))
+  )
+
+  expect_doppelganger("geom scale distiller",
+                      p + scale_fill_distiller(palette = 4)
+  )
 
 })
