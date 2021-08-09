@@ -54,7 +54,7 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                         # automatically determine the name of the geometry column
                         # and add the mapping if it doesn't exist
-                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$geometry) && is.null(plot$mapping$geometry)) ||
+                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$geometry) && is.null(plot$computed_mapping$geometry)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$computed_mapping$geometry))) {
                           if (ggplot2:::is_sf(data)) {
                             geometry_col <- attr(data, "sf_column")
@@ -62,22 +62,22 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           }
                         }
 
-                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$hemi) && is.null(plot$mapping$hemi)) ||
+                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$hemi) && is.null(plot$computed_mapping$hemi)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$computed_mapping$hemi))) {
                           self$computed_mapping$hemi <- as.name("hemi")
                         }
 
-                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$side) && is.null(plot$mapping$side)) ||
+                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$side) && is.null(plot$computed_mapping$side)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$computed_mapping$side))) {
                           self$computed_mapping$side <- as.name("side")
                         }
 
-                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$type) && is.null(plot$mapping$type)) ||
+                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$type) && is.null(plot$computed_mapping$type)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$computed_mapping$type))) {
                           self$computed_mapping$type <- as.name("type")
                         }
 
-                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$fill) && is.null(plot$mapping$fill)) ||
+                        if ((isTRUE(self$inherit.aes) && is.null(self$computed_mapping$fill) && is.null(plot$computed_mapping$fill)) ||
                             (!isTRUE(self$inherit.aes) && is.null(self$computed_mapping$fill))) {
                           self$computed_mapping$fill <- as.name("region")
                         }
