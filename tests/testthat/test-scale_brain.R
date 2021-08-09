@@ -47,7 +47,8 @@ test_that("Check scales", {
 test_that("Check other scales",{
   aseg_r <- tibble(
     region = brain_regions(aseg),
-    value = sample(1:100, length(brain_regions(aseg)))
+    value = c(93L, 44L, 92L, 70L, 3L, 48L, 9L, 46L,
+              2L, 60L, 71L, 76L, 24L, 73L, 50L, 39L, 21L, 62L)
   )
 
   p <- ggplot(aseg_r) +
