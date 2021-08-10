@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3.01</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <a href="../articles/externalData.html">Adding external data to ggseg plotting</a>
     </li>
     <li>
-      <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
+      <a href="../articles/freesurfer_files.html">Read in files from FreeSurfer</a>
     </li>
     <li>
       <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
@@ -195,19 +195,19 @@
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
 <span class="co">#&gt; CRS:           NA</span>
-<span class="co">#&gt; # A tibble: 90 x 6</span>
-<span class="co">#&gt;    hemi  side   region     label     roi                                geometry</span>
-<span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                        &lt;MULTIPOLYGON&gt;</span>
-<span class="co">#&gt;  1 left  later… &lt;NA&gt;       &lt;NA&gt;      0001  (((84.32563 34.46407, 84.16625 33.33…</span>
-<span class="co">#&gt;  2 left  later… bankssts   lh_banks… 0002  (((214.8215 108.8139, 210.4695 107.6…</span>
-<span class="co">#&gt;  3 left  later… caudal mi… lh_cauda… 0004  (((106.16 184.3144, 93.61281 180.911…</span>
-<span class="co">#&gt;  4 left  later… fusiform   lh_fusif… 0008  (((256.5481 48.35713, 244.044 45.027…</span>
-<span class="co">#&gt;  5 left  later… inferior … lh_infer… 0009  (((218.4373 161.6233, 214.914 157.69…</span>
-<span class="co">#&gt;  6 left  later… inferior … lh_infer… 0010  (((250.7745 70.75764, 246.3042 68.92…</span>
-<span class="co">#&gt;  7 left  later… lateral o… lh_later… 0012  (((277.4615 115.0523, 277.4682 115.0…</span>
-<span class="co">#&gt;  8 left  later… lateral o… lh_later… 0013  (((66.26648 69.56474, 56.24012 66.01…</span>
-<span class="co">#&gt;  9 left  later… middle te… lh_middl… 0016  (((238.0128 91.25816, 230.1394 88.37…</span>
-<span class="co">#&gt; 10 left  later… pars oper… lh_parso… 0019  (((79.03391 126.496, 74.24232 124.26…</span>
+<span class="co">#&gt; # A tibble: 90 × 6</span>
+<span class="co">#&gt;    hemi  side    region                label                   roi                    geometry</span>
+<span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt;                   &lt;chr&gt;            &lt;MULTIPOLYGON&gt;</span>
+<span class="co">#&gt;  1 left  lateral &lt;NA&gt;                  &lt;NA&gt;                    0001  (((84.32563 34.46407, 84…</span>
+<span class="co">#&gt;  2 left  lateral bankssts              lh_bankssts             0002  (((214.8215 108.8139, 21…</span>
+<span class="co">#&gt;  3 left  lateral caudal middle frontal lh_caudalmiddlefrontal  0004  (((106.16 184.3144, 93.6…</span>
+<span class="co">#&gt;  4 left  lateral fusiform              lh_fusiform             0008  (((256.5481 48.35713, 24…</span>
+<span class="co">#&gt;  5 left  lateral inferior parietal     lh_inferiorparietal     0009  (((218.4373 161.6233, 21…</span>
+<span class="co">#&gt;  6 left  lateral inferior temporal     lh_inferiortemporal     0010  (((250.7745 70.75764, 24…</span>
+<span class="co">#&gt;  7 left  lateral lateral occipital     lh_lateraloccipital     0012  (((277.4615 115.0523, 27…</span>
+<span class="co">#&gt;  8 left  lateral lateral orbitofrontal lh_lateralorbitofrontal 0013  (((66.26648 69.56474, 56…</span>
+<span class="co">#&gt;  9 left  lateral middle temporal       lh_middletemporal       0016  (((238.0128 91.25816, 23…</span>
+<span class="co">#&gt; 10 left  lateral pars opercularis      lh_parsopercularis      0019  (((79.03391 126.496, 74.…</span>
 <span class="co">#&gt; # … with 80 more rows</span></code></pre></div>
 <div id="if-the-atlas-is-not-a-simple-features-version" class="section level2">
 <h2 class="hasAnchor">
@@ -217,18 +217,18 @@
 <code class="sourceCode R"><span class="va">dk2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_ggseg_atlas.html">as_ggseg_atlas</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span>
 <span class="va">dk2</span>
 <span class="co">#&gt; # ggseg atlas</span>
-<span class="co">#&gt;    atlas type    hemi  side   region        label         roi              ggseg</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;       &lt;brn_plyg&gt;</span>
-<span class="co">#&gt;  1 dk    cortic… left  later… &lt;NA&gt;          &lt;NA&gt;          0001  &lt; p:  1 - v: 12&gt;</span>
-<span class="co">#&gt;  2 dk    cortic… left  later… bankssts      lh_bankssts   0002  &lt; p:  1 - v: 23&gt;</span>
-<span class="co">#&gt;  3 dk    cortic… left  later… caudal middl… lh_caudalmid… 0004  &lt; p:  1 - v: 29&gt;</span>
-<span class="co">#&gt;  4 dk    cortic… left  later… fusiform      lh_fusiform   0008  &lt; p:  1 - v: 19&gt;</span>
-<span class="co">#&gt;  5 dk    cortic… left  later… inferior par… lh_inferiorp… 0009  &lt; p:  1 - v: 31&gt;</span>
-<span class="co">#&gt;  6 dk    cortic… left  later… inferior tem… lh_inferiort… 0010  &lt; p:  1 - v: 34&gt;</span>
-<span class="co">#&gt;  7 dk    cortic… left  later… lateral occi… lh_lateraloc… 0012  &lt; p:  1 - v: 31&gt;</span>
-<span class="co">#&gt;  8 dk    cortic… left  later… lateral orbi… lh_lateralor… 0013  &lt; p:  1 - v: 25&gt;</span>
-<span class="co">#&gt;  9 dk    cortic… left  later… middle tempo… lh_middletem… 0016  &lt; p:  1 - v: 46&gt;</span>
-<span class="co">#&gt; 10 dk    cortic… left  later… pars opercul… lh_parsoperc… 0019  &lt; p:  1 - v: 23&gt;</span>
+<span class="co">#&gt;    atlas type     hemi  side    region                label roi              ggseg</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;       &lt;brn_plyg&gt;</span>
+<span class="co">#&gt;  1 dk    cortical left  lateral &lt;NA&gt;                  &lt;NA&gt;  0001  &lt; p:  1 - v: 12&gt;</span>
+<span class="co">#&gt;  2 dk    cortical left  lateral bankssts              lh_b… 0002  &lt; p:  1 - v: 23&gt;</span>
+<span class="co">#&gt;  3 dk    cortical left  lateral caudal middle frontal lh_c… 0004  &lt; p:  1 - v: 29&gt;</span>
+<span class="co">#&gt;  4 dk    cortical left  lateral fusiform              lh_f… 0008  &lt; p:  1 - v: 19&gt;</span>
+<span class="co">#&gt;  5 dk    cortical left  lateral inferior parietal     lh_i… 0009  &lt; p:  1 - v: 31&gt;</span>
+<span class="co">#&gt;  6 dk    cortical left  lateral inferior temporal     lh_i… 0010  &lt; p:  1 - v: 34&gt;</span>
+<span class="co">#&gt;  7 dk    cortical left  lateral lateral occipital     lh_l… 0012  &lt; p:  1 - v: 31&gt;</span>
+<span class="co">#&gt;  8 dk    cortical left  lateral lateral orbitofrontal lh_l… 0013  &lt; p:  1 - v: 25&gt;</span>
+<span class="co">#&gt;  9 dk    cortical left  lateral middle temporal       lh_m… 0016  &lt; p:  1 - v: 46&gt;</span>
+<span class="co">#&gt; 10 dk    cortical left  lateral pars opercularis      lh_p… 0019  &lt; p:  1 - v: 23&gt;</span>
 <span class="co">#&gt; # … with 80 more rows</span></code></pre></div>
 <p>If the ggseg-atlas is set up correctly, we should be able to convert it into a simple-features atlas.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -279,13 +279,13 @@
 <span class="op">)</span>
 
 <span class="va">someData</span>
-<span class="co">#&gt; # A tibble: 4 x 2</span>
+<span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.367</span>
-<span class="co">#&gt; 2 insula              0.385</span>
-<span class="co">#&gt; 3 precentral          0.431</span>
-<span class="co">#&gt; 4 superior parietal   0.398</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.402</span>
+<span class="co">#&gt; 2 insula              0.176</span>
+<span class="co">#&gt; 3 precentral          0.314</span>
+<span class="co">#&gt; 4 superior parietal   0.226</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -357,9 +357,9 @@
 <span class="co">#&gt; Warning: Removed 78 rows containing missing values (geom_label).</span></code></pre></div>
 <p><img src="geom-sf_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
 <p>If you want a version where the labels do not overlap each other, you can try the <code>geom_sf_label_repel</code> function from the <code>ggrepel</code> package.</p>
-<div id="facetting-groups" class="section level2">
+<div id="faceting-groups" class="section level2">
 <h2 class="hasAnchor">
-<a href="#facetting-groups" class="anchor"></a>Facetting groups</h2>
+<a href="#faceting-groups" class="anchor"></a>Faceting groups</h2>
 <p>If your data includes groups, and you want to facet the output, you need to group the data <em>before</em> calling <code>brain_join</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
@@ -369,17 +369,17 @@
   groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"g1"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"g2"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="va">someData</span>
-<span class="co">#&gt; # A tibble: 8 x 3</span>
+<span class="co">#&gt; # A tibble: 8 × 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.23  g1    </span>
-<span class="co">#&gt; 2 insula              0.461 g1    </span>
-<span class="co">#&gt; 3 precentral          0.239 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.223 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.384 g2    </span>
-<span class="co">#&gt; 6 insula              0.082 g2    </span>
-<span class="co">#&gt; 7 precentral          0.343 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.47  g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.204 g1    </span>
+<span class="co">#&gt; 2 insula              0.04  g1    </span>
+<span class="co">#&gt; 3 precentral          0.337 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.277 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.096 g2    </span>
+<span class="co">#&gt; 6 insula              0.334 g2    </span>
+<span class="co">#&gt; 7 precentral          0.278 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.353 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 

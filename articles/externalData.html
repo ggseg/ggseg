@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3.01</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <a href="../articles/externalData.html">Adding external data to ggseg plotting</a>
     </li>
     <li>
-      <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
+      <a href="../articles/freesurfer_files.html">Read in files from FreeSurfer</a>
     </li>
     <li>
       <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
@@ -159,19 +159,19 @@
 <p>Further inspection of the atlas data can be explored by turning them into tibbles (or data.frames)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 90 x 8
-##    atlas type   hemi  side   region  label  roi                         geometry
-##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;                 &lt;MULTIPOLYGON&gt;
-##  1 dk    corti… left  later… &lt;NA&gt;    &lt;NA&gt;   0001  (((84.32563 34.46407, 84.1662…
-##  2 dk    corti… left  later… bankss… lh_ba… 0002  (((214.8215 108.8139, 210.469…
-##  3 dk    corti… left  later… caudal… lh_ca… 0004  (((106.16 184.3144, 93.61281 …
-##  4 dk    corti… left  later… fusifo… lh_fu… 0008  (((256.5481 48.35713, 244.044…
-##  5 dk    corti… left  later… inferi… lh_in… 0009  (((218.4373 161.6233, 214.914…
-##  6 dk    corti… left  later… inferi… lh_in… 0010  (((250.7745 70.75764, 246.304…
-##  7 dk    corti… left  later… latera… lh_la… 0012  (((277.4615 115.0523, 277.468…
-##  8 dk    corti… left  later… latera… lh_la… 0013  (((66.26648 69.56474, 56.2401…
-##  9 dk    corti… left  later… middle… lh_mi… 0016  (((238.0128 91.25816, 230.139…
-## 10 dk    corti… left  later… pars o… lh_pa… 0019  (((79.03391 126.496, 74.24232…
+<pre><code>## # A tibble: 90 × 8
+##    atlas type     hemi  side    region                label roi                    geometry
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;            &lt;MULTIPOLYGON&gt;
+##  1 dk    cortical left  lateral &lt;NA&gt;                  &lt;NA&gt;  0001  (((84.32563 34.46407, 84…
+##  2 dk    cortical left  lateral bankssts              lh_b… 0002  (((214.8215 108.8139, 21…
+##  3 dk    cortical left  lateral caudal middle frontal lh_c… 0004  (((106.16 184.3144, 93.6…
+##  4 dk    cortical left  lateral fusiform              lh_f… 0008  (((256.5481 48.35713, 24…
+##  5 dk    cortical left  lateral inferior parietal     lh_i… 0009  (((218.4373 161.6233, 21…
+##  6 dk    cortical left  lateral inferior temporal     lh_i… 0010  (((250.7745 70.75764, 24…
+##  7 dk    cortical left  lateral lateral occipital     lh_l… 0012  (((277.4615 115.0523, 27…
+##  8 dk    cortical left  lateral lateral orbitofrontal lh_l… 0013  (((66.26648 69.56474, 56…
+##  9 dk    cortical left  lateral middle temporal       lh_m… 0016  (((238.0128 91.25816, 23…
+## 10 dk    cortical left  lateral pars opercularis      lh_p… 0019  (((79.03391 126.496, 74.…
 ## # … with 80 more rows</code></pre>
 <p>Here you can see information about the <code>dk</code> atlas, and the main attributes of this atlas. If you want to use external data with your <code>ggseg</code> plot, you will need to make sure that your data has at least one column corresponding in name and content with another in the atlas you are using.</p>
 </div>
@@ -185,7 +185,7 @@
   p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.03</span>,<span class="fl">.6</span>, <span class="fl">.05</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="va">someData</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 2
+<pre><code>## # A tibble: 3 × 2
 ##   region                    p
 ##   &lt;chr&gt;                 &lt;dbl&gt;
 ## 1 superior temporal      0.03
@@ -197,19 +197,19 @@
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span></code></pre></div>
 <pre><code>## Joining, by = "region"</code></pre>
-<pre><code>## # A tibble: 90 x 9
-##    atlas type   hemi  side   region label roi                     geometry     p
-##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
-##  1 dk    corti… left  later… &lt;NA&gt;   &lt;NA&gt;  0001  (((84.32563 34.46407, 84.… NA   
-##  2 dk    corti… left  later… banks… lh_b… 0002  (((214.8215 108.8139, 210… NA   
-##  3 dk    corti… left  later… cauda… lh_c… 0004  (((106.16 184.3144, 93.61… NA   
-##  4 dk    corti… left  later… fusif… lh_f… 0008  (((256.5481 48.35713, 244… NA   
-##  5 dk    corti… left  later… infer… lh_i… 0009  (((218.4373 161.6233, 214… NA   
-##  6 dk    corti… left  later… infer… lh_i… 0010  (((250.7745 70.75764, 246… NA   
-##  7 dk    corti… left  later… later… lh_l… 0012  (((277.4615 115.0523, 277… NA   
-##  8 dk    corti… left  later… later… lh_l… 0013  (((66.26648 69.56474, 56.…  0.05
-##  9 dk    corti… left  later… middl… lh_m… 0016  (((238.0128 91.25816, 230… NA   
-## 10 dk    corti… left  later… pars … lh_p… 0019  (((79.03391 126.496, 74.2… NA   
+<pre><code>## # A tibble: 90 × 9
+##    atlas type     hemi  side  region label roi                    geometry     p
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;            &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
+##  1 dk    cortical left  late… &lt;NA&gt;   &lt;NA&gt;  0001  (((84.32563 34.46407, 84… NA   
+##  2 dk    cortical left  late… banks… lh_b… 0002  (((214.8215 108.8139, 21… NA   
+##  3 dk    cortical left  late… cauda… lh_c… 0004  (((106.16 184.3144, 93.6… NA   
+##  4 dk    cortical left  late… fusif… lh_f… 0008  (((256.5481 48.35713, 24… NA   
+##  5 dk    cortical left  late… infer… lh_i… 0009  (((218.4373 161.6233, 21… NA   
+##  6 dk    cortical left  late… infer… lh_i… 0010  (((250.7745 70.75764, 24… NA   
+##  7 dk    cortical left  late… later… lh_l… 0012  (((277.4615 115.0523, 27… NA   
+##  8 dk    cortical left  late… later… lh_l… 0013  (((66.26648 69.56474, 56…  0.05
+##  9 dk    cortical left  late… middl… lh_m… 0016  (((238.0128 91.25816, 23… NA   
+## 10 dk    cortical left  late… pars … lh_p… 0019  (((79.03391 126.496, 74.… NA   
 ## # … with 80 more rows</code></pre>
 <p>No errors! Yes, the <code>p</code> column is seemingly full of <code>NA</code>s, but that is just because the top of the data is the somatomotor network, which we did not supply any p values for, so it has been populated with <code>NA</code>s. We can sort the data differently, so we can see the <code>p</code>has been added correctly.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -218,25 +218,25 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <pre><code>## Joining, by = "region"</code></pre>
-<pre><code>## # A tibble: 90 x 9
-##    atlas type   hemi  side   region label roi                     geometry     p
-##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
-##  1 dk    corti… left  later… super… lh_s… 0031  (((207.634 112.8177, 195.…  0.03
-##  2 dk    corti… right later… super… rh_s… 0031  (((1201.097 114.4479, 120…  0.03
-##  3 dk    corti… left  later… later… lh_l… 0013  (((66.26648 69.56474, 56.…  0.05
-##  4 dk    corti… left  medial later… lh_l… 0013  (((571.041 20.11423, 571.…  0.05
-##  5 dk    corti… right medial later… rh_l… 0013  (((770.9836 30.46747, 770…  0.05
-##  6 dk    corti… right later… later… rh_l… 0013  (((1321.97 75.4817, 1320.…  0.05
-##  7 dk    corti… left  later… prece… lh_p… 0025  (((157.1559 204.0537, 131…  0.6 
-##  8 dk    corti… left  medial prece… lh_p… 0025  (((476.8878 196.7183, 484…  0.6 
-##  9 dk    corti… right medial prece… rh_p… 0025  (((923.7245 201.5463, 923…  0.6 
-## 10 dk    corti… right later… prece… rh_p… 0025  (((1226.19 203.939, 1230.…  0.6 
+<pre><code>## # A tibble: 90 × 9
+##    atlas type     hemi  side  region label roi                    geometry     p
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;            &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
+##  1 dk    cortical left  late… super… lh_s… 0031  (((207.634 112.8177, 195…  0.03
+##  2 dk    cortical right late… super… rh_s… 0031  (((1201.097 114.4479, 12…  0.03
+##  3 dk    cortical left  late… later… lh_l… 0013  (((66.26648 69.56474, 56…  0.05
+##  4 dk    cortical left  medi… later… lh_l… 0013  (((571.041 20.11423, 571…  0.05
+##  5 dk    cortical right medi… later… rh_l… 0013  (((770.9836 30.46747, 77…  0.05
+##  6 dk    cortical right late… later… rh_l… 0013  (((1321.97 75.4817, 1320…  0.05
+##  7 dk    cortical left  late… prece… lh_p… 0025  (((157.1559 204.0537, 13…  0.6 
+##  8 dk    cortical left  medi… prece… lh_p… 0025  (((476.8878 196.7183, 48…  0.6 
+##  9 dk    cortical right medi… prece… rh_p… 0025  (((923.7245 201.5463, 92…  0.6 
+## 10 dk    cortical right late… prece… rh_p… 0025  (((1226.19 203.939, 1230…  0.6 
 ## # … with 80 more rows</code></pre>
 <p>If you need your data to be matched on several columns, the approach is the same. Add the column you want to match on, with the <strong>exact</strong> same name, and make sure it’s content matches the content of the same column in the data.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span><span class="op">$</span><span class="va">hemi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span><span class="op">)</span>
 <span class="va">someData</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<pre><code>## # A tibble: 3 × 3
 ##   region                    p hemi 
 ##   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;
 ## 1 superior temporal      0.03 left 
@@ -248,19 +248,19 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></code></pre></div>
 <pre><code>## Joining, by = c("hemi", "region")</code></pre>
-<pre><code>## # A tibble: 90 x 9
-##    atlas type   hemi  side   region label roi                     geometry     p
-##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
-##  1 dk    corti… left  later… super… lh_s… 0031  (((207.634 112.8177, 195.…  0.03
-##  2 dk    corti… left  later… later… lh_l… 0013  (((66.26648 69.56474, 56.…  0.05
-##  3 dk    corti… left  medial later… lh_l… 0013  (((571.041 20.11423, 571.…  0.05
-##  4 dk    corti… left  later… prece… lh_p… 0025  (((157.1559 204.0537, 131…  0.6 
-##  5 dk    corti… left  medial prece… lh_p… 0025  (((476.8878 196.7183, 484…  0.6 
-##  6 dk    corti… left  later… &lt;NA&gt;   &lt;NA&gt;  0001  (((84.32563 34.46407, 84.… NA   
-##  7 dk    corti… left  later… banks… lh_b… 0002  (((214.8215 108.8139, 210… NA   
-##  8 dk    corti… left  later… cauda… lh_c… 0004  (((106.16 184.3144, 93.61… NA   
-##  9 dk    corti… left  later… fusif… lh_f… 0008  (((256.5481 48.35713, 244… NA   
-## 10 dk    corti… left  later… infer… lh_i… 0009  (((218.4373 161.6233, 214… NA   
+<pre><code>## # A tibble: 90 × 9
+##    atlas type     hemi  side  region label roi                    geometry     p
+##    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;            &lt;MULTIPOLYGON&gt; &lt;dbl&gt;
+##  1 dk    cortical left  late… super… lh_s… 0031  (((207.634 112.8177, 195…  0.03
+##  2 dk    cortical left  late… later… lh_l… 0013  (((66.26648 69.56474, 56…  0.05
+##  3 dk    cortical left  medi… later… lh_l… 0013  (((571.041 20.11423, 571…  0.05
+##  4 dk    cortical left  late… prece… lh_p… 0025  (((157.1559 204.0537, 13…  0.6 
+##  5 dk    cortical left  medi… prece… lh_p… 0025  (((476.8878 196.7183, 48…  0.6 
+##  6 dk    cortical left  late… &lt;NA&gt;   &lt;NA&gt;  0001  (((84.32563 34.46407, 84… NA   
+##  7 dk    cortical left  late… banks… lh_b… 0002  (((214.8215 108.8139, 21… NA   
+##  8 dk    cortical left  late… cauda… lh_c… 0004  (((106.16 184.3144, 93.6… NA   
+##  9 dk    cortical left  late… fusif… lh_f… 0008  (((256.5481 48.35713, 24… NA   
+## 10 dk    cortical left  late… infer… lh_i… 0009  (((218.4373 161.6233, 21… NA   
 ## # … with 80 more rows</code></pre>
 <p>Notice how the message now states that it is joining <code>by = c("region", "hemi")</code>. The merge function has recognized that there are two equally named columns, and assumes (in this case correctly) that these are equivalent.<br><strong>Notice</strong> that everything is case-sensitive, so writing <code>Region</code> or <code>Left</code> will not result in matching.</p>
 </div>
@@ -304,7 +304,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
 <p><img src="externalData_files/figure-html/datasupp3-1.png" width="100%"></p>
-<p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for facetting, or else it will not work.</p>
+<p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for faceting, or else it will not work.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If you group_by the columns you will facet by, this will work well.</span>
 <span class="va">someData</span> <span class="op">=</span> <span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -320,7 +320,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span><span class="op">(</span>colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span><span class="op">)</span>,na.value<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
 <p><img src="externalData_files/figure-html/duplicate-1.png" width="100%"></p>
-<p>This whole procedure can be piped together, so you dont have to save all the intermediate steps.</p>
+<p>This whole procedure can be piped together, so you don’t have to save all the intermediate steps.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">AgeG</span><span class="op">)</span> <span class="op">%&gt;%</span> 

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3.01</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <a href="../articles/externalData.html">Adding external data to ggseg plotting</a>
     </li>
     <li>
-      <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
+      <a href="../articles/freesurfer_files.html">Read in files from FreeSurfer</a>
     </li>
     <li>
       <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
@@ -111,7 +111,7 @@
 
     
     
-<p>The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom <code>geom_brain</code> (variant of geom_sf). This has introduced alot of new functionality into the package, in addition to some new custom methods and objects.</p>
+<p>The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom <code>geom_brain</code> (variant of geom_sf). This has introduced a lot of new functionality into the package, in addition to some new custom methods and objects.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
@@ -167,19 +167,19 @@
 <span class="co">#&gt; Dimension:     XY</span>
 <span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
 <span class="co">#&gt; CRS:           NA</span>
-<span class="co">#&gt; # A tibble: 90 x 6</span>
-<span class="co">#&gt;    hemi  side   region     label     roi                                geometry</span>
-<span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                        &lt;MULTIPOLYGON&gt;</span>
-<span class="co">#&gt;  1 left  later… &lt;NA&gt;       &lt;NA&gt;      0001  (((84.32563 34.46407, 84.16625 33.33…</span>
-<span class="co">#&gt;  2 left  later… bankssts   lh_banks… 0002  (((214.8215 108.8139, 210.4695 107.6…</span>
-<span class="co">#&gt;  3 left  later… caudal mi… lh_cauda… 0004  (((106.16 184.3144, 93.61281 180.911…</span>
-<span class="co">#&gt;  4 left  later… fusiform   lh_fusif… 0008  (((256.5481 48.35713, 244.044 45.027…</span>
-<span class="co">#&gt;  5 left  later… inferior … lh_infer… 0009  (((218.4373 161.6233, 214.914 157.69…</span>
-<span class="co">#&gt;  6 left  later… inferior … lh_infer… 0010  (((250.7745 70.75764, 246.3042 68.92…</span>
-<span class="co">#&gt;  7 left  later… lateral o… lh_later… 0012  (((277.4615 115.0523, 277.4682 115.0…</span>
-<span class="co">#&gt;  8 left  later… lateral o… lh_later… 0013  (((66.26648 69.56474, 56.24012 66.01…</span>
-<span class="co">#&gt;  9 left  later… middle te… lh_middl… 0016  (((238.0128 91.25816, 230.1394 88.37…</span>
-<span class="co">#&gt; 10 left  later… pars oper… lh_parso… 0019  (((79.03391 126.496, 74.24232 124.26…</span>
+<span class="co">#&gt; # A tibble: 90 × 6</span>
+<span class="co">#&gt;    hemi  side    region                label                   roi                    geometry</span>
+<span class="co">#&gt;  * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt;                   &lt;chr&gt;            &lt;MULTIPOLYGON&gt;</span>
+<span class="co">#&gt;  1 left  lateral &lt;NA&gt;                  &lt;NA&gt;                    0001  (((84.32563 34.46407, 84…</span>
+<span class="co">#&gt;  2 left  lateral bankssts              lh_bankssts             0002  (((214.8215 108.8139, 21…</span>
+<span class="co">#&gt;  3 left  lateral caudal middle frontal lh_caudalmiddlefrontal  0004  (((106.16 184.3144, 93.6…</span>
+<span class="co">#&gt;  4 left  lateral fusiform              lh_fusiform             0008  (((256.5481 48.35713, 24…</span>
+<span class="co">#&gt;  5 left  lateral inferior parietal     lh_inferiorparietal     0009  (((218.4373 161.6233, 21…</span>
+<span class="co">#&gt;  6 left  lateral inferior temporal     lh_inferiortemporal     0010  (((250.7745 70.75764, 24…</span>
+<span class="co">#&gt;  7 left  lateral lateral occipital     lh_lateraloccipital     0012  (((277.4615 115.0523, 27…</span>
+<span class="co">#&gt;  8 left  lateral lateral orbitofrontal lh_lateralorbitofrontal 0013  (((66.26648 69.56474, 56…</span>
+<span class="co">#&gt;  9 left  lateral middle temporal       lh_middletemporal       0016  (((238.0128 91.25816, 23…</span>
+<span class="co">#&gt; 10 left  lateral pars opercularis      lh_parsopercularis      0019  (((79.03391 126.496, 74.…</span>
 <span class="co">#&gt; # … with 80 more rows</span></code></pre></div>
 <p>Of these four, only the <code>palette</code> is an optional part, where some atlases may have this field empty. The data, you might notice, is simple-features data, with a <code>geometry</code> column that includes all the information needed to plot the data as a simple features object. You can actually call <code>plot</code> directly on the data, and the standard simple features plot will appear.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -303,7 +303,7 @@
 <div id="plotting-with-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-with-data" class="anchor"></a>Plotting with data</h2>
-<p>Of course, as usual, people will have their own data they want to add to the plots, usingcolumns from their own data to the plot aesthetics. By making sure <em>at least one column</em> in your data has the same name and overlapping content as a column in the atlas data, geom_brain will merge your data with the atlas and create your plots.</p>
+<p>Of course, as usual, people will have their own data they want to add to the plots, using columns from their own data to the plot aesthetics. By making sure <em>at least one column</em> in your data has the same name and overlapping content as a column in the atlas data, geom_brain will merge your data with the atlas and create your plots.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -322,13 +322,13 @@
 <span class="op">)</span>
 
 <span class="va">someData</span>
-<span class="co">#&gt; # A tibble: 4 x 2</span>
+<span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.142</span>
-<span class="co">#&gt; 2 insula              0.014</span>
-<span class="co">#&gt; 3 precentral          0.466</span>
-<span class="co">#&gt; 4 superior parietal   0.328</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.177</span>
+<span class="co">#&gt; 2 insula              0.161</span>
+<span class="co">#&gt; 3 precentral          0.015</span>
+<span class="co">#&gt; 4 superior parietal   0.33</span></code></pre></div>
 <p>And such plots can be further adapted with standard ggplot themes, scales etc, to your liking.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span>
@@ -345,7 +345,7 @@
 <div id="facet-group-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#facet-group-data" class="anchor"></a>Facet group data</h3>
-<p>Just like in ggseg, though, you still need to do some double work for facetting to work correctly. Because the atlas and your data need to be merged correctly, you will need to <code>group_by</code> your data <em>before</em> giving it to ggplot, for facets to work.</p>
+<p>Just like in ggseg, though, you still need to do some double work for faceting to work correctly. Because the atlas and your data need to be merged correctly, you will need to <code>group_by</code> your data <em>before</em> giving it to ggplot, for facets to work.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,
@@ -355,17 +355,17 @@
 <span class="op">)</span>
 
 <span class="va">someData</span>
-<span class="co">#&gt; # A tibble: 8 x 3</span>
+<span class="co">#&gt; # A tibble: 8 × 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.174 g1    </span>
-<span class="co">#&gt; 2 insula              0.263 g1    </span>
-<span class="co">#&gt; 3 precentral          0.465 g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.382 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.314 g2    </span>
-<span class="co">#&gt; 6 insula              0.494 g2    </span>
-<span class="co">#&gt; 7 precentral          0.392 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.085 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.212 g1    </span>
+<span class="co">#&gt; 2 insula              0.242 g1    </span>
+<span class="co">#&gt; 3 precentral          0.172 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.432 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.272 g2    </span>
+<span class="co">#&gt; 6 insula              0.161 g2    </span>
+<span class="co">#&gt; 7 precentral          0.462 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.116 g2</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span>

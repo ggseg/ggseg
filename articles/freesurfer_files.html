@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Read in files from Freesurfer • ggseg</title>
+<title>Read in files from FreeSurfer • ggseg</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Read in files from Freesurfer">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Read in files from FreeSurfer">
 <meta property="og:description" content="ggseg">
 <meta property="og:image" content="https://lcbc-uio.github.io/ggseg/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3.01</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <a href="../articles/externalData.html">Adding external data to ggseg plotting</a>
     </li>
     <li>
-      <a href="../articles/freesurfer_files.html">Read in files from Freesurfer</a>
+      <a href="../articles/freesurfer_files.html">Read in files from FreeSurfer</a>
     </li>
     <li>
       <a href="../articles/geom-sf.html">Using atlases with geom_sf</a>
@@ -101,7 +101,7 @@
       </header><script src="freesurfer_files_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Read in files from Freesurfer</h1>
+      <h1 data-toc-skip>Read in files from FreeSurfer</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ggseg/ggseg/blob/master/vignettes/freesurfer_files.Rmd"><code>vignettes/freesurfer_files.Rmd</code></a></small>
@@ -111,15 +111,15 @@
 
     
     
-<p>Freesurfer already have files that are compatible with <code>ggseg</code> in some extent. There are naming conventions and file-formats that are different, and as such it can at times be a little tricky to get data directly from Freesurfer into R, and subsequently plotting in ggseg.</p>
+<p>FreeSurfer already have files that are compatible with <code>ggseg</code> in some extent. There are naming conventions and file-formats that are different, and as such it can at times be a little tricky to get data directly from FreeSurfer into R, and subsequently plotting in ggseg.</p>
 <div id="raw-stats-files" class="section level1">
 <h1 class="hasAnchor">
 <a href="#raw-stats-files" class="anchor"></a>Raw stats files</h1>
 <div id="read-in-single-raw-stats-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#read-in-single-raw-stats-file" class="anchor"></a>Read in single raw stats file</h2>
-<p>If <code>recon-all</code> from Freesurfer has been run, each participant should have a <code>stats</code> folder, with various parcellation data and summary statistics for those parcellations and measures. These have many header lines before the data acutally start, and can have some formatting difficult to handle in R.</p>
-<p>The function <code>read_freesurfer_stats</code> is made to easily read in raw stats tables from each individual, without needing to go through Freesurfers internal converters. When using this file, remembering which hemisphere is read in is important, as this information must be added to the <code>label</code> column for <code>ggseg</code> to recognise the region labels.</p>
+<p>If <code>recon-all</code> from FreeSurfer has been run, each participant should have a <code>stats</code> folder, with various parcellation data and summary statistics for those parcellations and measures. These have many header lines before the data actually start, and can have some formatting difficult to handle in R.</p>
+<p>The function <code>read_freesurfer_stats</code> is made to easily read in raw stats tables from each individual, without needing to go through FreeSurfer’s internal converters. When using this file, remembering which hemisphere is read in is important, as this information must be added to the <code>label</code> column for <code>ggseg</code> to recognise the region labels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
@@ -129,7 +129,7 @@
 <code class="sourceCode R"><span class="va">stats_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">subjects_dir</span>, <span class="st">"bert/stats/lh.aparc.stats"</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_freesurfer_stats.html">read_freesurfer_stats</a></span><span class="op">(</span><span class="va">stats_file</span><span class="op">)</span>
 <span class="va">data</span>
-<span class="co">#&gt; # A tibble: 34 x 10</span>
+<span class="co">#&gt; # A tibble: 34 × 10</span>
 <span class="co">#&gt;    label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd</span>
 <span class="co">#&gt;    &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;</span>
 <span class="co">#&gt;  1 bankssts    1181      831    2297     2.77    0.428    0.116    0.024      11</span>
@@ -158,7 +158,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_atlas_files.html">read_atlas_files</a></span><span class="op">(</span><span class="va">subject_dir</span>, <span class="st">"aparc.stats$"</span><span class="op">)</span>
 <span class="va">dat</span>
-<span class="co">#&gt; # A tibble: 68 x 11</span>
+<span class="co">#&gt; # A tibble: 68 × 11</span>
 <span class="co">#&gt;    subject label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv</span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 bert    lh_bank…    1181      831    2297     2.77    0.428    0.116    0.024</span>
@@ -193,8 +193,8 @@
 </div>
 <div id="freesurfer-stats-tables" class="section level1">
 <h1 class="hasAnchor">
-<a href="#freesurfer-stats-tables" class="anchor"></a>Freesurfer stats tables</h1>
-<p>Freesurfer has internal functions to convert their raw stats files into tables, gather subject into a single data file with particular metric. It is quite common to use these files, but again the formatting is not something R is very happy with. The function <code><a href="../reference/read_freesurfer_table.html">read_freesurfer_table()</a></code> is for easier import of these files, particularly for further plotting with ggseg.</p>
+<a href="#freesurfer-stats-tables" class="anchor"></a>FreeSurfer stats tables</h1>
+<p>FreeSurfer has internal functions to convert their raw stats files into tables, gather subject into a single data file with particular metric. It is quite common to use these files, but again the formatting is not something R is very happy with. The function <code><a href="../reference/read_freesurfer_table.html">read_freesurfer_table()</a></code> is for easier import of these files, particularly for further plotting with ggseg.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Path to our particular file, yours will be wherever you have saved it</span>
 <span class="va">table_path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"tests/testthat/data/aparc.volume.table"</span><span class="op">)</span>
@@ -202,7 +202,7 @@
 <span class="co">#&gt; [1] "/Users/runner/work/ggseg/ggseg/tests/testthat/data/aparc.volume.table"</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_freesurfer_table.html">read_freesurfer_table</a></span><span class="op">(</span><span class="va">table_path</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 36 x 3</span>
+<span class="co">#&gt; # A tibble: 36 × 3</span>
 <span class="co">#&gt;    subject label                             value</span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                             &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 bert    rh_bankssts_volume                 1969</span>
@@ -221,7 +221,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_freesurfer_table.html">read_freesurfer_table</a></span><span class="op">(</span><span class="va">table_path</span>, measure <span class="op">=</span> <span class="st">"volume"</span><span class="op">)</span>
 <span class="va">dat</span>
-<span class="co">#&gt; # A tibble: 36 x 3</span>
+<span class="co">#&gt; # A tibble: 36 × 3</span>
 <span class="co">#&gt;    subject label                      volume</span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                       &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 bert    rh_bankssts                  1969</span>
@@ -239,7 +239,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">volume</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>An error will be thrown because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. To avoid this, you can remove those labels before plotting.</p>
+<p>An error will be thrown because the FreeSurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. To avoid this, you can remove those labels before plotting.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"lh|rh"</span>, <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
