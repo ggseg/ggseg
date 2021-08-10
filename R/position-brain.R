@@ -13,7 +13,7 @@
 #' converted into factors and ordered by wanted
 #' order of appearance.
 #'
-#' @param data sf-data.frame of joined brain atlas and tata
+#' @param data sf-data.frame of joined brain atlas and data
 #' @param position position formula for slices
 #'
 #' @return sf-data.frame with repositioned slices

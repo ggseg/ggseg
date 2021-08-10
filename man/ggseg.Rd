@@ -57,10 +57,10 @@ a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
 \describe{
 
 \item{`dk`}{
-The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
+The Desikan-Killiany Cortical Atlas [default], FreeSurfer cortical segmentations.}
 
 \item{`aseg`}{
-Freesurfer automatic subcortical segmentation of a brain volume}
+FreeSurfer automatic subcortical segmentation of a brain volume}
 }
 }
 \examples{
@@ -92,6 +92,6 @@ Authors:
 }
 
 
-Athanasia Mowinckel and Didac Pineiro
+Athanasia Mo Mowinckel and Didac Vidal-Piñeiro
 }
 \keyword{internal}

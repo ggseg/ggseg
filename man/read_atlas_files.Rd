@@ -7,7 +7,7 @@
 read_atlas_files(subjects_dir, atlas)
 }
 \arguments{
-\item{subjects_dir}{Freesurfer subject directory}
+\item{subjects_dir}{FreeSurfer subject directory}
 
 \item{atlas}{unique character combination identifying the atlas}
 }

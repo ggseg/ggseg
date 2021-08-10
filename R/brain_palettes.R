@@ -6,7 +6,7 @@
 #' @param n Number of colours to return (or "all" [default])
 #' @param package package to get brain_pals data from (ggseg or ggsegExtra)
 #' @param direction Direction of  HEX, -1 reverses order
-#' Neccessary if applying palette to other data than the brain atlas it comes from.
+#' Necessary if applying palette to other data than the brain atlas it comes from.
 #' @param unname return unnamed vector (default = FALSE)
 #' @return vector of colours
 #' @export

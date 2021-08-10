@@ -1,11 +1,11 @@
 #' ggseg plot theme
 #'
 #' @description a set of themes created for the ggseg plots. Use theme() to tweak.
-#' @author Athanasia Mowinckel
+#' @author Athanasia Mo Mowinckel
 #'
 #' @param text.size Specify size of plot text
-#' @param text.colour Speficy colour of plot text
-#' @param text.family Speficy font family
+#' @param text.colour Specify colour of plot text
+#' @param text.family Specify font family
 #' @param plot.background Specify fill of plot background (`theme_custombrain` only)
 #'
 #' @details

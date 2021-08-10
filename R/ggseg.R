@@ -2,7 +2,7 @@
 #'
 #' \code{ggseg} plots and returns a ggplot object of plotted
 #' aparc regions. Is superseded by the new \code{\link{geom_brain}}.
-#' @author Athanasia Mowinckel and Didac Pineiro
+#' @author Athanasia Mo Mowinckel and Didac Vidal-Piñeiro
 #'
 #' @param .data A .data.frame to use for plot aesthetics. Should include a
 #' column called "region" corresponding to aparc regions.
@@ -26,10 +26,10 @@
 #' \describe{
 #'
 #' \item{`dk`}{
-#' The Desikan-Killiany Cortical Atlas [default], Freesurfer cortical segmentations.}
+#' The Desikan-Killiany Cortical Atlas [default], FreeSurfer cortical segmentations.}
 #'
 #' \item{`aseg`}{
-#' Freesurfer automatic subcortical segmentation of a brain volume}
+#' FreeSurfer automatic subcortical segmentation of a brain volume}
 #' }
 #'
 #' @return a ggplot object

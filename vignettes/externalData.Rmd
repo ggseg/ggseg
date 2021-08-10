@@ -143,7 +143,7 @@ ggplot(someData) +
 
 See how you have three facets, when you only have 2 groups, and that the "background"  brain is not printed in your two groups. 
 This is because for ggplot, that is what the data looks like.
-For this to work, you can supply already grouped data to `ggseg`, but you must make sure they are grouped by the columns you will use for facetting, or else it will not work. 
+For this to work, you can supply already grouped data to `ggseg`, but you must make sure they are grouped by the columns you will use for faceting, or else it will not work. 
 
 ```{r duplicate}
 # If you group_by the columns you will facet by, this will work well.
@@ -161,7 +161,7 @@ ggplot(someData) +
 ```
 
 
-This whole procedure can be piped together, so you dont have to save all the intermediate steps.
+This whole procedure can be piped together, so you don't have to save all the intermediate steps.
 
 ```{r duplicatepipe}
 someData %>% 

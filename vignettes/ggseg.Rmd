@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom `geom_brain` (variant of geom_sf). 
-This has introduced alot of new functionality into the package, in addition to some new custom methods and objects. 
+This has introduced a lot of new functionality into the package, in addition to some new custom methods and objects. 
 
 ```{r setup}
 library(ggseg)
@@ -98,7 +98,7 @@ ggplot() +
 
 
 ## Plotting with data
-Of course, as usual, people will have their own data they want to add to the plots, usingcolumns from their own data to the plot aesthetics. 
+Of course, as usual, people will have their own data they want to add to the plots, using columns from their own data to the plot aesthetics. 
 By making sure _at least one column_ in your data has the same name and overlapping content as a column in the atlas data, geom_brain will merge your data with the atlas and create your plots. 
 
 ```{r}
@@ -129,7 +129,7 @@ ggplot(someData) +
 
 ### Facet group data
 
-Just like in ggseg, though, you still need to do some double work for facetting to work correctly.
+Just like in ggseg, though, you still need to do some double work for faceting to work correctly.
 Because the atlas and your data need to be merged correctly, you will need to `group_by` your data _before_ giving it to ggplot, for facets to work.
 
 ```{r}

@@ -7,7 +7,7 @@
 reposition_brain(data, position = "horizontal")
 }
 \arguments{
-\item{data}{sf-data.frame of joined brain atlas and tata}
+\item{data}{sf-data.frame of joined brain atlas and data}
 
 \item{position}{position formula for slices}
 }

@@ -1,8 +1,8 @@
 ---
-title: "Read in files from Freesurfer"
+title: "Read in files from FreeSurfer"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Read in files from Freesurfer}
+  %\VignetteIndexEntry{Read in files from FreeSurfer}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,15 +20,15 @@ stats_file <- paste0(subject_dir, "bert/stats/lh.aparc.stats")
 ```
 
 
-Freesurfer already have files that are compatible with `ggseg` in some extent.
-There are naming conventions and file-formats that are different, and as such it can at times be a little tricky to get data directly from Freesurfer into R, and subsequently plotting in ggseg.
+FreeSurfer already have files that are compatible with `ggseg` in some extent.
+There are naming conventions and file-formats that are different, and as such it can at times be a little tricky to get data directly from FreeSurfer into R, and subsequently plotting in ggseg.
 
 # Raw stats files
 ## Read in single raw stats file
-If `recon-all` from Freesurfer has been run, each participant should have a `stats` folder, with various parcellation data and summary statistics for those parcellations and measures. 
-These have many header lines before the data acutally start, and can have some formatting difficult to handle in R.
+If `recon-all` from FreeSurfer has been run, each participant should have a `stats` folder, with various parcellation data and summary statistics for those parcellations and measures. 
+These have many header lines before the data actually start, and can have some formatting difficult to handle in R.
 
-The function `read_freesurfer_stats` is made to easily read in raw stats tables from each individual, without needing to go through Freesurfers internal converters.
+The function `read_freesurfer_stats` is made to easily read in raw stats tables from each individual, without needing to go through FreeSurfer's internal converters.
 When using this file, remembering which hemisphere is read in is important, as this information must be added to the `label` column for `ggseg` to recognise the region labels.
 
 ```{r, eval=FALSE}
@@ -94,8 +94,8 @@ dat %>%
   facet_wrap(~stat)
 ```
 
-# Freesurfer stats tables
-Freesurfer has internal functions to convert their raw stats files into tables, gather subject into a single data file with particular metric.
+# FreeSurfer stats tables
+FreeSurfer has internal functions to convert their raw stats files into tables, gather subject into a single data file with particular metric.
 It is quite common to use these files, but again the formatting is not something R is very happy with.
 The function `read_freesurfer_table()` is for easier import of these files, particularly for further plotting with ggseg. 
 
@@ -130,7 +130,7 @@ dat %>%
   ggseg(mapping = aes(fill = volume))
 ```
 
-An error will be thrown because the Freesurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
+An error will be thrown because the FreeSurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. 
 To avoid this, you can remove those labels before plotting.
 
 ```{r}

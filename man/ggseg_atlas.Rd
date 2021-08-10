@@ -14,7 +14,7 @@ a tibble with polygon coordinates for plotting brain regions
 }
 \description{
 The `ggseg_atlas` class is a subclass of [`data.frame`][data.frame()],
-created in order to have different default behaviour. It heavily relieas on
+created in order to have different default behaviour. It heavily relies on
 the "tibble" [`tbl_df`][tibble()].
 [tidyverse](https://www.tidyverse.org/packages/), including
 [dplyr](http://dplyr.tidyverse.org/),
@@ -29,7 +29,7 @@ Objects of class `ggseg_atlas` have:
 * A `class` attribute of `c("ggseg_atlas", "tbl_df", "tbl", "data.frame")`.
 * A base type of `"list"`, where each element of the list has the same
   [NROW()].
-* Alot of this script and its functions are taken from the
+* A lot of this script and its functions are taken from the
   [`tibble`][tibble()]-package
 }
 

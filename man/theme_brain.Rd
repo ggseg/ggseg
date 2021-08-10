@@ -28,11 +28,11 @@ theme_brain2(
 \arguments{
 \item{text.size}{Specify size of plot text}
 
-\item{text.family}{Speficy font family}
+\item{text.family}{Specify font family}
 
 \item{plot.background}{Specify fill of plot background (`theme_custombrain` only)}
 
-\item{text.colour}{Speficy colour of plot text}
+\item{text.colour}{Specify colour of plot text}
 }
 \value{
 function that alters the themeing of a ggplot object
@@ -69,5 +69,5 @@ ggplot() +
 [ggplot()], [aes()], [geom_polygon()], [coord_fixed()] from the ggplot2 package
 }
 \author{
-Athanasia Mowinckel
+Athanasia Mo Mowinckel
 }
