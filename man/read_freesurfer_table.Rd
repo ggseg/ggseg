@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_freesurfer.R
 \name{read_freesurfer_table}
 \alias{read_freesurfer_table}
-\title{Read in stats table from Freesurfer}
+\title{Read in stats table from FreeSurfer}
 \usage{
 read_freesurfer_table(path, measure = NULL, ...)
 }
@@ -17,10 +17,10 @@ read_freesurfer_table(path, measure = NULL, ...)
 tibble with stats information for subjects from FreeSurfer
 }
 \description{
-Freesurfer has functions to create
+FreeSurfer has functions to create
 tables from raw stats files. If you have
 data already merged using the \code{aparcstats2table}
-or \code{asegstats2table} from Freesurfer,
+or \code{asegstats2table} from FreeSurfer,
 this function will read in the data and prepare it
 for ggseg.
 }

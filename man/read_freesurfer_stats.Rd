@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_freesurfer.R
 \name{read_freesurfer_stats}
 \alias{read_freesurfer_stats}
-\title{Read in raw Freesurfer stats file}
+\title{Read in raw FreeSurfer stats file}
 \usage{
 read_freesurfer_stats(path, rename = TRUE)
 }
@@ -15,7 +15,7 @@ read_freesurfer_stats(path, rename = TRUE)
 tibble with stats information for subjects from FreeSurfer
 }
 \description{
-Freesurfer atlas stats files have a format
+FreeSurfer atlas stats files have a format
 that can be difficult to easily read in to R.
 This function takes a raw stats-file from the
 subjects directory and reads it in as a

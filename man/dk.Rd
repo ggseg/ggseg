@@ -14,7 +14,7 @@ data(dk)
 An object of class 'brain_atlas' for plotting with ggseg
 }
 \description{
-Coordinate data for the Desikan-Killany Cortical atlas,
+Coordinate data for the Desikan-Killiany Cortical atlas,
 with 40 regions in on the cortical surface of the brain.
 }
 \examples{

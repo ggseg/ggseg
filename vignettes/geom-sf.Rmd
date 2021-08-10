@@ -137,7 +137,7 @@ someData %>%
 
 If you want a version where the labels do not overlap each other, you can try the `geom_sf_label_repel` function from the `ggrepel` package. 
 
-## Facetting groups
+## Faceting groups
 If your data includes groups, and you want to facet the output, you need to group the data _before_ calling `brain_join`.
 
 ```{r}

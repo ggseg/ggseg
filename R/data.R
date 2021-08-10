@@ -1,7 +1,7 @@
 ## Polygon data ----
 #' Desikan-Killiany Cortical Atlas
 #'
-#' Coordinate data for the Desikan-Killany Cortical atlas,
+#' Coordinate data for the Desikan-Killiany Cortical atlas,
 #' with 40 regions in on the cortical surface of the brain.
 #'
 #' @docType data

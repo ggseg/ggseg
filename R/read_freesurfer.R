@@ -1,7 +1,7 @@
 
-#' Read in raw Freesurfer stats file
+#' Read in raw FreeSurfer stats file
 #'
-#' Freesurfer atlas stats files have a format
+#' FreeSurfer atlas stats files have a format
 #' that can be difficult to easily read in to R.
 #' This function takes a raw stats-file from the
 #' subjects directory and reads it in as a
@@ -48,7 +48,7 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #' for all subjects in the subjects directory.
 #' Will add hemisphere and subject id to the data.
 #'
-#' @param subjects_dir Freesurfer subject directory
+#' @param subjects_dir FreeSurfer subject directory
 #' @param atlas unique character combination identifying the atlas
 #' @importFrom dplyr bind_rows
 #' @importFrom tidyr separate unite
@@ -89,12 +89,12 @@ read_atlas_files <- function(subjects_dir, atlas){
 }
 
 
-#' Read in stats table from Freesurfer
+#' Read in stats table from FreeSurfer
 #'
-#' Freesurfer has functions to create
+#' FreeSurfer has functions to create
 #' tables from raw stats files. If you have
 #' data already merged using the \code{aparcstats2table}
-#' or \code{asegstats2table} from Freesurfer,
+#' or \code{asegstats2table} from FreeSurfer,
 #' this function will read in the data and prepare it
 #' for ggseg.
 #'
