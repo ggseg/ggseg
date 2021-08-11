@@ -6,6 +6,8 @@
 #'        variables from the supplied data to the plot
 #' @param data data.frame with data to plot
 #' @param atlas object of type brain_atlas to plot
+#' @param hemi hemisphere to plot. Defaults to everything in the atlas.
+#' @param side slice to plot, as recorded in the "side" column in the atlas data. Defaults to all.
 #' @param position position of the data. Default is "identity" but can be
 #'        changed by \code{\link{position_brain}}.
 #' @param show.legend logical. Should legend be added or not.
@@ -22,9 +24,12 @@
 #'
 #' ggplot() +
 #'  geom_brain(atlas = dk)
-geom_brain <- function (mapping = aes(), data = NULL,
-                        atlas = NULL,
-                        position = "identity",
+geom_brain <- function(mapping = aes(),
+                        data = NULL,
+                        atlas,
+                        hemi = NULL,
+                        side = NULL,
+                        position = position_brain(),
                         show.legend = NA,
                         inherit.aes = TRUE, ...)
 {
@@ -37,6 +42,8 @@ geom_brain <- function (mapping = aes(), data = NULL,
                 inherit.aes = inherit.aes,
                 params = list(na.rm = FALSE,
                               atlas = atlas,
+                              hemi = hemi,
+                              side = side,
                               ...)),
     coord_sf(default = TRUE, clip = "off")
   )
@@ -60,7 +67,8 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                        stroke = 0.5
                      ),
 
-                     draw_panel = function(data, atlas, panel_params, coord, legend = NULL,
+                     draw_panel = function(data, atlas, hemi, side,
+                                           panel_params, coord, legend = NULL,
                                            lineend = "butt",
                                            linejoin = "round",
                                            linemitre = 10,

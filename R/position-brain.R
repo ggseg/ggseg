@@ -27,9 +27,9 @@
 reposition_brain <- function(data, position = "horizontal"){
   data <- as.data.frame(data)
 
-  pos <- position_formula(position, unique(data$type))
+  # pos <- position_formula(position, data)
 
-  frame_2_position(data, pos)
+  frame_2_position(data, position)
 }
 
 
@@ -67,9 +67,7 @@ PositionBrain <- ggplot2::ggproto("PositionBrain", ggplot2:::Position,
 
                                   compute_layer = function(self, data, params, layout) {
 
-                                    pos <- position_formula(params$position, unique(data$type))
-
-                                    df3 <- frame_2_position(data, pos)
+                                    df3 <- frame_2_position(data, params$position)
                                     bbx <- sf::st_bbox(df3$geometry)
 
                                     # rescale layout to reflect new coordinates
@@ -88,7 +86,7 @@ PositionBrain <- ggplot2::ggproto("PositionBrain", ggplot2:::Position,
 
 # geometry movers ----
 
-position_formula <- function(pos, type){
+position_formula <- function(pos, data){
   chosen <- all.vars(pos, unique = FALSE)
   chosen <- chosen[!grepl("\\.", chosen)]
 
@@ -96,22 +94,18 @@ position_formula <- function(pos, type){
     stop("Cannot position brain with the same data as columns and rows",
          call. = FALSE)
 
-  if(type == "cortical"){
+  if(unique(data$type) == "cortical"){
     if(length(chosen) < 2)
       stop("position formula not correct. ",
            "Missing ", paste0(c("side","hemi")[!c("side","hemi") %in% chosen], collapse=" & "), "",
            call. = FALSE
       )
-
-    position <- if(length(grep("\\+", pos))>0){
-      ifelse(grep("\\+", pos) == 2,
-             "rows", "columns")
+    position <- if(length(grep("\\+", pos)) > 0){
+      ifelse(grep("^\\.", pos) == 2,
+             "columns", "rows")
     }else{
       chosen
     }
-  }else{
-    stop("Don't know how to position subcortical data",
-         call. = FALSE)
   }
 
   if(all(sum(grepl("\\.|~", pos)) != 2 & position %in% c("rows", "columns")))
@@ -127,24 +121,52 @@ position_formula <- function(pos, type){
 
 
 frame_2_position <- function(data, pos){
-  df2 <- dplyr::group_by_at(data, pos$chosen)
-  df2 <- dplyr::group_split(df2)
-
-  posi <- ifelse(length(pos$position) > 1,
-                 "grid", pos$position)
-
-  # get all into same 0-space
-  df2 <- lapply(df2, gather_geometry)
-  df3 <- switch(posi,
-                rows = stack_vertical(df2),
-                columns = stack_horizontal(df2),
-                grid = stack_grid(df2, pos$position[1], pos$position[2])
-  )
+    dfpos <- split_data(data, pos)
+    df2 <- lapply(dfpos$data, gather_geometry)
+    posi <- ifelse(length(dfpos$position) > 1, "grid", dfpos$position)
+    # browser()
+    df3 <- switch(posi,
+                  rows    = stack_vertical(df2),
+                  columns = stack_horizontal(df2),
+                  grid    = stack_grid(df2, dfpos$position[1], dfpos$position[2])
+    )
 
   df4 <- st_as_sf(df3$df)
   attr(sf::st_geometry(df4), "bbox") = df3$box
 
   df4
+}
+
+split_data <- function(data, position){
+  if(class(position) == "formula"){
+    pos <- position_formula(position, data)
+    df2 <- dplyr::group_by_at(data, pos$chosen)
+    df2 <- dplyr::group_split(df2)
+    pos <- pos$position
+  }else{
+    if(length(position) == 1){
+      if(position %in% c("horizontal", "vertical"))
+        position <- default_order(data)
+    }
+    pos <- as.data.frame(strsplit(position, " "))
+    if(unique(data$type) == "cortical"){
+      k <- cbind(pos[2,] %in% data$side,
+                 pos[1,] %in% data$hemi)
+      k <- sapply(1:nrow(k), function(x) sum(k[x,]))
+      pos <- pos[ifelse(k == 2, TRUE, FALSE)]
+
+      df2 <- lapply(pos, function(x){
+        data[data$hemi == x[1] & data$side == x[2],]
+      })
+    }else{
+      df2 <- lapply(pos, function(x){
+        data[data$side == x,]
+      })
+    }
+    pos <- unique(ifelse(position == "vertical", "rows", "columns"))
+  }
+
+  return(list(data = df2, position = pos))
 }
 
 gather_geometry <- function(df){
@@ -154,10 +176,11 @@ gather_geometry <- function(df){
 }
 
 stack_horizontal <- function(df){
+  sep <- get_sep(df)
 
   bx <- list()
   for(k in 1:length(df)){
-    df[[k]]$geometry <- df[[k]]$geometry + c((k-1)*350, 0)
+    df[[k]]$geometry <- df[[k]]$geometry + c((k-1)*sep[1], 0)
     bx[[k]] <- sf::st_bbox(df[[k]]$geometry )
   }
 
@@ -168,9 +191,11 @@ stack_horizontal <- function(df){
 }
 
 stack_vertical <- function(df){
+  sep <- get_sep(df)
+
   bx <- list()
   for(k in 1:length(df)){
-    df[[k]]$geometry <- df[[k]]$geometry + c(0, (k-1)*250)
+    df[[k]]$geometry <- df[[k]]$geometry + c(0, (k-1)*sep[2])
     bx[[k]] <- sf::st_bbox(df[[k]]$geometry )
   }
 
@@ -182,6 +207,7 @@ stack_vertical <- function(df){
 
 stack_grid <- function(df, rows, columns){
   bx <- list()
+  sep <- get_sep(df)
 
   if(length(df) == 4){
     # switch columns if they are not the same
@@ -194,12 +220,12 @@ stack_grid <- function(df, rows, columns){
 
   # move second and fourth on x
   for(k in c(2,3)){
-    df[[k]]$geometry <- df[[k]]$geometry + c(350,0)
+    df[[k]]$geometry <- df[[k]]$geometry + c(sep[1],0)
   }
 
   # move third and fourth on y
   for(k in c(3,4)){
-    df[[k]]$geometry <- df[[k]]$geometry + c(0,250)
+    df[[k]]$geometry <- df[[k]]$geometry + c(0,sep[2])
   }
 
   bx <- lapply(df, function(x) sf::st_bbox(x$geometry ))
@@ -213,13 +239,27 @@ stack_grid <- function(df, rows, columns){
   )
 }
 
-get_box <- function(bx, pad = 10){
+get_box <- function(bx){
   bx <- do.call(rbind, bx)
+  pad <- max(bx)*.01
   bx <- c(-pad, -pad,
-          ceiling(max(bx[,"xmax"]))+pad,
-          ceiling(max(bx[,"ymax"])+pad))
-  x <- stats::setNames(10*round(bx/10), c("xmin", "ymin", "xmax", "ymax"))
+          max(bx[,"xmax"]) + pad,
+          max(bx[,"ymax"]) + pad)
+  x <- stats::setNames(bx, c("xmin", "ymin", "xmax", "ymax"))
   class(x) <- "bbox"
   x
 }
 
+get_sep <- function(data){
+  sep <- sapply(data, function(x) sf::st_bbox(x$geometry))
+  sep <- c(max(sep[3,]), max(sep[4,]))
+  c("x" = sep[1] + sep[1]*.2, "y" = sep[2] + sep[2]*.2)
+}
+
+default_order <- function(data){
+  if(unique(data$type) == "cortical"){
+    return(c("left lateral", "left medial", "right medial", "right lateral"))
+  }else{
+    return(unique(data$side))
+  }
+}

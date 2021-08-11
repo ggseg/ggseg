@@ -1,6 +1,14 @@
 # ggseg 1.6
 
-## ggseg 1.6.03
+## 1.6.4
+* Added options `hemi` and `side` to geom
+* improved `position_brain()` to accept character vector, and also support subcortical atlases
+
+## 1.6.3.01
+* fixed broken geom after changes to ggplot2 internals  
+* fixed spelling mistakes in docs
+
+## ggseg 1.6.3
 * removed function to display ggseg palettes
 * preparations for CRAN submission
     * added examples to more functions
