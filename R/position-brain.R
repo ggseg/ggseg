@@ -25,7 +25,7 @@
 #' reposition_brain(dk, hemi + side ~ .)
 #' reposition_brain(dk, . ~ hemi + side)
 reposition_brain <- function(data, position = "horizontal"){
-  data <- as.data.frame(data)
+  data <- as.data.frame(data, stringsAsFactors = FALSE)
 
   # pos <- position_formula(position, data)
 
@@ -124,7 +124,6 @@ frame_2_position <- function(data, pos){
     dfpos <- split_data(data, pos)
     df2 <- lapply(dfpos$data, gather_geometry)
     posi <- ifelse(length(dfpos$position) > 1, "grid", dfpos$position)
-    # browser()
     df3 <- switch(posi,
                   rows    = stack_vertical(df2),
                   columns = stack_horizontal(df2),
@@ -148,7 +147,7 @@ split_data <- function(data, position){
       if(position %in% c("horizontal", "vertical"))
         position <- default_order(data)
     }
-    pos <- as.data.frame(strsplit(position, " "))
+    pos <- as.data.frame(strsplit(position, " "),stringsAsFactors = FALSE)
     if(unique(data$type) == "cortical"){
       k <- cbind(pos[2,] %in% data$side,
                  pos[1,] %in% data$hemi)
