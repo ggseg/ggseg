@@ -11,8 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  out.width = "100%",
-  fig.width = 10
+  fig.width = 6
 )
 ```
 
@@ -94,6 +93,38 @@ This new geom makes it possible for you to also better control the position of t
 ```{r}
 ggplot() +
   geom_brain(atlas = dk, position = position_brain(hemi ~ side))
+```
+
+A new addition to the positions, is the ability to also specify the order directly through a character vector. By default, the position is:
+
+```{r}
+cortical_pos <- c("left lateral", "left medial", "right medial", "right lateral")
+ggplot() +
+  geom_brain(atlas = dk, position = position_brain(cortical_pos))
+
+# Which can easily be switched around!
+cortical_pos <- c("right lateral", "left medial", "right medial", "left lateral")
+ggplot() +
+  geom_brain(atlas = dk, position = position_brain(cortical_pos))
+```
+
+## Reducing slices
+
+Many have wanted the option like in `ggseg()` to only see a single hemisphere or slice. This functionality had been added through the `hemi` and `side` arguments to `geom_brain()`, mimicking the way `ggseg()` works.
+
+```{r}
+ggplot() +
+  geom_brain(atlas = dk, side = "lateral")
+
+ggplot() +
+  geom_brain(atlas = dk, hemi = "left")
+```
+
+This also should work for subcortical atlases, but the hemisphere (`hemi`) specification should be used carefully, as it might end up looking quite different than what you intended!
+
+```{r}
+ggplot() +
+  geom_brain(atlas = aseg, side = "axial", hemi = "left")
 ```
 
 

@@ -46,12 +46,23 @@ The package can be installed from CRAN.
 install.packages("ggseg")
 ```
 
+Alternatively, ggseg may also be installed through its ggseg r-universe:
 
-The development version of the package can be installed using devtools. The package includes some large datasets for the brain coordinates. Please be patient during download and install, it will take some time.
+```r
+# Enable this universe
+options(repos = c(
+    ggseg = 'https://ggseg.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'))
+
+# Install some packages
+install.packages('ggseg')
+```
+
+The development version of the package can be installed using devtools. 
 
 ```{r eval=FALSE}
 install.packages("remotes")
-remotes::install_github("ggseg/ggseg", build_vignettes = TRUE)
+remotes::install_github("ggseg/ggseg")
 ```
 
 The functions are now installed, and you may load them when you want to use them.

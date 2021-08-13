@@ -16,6 +16,6 @@ logo.png
 ^doc$
 ^\.github$
 vignettes/ggseg-old*
-
+vignettes/geom-sf*
 ^cran-comments\.md$
 ^CRAN-RELEASE$

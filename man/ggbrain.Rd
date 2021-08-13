@@ -9,8 +9,10 @@
 geom_brain(
   mapping = aes(),
   data = NULL,
-  atlas = NULL,
-  position = "identity",
+  atlas,
+  hemi = NULL,
+  side = NULL,
+  position = position_brain(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -23,6 +25,10 @@ variables from the supplied data to the plot}
 \item{data}{data.frame with data to plot}
 
 \item{atlas}{object of type brain_atlas to plot}
+
+\item{hemi}{hemisphere to plot. Defaults to everything in the atlas.}
+
+\item{side}{slice to plot, as recorded in the "side" column in the atlas data. Defaults to all.}
 
 \item{position}{position of the data. Default is "identity" but can be
 changed by \code{\link{position_brain}}.}

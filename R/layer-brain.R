@@ -26,6 +26,16 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           stop("No atlas supplied, please provide a brain atlas to the geom.",
                                call. = FALSE)
 
+                        if(!is.null(self$geom_params$hemi)){
+                          hemi <- match.arg(self$geom_params$hemi, unique(atlas$hemi))
+                          atlas <- atlas[atlas$hemi %in% hemi,]
+                        }
+
+                        if(!is.null(self$geom_params$side)){
+                          side <- match.arg(self$geom_params$side, unique(atlas$side))
+                          atlas <- atlas[atlas$side %in% side,]
+                        }
+
                         if(class(dt)[1] != "waiver"){
 
                           data <- brain_join(dt, atlas)
@@ -47,7 +57,7 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           }
 
                         }else{
-                          data <- as.data.frame(self$geom_params$atlas)
+                          data <- atlas
                         }
 
                         data <- sf::st_as_sf(data)
@@ -82,27 +92,13 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                           self$computed_mapping$fill <- as.name("region")
                         }
 
-
                         # work around for later merging.
                         # shitty solution
                         self$computed_mapping$label <- as.name("label")
 
                         # automatically determine the legend type
-                        if (is.na(self$show.legend) || isTRUE(self$show.legend)) {
-                          if (ggplot2:::is_sf(data)) {
-                            sf_type <- ggplot2:::detect_sf_type(data)
-                            if (sf_type == "point") {
-                              self$geom_params$legend <- "point"
-                            } else if (sf_type == "line") {
-                              self$geom_params$legend <- "line"
-                            } else {
-                              self$geom_params$legend <- "polygon"
-                            }
-                          }
-                        } else if (is.character(self$show.legend)) {
-                          self$geom_params$legend <- self$show.legend
-                          self$show.legend <- TRUE
-                        }
+                        self$geom_params$legend <- "polygon"
+
                         data
                       }
 )
