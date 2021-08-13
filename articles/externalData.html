@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.3.01</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.4</span>
       </span>
     </div>
 
@@ -272,7 +272,7 @@
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="../reference/geom_brain.html">geom_brain</a></span><span class="op">(</span> atlas<span class="op">=</span><span class="va">dk</span>, mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region', 'hemi'</code></pre>
-<p><img src="externalData_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
+<p><img src="externalData_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>You can actually also supply it directly as an atlas. For instance, if you had saved the merged data from the previous steps, you can supply this directly to the <code>atlas</code> option.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">newAtlas</span> <span class="op">=</span> <span class="va">dk</span> <span class="op">%&gt;%</span> 
@@ -286,7 +286,7 @@
              mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">p</span><span class="op">)</span>, 
              position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<p><img src="externalData_files/figure-html/unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="externalData_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with. Lets do a recap of the unwanted results:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
@@ -303,7 +303,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">AgeG</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
-<p><img src="externalData_files/figure-html/datasupp3-1.png" width="100%"></p>
+<p><img src="externalData_files/figure-html/datasupp3-1.png" width="700"></p>
 <p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for faceting, or else it will not work.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If you group_by the columns you will facet by, this will work well.</span>
@@ -319,7 +319,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span><span class="op">(</span>colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span><span class="op">)</span>,na.value<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
-<p><img src="externalData_files/figure-html/duplicate-1.png" width="100%"></p>
+<p><img src="externalData_files/figure-html/duplicate-1.png" width="700"></p>
 <p>This whole procedure can be piped together, so you don’t have to save all the intermediate steps.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -333,7 +333,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradientn</a></span><span class="op">(</span>colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"royalblue"</span>,<span class="st">"firebrick"</span>,<span class="st">"goldenrod"</span><span class="op">)</span>,na.value<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
-<p><img src="externalData_files/figure-html/duplicatepipe-1.png" width="100%"></p>
+<p><img src="externalData_files/figure-html/duplicatepipe-1.png" width="700"></p>
 </div>
   </div>
 
