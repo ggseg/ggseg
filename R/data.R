@@ -14,6 +14,7 @@
 #' (\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
 #'
 #' @return An object of class 'brain_atlas' for plotting with ggseg
+#'
 #' @examples
 #' data(dk)
 "dk"

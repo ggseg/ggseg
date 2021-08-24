@@ -43,7 +43,7 @@ a ggplot object
 Plotting results from analyses done on data derived from brain
 segmentations is a common need, but may be quite laborious.
 Results from such analyses are usually easier to interpret if
-the plot can mimmick the shape and position in the brain it
+the plot can mimic the shape and position in the brain it
 represents.
 
 \code{ggseg} plots and returns a ggplot object of plotted

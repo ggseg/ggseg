@@ -47,7 +47,7 @@ ggseg(position="stacked") +
 
 ## Using fill and colour
 Maybe you want each region to have a different colour. 
-ggseg has a built column called `region` wich you can use as fill to achieve this.
+ggseg has a built column called `region` which you can use as fill to achieve this.
 **Note:** unlike other ggplots, before using `aes` you must indicate `mapping=aes`.
   
 ```{r fill, fig.width=5}
@@ -129,7 +129,7 @@ ggseg(.data=someData, colour="white", hemisphere = "right",
   labs(title="Aparc plots rule")
 ```
 
-## Facetting
+## Faceting
 If your data has different statistics for different groups, and you want to plot them all, we can use ggplot's `facet_wrap` or `facet_grid` for that.
 The data needs to be in long format for this to work, like ggplot likes it.
 Also, you'll need to merge the data **outside** of the plotting function for it to work nicely.
@@ -149,7 +149,7 @@ ggseg(.data=someData, colour="white", mapping=aes(fill=p)) +
 
 ```
 
-As you can see. The result of this facetting is not what we are after. 
+As you can see. The result of this faceting is not what we are after. 
 This is because the the function requires full data to be able to plot, and the `AgeG` column is NA for everything outside the significant results.
 
 To fix this, you must duplicate the atlas data, and supply your data through the `atlas` option.
@@ -185,7 +185,7 @@ ggseg(.data = someData, atlas=dk, colour="white", mapping=aes(fill=p)) +
 ```
 
 Depending on what type of column is used for fill (continuous or discrete),
-you can also use the differenct `scales` to alter the colours.
+you can also use the different `scales` to alter the colours.
 ```{r datasupp5, fig.width=5}
 ggseg(.data = someData, atlas=dk, colour="white", mapping=aes(fill=p)) +
   facet_wrap(~AgeG, ncol=1) +

@@ -22,7 +22,7 @@ We also found it too tricky, with too many re-iterations of the same arguments, 
 
 Because of these issues, we here provide an alternate workflow for those users wanting to implement other simple-feature geoms to the ggseg-plots. 
 This workflow means not using the `geom_brain` function, but pre-joining and fixing the data _before_ providing it to `ggplot`. 
-In many ways, this workflow mimmicks what happens behind the scenes in `ggseg()` and within the `geom_brain` functions.
+In many ways, this workflow mimics what happens behind the scenes in `ggseg()` and within the `geom_brain` functions.
 
 
 # Explore the atlas

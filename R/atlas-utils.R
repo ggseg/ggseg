@@ -68,21 +68,25 @@ brain_labels.brain_atlas <- function(x){
 
 #' Detect atlas type
 #' @keywords internal
+#' @noRd
 atlas_type <- function(x){
   UseMethod("atlas_type")
 }
 
 #' @keywords internal
+#' @noRd
 atlas_type.ggseg_atlas <- function(x){
   guess_type(x)
 }
 
 #' @keywords internal
+#' @noRd
 atlas_type.brain_atlas <- function(x){
   guess_type(x)
 }
 
 #' @keywords internal
+#' @noRd
 guess_type <- function(x){
   k <- if("type" %in% names(x))
     unique(x$type)
