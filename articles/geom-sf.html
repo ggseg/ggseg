@@ -112,7 +112,7 @@
     
     
 <p>While the new workflow in <em>ggseg</em> using the simple features type <code>geom_brain</code> works well, it struggles with integration with other very useful simple feature geoms, like labels. Since <code>geom_brain</code> can alter the position of slices through the <code>position</code> argument, and since the atlas is provided as a separate argument rather than integrated in the data itself, the geoms for sf-labels are not possible to implement. We also found it too tricky, with too many re-iterations of the same arguments, to implement a specialized brain-label geom.</p>
-<p>Because of these issues, we here provide an alternate workflow for those users wanting to implement other simple-feature geoms to the ggseg-plots. This workflow means not using the <code>geom_brain</code> function, but pre-joining and fixing the data <em>before</em> providing it to <code>ggplot</code>. In many ways, this workflow mimmicks what happens behind the scenes in <code><a href="../reference/ggseg.html">ggseg()</a></code> and within the <code>geom_brain</code> functions.</p>
+<p>Because of these issues, we here provide an alternate workflow for those users wanting to implement other simple-feature geoms to the ggseg-plots. This workflow means not using the <code>geom_brain</code> function, but pre-joining and fixing the data <em>before</em> providing it to <code>ggplot</code>. In many ways, this workflow mimics what happens behind the scenes in <code><a href="../reference/ggseg.html">ggseg()</a></code> and within the <code>geom_brain</code> functions.</p>
 <div id="explore-the-atlas" class="section level1">
 <h1 class="hasAnchor">
 <a href="#explore-the-atlas" class="anchor"></a>Explore the atlas</h1>
@@ -282,10 +282,10 @@
 <span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.365</span>
-<span class="co">#&gt; 2 insula              0.425</span>
-<span class="co">#&gt; 3 precentral          0.114</span>
-<span class="co">#&gt; 4 superior parietal   0.111</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.061</span>
+<span class="co">#&gt; 2 insula              0.104</span>
+<span class="co">#&gt; 3 precentral          0.252</span>
+<span class="co">#&gt; 4 superior parietal   0.226</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -372,14 +372,14 @@
 <span class="co">#&gt; # A tibble: 8 × 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.14  g1    </span>
-<span class="co">#&gt; 2 insula              0.345 g1    </span>
-<span class="co">#&gt; 3 precentral          0.41  g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.328 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.424 g2    </span>
-<span class="co">#&gt; 6 insula              0.203 g2    </span>
-<span class="co">#&gt; 7 precentral          0.496 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.305 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.191 g1    </span>
+<span class="co">#&gt; 2 insula              0.403 g1    </span>
+<span class="co">#&gt; 3 precentral          0.333 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.355 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.336 g2    </span>
+<span class="co">#&gt; 6 insula              0.398 g2    </span>
+<span class="co">#&gt; 7 precentral          0.49  g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.059 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span> 

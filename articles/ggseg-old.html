@@ -146,7 +146,7 @@
 <div id="using-fill-and-colour" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-fill-and-colour" class="anchor"></a>Using fill and colour</h2>
-<p>Maybe you want each region to have a different colour. ggseg has a built column called <code>region</code> wich you can use as fill to achieve this. <strong>Note:</strong> unlike other ggplots, before using <code>aes</code> you must indicate <code>mapping=aes</code>.</p>
+<p>Maybe you want each region to have a different colour. ggseg has a built column called <code>region</code> which you can use as fill to achieve this. <strong>Note:</strong> unlike other ggplots, before using <code>aes</code> you must indicate <code>mapping=aes</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -214,9 +214,9 @@
 <pre><code>## merging atlas and data by 'region', 'hemi'</code></pre>
 <p><img src="ggseg-old_files/figure-html/datasuppHemi-1.png" width="480"></p>
 </div>
-<div id="facetting" class="section level2">
+<div id="faceting" class="section level2">
 <h2 class="hasAnchor">
-<a href="#facetting" class="anchor"></a>Facetting</h2>
+<a href="#faceting" class="anchor"></a>Faceting</h2>
 <p>If your data has different statistics for different groups, and you want to plot them all, we can use ggplot’s <code>facet_wrap</code> or <code>facet_grid</code> for that. The data needs to be in long format for this to work, like ggplot likes it. Also, you’ll need to merge the data <strong>outside</strong> of the plotting function for it to work nicely. This is because the atlas data must be completely duplicated for plotting to look nice.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
@@ -231,7 +231,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
 <p><img src="ggseg-old_files/figure-html/datasupp3-1.png" width="480"></p>
-<p>As you can see. The result of this facetting is not what we are after. This is because the the function requires full data to be able to plot, and the <code>AgeG</code> column is NA for everything outside the significant results.</p>
+<p>As you can see. The result of this faceting is not what we are after. This is because the the function requires full data to be able to plot, and the <code>AgeG</code> column is NA for everything outside the significant results.</p>
 <p>To fix this, you must duplicate the atlas data, and supply your data through the <code>atlas</code> option. This is maybe best achieved by making your data into a list, and then list applying <code>lapply</code> over them, and binding them together again.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">=</span> <span class="va">someData</span> <span class="op">%&gt;%</span> 
@@ -262,7 +262,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_colour_continuous.html">scale_fill_continuous</a></span><span class="op">(</span>na.value<span class="op">=</span><span class="st">"transparent"</span><span class="op">)</span></code></pre></div>
 <pre><code>## merging atlas and data by 'region'</code></pre>
 <p><img src="ggseg-old_files/figure-html/datasupp4-1.png" width="480"></p>
-<p>Depending on what type of column is used for fill (continuous or discrete), you can also use the differenct <code>scales</code> to alter the colours.</p>
+<p>Depending on what type of column is used for fill (continuous or discrete), you can also use the different <code>scales</code> to alter the colours.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">someData</span>, atlas<span class="op">=</span><span class="va">dk</span>, colour<span class="op">=</span><span class="st">"white"</span>, mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">AgeG</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
