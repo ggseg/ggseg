@@ -6,7 +6,7 @@ layer_brain <- function(geom = NULL, stat = NULL,
                         check.aes = TRUE,
                         check.param = TRUE,
                         show.legend = NA) {
-  layer(
+  ggplot2::layer(
     geom = geom, stat = stat, data = data, mapping = mapping,
     position = position, params = params, inherit.aes = inherit.aes,
     check.aes = check.aes, check.param = check.param,
