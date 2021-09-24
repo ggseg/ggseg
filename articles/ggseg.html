@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.4.900</span>
       </span>
     </div>
 
@@ -114,6 +114,7 @@
 <p>The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom <code>geom_brain</code> (variant of geom_sf). This has introduced a lot of new functionality into the package, in addition to some new custom methods and objects.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
 <div id="the-brain-atlas-class" class="section level1">
 <h1 class="hasAnchor">
@@ -306,8 +307,7 @@
   <span class="fu"><a href="../reference/geom_brain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Which can easily be switched around!</span>
+<code class="sourceCode R"><span class="co"># Which can easily be switched around!</span>
 <span class="va">cortical_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"right lateral"</span>, <span class="st">"left medial"</span>, <span class="st">"right medial"</span>, <span class="st">"left lateral"</span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/geom_brain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -322,8 +322,7 @@
   <span class="fu"><a href="../reference/geom_brain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, side <span class="op">=</span> <span class="st">"lateral"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/geom_brain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, hemi <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-10-2.png" width="576"></p>
 <p>This also should work for subcortical atlases, but the hemisphere (<code>hemi</code>) specification should be used carefully, as it might end up looking quite different than what you intended!</p>
@@ -346,7 +345,6 @@
 <span class="co">#&gt; The following objects are masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-        
 <span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
   region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,
            <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>, 
@@ -357,10 +355,10 @@
 <span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 transverse temporal 0.246</span>
-<span class="co">#&gt; 2 insula              0.252</span>
-<span class="co">#&gt; 3 precentral          0.497</span>
-<span class="co">#&gt; 4 superior parietal   0.066</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.315</span>
+<span class="co">#&gt; 2 insula              0.47 </span>
+<span class="co">#&gt; 3 precentral          0.265</span>
+<span class="co">#&gt; 4 superior parietal   0.07</span></code></pre></div>
 <p>And such plots can be further adapted with standard ggplot themes, scales etc, to your liking.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span>
@@ -390,14 +388,14 @@
 <span class="co">#&gt; # A tibble: 8 × 3</span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1 transverse temporal 0.475 g1    </span>
-<span class="co">#&gt; 2 insula              0.042 g1    </span>
-<span class="co">#&gt; 3 precentral          0.49  g1    </span>
-<span class="co">#&gt; 4 superior parietal   0.471 g1    </span>
-<span class="co">#&gt; 5 transverse temporal 0.059 g2    </span>
-<span class="co">#&gt; 6 insula              0.03  g2    </span>
-<span class="co">#&gt; 7 precentral          0.161 g2    </span>
-<span class="co">#&gt; 8 superior parietal   0.145 g2</span></code></pre></div>
+<span class="co">#&gt; 1 transverse temporal 0.447 g1    </span>
+<span class="co">#&gt; 2 insula              0.375 g1    </span>
+<span class="co">#&gt; 3 precentral          0.025 g1    </span>
+<span class="co">#&gt; 4 superior parietal   0.472 g1    </span>
+<span class="co">#&gt; 5 transverse temporal 0.234 g2    </span>
+<span class="co">#&gt; 6 insula              0.195 g2    </span>
+<span class="co">#&gt; 7 precentral          0.261 g2    </span>
+<span class="co">#&gt; 8 superior parietal   0.5   g2</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op">%&gt;%</span>
