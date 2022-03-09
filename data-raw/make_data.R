@@ -66,6 +66,7 @@ ggplot() +
   geom_brain(atlas = aseg_n)
 
 aseg <- aseg_n
+
 usethis::use_data(aseg,
                   internal = FALSE,
                   overwrite = TRUE,

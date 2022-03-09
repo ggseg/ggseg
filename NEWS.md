@@ -5,6 +5,7 @@
 ## 1.6.4
 * Added options `hemi` and `side` to geom
 * improved `position_brain()` to accept character vector, and also support subcortical atlases
+* Altered axial to coronal in aseg atlas
 
 ## 1.6.3.01
 * fixed broken geom after changes to ggplot2 internals  
