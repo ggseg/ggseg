@@ -124,7 +124,7 @@ This also should work for subcortical atlases, but the hemisphere (`hemi`) speci
 
 ```{r}
 ggplot() +
-  geom_brain(atlas = aseg, side = "axial", hemi = "left")
+  geom_brain(atlas = aseg, side = "coronal", hemi = "left")
 ```
 
 
