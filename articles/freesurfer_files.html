@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.4.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/ggseg.html">Get started</a>
 </li>
@@ -57,7 +53,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -83,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ggseg/ggseg/">
+  <a href="https://github.com/ggseg/ggseg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -98,13 +94,13 @@
 
       
 
-      </header><script src="freesurfer_files_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Read in files from FreeSurfer</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ggseg/ggseg/blob/master/vignettes/freesurfer_files.Rmd"><code>vignettes/freesurfer_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ggseg/ggseg/blob/HEAD/vignettes/freesurfer_files.Rmd" class="external-link"><code>vignettes/freesurfer_files.Rmd</code></a></small>
       <div class="hidden name"><code>freesurfer_files.Rmd</code></div>
 
     </div>
@@ -112,138 +108,138 @@
     
     
 <p>FreeSurfer already have files that are compatible with <code>ggseg</code> in some extent. There are naming conventions and file-formats that are different, and as such it can at times be a little tricky to get data directly from FreeSurfer into R, and subsequently plotting in ggseg.</p>
-<div id="raw-stats-files" class="section level1">
-<h1 class="hasAnchor">
-<a href="#raw-stats-files" class="anchor"></a>Raw stats files</h1>
-<div id="read-in-single-raw-stats-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#read-in-single-raw-stats-file" class="anchor"></a>Read in single raw stats file</h2>
+<div class="section level2">
+<h2 id="raw-stats-files">Raw stats files<a class="anchor" aria-label="anchor" href="#raw-stats-files"></a>
+</h2>
+<div class="section level3">
+<h3 id="read-in-single-raw-stats-file">Read in single raw stats file<a class="anchor" aria-label="anchor" href="#read-in-single-raw-stats-file"></a>
+</h3>
 <p>If <code>recon-all</code> from FreeSurfer has been run, each participant should have a <code>stats</code> folder, with various parcellation data and summary statistics for those parcellations and measures. These have many header lines before the data actually start, and can have some formatting difficult to handle in R.</p>
 <p>The function <code>read_freesurfer_stats</code> is made to easily read in raw stats tables from each individual, without needing to go through FreeSurfer’s internal converters. When using this file, remembering which hemisphere is read in is important, as this information must be added to the <code>label</code> column for <code>ggseg</code> to recognise the region labels.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg">ggseg</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">subjects_dir</span> <span class="op">&lt;-</span> <span class="st">"/Applications/freesurfer/subjects/"</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stats_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">subjects_dir</span>, <span class="st">"bert/stats/lh.aparc.stats"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">stats_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">subjects_dir</span>, <span class="st">"bert/stats/lh.aparc.stats"</span><span class="op">)</span>
 <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_freesurfer_stats.html">read_freesurfer_stats</a></span><span class="op">(</span><span class="va">stats_file</span><span class="op">)</span>
 <span class="va">data</span>
-<span class="co">#&gt; # A tibble: 34 × 10</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 10</span></span>
 <span class="co">#&gt;    label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd</span>
-<span class="co">#&gt;    &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1 bankssts    1181      831    2297     2.77    0.428    0.116    0.024      11</span>
-<span class="co">#&gt;  2 caudala…     843      572    1534     2.72    0.469    0.124    0.013      10</span>
-<span class="co">#&gt;  3 caudalm…    2758     1840    5772     2.80    0.526    0.114    0.021      26</span>
-<span class="co">#&gt;  4 cuneus      2683     1654    3074     1.81    0.471    0.14     0.033      39</span>
-<span class="co">#&gt;  5 entorhi…     581      416    1840     3.33    0.667    0.116    0.032       5</span>
-<span class="co">#&gt;  6 fusiform    4113     2875    8519     2.72    0.599    0.131    0.025      52</span>
-<span class="co">#&gt;  7 inferio…    4948     3466   10559     2.70    0.509    0.131    0.029      65</span>
-<span class="co">#&gt;  8 inferio…    5056     3542   12358     2.98    0.625    0.138    0.033      74</span>
-<span class="co">#&gt;  9 isthmus…    1561      990    2350     2.09    0.745    0.113    0.023      19</span>
-<span class="co">#&gt; 10 lateral…    7961     5077   12743     2.30    0.588    0.139    0.033     104</span>
-<span class="co">#&gt; # … with 24 more rows, and 1 more variable: CurvInd &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> bankssts    <span style="text-decoration: underline;">1</span>181      831    <span style="text-decoration: underline;">2</span>297     2.77    0.428    0.116    0.024      11</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> caudala…     843      572    <span style="text-decoration: underline;">1</span>534     2.72    0.469    0.124    0.013      10</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> caudalm…    <span style="text-decoration: underline;">2</span>758     <span style="text-decoration: underline;">1</span>840    <span style="text-decoration: underline;">5</span>772     2.80    0.526    0.114    0.021      26</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> cuneus      <span style="text-decoration: underline;">2</span>683     <span style="text-decoration: underline;">1</span>654    <span style="text-decoration: underline;">3</span>074     1.81    0.471    0.14     0.033      39</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> entorhi…     581      416    <span style="text-decoration: underline;">1</span>840     3.33    0.667    0.116    0.032       5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> fusiform    <span style="text-decoration: underline;">4</span>113     <span style="text-decoration: underline;">2</span>875    <span style="text-decoration: underline;">8</span>519     2.72    0.599    0.131    0.025      52</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> inferio…    <span style="text-decoration: underline;">4</span>948     <span style="text-decoration: underline;">3</span>466   <span style="text-decoration: underline;">10</span>559     2.70    0.509    0.131    0.029      65</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> inferio…    <span style="text-decoration: underline;">5</span>056     <span style="text-decoration: underline;">3</span>542   <span style="text-decoration: underline;">12</span>358     2.98    0.625    0.138    0.033      74</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> isthmus…    <span style="text-decoration: underline;">1</span>561      990    <span style="text-decoration: underline;">2</span>350     2.09    0.745    0.113    0.023      19</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> lateral…    <span style="text-decoration: underline;">7</span>961     <span style="text-decoration: underline;">5</span>077   <span style="text-decoration: underline;">12</span>743     2.30    0.588    0.139    0.033     104</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 24 more rows, and 1 more variable: CurvInd &lt;dbl&gt;</span></span></code></pre></div>
 <p>This data should be well-suited for use with ggseg.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"lh_"</span>, <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ThickAvg</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"lh_"</span>, <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ThickAvg</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'label'</span></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
-<div id="read-in-raw-stats-files-for-an-atlas-for-all-subjects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#read-in-raw-stats-files-for-an-atlas-for-all-subjects" class="anchor"></a>Read in raw stats files for an atlas for all subjects</h2>
+<div class="section level3">
+<h3 id="read-in-raw-stats-files-for-an-atlas-for-all-subjects">Read in raw stats files for an atlas for all subjects<a class="anchor" aria-label="anchor" href="#read-in-raw-stats-files-for-an-atlas-for-all-subjects"></a>
+</h3>
 <p>A convenience function also exists for those wanting to circumvent the <code>aparcstats2table</code> and <code>asegstats2table</code> from freesurfer for creating larger datasets of all subjects for a specific parcellation and metric. Using the function <code>read_freesurfer_stats</code>, <code>read_atlas_files</code> uses regular expression for the atlas you want to extract data from, and grabs this data from all available subjects. Be careful with your pattern matching to be sure you get exactly the atlas you want. For instance, there are several atlases with with string <code>aparc</code> in them. So in order to get only the default aparc stats, we need to specify <code>aparc.stats$</code>, which will only read those files ending with that particular string. This function <em>can</em> throw warnings, which is most cases can be ignored.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_atlas_files.html">read_atlas_files</a></span><span class="op">(</span><span class="va">subject_dir</span>, <span class="st">"aparc.stats$"</span><span class="op">)</span>
 <span class="va">dat</span>
-<span class="co">#&gt; # A tibble: 68 × 11</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 11</span></span>
 <span class="co">#&gt;    subject label    NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt;    &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 bert    lh_bank…    1181      831    2297     2.77    0.428    0.116    0.024</span>
-<span class="co">#&gt;  2 bert    lh_caud…     843      572    1534     2.72    0.469    0.124    0.013</span>
-<span class="co">#&gt;  3 bert    lh_caud…    2758     1840    5772     2.80    0.526    0.114    0.021</span>
-<span class="co">#&gt;  4 bert    lh_cune…    2683     1654    3074     1.81    0.471    0.14     0.033</span>
-<span class="co">#&gt;  5 bert    lh_ento…     581      416    1840     3.33    0.667    0.116    0.032</span>
-<span class="co">#&gt;  6 bert    lh_fusi…    4113     2875    8519     2.72    0.599    0.131    0.025</span>
-<span class="co">#&gt;  7 bert    lh_infe…    4948     3466   10559     2.70    0.509    0.131    0.029</span>
-<span class="co">#&gt;  8 bert    lh_infe…    5056     3542   12358     2.98    0.625    0.138    0.033</span>
-<span class="co">#&gt;  9 bert    lh_isth…    1561      990    2350     2.09    0.745    0.113    0.023</span>
-<span class="co">#&gt; 10 bert    lh_late…    7961     5077   12743     2.30    0.588    0.139    0.033</span>
-<span class="co">#&gt; # … with 58 more rows, and 2 more variables: FoldInd &lt;int&gt;, CurvInd &lt;dbl&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> bert    lh_bank…    <span style="text-decoration: underline;">1</span>181      831    <span style="text-decoration: underline;">2</span>297     2.77    0.428    0.116    0.024</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> bert    lh_caud…     843      572    <span style="text-decoration: underline;">1</span>534     2.72    0.469    0.124    0.013</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> bert    lh_caud…    <span style="text-decoration: underline;">2</span>758     <span style="text-decoration: underline;">1</span>840    <span style="text-decoration: underline;">5</span>772     2.80    0.526    0.114    0.021</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> bert    lh_cune…    <span style="text-decoration: underline;">2</span>683     <span style="text-decoration: underline;">1</span>654    <span style="text-decoration: underline;">3</span>074     1.81    0.471    0.14     0.033</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> bert    lh_ento…     581      416    <span style="text-decoration: underline;">1</span>840     3.33    0.667    0.116    0.032</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> bert    lh_fusi…    <span style="text-decoration: underline;">4</span>113     <span style="text-decoration: underline;">2</span>875    <span style="text-decoration: underline;">8</span>519     2.72    0.599    0.131    0.025</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> bert    lh_infe…    <span style="text-decoration: underline;">4</span>948     <span style="text-decoration: underline;">3</span>466   <span style="text-decoration: underline;">10</span>559     2.70    0.509    0.131    0.029</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> bert    lh_infe…    <span style="text-decoration: underline;">5</span>056     <span style="text-decoration: underline;">3</span>542   <span style="text-decoration: underline;">12</span>358     2.98    0.625    0.138    0.033</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> bert    lh_isth…    <span style="text-decoration: underline;">1</span>561      990    <span style="text-decoration: underline;">2</span>350     2.09    0.745    0.113    0.023</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> bert    lh_late…    <span style="text-decoration: underline;">7</span>961     <span style="text-decoration: underline;">5</span>077   <span style="text-decoration: underline;">12</span>743     2.30    0.588    0.139    0.033</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows, and 2 more variables: FoldInd &lt;int&gt;, CurvInd &lt;dbl&gt;</span></span></code></pre></div>
 <p>Since all files are read in, the hemisphere in the label is already fixed, so it is easy to plot.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span><span class="va">dat</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ThickStd</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span><span class="va">dat</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ThickStd</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'label'</span></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>With this data, we can even have a look at all the metrics at once.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
 
-<span class="va">dat</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">stat</span>, <span class="va">val</span>, <span class="op">-</span><span class="va">subject</span>, <span class="op">-</span><span class="va">label</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">stat</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">val</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">stat</span><span class="op">)</span>
+<span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span><span class="va">stat</span>, <span class="va">val</span>, <span class="op">-</span><span class="va">subject</span>, <span class="op">-</span><span class="va">label</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">stat</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">val</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">stat</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'label'</span></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 </div>
-<div id="freesurfer-stats-tables" class="section level1">
-<h1 class="hasAnchor">
-<a href="#freesurfer-stats-tables" class="anchor"></a>FreeSurfer stats tables</h1>
+<div class="section level2">
+<h2 id="freesurfer-stats-tables">FreeSurfer stats tables<a class="anchor" aria-label="anchor" href="#freesurfer-stats-tables"></a>
+</h2>
 <p>FreeSurfer has internal functions to convert their raw stats files into tables, gather subject into a single data file with particular metric. It is quite common to use these files, but again the formatting is not something R is very happy with. The function <code><a href="../reference/read_freesurfer_table.html">read_freesurfer_table()</a></code> is for easier import of these files, particularly for further plotting with ggseg.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Path to our particular file, yours will be wherever you have saved it</span>
-<span class="va">table_path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"tests/testthat/data/aparc.volume.table"</span><span class="op">)</span>
+<span class="va">table_path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"tests/testthat/data/aparc.volume.table"</span><span class="op">)</span>
 <span class="va">table_path</span>
 <span class="co">#&gt; [1] "/Users/runner/work/ggseg/ggseg/tests/testthat/data/aparc.volume.table"</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_freesurfer_table.html">read_freesurfer_table</a></span><span class="op">(</span><span class="va">table_path</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 36 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 36 × 3</span></span>
 <span class="co">#&gt;    subject label                             value</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                             &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 bert    rh_bankssts_volume                 1969</span>
-<span class="co">#&gt;  2 bert    rh_caudalanteriorcingulate_volume  2280</span>
-<span class="co">#&gt;  3 bert    rh_caudalmiddlefrontal_volume      5390</span>
-<span class="co">#&gt;  4 bert    rh_cuneus_volume                   2998</span>
-<span class="co">#&gt;  5 bert    rh_entorhinal_volume               1735</span>
-<span class="co">#&gt;  6 bert    rh_fusiform_volume                 8144</span>
-<span class="co">#&gt;  7 bert    rh_inferiorparietal_volume        14876</span>
-<span class="co">#&gt;  8 bert    rh_inferiortemporal_volume        11016</span>
-<span class="co">#&gt;  9 bert    rh_isthmuscingulate_volume         1983</span>
-<span class="co">#&gt; 10 bert    rh_lateraloccipital_volume        12729</span>
-<span class="co">#&gt; # … with 26 more rows</span></code></pre></div>
-<p>The file is read and has three columns only. The subject column, the label column, and a column with the values of the metric. Since the stats tables can contain different measures, and these are handled somewhat differently, we for convenience leave the default reading of the table this way. To work with ggseg, though, the labels usually (but not always) need a little cleaning. In this case we read in a <code>volume</code> table, and as such all labels end with "_volume". ggseg will <em>not</em> recognise this matching the atlas, and will therefore not plot.</p>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> bert    rh_bankssts_volume                 <span style="text-decoration: underline;">1</span>969</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> bert    rh_caudalanteriorcingulate_volume  <span style="text-decoration: underline;">2</span>280</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> bert    rh_caudalmiddlefrontal_volume      <span style="text-decoration: underline;">5</span>390</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> bert    rh_cuneus_volume                   <span style="text-decoration: underline;">2</span>998</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> bert    rh_entorhinal_volume               <span style="text-decoration: underline;">1</span>735</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> bert    rh_fusiform_volume                 <span style="text-decoration: underline;">8</span>144</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> bert    rh_inferiorparietal_volume        <span style="text-decoration: underline;">14</span>876</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> bert    rh_inferiortemporal_volume        <span style="text-decoration: underline;">11</span>016</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> bert    rh_isthmuscingulate_volume         <span style="text-decoration: underline;">1</span>983</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> bert    rh_lateraloccipital_volume        <span style="text-decoration: underline;">12</span>729</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 26 more rows</span></span></code></pre></div>
+<p>The file is read and has three columns only. The subject column, the label column, and a column with the values of the metric. Since the stats tables can contain different measures, and these are handled somewhat differently, we for convenience leave the default reading of the table this way. To work with ggseg, though, the labels usually (but not always) need a little cleaning. In this case we read in a <code>volume</code> table, and as such all labels end with “_volume”. ggseg will <em>not</em> recognise this matching the atlas, and will therefore not plot.</p>
 <p>Easiest way to clean, is by using the <code>measure</code> argument for the function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_freesurfer_table.html">read_freesurfer_table</a></span><span class="op">(</span><span class="va">table_path</span>, measure <span class="op">=</span> <span class="st">"volume"</span><span class="op">)</span>
 <span class="va">dat</span>
-<span class="co">#&gt; # A tibble: 36 × 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 36 × 3</span></span>
 <span class="co">#&gt;    subject label                      volume</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                       &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 bert    rh_bankssts                  1969</span>
-<span class="co">#&gt;  2 bert    rh_caudalanteriorcingulate   2280</span>
-<span class="co">#&gt;  3 bert    rh_caudalmiddlefrontal       5390</span>
-<span class="co">#&gt;  4 bert    rh_cuneus                    2998</span>
-<span class="co">#&gt;  5 bert    rh_entorhinal                1735</span>
-<span class="co">#&gt;  6 bert    rh_fusiform                  8144</span>
-<span class="co">#&gt;  7 bert    rh_inferiorparietal         14876</span>
-<span class="co">#&gt;  8 bert    rh_inferiortemporal         11016</span>
-<span class="co">#&gt;  9 bert    rh_isthmuscingulate          1983</span>
-<span class="co">#&gt; 10 bert    rh_lateraloccipital         12729</span>
-<span class="co">#&gt; # … with 26 more rows</span></code></pre></div>
-<p>This will do two things: 1) remove the label suffix, and 2) rename the <code>value</code> column to the measure supplied. Alternatively, you will need to do string manipulation on the label column your self, we recommend the <a href="https://stringr.tidyverse.org/index.html">stringr</a> package in that case.</p>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> bert    rh_bankssts                  <span style="text-decoration: underline;">1</span>969</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> bert    rh_caudalanteriorcingulate   <span style="text-decoration: underline;">2</span>280</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> bert    rh_caudalmiddlefrontal       <span style="text-decoration: underline;">5</span>390</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> bert    rh_cuneus                    <span style="text-decoration: underline;">2</span>998</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> bert    rh_entorhinal                <span style="text-decoration: underline;">1</span>735</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> bert    rh_fusiform                  <span style="text-decoration: underline;">8</span>144</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> bert    rh_inferiorparietal         <span style="text-decoration: underline;">14</span>876</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> bert    rh_inferiortemporal         <span style="text-decoration: underline;">11</span>016</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> bert    rh_isthmuscingulate          <span style="text-decoration: underline;">1</span>983</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> bert    rh_lateraloccipital         <span style="text-decoration: underline;">12</span>729</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 26 more rows</span></span></code></pre></div>
+<p>This will do two things: 1) remove the label suffix, and 2) rename the <code>value</code> column to the measure supplied. Alternatively, you will need to do string manipulation on the label column your self, we recommend the <a href="https://stringr.tidyverse.org/index.html" class="external-link">stringr</a> package in that case.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">volume</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">volume</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>An error will be thrown because the FreeSurfer tables also include measures of total volume/region/thickness, estimated intracranial volume etc, which will not merge into the atlas, and the internal ggseg atlas-merging function throws a warning. To avoid this, you can remove those labels before plotting.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dat</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"lh|rh"</span>, <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">volume</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"lh|rh"</span>, <span class="va">label</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">volume</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; merging atlas and data by 'label'</span></code></pre></div>
 <p><img src="freesurfer_files_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
@@ -260,11 +256,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
+  <p></p>
+<p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -272,6 +270,8 @@
 
   
 
+
+  
 
   </body>
 </html>
