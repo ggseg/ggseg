@@ -7,8 +7,7 @@
 status](https://github.com/ggseg/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/ggseg/ggseg/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
-[![Coverage
-status](https://codecov.io/gh/ggseg/ggseg/branch/master/graph/badge.svg)](https://codecov.io/gh/ggseg/ggseg)
+[![codecov](https://codecov.io/gh/ggseg/ggseg/branch/main/graph/badge.svg?token=WtlS6Kk1vo)](https://app.codecov.io/gh/ggseg/ggseg)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
@@ -72,6 +71,7 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
+#> Loading required package: ggplot2
 library(ggplot2)
 plot(dk)
 ```

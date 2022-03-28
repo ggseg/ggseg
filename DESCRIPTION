@@ -1,6 +1,6 @@
 Package: ggseg
 Title: Plotting Tool for Brain Atlases
-Version: 1.6.4.901
+Version: 1.6.5
 Authors@R: c(
     person("Athanasia Mo", "Mowinckel", 
             email = "a.m.mowinckel@psykologi.uio.no", 
@@ -17,7 +17,7 @@ Description: Contains 'ggplot2' geom for plotting brain atlases using
     <doi:10.1177/2515245920928009>.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: 
     R (>= 3.3),
     ggplot2 (>= 3.3)

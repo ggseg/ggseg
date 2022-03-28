@@ -13,4 +13,5 @@
 #' @name ggseg
 #' @docType package
 #' @keywords internal
+#' @import ggplot2
 "_PACKAGE"
