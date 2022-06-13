@@ -22,7 +22,7 @@ Will add hemisphere and subject id to the data.
 }
 \examples{
 \dontrun{
-subj_dir <- freesurfer::fs_subj_dir()
+subj_dir <- "/path/to/freesurfer/7.2.0/subjects/"
 read_atlas_files(subj_dir, "aseg.stats")
 
 read_atlas_files(subj_dir, "lh.aparc.stats")

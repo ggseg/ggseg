@@ -23,7 +23,7 @@ data.frame.
 }
 \examples{
 \dontrun{
-subj_dir <- freesurfer::fs_subj_dir()
+subj_dir <- "/path/to/freesurfer/7.2.0/subjects/"
 aseg_stats <- file.path(subj_dir, "bert/stats/aseg.stats")
 read_freesurfer_stats(aseg_stats)
 }

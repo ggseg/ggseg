@@ -4,7 +4,7 @@
 \name{ggseg}
 \alias{ggseg}
 \alias{ggseg-package}
-\title{ggseg: Plot brain segmentations with ggplot and plotly}
+\title{ggseg: Plot brain segmentations with ggplot}
 \usage{
 ggseg(
   .data = NULL,
@@ -52,7 +52,7 @@ aparc regions. Is superseded by the new \code{\link{geom_brain}}.
 \details{
 This package contains data from various brain parcellations,
 with convenient functions to inspect the results directly on
-a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
+a brain-plot wither with ggplot (2D polygons).
 
 \describe{
 
