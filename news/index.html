@@ -69,9 +69,7 @@
       <small>Source: <a href="https://github.com/ggseg/ggseg/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.6.5" id="ggseg-165">ggseg 1.6.5<a class="anchor" aria-label="anchor" href="#ggseg-165"></a></h2>
-</div>
+    <div class="section level2"><h2 class="page-header" data-toc-text="1.6.5" id="ggseg-165">ggseg 1.6.5<a class="anchor" aria-label="anchor" href="#ggseg-165"></a></h2></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6" id="ggseg-16">ggseg 1.6<a class="anchor" aria-label="anchor" href="#ggseg-16"></a></h2>
 <div class="section level3">
@@ -88,8 +86,7 @@
 <div class="section level3">
 <h3 id="ggseg-1-6">ggseg 1.6.3<a class="anchor" aria-label="anchor" href="#ggseg-1-6"></a></h3>
 <ul><li>removed function to display ggseg palettes</li>
-<li>preparations for CRAN submission
-<ul><li>added examples to more functions</li>
+<li>preparations for CRAN submission<ul><li>added examples to more functions</li>
 <li>updated links</li>
 </ul></li>
 </ul></div>
@@ -101,30 +98,25 @@
 </ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-6-2">ggseg 1.6.02<a class="anchor" aria-label="anchor" href="#ggseg-1-6-2"></a></h3>
-<ul><li>No longer depends on ggplot2, but imports it.
-<ul><li>as is advised practice</li>
+<ul><li>No longer depends on ggplot2, but imports it.<ul><li>as is advised practice</li>
 <li>users must explicitly load ggplot2 to access further ggplot2 functions</li>
-</ul></li>
-</ul></div>
+</ul></li></ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-6-3">ggseg 1.6.01<a class="anchor" aria-label="anchor" href="#ggseg-1-6-3"></a></h3>
-<ul><li>fixed installation issues by making sure package depends on R&gt;3.3 for polygon holes.</li>
-</ul></div>
+<ul><li>fixed installation issues by making sure package depends on R&gt;3.3 for polygon holes.</li></ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-6-4">ggseg 1.6.00<a class="anchor" aria-label="anchor" href="#ggseg-1-6-4"></a></h3>
 <p>New large update, many new features. Of particular note is the introduction of the brain sf geom, which improved speed, and adaptability of the plots.</p>
 <ul><li>
 <code><a href="../reference/ggseg.html">ggseg()</a></code> will stay for a while, but is superseded by a simple features geom<br></li>
 <li>
-<code>geom_brain</code> introduced as a new function to plot the atlas data
-<ul><li>an sf geom provides a lot of new features to the package<br></li>
+<code>geom_brain</code> introduced as a new function to plot the atlas data<ul><li>an sf geom provides a lot of new features to the package<br></li>
 <li>more control over display of the slices through <code><a href="../reference/position_brain.html">position_brain()</a></code><br></li>
 <li>improved capabilities for atlases with regions that have holes<br></li>
 </ul></li>
 <li>new atlas class <code>brain_atlas</code> which contains simple features data<br></li>
 <li>new functions to allow compatibility between sf and polygon data<br></li>
-<li>utility functions to use on the atlas data for easy access to information
-<ul><li>
+<li>utility functions to use on the atlas data for easy access to information<ul><li>
 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> functions for ggseg_atlas and brain_atlas classes for a quick look at atlases<br></li>
 <li>
 <code>brain_regions</code> functions to easily extract the unique names of regions for an atlas<br></li>
@@ -136,36 +128,25 @@
 <h2 class="page-header" data-toc-text="1.5" id="ggseg-15">ggseg 1.5<a class="anchor" aria-label="anchor" href="#ggseg-15"></a></h2>
 <div class="section level3">
 <h3 id="ggseg-1-5">ggseg 1.5.5<a class="anchor" aria-label="anchor" href="#ggseg-1-5"></a></h3>
-<ul><li>dk atlas regions renamed to better reflect correct naming
-<ul><li>pre central and post central are precentral and postcentral<br></li>
-</ul></li>
+<ul><li>dk atlas regions renamed to better reflect correct naming<ul><li>pre central and post central are precentral and postcentral<br></li></ul></li>
 <li>dk atlas now also includes the corpus callosum, as the original atlas contains</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.5" id="ggseg-15-1">ggseg 1.5<a class="anchor" aria-label="anchor" href="#ggseg-15-1"></a></h2>
-</div>
+    <div class="section level2"><h2 class="page-header" data-toc-text="1.5" id="ggseg-15-1">ggseg 1.5<a class="anchor" aria-label="anchor" href="#ggseg-15-1"></a></h2></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.4" id="ggseg-154">ggseg 1.5.4<a class="anchor" aria-label="anchor" href="#ggseg-154"></a></h2>
-<ul><li>dkt renamed to dk
-<ul><li>the dkt (Desikan-Killiany-Tourville) atlas is not yet available<br></li>
-</ul></li>
-<li>atlas columns <code>area</code> renamed to <code>region</code>
-<ul><li>to avoid confusion with the calculation of cortical/surface area<br></li>
-</ul></li>
+<ul><li>dkt renamed to dk<ul><li>the dkt (Desikan-Killiany-Tourville) atlas is not yet available<br></li></ul></li>
+<li>atlas columns <code>area</code> renamed to <code>region</code><ul><li>to avoid confusion with the calculation of cortical/surface area<br></li></ul></li>
 <li>dk atlas region name “medial orbito frontal” changed to “medial orbitofrontal”</li>
 </ul><div class="section level3">
 <h3 id="ggseg-1-5-4">ggseg 1.5.3<a class="anchor" aria-label="anchor" href="#ggseg-1-5-4"></a></h3>
-<ul><li>Split ggseg, and ggseg3d into two different packages</li>
-</ul></div>
+<ul><li>Split ggseg, and ggseg3d into two different packages</li></ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-5-4-1">ggseg 1.5.2<a class="anchor" aria-label="anchor" href="#ggseg-1-5-4-1"></a></h3>
-<ul><li>Adapted to work with dplyr 0.8.1</li>
-</ul></div>
+<ul><li>Adapted to work with dplyr 0.8.1</li></ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-5-4-2">ggseg 1.5.1<a class="anchor" aria-label="anchor" href="#ggseg-1-5-4-2"></a></h3>
-<ul><li>Changed ggseg_atlas-class to have nested columns for easier viewing and wrangling</li>
-</ul></div>
+<ul><li>Changed ggseg_atlas-class to have nested columns for easier viewing and wrangling</li></ul></div>
 <div class="section level3">
 <h3 id="ggseg-1-5-4-3">ggseg 1.5<a class="anchor" aria-label="anchor" href="#ggseg-1-5-4-3"></a></h3>
 <ul><li><p>Changed atlas.info to function <code>atlas_info()</code></p></li>
@@ -195,7 +176,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
