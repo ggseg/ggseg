@@ -12,7 +12,7 @@ on:
       - master
       - dev
 
-name: R-CMD-check
+name: R-CMD-check-old
 
 jobs:
   R-CMD-check:
