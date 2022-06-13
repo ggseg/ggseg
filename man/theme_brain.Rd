@@ -57,11 +57,13 @@ Theme for easy customisation of the brain themes.}
 \examples{
 library(ggplot2)
 
-ggplot() +
-  geom_brain(atlas = dk) +
+p <- ggplot() +
+  geom_brain(atlas = dk)
+
+p +
   theme_brain()
 
-  geom_brain(atlas = dk) +
+p +
   theme_darkbrain()
 
 }

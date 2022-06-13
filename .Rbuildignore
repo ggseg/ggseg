@@ -20,3 +20,4 @@ vignettes/geom-sf*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 dev
+^CRAN-SUBMISSION$

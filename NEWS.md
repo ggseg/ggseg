@@ -12,9 +12,9 @@
 * change aseg data class , fix #56
 * bump version, small cran fixes
 * add sysreq
-* fix axial to coroncal in vignette
-* change axial to corontal in aseg data
-* readd ggplot2 depends\n\n
+* fix axial to coronal in vignette
+* change axial to coronal in aseg data
+* re-add ggplot2 depends\n\n
 
 # ggseg 1.6
 

@@ -67,10 +67,11 @@ FreeSurfer automatic subcortical segmentation of a brain volume}
 library(ggplot2)
 ggseg()
 ggseg(mapping=aes(fill=region))
+\dontrun{
 ggseg(colour="black", size=.7, mapping=aes(fill=region)) + theme_void()
 ggseg(position = "stacked")
 ggseg(adapt_scales = FALSE)
-
+}
 }
 \seealso{
 Useful links:

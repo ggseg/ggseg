@@ -38,10 +38,11 @@
 #' library(ggplot2)
 #' ggseg()
 #' ggseg(mapping=aes(fill=region))
+#' \dontrun{
 #' ggseg(colour="black", size=.7, mapping=aes(fill=region)) + theme_void()
 #' ggseg(position = "stacked")
 #' ggseg(adapt_scales = FALSE)
-#'
+#' }
 #' @seealso [ggplot2][ggplot], [aes][aes],
 #' [geom_polygon][geom_polygon], [coord_fixed][coord_fixed]
 #'

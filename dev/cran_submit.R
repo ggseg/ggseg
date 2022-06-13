@@ -36,6 +36,5 @@ fledge::bump_version()
 # Add comments for CRAN
 usethis::use_cran_comments(open = rlang::is_interactive())
 
-
 # Verify you're ready for release, and release
 devtools::release()
