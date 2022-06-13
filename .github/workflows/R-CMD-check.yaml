@@ -46,5 +46,4 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-        env:
           VDIFFR_RUN_TESTS: ${{ matrix.config.vdiffr }}
