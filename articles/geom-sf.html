@@ -278,10 +278,10 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.341</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.455</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.164</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.381</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.216</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.402</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.107</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.163</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -368,14 +368,14 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.149 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.464 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.233 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.112 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.005 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.131 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.126 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.086 g2</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.141 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.313 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.138 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.263 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.232 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.217 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.381 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.271 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
