@@ -7,8 +7,8 @@ test_that("brain atlas plots work", {
                       plot(dk,
                            position = position_brain(hemi ~ side)))
 
-  # expect_doppelganger("brain atlas aseg plot",
-  #                     plot(aseg))
+  expect_doppelganger("brain atlas aseg plot",
+                      plot(aseg))
 
   k <- dk
   k$data$geometry <- NULL

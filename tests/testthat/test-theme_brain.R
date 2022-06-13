@@ -1,8 +1,8 @@
 context("theme-brain")
 test_that("Check that themes are working", {
 
-  p <- ggseg(atlas=dk,show.legend = FALSE,
-             mapping=aes(fill=region))
+  p <- ggseg(atlas = dk, show.legend = FALSE,
+             mapping = aes(fill = region))
 
   expect_doppelganger("theme brain",
                       p + theme_brain())
