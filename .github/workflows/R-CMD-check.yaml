@@ -26,7 +26,7 @@ jobs:
           - {os: windows-latest, r: '3.6',     vdiffr: true}
           - {os: windows-latest, r: 'release', vdiffr: true}
           - {os: ubuntu-latest,  r: '4.1',     vdiffr: true, http-user-agent: 'release'}
-          - {{os: ubuntu-latest, r: 'release'  vdiffr: false}
+          - {os: ubuntu-latest, r: 'release'  vdiffr: false}
           - {os: ubuntu-latest,  r: 'oldrel-1' vdiffr: false}
 
 
