@@ -7,14 +7,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   out.width = "100%",
-  fig.path = "man/img/README-",
+  fig.path = "man/figures/README-",
   fig.retina = 3,
   echo = TRUE
 )
 ``` 
  
 
-# ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />  
+# ggseg <img src="man/figures/logo.png" align="right" alt="" width="138.5" />  
 <!-- badges: start -->
 [![R build status](https://github.com/ggseg/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/ggseg/ggseg/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)

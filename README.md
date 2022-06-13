@@ -1,5 +1,5 @@
 
-# ggseg <img src="man/img/logo.png" align="right" alt="" width="138.5" />
+# ggseg <img src="man/figures/logo.png" align="right" alt="" width="138.5" />
 
 <!-- badges: start -->
 
@@ -72,18 +72,17 @@ use them. All functions are documented in standard R fashion.
 
 ``` r
 library(ggseg)
-#> Loading required package: ggplot2
 library(ggplot2)
 plot(dk)
 ```
 
-<img src="man/img/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ``` r
 plot(aseg)
 ```
 
-<img src="man/img/README-unnamed-chunk-4-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
 
 While default atlas plots will give you an idea of how the atlases look,
 you will likely want to project your own data onto the plot.
@@ -115,7 +114,7 @@ someData %>%
 #> merging atlas and data by 'region'
 ```
 
-<img src="man/img/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://ggseg.github.io/ggseg/)
