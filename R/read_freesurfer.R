@@ -10,11 +10,12 @@
 #' @param path path to stats file
 #' @param rename logical. rename headers for ggseg compatibility
 #' @importFrom dplyr rename as_tibble
+#' @importFrom utils read.table
 #' @return tibble with stats information for subjects from FreeSurfer
 #' @export
 #' @examples
 #' \dontrun{
-#' subj_dir <- freesurfer::fs_subj_dir()
+#' subj_dir <- "/path/to/freesurfer/7.2.0/subjects/"
 #' aseg_stats <- file.path(subj_dir, "bert/stats/aseg.stats")
 #' read_freesurfer_stats(aseg_stats)
 #' }
@@ -23,7 +24,6 @@ read_freesurfer_stats <- function(path, rename = TRUE){
   # get headers
   headers <- readLines(path)
   headers <- headers[grepl("^#", headers)]
-
   headers <- gsub("# ", "", headers)[length(headers)]
   headers <- strsplit(headers, " ")[[1]]
 
@@ -56,7 +56,7 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #' @export
 #' @examples
 #' \dontrun{
-#' subj_dir <- freesurfer::fs_subj_dir()
+#' subj_dir <- "/path/to/freesurfer/7.2.0/subjects/"
 #' read_atlas_files(subj_dir, "aseg.stats")
 #'
 #' read_atlas_files(subj_dir, "lh.aparc.stats")

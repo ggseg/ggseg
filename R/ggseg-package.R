@@ -1,4 +1,4 @@
-#' ggseg: Plot brain segmentations with ggplot and plotly
+#' ggseg: Plot brain segmentations with ggplot
 #'
 #' Plotting results from analyses done on data derived from brain
 #' segmentations is a common need, but may be quite laborious.
@@ -8,7 +8,7 @@
 #'
 #' This package contains data from various brain parcellations,
 #' with convenient functions to inspect the results directly on
-#' a brain-plot wither with ggplot (2D polygons) or plotly (3d meshes).
+#' a brain-plot wither with ggplot (2D polygons).
 #'
 #' @name ggseg
 #' @docType package
