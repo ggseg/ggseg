@@ -2,7 +2,7 @@
 
 # ggseg 1.6.5
 
-- Bump version to 1.6.5
+* Bump version to 1.6.5
 * rm freesurfer dep
 * rm old remnants
 * update readme img
