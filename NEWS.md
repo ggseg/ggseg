@@ -1,11 +1,20 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# ggseg 1.6.5.9000
-
-- Same as previous version.
-
-
 # ggseg 1.6.5
+
+- Bump version to 1.6.5
+* rm freesurfer dep
+* rm old remnants
+* update readme img
+* switch cerebellum labels for wm gm, fix #80
+* fix aseg labels to original, fix #78
+* add vis as categorical. fix #76
+* change aseg data class , fix #56
+* bump version, small cran fixes
+* add sysreq
+* fix axial to coroncal in vignette
+* change axial to corontal in aseg data
+* readd ggplot2 depends\n\n
 
 # ggseg 1.6
 
