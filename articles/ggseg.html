@@ -110,7 +110,6 @@
 <p>The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom <code>geom_brain</code> (variant of geom_sf). This has introduced a lot of new functionality into the package, in addition to some new custom methods and objects.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
 <div class="section level2">
 <h2 id="the-brain-atlas-class">The brain-atlas class<a class="anchor" aria-label="anchor" href="#the-brain-atlas-class"></a>
@@ -354,10 +353,10 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.095</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.203</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.455</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.016</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.208</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.405</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.413</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.492</span></code></pre></div>
 <p>And such plots can be further adapted with standard ggplot themes, scales etc, to your liking.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span>
@@ -387,14 +386,14 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.021 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.342 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.248 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.461 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.111 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.197 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.462 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.047 g2</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.232 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.338 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.028 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.452 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.346 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.417 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.484 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.135 g2</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>

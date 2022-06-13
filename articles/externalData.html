@@ -118,10 +118,8 @@
 <p>There are several ways you can inspect what the data in the atlas looks like. While each atlas has some small differences, they all share six main columns:<br><strong>1. .long</strong> - x-axis<br><strong>2. .lat </strong>- y-axis<br><strong>3. .region </strong>- name of region/network<br><strong>4. .hemi</strong> - hemisphere (left or right)<br><strong>5. .side</strong> - side of view (medial, lateral, sagittal or axial)</p>
 <p>Most atlases also have a <code>label</code> column, which are raw names assigned from the program run to segment/extract data. TO inspect the atlases, call them in the console.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Loading required package: ggplot2</span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
 <span class="co">## Attaching package: 'dplyr'</span></code></pre>
 <pre><code><span class="co">## The following objects are masked from 'package:stats':</span>
@@ -130,7 +128,7 @@
 <pre><code><span class="co">## The following objects are masked from 'package:base':</span>
 <span class="co">## </span>
 <span class="co">##     intersect, setdiff, setequal, union</span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">dk</span></code></pre></div>
@@ -155,7 +153,7 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> left  lateral pars orbitalis        lh_parsorbitalis        0020 </span>
 <span class="co">## <span style="color: #949494;"># … with 76 more rows</span></span></code></pre>
 <p>Further inspection of the atlas data can be explored by turning them into tibbles (or data.frames)</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 90 × 8</span></span>
 <span class="co">##    atlas type     hemi  side    region     label roi                    geometry</span>
@@ -177,7 +175,7 @@
 <h2 id="structuring-data-for-merging">Structuring data for merging<a class="anchor" aria-label="anchor" href="#structuring-data-for-merging"></a>
 </h2>
 <p>For instance, here we make some data for the “default” and “visual” networks in the <code>dk</code> atlas, and two p values for those two networks.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
   region<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"superior temporal"</span>,<span class="st">"precentral"</span>, <span class="st">"lateral orbitofrontal"</span><span class="op">)</span>,
   p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.03</span>,<span class="fl">.6</span>, <span class="fl">.05</span><span class="op">)</span>
@@ -190,7 +188,7 @@
 <span class="co">## <span style="color: #BCBCBC;">2</span> precentral             0.6 </span>
 <span class="co">## <span style="color: #BCBCBC;">3</span> lateral orbitofrontal  0.05</span></code></pre>
 <p>Notice you we have spelled both the column name and the region names <strong>exactly</strong> as they appear in the data. This is necessary for the merging within the <code>ggseg</code> function to work properly. This merge can be attempted before supplying the data to <code>ggseg</code> to see if there are any errors.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span></code></pre></div>
@@ -210,7 +208,7 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> dk    cortical left  late… pars … lh_p… 0019  (((79.03391 126.496, 74.… <span style="color: #BB0000;">NA</span>   </span>
 <span class="co">## <span style="color: #949494;"># … with 80 more rows</span></span></code></pre>
 <p>No errors! Yes, the <code>p</code> column is seemingly full of <code>NA</code>s, but that is just because the top of the data is the somatomotor network, which we did not supply any p values for, so it has been populated with <code>NA</code>s. We can sort the data differently, so we can see the <code>p</code>has been added correctly.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -231,7 +229,7 @@
 <span class="co">## <span style="color: #BCBCBC;">10</span> dk    cortical right late… prece… rh_p… 0025  (((1226.19 203.939, 1230…  0.6 </span>
 <span class="co">## <span style="color: #949494;"># … with 80 more rows</span></span></code></pre>
 <p>If you need your data to be matched on several columns, the approach is the same. Add the column you want to match on, with the <strong>exact</strong> same name, and make sure it’s content matches the content of the same column in the data.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span><span class="op">$</span><span class="va">hemi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span><span class="op">)</span>
 <span class="va">someData</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 3</span></span>
@@ -240,7 +238,7 @@
 <span class="co">## <span style="color: #BCBCBC;">1</span> superior temporal      0.03 left </span>
 <span class="co">## <span style="color: #BCBCBC;">2</span> precentral             0.6  left </span>
 <span class="co">## <span style="color: #BCBCBC;">3</span> lateral orbitofrontal  0.05 left</span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -266,18 +264,18 @@
 <h2 id="providing-data-to-ggseg">Providing data to <code>ggseg</code><a class="anchor" aria-label="anchor" href="#providing-data-to-ggseg"></a>
 </h2>
 <p>When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span> atlas<span class="op">=</span><span class="va">dk</span>, mapping<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">p</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## merging atlas and data by 'region', 'hemi'</span></code></pre>
 <p><img src="externalData_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>You can actually also supply it directly as an atlas. For instance, if you had saved the merged data from the previous steps, you can supply this directly to the <code>atlas</code> option.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">newAtlas</span> <span class="op">=</span> <span class="va">dk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/as_brain_atlas.html">as_brain_atlas</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Joining, by = c("hemi", "region")</span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">newAtlas</span>, 
              mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">p</span><span class="op">)</span>, 
@@ -285,7 +283,7 @@
   <span class="op">)</span></code></pre></div>
 <p><img src="externalData_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It is this possibility of supplying a custom atlas that gives you particular flexibility, though a little tricky to begin with. Lets do a recap of the unwanted results:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,
                <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span>, 
@@ -302,7 +300,7 @@
 <pre><code><span class="co">## merging atlas and data by 'region'</span></code></pre>
 <p><img src="externalData_files/figure-html/datasupp3-1.png" width="700"></p>
 <p>See how you have three facets, when you only have 2 groups, and that the “background” brain is not printed in your two groups. This is because for ggplot, that is what the data looks like. For this to work, you can supply already grouped data to <code>ggseg</code>, but you must make sure they are grouped by the columns you will use for faceting, or else it will not work.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># If you group_by the columns you will facet by, this will work well.</span>
 <span class="va">someData</span> <span class="op">=</span> <span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">AgeG</span><span class="op">)</span>
@@ -318,7 +316,7 @@
 <pre><code><span class="co">## merging atlas and data by 'region'</span></code></pre>
 <p><img src="externalData_files/figure-html/duplicate-1.png" width="700"></p>
 <p>This whole procedure can be piped together, so you don’t have to save all the intermediate steps.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">AgeG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
 

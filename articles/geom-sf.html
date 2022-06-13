@@ -115,7 +115,6 @@
 <p>Firstly, you need to make sure that the atlas you are working on had simple features (sf) geometry column in it. The easiest way to do this is to simply call the atlas in the R terminal and look for information on <code>use</code> in the console printout. The dk-atlas has <code>use: ggplot() + geom_brain()</code> letting us know that it is set up to work with simple features.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">dk</span>
@@ -279,10 +278,10 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
 <span class="co">#&gt;   region                  p</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.494</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.218</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.162</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.084</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.217</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.436</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.413</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.265</span></code></pre></div>
 <p>To join a data.frame to an atlas object, you should use the specialised <code>brain_join</code> function. This makes sure that atlas information is preserved while joining.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -369,14 +368,14 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span>
 <span class="co">#&gt;   region                  p groups</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.019 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.258 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.063 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.453 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.428 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.281 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.29  g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.34  g2</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.218 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.441 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.227 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.094 g1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.256 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.396 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.296 g2    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.284 g2</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
