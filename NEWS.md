@@ -1,3 +1,10 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# ggseg 1.6.5.9000
+
+- Same as previous version.
+
+
 # ggseg 1.6.5
 
 # ggseg 1.6
