@@ -9,7 +9,7 @@ on:
 name: R-CMD-check
 
 jobs:
-  R-CMD-check-test:
+  R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -19,8 +19,8 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest,   r: 'release',  vdiffr: true}
-          - {os: windows-latest, r: 'release',  vdiffr: true}
-          - {os: ubuntu-latest,  r: 'devel',    vdiffr: true, http-user-agent: 'release'}
+          - {os: windows-latest, r: 'release',  vdiffr: false}
+          - {os: ubuntu-latest,  r: 'devel',    vdiffr: false, http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release',  vdiffr: false}
           - {os: ubuntu-latest,  r: 'oldrel-1', vdiffr: false}
     env:
@@ -46,4 +46,6 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+        env:
           VDIFFR_RUN_TESTS: ${{ matrix.config.vdiffr }}
+
