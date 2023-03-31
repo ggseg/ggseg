@@ -55,7 +55,7 @@ format.brain_atlas <- function(x, ...) {
   idx <- !grepl("ggseg|geometry", names(dt))
   dt <- dplyr::as_tibble(dt)
   dt <- dt[!is.na(dt$region), idx]
-  dt_print <- utils::capture.output(dt)[-1]
+  dt_print <- utils::capture.output(print(dt, ...))[-1]
 
   c(
     sprintf("# %s %s brain atlas", x$atlas, x$type),
@@ -71,7 +71,7 @@ format.brain_atlas <- function(x, ...) {
 
 #' @export
 print.brain_atlas <- function(x, ...) {
-  cat(format(x), sep = "\n")
+  cat(format(x, ...), sep = "\n")
   invisible(x)
 }
 

@@ -1,6 +1,6 @@
 Package: ggseg
 Title: Plotting Tool for Brain Atlases
-Version: 1.6.5
+Version: 1.6.6
 Authors@R: c(
     person("Athanasia Mo", "Mowinckel", 
             email = "a.m.mowinckel@psykologi.uio.no", 
@@ -9,7 +9,11 @@ Authors@R: c(
     person("Didac", "Vidal-Piñeiro", 
             email = "d.v.pineiro@psykologi.uio.no", 
             role = c("aut"),
-        comment = c(ORCID = "0000-0001-9997-9156"))
+        comment = c(ORCID = "0000-0001-9997-9156")),
+    person("Ramiro", "Magno",
+            email = "ramiro.magno@gmail.com",
+            role = c("aut"),
+        comment = c(ORCID = "0000-0001-5226-3441"))
         )
 Description: Contains 'ggplot2' geom for plotting brain atlases using 
     simple features. The largest component of the package is the data 
@@ -17,7 +21,7 @@ Description: Contains 'ggplot2' geom for plotting brain atlases using
     <doi:10.1177/2515245920928009>.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.3)
 LazyData: true
