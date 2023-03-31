@@ -19,7 +19,7 @@ atlases where first introduced."><meta property="og:image" content="https://lcbc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.6</span>
       </span>
     </div>
 
@@ -79,18 +79,18 @@ atlases where first introduced.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">scale_brain</span><span class="op">(</span>
-  name <span class="op">=</span> <span class="st">"dk"</span>,
-  na.value <span class="op">=</span> <span class="st">"grey"</span>,
-  <span class="va">...</span>,
-  aesthetics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fill"</span>, <span class="st">"colour"</span>, <span class="st">"color"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">scale_colour_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">scale_color_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
-
-<span class="fu">scale_fill_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scale_brain</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"dk"</span>,</span>
+<span>  na.value <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  aesthetics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fill"</span>, <span class="st">"colour"</span>, <span class="st">"color"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">scale_colour_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">scale_color_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">scale_fill_brain</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -132,7 +132,7 @@ atlases where first introduced.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">scale_brain</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">scale_brain</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     aesthetics: fill</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     axis_order: function</span>
@@ -152,7 +152,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_discrete: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_empty: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     labels: waiver</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: bankssts caudal anterior cingulate caudal middle frontal ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_sec_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     map: function</span>
@@ -177,7 +177,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform_df: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     super:  &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
-<span class="r-in"><span class="fu">scale_colour_brain</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">scale_colour_brain</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     aesthetics: colour</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     axis_order: function</span>
@@ -197,7 +197,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_discrete: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_empty: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     labels: waiver</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: bankssts caudal anterior cingulate caudal middle frontal ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_sec_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     map: function</span>
@@ -222,7 +222,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform_df: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     super:  &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
-<span class="r-in"><span class="fu">scale_fill_brain</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">scale_fill_brain</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     aesthetics: fill</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     axis_order: function</span>
@@ -242,7 +242,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_discrete: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     is_empty: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     labels: waiver</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: bankssts caudal anterior cingulate caudal middle frontal ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_sec_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     make_title: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     map: function</span>
@@ -267,7 +267,7 @@ atlases where first introduced.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     transform_df: function</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     super:  &lt;ggproto object: Class ScaleDiscrete, Scale, gg&gt;</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -278,11 +278,11 @@ atlases where first introduced.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
+  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro, Ramiro Magno.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

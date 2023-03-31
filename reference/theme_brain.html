@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.6</span>
       </span>
     </div>
 
@@ -75,23 +75,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">theme_brain</span><span class="op">(</span>text.size <span class="op">=</span> <span class="fl">12</span>, text.family <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span>
-
-<span class="fu">theme_darkbrain</span><span class="op">(</span>text.size <span class="op">=</span> <span class="fl">12</span>, text.family <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span>
-
-<span class="fu">theme_custombrain</span><span class="op">(</span>
-  plot.background <span class="op">=</span> <span class="st">"white"</span>,
-  text.colour <span class="op">=</span> <span class="st">"darkgrey"</span>,
-  text.size <span class="op">=</span> <span class="fl">12</span>,
-  text.family <span class="op">=</span> <span class="st">"mono"</span>
-<span class="op">)</span>
-
-<span class="fu">theme_brain2</span><span class="op">(</span>
-  plot.background <span class="op">=</span> <span class="st">"white"</span>,
-  text.colour <span class="op">=</span> <span class="st">"darkgrey"</span>,
-  text.size <span class="op">=</span> <span class="fl">12</span>,
-  text.family <span class="op">=</span> <span class="st">"mono"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">theme_brain</span><span class="op">(</span>text.size <span class="op">=</span> <span class="fl">12</span>, text.family <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_darkbrain</span><span class="op">(</span>text.size <span class="op">=</span> <span class="fl">12</span>, text.family <span class="op">=</span> <span class="st">"mono"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_custombrain</span><span class="op">(</span></span>
+<span>  plot.background <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="st">"darkgrey"</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="st">"mono"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">theme_brain2</span><span class="op">(</span></span>
+<span>  plot.background <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="st">"darkgrey"</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="st">"mono"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -146,19 +146,19 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_brain</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_brain</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="theme_brain-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_darkbrain</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_darkbrain</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="theme_brain-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -169,11 +169,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
+  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro, Ramiro Magno.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -1,5 +1,5 @@
-pandoc: 2.14.2
-pkgdown: 2.0.4
+pandoc: 2.19.2
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   externalData: externalData.html
@@ -7,7 +7,7 @@ articles:
   geom-sf: geom-sf.html
   ggseg-old: ggseg-old.html
   ggseg: ggseg.html
-last_built: 2022-06-14T09:15Z
+last_built: 2023-03-31T09:03Z
 urls:
   reference: https://lcbc-uio.github.io/ggseg/reference
   article: https://lcbc-uio.github.io/ggseg/articles

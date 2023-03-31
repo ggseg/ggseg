@@ -18,7 +18,7 @@ object."><meta property="og:image" content="https://lcbc-uio.github.io/ggseg/log
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.6</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@ object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">brain_join</span><span class="op">(</span><span class="va">data</span>, <span class="va">atlas</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">brain_join</span><span class="op">(</span><span class="va">data</span>, <span class="va">atlas</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -104,13 +104,13 @@ object.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">    region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</span>
-<span class="r-in">                <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>,</span>
-<span class="r-in">    p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">    stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">brain_join</span><span class="op">(</span><span class="va">someData</span>, <span class="va">dk</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</span></span>
+<span class="r-in"><span>                <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">brain_join</span><span class="op">(</span><span class="va">someData</span>, <span class="va">dk</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> merging atlas and data by 'region'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 90 features and 8 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
@@ -140,7 +140,7 @@ object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  0013 NA MULTIPOLYGON (((66.26648 69...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  0016 NA MULTIPOLYGON (((238.0128 91...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 0019 NA MULTIPOLYGON (((79.03391 12...</span>
-<span class="r-in"><span class="fu">brain_join</span><span class="op">(</span><span class="va">someData</span>, <span class="va">dk</span>, <span class="st">"region"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">brain_join</span><span class="op">(</span><span class="va">someData</span>, <span class="va">dk</span>, <span class="st">"region"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 90 features and 8 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
@@ -169,7 +169,7 @@ object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  0013 NA MULTIPOLYGON (((66.26648 69...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  0016 NA MULTIPOLYGON (((238.0128 91...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 0019 NA MULTIPOLYGON (((79.03391 12...</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -180,11 +180,11 @@ object.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
+  <p></p><p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro, Ramiro Magno.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

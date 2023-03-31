@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.6</span>
       </span>
     </div>
 
@@ -107,89 +107,106 @@
 
     
     
-<p>The new ggseg-package version has introduced a new way of plotting the brain atlases, through a custom <code>geom_brain</code> (variant of geom_sf). This has introduced a lot of new functionality into the package, in addition to some new custom methods and objects.</p>
+<p>The new ggseg-package version has introduced a new way of plotting
+the brain atlases, through a custom <code>geom_brain</code> (variant of
+geom_sf). This has introduced a lot of new functionality into the
+package, in addition to some new custom methods and objects.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggseg/ggseg" class="external-link">ggseg</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="the-brain-atlas-class">The brain-atlas class<a class="anchor" aria-label="anchor" href="#the-brain-atlas-class"></a>
 </h2>
-<p>The first new thing to notice is that we have introduced a new atlas class called <code>brain-atlas</code>. This class is a special class for ggseg-atlases, that contain information in a specific way. They are objects with 4-levels, each containing important information about the atlas in question.</p>
+<p>The first new thing to notice is that we have introduced a new atlas
+class called <code>brain-atlas</code>. This class is a special class for
+ggseg-atlases, that contain information in a specific way. They are
+objects with 4-levels, each containing important information about the
+atlas in question.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dk</span><span class="op">$</span><span class="va">atlas</span>
-<span class="co">#&gt; [1] "dk"</span>
-<span class="va">dk</span><span class="op">$</span><span class="va">type</span>
-<span class="co">#&gt; [1] "cortical"</span>
-<span class="va">dk</span><span class="op">$</span><span class="va">palette</span>
-<span class="co">#&gt;                   bankssts  caudal anterior cingulate </span>
-<span class="co">#&gt;                  "#196428"                  "#7D64A0" </span>
-<span class="co">#&gt;      caudal middle frontal            corpus callosum </span>
-<span class="co">#&gt;                  "#641900"                  "#784632" </span>
-<span class="co">#&gt;                     cuneus                 entorhinal </span>
-<span class="co">#&gt;                  "#DC1464"                  "#DC140A" </span>
-<span class="co">#&gt;                   fusiform          inferior parietal </span>
-<span class="co">#&gt;                  "#B4DC8C"                  "#DC3CDC" </span>
-<span class="co">#&gt;          inferior temporal          isthmus cingulate </span>
-<span class="co">#&gt;                  "#B42878"                  "#8C148C" </span>
-<span class="co">#&gt;          lateral occipital      lateral orbitofrontal </span>
-<span class="co">#&gt;                  "#141E8C"                  "#234B32" </span>
-<span class="co">#&gt;                    lingual       medial orbitofrontal </span>
-<span class="co">#&gt;                  "#E18C8C"                  "#C8234B" </span>
-<span class="co">#&gt;            middle temporal            parahippocampal </span>
-<span class="co">#&gt;                  "#A06432"                  "#14DC3C" </span>
-<span class="co">#&gt;                paracentral           pars opercularis </span>
-<span class="co">#&gt;                  "#3CDC3C"                  "#DCB48C" </span>
-<span class="co">#&gt;             pars orbitalis          pars triangularis </span>
-<span class="co">#&gt;                  "#146432"                  "#DC3C14" </span>
-<span class="co">#&gt;              pericalcarine                postcentral </span>
-<span class="co">#&gt;                  "#78643C"                  "#DC1414" </span>
-<span class="co">#&gt;        posterior cingulate                 precentral </span>
-<span class="co">#&gt;                  "#DCB4DC"                  "#3C14DC" </span>
-<span class="co">#&gt;                  precuneus rostral anterior cingulate </span>
-<span class="co">#&gt;                  "#A08CB4"                  "#50148C" </span>
-<span class="co">#&gt;     rostral middle frontal           superior frontal </span>
-<span class="co">#&gt;                  "#4B327D"                  "#14DCA0" </span>
-<span class="co">#&gt;          superior parietal          superior temporal </span>
-<span class="co">#&gt;                  "#14B48C"                  "#8CDCDC" </span>
-<span class="co">#&gt;              supramarginal               frontal pole </span>
-<span class="co">#&gt;                  "#50A014"                  "#640064" </span>
-<span class="co">#&gt;              temporal pole        transverse temporal </span>
-<span class="co">#&gt;                  "#464646"                  "#9696C8" </span>
-<span class="co">#&gt;                     insula </span>
-<span class="co">#&gt;                  "#FFC020"</span>
-<span class="va">dk</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Simple feature collection with 90 features and 5 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span>
-<span class="co">#&gt; CRS:           NA</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 90 × 6</span></span>
-<span class="co">#&gt;    hemi  side    region                label     roi                    geometry</span>
-<span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> left  lateral <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        0001  (((84.32563 34.46407, 84…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> left  lateral bankssts              lh_banks… 0002  (((214.8215 108.8139, 21…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> left  lateral caudal middle frontal lh_cauda… 0004  (((106.16 184.3144, 93.6…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> left  lateral fusiform              lh_fusif… 0008  (((256.5481 48.35713, 24…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> left  lateral inferior parietal     lh_infer… 0009  (((218.4373 161.6233, 21…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> left  lateral inferior temporal     lh_infer… 0010  (((250.7745 70.75764, 24…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left  lateral lateral occipital     lh_later… 0012  (((277.4615 115.0523, 27…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> left  lateral lateral orbitofrontal lh_later… 0013  (((66.26648 69.56474, 56…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> left  lateral middle temporal       lh_middl… 0016  (((238.0128 91.25816, 23…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> left  lateral pars opercularis      lh_parso… 0019  (((79.03391 126.496, 74.…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 80 more rows</span></span></code></pre></div>
-<p>Of these four, only the <code>palette</code> is an optional part, where some atlases may have this field empty. The data, you might notice, is simple-features data, with a <code>geometry</code> column that includes all the information needed to plot the data as a simple features object. You can actually call <code>plot</code> directly on the data, and the standard simple features plot will appear.</p>
+<code class="sourceCode R"><span><span class="va">dk</span><span class="op">$</span><span class="va">atlas</span></span>
+<span><span class="co">#&gt; [1] "dk"</span></span>
+<span><span class="va">dk</span><span class="op">$</span><span class="va">type</span></span>
+<span><span class="co">#&gt; [1] "cortical"</span></span>
+<span><span class="va">dk</span><span class="op">$</span><span class="va">palette</span></span>
+<span><span class="co">#&gt;                   bankssts  caudal anterior cingulate </span></span>
+<span><span class="co">#&gt;                  "#196428"                  "#7D64A0" </span></span>
+<span><span class="co">#&gt;      caudal middle frontal            corpus callosum </span></span>
+<span><span class="co">#&gt;                  "#641900"                  "#784632" </span></span>
+<span><span class="co">#&gt;                     cuneus                 entorhinal </span></span>
+<span><span class="co">#&gt;                  "#DC1464"                  "#DC140A" </span></span>
+<span><span class="co">#&gt;                   fusiform          inferior parietal </span></span>
+<span><span class="co">#&gt;                  "#B4DC8C"                  "#DC3CDC" </span></span>
+<span><span class="co">#&gt;          inferior temporal          isthmus cingulate </span></span>
+<span><span class="co">#&gt;                  "#B42878"                  "#8C148C" </span></span>
+<span><span class="co">#&gt;          lateral occipital      lateral orbitofrontal </span></span>
+<span><span class="co">#&gt;                  "#141E8C"                  "#234B32" </span></span>
+<span><span class="co">#&gt;                    lingual       medial orbitofrontal </span></span>
+<span><span class="co">#&gt;                  "#E18C8C"                  "#C8234B" </span></span>
+<span><span class="co">#&gt;            middle temporal            parahippocampal </span></span>
+<span><span class="co">#&gt;                  "#A06432"                  "#14DC3C" </span></span>
+<span><span class="co">#&gt;                paracentral           pars opercularis </span></span>
+<span><span class="co">#&gt;                  "#3CDC3C"                  "#DCB48C" </span></span>
+<span><span class="co">#&gt;             pars orbitalis          pars triangularis </span></span>
+<span><span class="co">#&gt;                  "#146432"                  "#DC3C14" </span></span>
+<span><span class="co">#&gt;              pericalcarine                postcentral </span></span>
+<span><span class="co">#&gt;                  "#78643C"                  "#DC1414" </span></span>
+<span><span class="co">#&gt;        posterior cingulate                 precentral </span></span>
+<span><span class="co">#&gt;                  "#DCB4DC"                  "#3C14DC" </span></span>
+<span><span class="co">#&gt;                  precuneus rostral anterior cingulate </span></span>
+<span><span class="co">#&gt;                  "#A08CB4"                  "#50148C" </span></span>
+<span><span class="co">#&gt;     rostral middle frontal           superior frontal </span></span>
+<span><span class="co">#&gt;                  "#4B327D"                  "#14DCA0" </span></span>
+<span><span class="co">#&gt;          superior parietal          superior temporal </span></span>
+<span><span class="co">#&gt;                  "#14B48C"                  "#8CDCDC" </span></span>
+<span><span class="co">#&gt;              supramarginal               frontal pole </span></span>
+<span><span class="co">#&gt;                  "#50A014"                  "#640064" </span></span>
+<span><span class="co">#&gt;              temporal pole        transverse temporal </span></span>
+<span><span class="co">#&gt;                  "#464646"                  "#9696C8" </span></span>
+<span><span class="co">#&gt;                     insula </span></span>
+<span><span class="co">#&gt;                  "#FFC020"</span></span>
+<span><span class="va">dk</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Simple feature collection with 90 features and 5 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 0 ymin: 0 xmax: 1390.585 ymax: 205.4407</span></span>
+<span><span class="co">#&gt; CRS:           NA</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 90 × 6</span></span></span>
+<span><span class="co">#&gt;    hemi  side    region                label     roi                    geometry</span></span>
+<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> left  lateral <span style="color: #BB0000;">NA</span>                    <span style="color: #BB0000;">NA</span>        0001  (((84.32563 34.46407, 84…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> left  lateral bankssts              lh_banks… 0002  (((214.8215 108.8139, 21…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> left  lateral caudal middle frontal lh_cauda… 0004  (((106.16 184.3144, 93.6…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> left  lateral fusiform              lh_fusif… 0008  (((256.5481 48.35713, 24…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> left  lateral inferior parietal     lh_infer… 0009  (((218.4373 161.6233, 21…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> left  lateral inferior temporal     lh_infer… 0010  (((250.7745 70.75764, 24…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left  lateral lateral occipital     lh_later… 0012  (((277.4615 115.0523, 27…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> left  lateral lateral orbitofrontal lh_later… 0013  (((66.26648 69.56474, 56…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> left  lateral middle temporal       lh_middl… 0016  (((238.0128 91.25816, 23…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> left  lateral pars opercularis      lh_parso… 0019  (((79.03391 126.496, 74.…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 80 more rows</span></span></span></code></pre></div>
+<p>Of these four, only the <code>palette</code> is an optional part,
+where some atlases may have this field empty. The data, you might
+notice, is simple-features data, with a <code>geometry</code> column
+that includes all the information needed to plot the data as a simple
+features object. You can actually call <code>plot</code> directly on the
+data, and the standard simple features plot will appear.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
-<p>Even better, though, you should call <code>plot</code> directly on the atlas object. This will give you a fast overview of the atlas you are thinking of using.</p>
+<p>Even better, though, you should call <code>plot</code> directly on
+the atlas object. This will give you a fast overview of the atlas you
+are thinking of using.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<p>You will notice that the new atlas-class has better resolution and default values that what you get from the ggseg-atlas class.</p>
+<p>You will notice that the new atlas-class has better resolution and
+default values that what you get from the ggseg-atlas class.</p>
 <div class="section level3">
 <h3 id="extracting-atlas-information">Extracting atlas information<a class="anchor" aria-label="anchor" href="#extracting-atlas-information"></a>
 </h3>
-<p>This new class also comes with a new custom printout method, that should give you a better idea of the atlas content. It lists information such as:</p>
+<p>This new class also comes with a new custom printout method, that
+should give you a better idea of the atlas content. It lists information
+such as:</p>
 <ul>
 <li>type of atlas<br>
 </li>
@@ -201,251 +218,289 @@
 </li>
 <li>whether it has a built-in palette</li>
 </ul>
-<p>And in addition it has a preview of the data content, so you may more easily discern how you might adapt your own data to fit the atlas data.</p>
+<p>And in addition it has a preview of the data content, so you may more
+easily discern how you might adapt your own data to fit the atlas
+data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dk</span>
-<span class="co">#&gt; # dk cortical brain atlas</span>
-<span class="co">#&gt;   regions: 35 </span>
-<span class="co">#&gt;   hemispheres: left, right </span>
-<span class="co">#&gt;   side views: lateral, medial </span>
-<span class="co">#&gt;   palette: yes </span>
-<span class="co">#&gt;   use: ggplot() + geom_brain() </span>
-<span class="co">#&gt; ----</span>
-<span class="co">#&gt;    hemi  side    region                label                   roi  </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> left  lateral bankssts              lh_bankssts             0002 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> left  lateral caudal middle frontal lh_caudalmiddlefrontal  0004 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> left  lateral fusiform              lh_fusiform             0008 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> left  lateral inferior parietal     lh_inferiorparietal     0009 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> left  lateral inferior temporal     lh_inferiortemporal     0010 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> left  lateral lateral occipital     lh_lateraloccipital     0012 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left  lateral lateral orbitofrontal lh_lateralorbitofrontal 0013 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> left  lateral middle temporal       lh_middletemporal       0016 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> left  lateral pars opercularis      lh_parsopercularis      0019 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> left  lateral pars orbitalis        lh_parsorbitalis        0020 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 76 more rows</span></span></code></pre></div>
-<p>Some users have also wanted to easier ways of checking the names of regions and labels of an atlas, in order to check if their data fits the atlas data. In order to make this easier, we have added two new functions that should help you with that.</p>
+<code class="sourceCode R"><span><span class="va">dk</span></span>
+<span><span class="co">#&gt; # dk cortical brain atlas</span></span>
+<span><span class="co">#&gt;   regions: 35 </span></span>
+<span><span class="co">#&gt;   hemispheres: left, right </span></span>
+<span><span class="co">#&gt;   side views: lateral, medial </span></span>
+<span><span class="co">#&gt;   palette: yes </span></span>
+<span><span class="co">#&gt;   use: ggplot() + geom_brain() </span></span>
+<span><span class="co">#&gt; ----</span></span>
+<span><span class="co">#&gt;    hemi  side    region                label                   roi  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> left  lateral bankssts              lh_bankssts             0002 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> left  lateral caudal middle frontal lh_caudalmiddlefrontal  0004 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> left  lateral fusiform              lh_fusiform             0008 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> left  lateral inferior parietal     lh_inferiorparietal     0009 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> left  lateral inferior temporal     lh_inferiortemporal     0010 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> left  lateral lateral occipital     lh_lateraloccipital     0012 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> left  lateral lateral orbitofrontal lh_lateralorbitofrontal 0013 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> left  lateral middle temporal       lh_middletemporal       0016 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> left  lateral pars opercularis      lh_parsopercularis      0019 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> left  lateral pars orbitalis        lh_parsorbitalis        0020 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 76 more rows</span></span></span></code></pre></div>
+<p>Some users have also wanted to easier ways of checking the names of
+regions and labels of an atlas, in order to check if their data fits the
+atlas data. In order to make this easier, we have added two new
+functions that should help you with that.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "bankssts"                   "caudal anterior cingulate" </span>
-<span class="co">#&gt;  [3] "caudal middle frontal"      "corpus callosum"           </span>
-<span class="co">#&gt;  [5] "cuneus"                     "entorhinal"                </span>
-<span class="co">#&gt;  [7] "frontal pole"               "fusiform"                  </span>
-<span class="co">#&gt;  [9] "inferior parietal"          "inferior temporal"         </span>
-<span class="co">#&gt; [11] "insula"                     "isthmus cingulate"         </span>
-<span class="co">#&gt; [13] "lateral occipital"          "lateral orbitofrontal"     </span>
-<span class="co">#&gt; [15] "lingual"                    "medial orbitofrontal"      </span>
-<span class="co">#&gt; [17] "middle temporal"            "paracentral"               </span>
-<span class="co">#&gt; [19] "parahippocampal"            "pars opercularis"          </span>
-<span class="co">#&gt; [21] "pars orbitalis"             "pars triangularis"         </span>
-<span class="co">#&gt; [23] "pericalcarine"              "postcentral"               </span>
-<span class="co">#&gt; [25] "posterior cingulate"        "precentral"                </span>
-<span class="co">#&gt; [27] "precuneus"                  "rostral anterior cingulate"</span>
-<span class="co">#&gt; [29] "rostral middle frontal"     "superior frontal"          </span>
-<span class="co">#&gt; [31] "superior parietal"          "superior temporal"         </span>
-<span class="co">#&gt; [33] "supramarginal"              "temporal pole"             </span>
-<span class="co">#&gt; [35] "transverse temporal"</span>
-<span class="fu"><a href="../reference/brain_labels.html">brain_labels</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "lh_bankssts"                 "lh_caudalanteriorcingulate" </span>
-<span class="co">#&gt;  [3] "lh_caudalmiddlefrontal"      "lh_corpuscallosum"          </span>
-<span class="co">#&gt;  [5] "lh_cuneus"                   "lh_entorhinal"              </span>
-<span class="co">#&gt;  [7] "lh_frontalpole"              "lh_fusiform"                </span>
-<span class="co">#&gt;  [9] "lh_inferiorparietal"         "lh_inferiortemporal"        </span>
-<span class="co">#&gt; [11] "lh_insula"                   "lh_isthmuscingulate"        </span>
-<span class="co">#&gt; [13] "lh_lateraloccipital"         "lh_lateralorbitofrontal"    </span>
-<span class="co">#&gt; [15] "lh_lingual"                  "lh_medialorbitofrontal"     </span>
-<span class="co">#&gt; [17] "lh_middletemporal"           "lh_paracentral"             </span>
-<span class="co">#&gt; [19] "lh_parahippocampal"          "lh_parsopercularis"         </span>
-<span class="co">#&gt; [21] "lh_parsorbitalis"            "lh_parstriangularis"        </span>
-<span class="co">#&gt; [23] "lh_pericalcarine"            "lh_postcentral"             </span>
-<span class="co">#&gt; [25] "lh_posteriorcingulate"       "lh_precentral"              </span>
-<span class="co">#&gt; [27] "lh_precuneus"                "lh_rostralanteriorcingulate"</span>
-<span class="co">#&gt; [29] "lh_rostralmiddlefrontal"     "lh_superiorfrontal"         </span>
-<span class="co">#&gt; [31] "lh_superiorparietal"         "lh_superiortemporal"        </span>
-<span class="co">#&gt; [33] "lh_supramarginal"            "lh_temporalpole"            </span>
-<span class="co">#&gt; [35] "lh_transversetemporal"       "rh_bankssts"                </span>
-<span class="co">#&gt; [37] "rh_caudalanteriorcingulate"  "rh_caudalmiddlefrontal"     </span>
-<span class="co">#&gt; [39] "rh_corpuscallosum"           "rh_cuneus"                  </span>
-<span class="co">#&gt; [41] "rh_entorhinal"               "rh_frontalpole"             </span>
-<span class="co">#&gt; [43] "rh_fusiform"                 "rh_inferiorparietal"        </span>
-<span class="co">#&gt; [45] "rh_inferiortemporal"         "rh_insula"                  </span>
-<span class="co">#&gt; [47] "rh_isthmuscingulate"         "rh_lateraloccipital"        </span>
-<span class="co">#&gt; [49] "rh_lateralorbitofrontal"     "rh_lingual"                 </span>
-<span class="co">#&gt; [51] "rh_medialorbitofrontal"      "rh_middletemporal"          </span>
-<span class="co">#&gt; [53] "rh_paracentral"              "rh_parahippocampal"         </span>
-<span class="co">#&gt; [55] "rh_parsopercularis"          "rh_parsorbitalis"           </span>
-<span class="co">#&gt; [57] "rh_parstriangularis"         "rh_pericalcarine"           </span>
-<span class="co">#&gt; [59] "rh_postcentral"              "rh_posteriorcingulate"      </span>
-<span class="co">#&gt; [61] "rh_precentral"               "rh_precuneus"               </span>
-<span class="co">#&gt; [63] "rh_rostralanteriorcingulate" "rh_rostralmiddlefrontal"    </span>
-<span class="co">#&gt; [65] "rh_superiorfrontal"          "rh_superiorparietal"        </span>
-<span class="co">#&gt; [67] "rh_superiortemporal"         "rh_supramarginal"           </span>
-<span class="co">#&gt; [69] "rh_temporalpole"             "rh_transversetemporal"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "bankssts"                   "caudal anterior cingulate" </span></span>
+<span><span class="co">#&gt;  [3] "caudal middle frontal"      "corpus callosum"           </span></span>
+<span><span class="co">#&gt;  [5] "cuneus"                     "entorhinal"                </span></span>
+<span><span class="co">#&gt;  [7] "frontal pole"               "fusiform"                  </span></span>
+<span><span class="co">#&gt;  [9] "inferior parietal"          "inferior temporal"         </span></span>
+<span><span class="co">#&gt; [11] "insula"                     "isthmus cingulate"         </span></span>
+<span><span class="co">#&gt; [13] "lateral occipital"          "lateral orbitofrontal"     </span></span>
+<span><span class="co">#&gt; [15] "lingual"                    "medial orbitofrontal"      </span></span>
+<span><span class="co">#&gt; [17] "middle temporal"            "paracentral"               </span></span>
+<span><span class="co">#&gt; [19] "parahippocampal"            "pars opercularis"          </span></span>
+<span><span class="co">#&gt; [21] "pars orbitalis"             "pars triangularis"         </span></span>
+<span><span class="co">#&gt; [23] "pericalcarine"              "postcentral"               </span></span>
+<span><span class="co">#&gt; [25] "posterior cingulate"        "precentral"                </span></span>
+<span><span class="co">#&gt; [27] "precuneus"                  "rostral anterior cingulate"</span></span>
+<span><span class="co">#&gt; [29] "rostral middle frontal"     "superior frontal"          </span></span>
+<span><span class="co">#&gt; [31] "superior parietal"          "superior temporal"         </span></span>
+<span><span class="co">#&gt; [33] "supramarginal"              "temporal pole"             </span></span>
+<span><span class="co">#&gt; [35] "transverse temporal"</span></span>
+<span><span class="fu"><a href="../reference/brain_labels.html">brain_labels</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "lh_bankssts"                 "lh_caudalanteriorcingulate" </span></span>
+<span><span class="co">#&gt;  [3] "lh_caudalmiddlefrontal"      "lh_corpuscallosum"          </span></span>
+<span><span class="co">#&gt;  [5] "lh_cuneus"                   "lh_entorhinal"              </span></span>
+<span><span class="co">#&gt;  [7] "lh_frontalpole"              "lh_fusiform"                </span></span>
+<span><span class="co">#&gt;  [9] "lh_inferiorparietal"         "lh_inferiortemporal"        </span></span>
+<span><span class="co">#&gt; [11] "lh_insula"                   "lh_isthmuscingulate"        </span></span>
+<span><span class="co">#&gt; [13] "lh_lateraloccipital"         "lh_lateralorbitofrontal"    </span></span>
+<span><span class="co">#&gt; [15] "lh_lingual"                  "lh_medialorbitofrontal"     </span></span>
+<span><span class="co">#&gt; [17] "lh_middletemporal"           "lh_paracentral"             </span></span>
+<span><span class="co">#&gt; [19] "lh_parahippocampal"          "lh_parsopercularis"         </span></span>
+<span><span class="co">#&gt; [21] "lh_parsorbitalis"            "lh_parstriangularis"        </span></span>
+<span><span class="co">#&gt; [23] "lh_pericalcarine"            "lh_postcentral"             </span></span>
+<span><span class="co">#&gt; [25] "lh_posteriorcingulate"       "lh_precentral"              </span></span>
+<span><span class="co">#&gt; [27] "lh_precuneus"                "lh_rostralanteriorcingulate"</span></span>
+<span><span class="co">#&gt; [29] "lh_rostralmiddlefrontal"     "lh_superiorfrontal"         </span></span>
+<span><span class="co">#&gt; [31] "lh_superiorparietal"         "lh_superiortemporal"        </span></span>
+<span><span class="co">#&gt; [33] "lh_supramarginal"            "lh_temporalpole"            </span></span>
+<span><span class="co">#&gt; [35] "lh_transversetemporal"       "rh_bankssts"                </span></span>
+<span><span class="co">#&gt; [37] "rh_caudalanteriorcingulate"  "rh_caudalmiddlefrontal"     </span></span>
+<span><span class="co">#&gt; [39] "rh_corpuscallosum"           "rh_cuneus"                  </span></span>
+<span><span class="co">#&gt; [41] "rh_entorhinal"               "rh_frontalpole"             </span></span>
+<span><span class="co">#&gt; [43] "rh_fusiform"                 "rh_inferiorparietal"        </span></span>
+<span><span class="co">#&gt; [45] "rh_inferiortemporal"         "rh_insula"                  </span></span>
+<span><span class="co">#&gt; [47] "rh_isthmuscingulate"         "rh_lateraloccipital"        </span></span>
+<span><span class="co">#&gt; [49] "rh_lateralorbitofrontal"     "rh_lingual"                 </span></span>
+<span><span class="co">#&gt; [51] "rh_medialorbitofrontal"      "rh_middletemporal"          </span></span>
+<span><span class="co">#&gt; [53] "rh_paracentral"              "rh_parahippocampal"         </span></span>
+<span><span class="co">#&gt; [55] "rh_parsopercularis"          "rh_parsorbitalis"           </span></span>
+<span><span class="co">#&gt; [57] "rh_parstriangularis"         "rh_pericalcarine"           </span></span>
+<span><span class="co">#&gt; [59] "rh_postcentral"              "rh_posteriorcingulate"      </span></span>
+<span><span class="co">#&gt; [61] "rh_precentral"               "rh_precuneus"               </span></span>
+<span><span class="co">#&gt; [63] "rh_rostralanteriorcingulate" "rh_rostralmiddlefrontal"    </span></span>
+<span><span class="co">#&gt; [65] "rh_superiorfrontal"          "rh_superiorparietal"        </span></span>
+<span><span class="co">#&gt; [67] "rh_superiortemporal"         "rh_supramarginal"           </span></span>
+<span><span class="co">#&gt; [69] "rh_temporalpole"             "rh_transversetemporal"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plotting-the-atlas">Plotting the atlas<a class="anchor" aria-label="anchor" href="#plotting-the-atlas"></a>
 </h3>
-<p>For other than quick overviews of the atlas using <code>plot</code> this new atlas class is specifically made to work with the new <code>geom_brain</code>. Since we have better control over the geom, we have also optimised it so that when plotting just the atlas, without specifying <code>fill</code> the polygons are automatically filled with the <code>region</code> column.</p>
+<p>For other than quick overviews of the atlas using <code>plot</code>
+this new atlas class is specifically made to work with the new
+<code>geom_brain</code>. Since we have better control over the geom, we
+have also optimised it so that when plotting just the atlas, without
+specifying <code>fill</code> the polygons are automatically filled with
+the <code>region</code> column.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
-<p>This new geom makes it possible for you to also better control the position of the brain slices, using specialised function for this to the position argument. The <code>position_brain</code> function takes a formula argument similar to that of <code>facet_grid</code> to alter the positions of the slices.</p>
+<p>This new geom makes it possible for you to also better control the
+position of the brain slices, using specialised function for this to the
+position argument. The <code>position_brain</code> function takes a
+formula argument similar to that of <code>facet_grid</code> to alter the
+positions of the slices.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
-<p>A new addition to the positions, is the ability to also specify the order directly through a character vector. By default, the position is:</p>
+<p>A new addition to the positions, is the ability to also specify the
+order directly through a character vector. By default, the position
+is:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cortical_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left lateral"</span>, <span class="st">"left medial"</span>, <span class="st">"right medial"</span>, <span class="st">"right lateral"</span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cortical_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left lateral"</span>, <span class="st">"left medial"</span>, <span class="st">"right medial"</span>, <span class="st">"right lateral"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Which can easily be switched around!</span>
-<span class="va">cortical_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right lateral"</span>, <span class="st">"left medial"</span>, <span class="st">"right medial"</span>, <span class="st">"left lateral"</span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Which can easily be switched around!</span></span>
+<span><span class="va">cortical_pos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right lateral"</span>, <span class="st">"left medial"</span>, <span class="st">"right medial"</span>, <span class="st">"left lateral"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">cortical_pos</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-9-2.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="reducing-slices">Reducing slices<a class="anchor" aria-label="anchor" href="#reducing-slices"></a>
 </h3>
-<p>Many have wanted the option like in <code><a href="../reference/ggseg.html">ggseg()</a></code> to only see a single hemisphere or slice. This functionality had been added through the <code>hemi</code> and <code>side</code> arguments to <code><a href="../reference/ggbrain.html">geom_brain()</a></code>, mimicking the way <code><a href="../reference/ggseg.html">ggseg()</a></code> works.</p>
+<p>Many have wanted the option like in <code><a href="../reference/ggseg.html">ggseg()</a></code> to only see
+a single hemisphere or slice. This functionality had been added through
+the <code>hemi</code> and <code>side</code> arguments to
+<code><a href="../reference/ggbrain.html">geom_brain()</a></code>, mimicking the way <code><a href="../reference/ggseg.html">ggseg()</a></code>
+works.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, side <span class="op">=</span> <span class="st">"lateral"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, side <span class="op">=</span> <span class="st">"lateral"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, hemi <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, hemi <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-10-2.png" width="576"></p>
-<p>This also should work for subcortical atlases, but the hemisphere (<code>hemi</code>) specification should be used carefully, as it might end up looking quite different than what you intended!</p>
+<p>This also should work for subcortical atlases, but the hemisphere
+(<code>hemi</code>) specification should be used carefully, as it might
+end up looking quite different than what you intended!</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">aseg</span>, side <span class="op">=</span> <span class="st">"coronal"</span>, hemi <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">aseg</span>, side <span class="op">=</span> <span class="st">"coronal"</span>, hemi <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="plotting-with-data">Plotting with data<a class="anchor" aria-label="anchor" href="#plotting-with-data"></a>
 </h3>
-<p>Of course, as usual, people will have their own data they want to add to the plots, using columns from their own data to the plot aesthetics. By making sure <em>at least one column</em> in your data has the same name and overlapping content as a column in the atlas data, geom_brain will merge your data with the atlas and create your plots.</p>
+<p>Of course, as usual, people will have their own data they want to add
+to the plots, using columns from their own data to the plot aesthetics.
+By making sure <em>at least one column</em> in your data has the same
+name and overlapping content as a column in the atlas data, geom_brain
+will merge your data with the atlas and create your plots.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-        
-<span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
-  region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,
-           <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>, 
-  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">someData</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;   region                  p</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.007</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.453</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.254</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.031</span></code></pre></div>
-<p>And such plots can be further adapted with standard ggplot themes, scales etc, to your liking.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span>        </span>
+<span><span class="va">someData</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</span>
+<span>           <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>, </span>
+<span>  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">someData</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;   region                  p</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.352</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.269</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.059</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.041</span></span></code></pre></div>
+<p>And such plots can be further adapted with standard ggplot themes,
+scales etc, to your liking.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, 
-             position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span>,
-             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"cividis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"My awesome title"</span>, 
-       subtitle <span class="op">=</span> <span class="st">"of a brain atlas plot"</span>,
-       caption <span class="op">=</span> <span class="st">"I'm pretty happy about this!"</span><span class="op">)</span>
-<span class="co">#&gt; merging atlas and data by 'region'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">someData</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, </span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"cividis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"My awesome title"</span>, </span>
+<span>       subtitle <span class="op">=</span> <span class="st">"of a brain atlas plot"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"I'm pretty happy about this!"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; merging atlas and data by 'region'</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 <div class="section level4">
 <h4 id="facet-group-data">Facet group data<a class="anchor" aria-label="anchor" href="#facet-group-data"></a>
 </h4>
-<p>Just like in ggseg, though, you still need to do some double work for faceting to work correctly. Because the atlas and your data need to be merged correctly, you will need to <code>group_by</code> your data <em>before</em> giving it to ggplot, for facets to work.</p>
+<p>Just like in ggseg, though, you still need to do some double work for
+faceting to work correctly. Because the atlas and your data need to be
+merged correctly, you will need to <code>group_by</code> your data
+<em>before</em> giving it to ggplot, for facets to work.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">someData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>
-  region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,
-           <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, 
-  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">8</span><span class="op">)</span>,
-  groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"g1"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"g2"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">someData</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span>
-<span class="co">#&gt;   region                  p groups</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.428 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.192 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.016 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.433 g1    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.447 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.411 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.018 g2    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.014 g2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">someData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</span>
+<span>           <span class="st">"precentral"</span>,<span class="st">"superior parietal"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, </span>
+<span>  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.5</span>,<span class="fl">.001</span><span class="op">)</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>  groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"g1"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"g2"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">someData</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span></span>
+<span><span class="co">#&gt;   region                  p groups</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> transverse temporal 0.42  g1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> insula              0.361 g1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> precentral          0.273 g1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> superior parietal   0.453 g1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> transverse temporal 0.16  g2    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> insula              0.143 g2    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> precentral          0.184 g2    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> superior parietal   0.141 g2</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, 
-             position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span>,
-             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">groups</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"correct facetting"</span><span class="op">)</span>
-<span class="co">#&gt; merging atlas and data by 'region'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">someData</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">groups</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>, </span>
+<span>             position <span class="op">=</span> <span class="fu"><a href="../reference/position_brain.html">position_brain</a></span><span class="op">(</span><span class="va">hemi</span> <span class="op">~</span> <span class="va">side</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">groups</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"correct facetting"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; merging atlas and data by 'region'</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="plotting-regions-as-categorical">Plotting regions as categorical<a class="anchor" aria-label="anchor" href="#plotting-regions-as-categorical"></a>
 </h3>
-<p>You can call <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> on any ggseg-atlas and get a preview of the entire atlas, with labels for each region.</p>
+<p>You can call <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> on any ggseg-atlas and get a preview
+of the entire atlas, with labels for each region.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
-<p>Sometimes, though, you might still want to plot regions as categorical, but only a subset of them. To do this, we need to do a little hack. Since the ggseg plotting function copies over the entire atlas (so it can display each region), we need two columns in the incoming data. One to merge nicely with the atlas data and one to specify which regions to colour. These two columns will likely contain mirrored information, but with different names.</p>
+<p>Sometimes, though, you might still want to plot regions as
+categorical, but only a subset of them. To do this, we need to do a
+little hack. Since the ggseg plotting function copies over the entire
+atlas (so it can display each region), we need two columns in the
+incoming data. One to merge nicely with the atlas data and one to
+specify which regions to colour. These two columns will likely contain
+mirrored information, but with different names.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  region <span class="op">=</span> <span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,
-  reg_col <span class="op">=</span> <span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="op">)</span>
-
-<span class="va">data</span>
-<span class="co">#&gt;                      region                   reg_col</span>
-<span class="co">#&gt; 1                  bankssts                  bankssts</span>
-<span class="co">#&gt; 2 caudal anterior cingulate caudal anterior cingulate</span>
-<span class="co">#&gt; 3     caudal middle frontal     caudal middle frontal</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>,
-             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">reg_col</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/scale_brain2.html">scale_fill_brain2</a></span><span class="op">(</span><span class="va">dk</span><span class="op">$</span><span class="va">palette</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">region</span><span class="op">]</span> <span class="op">)</span>
-<span class="co">#&gt; merging atlas and data by 'region'</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  region <span class="op">=</span> <span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span>  reg_col <span class="op">=</span> <span class="fu"><a href="../reference/brain_regions.html">brain_regions</a></span><span class="op">(</span><span class="va">dk</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span></span>
+<span><span class="co">#&gt;                      region                   reg_col</span></span>
+<span><span class="co">#&gt; 1                  bankssts                  bankssts</span></span>
+<span><span class="co">#&gt; 2 caudal anterior cingulate caudal anterior cingulate</span></span>
+<span><span class="co">#&gt; 3     caudal middle frontal     caudal middle frontal</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/ggbrain.html">geom_brain</a></span><span class="op">(</span>atlas <span class="op">=</span> <span class="va">dk</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">reg_col</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/scale_brain2.html">scale_fill_brain2</a></span><span class="op">(</span><span class="va">dk</span><span class="op">$</span><span class="va">palette</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">region</span><span class="op">]</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; merging atlas and data by 'region'</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="plotting-with-ggseg">Plotting with ggseg<a class="anchor" aria-label="anchor" href="#plotting-with-ggseg"></a>
 </h3>
-<p>You can also plot this new atlas class directly with the <code>ggseg</code> function, if you are more comfortable with that.</p>
+<p>You can also plot this new atlas class directly with the
+<code>ggseg</code> function, if you are more comfortable with that.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span><span class="va">someData</span>, atlas <span class="op">=</span> <span class="va">dk</span>, 
-      colour <span class="op">=</span> <span class="st">"black"</span>,
-      size <span class="op">=</span> <span class="fl">.1</span>, 
-      position <span class="op">=</span> <span class="st">"stacked"</span>,
-      mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; merging atlas and data by 'region'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ggseg.html">ggseg</a></span><span class="op">(</span><span class="va">someData</span>, atlas <span class="op">=</span> <span class="va">dk</span>, </span>
+<span>      colour <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>      size <span class="op">=</span> <span class="fl">.1</span>, </span>
+<span>      position <span class="op">=</span> <span class="st">"stacked"</span>,</span>
+<span>      mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; merging atlas and data by 'region'</span></span></code></pre></div>
 <p><img src="ggseg_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 </div>
 </div>
@@ -463,12 +518,12 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro.</p>
+<p>Developed by Athanasia Mo Mowinckel, Didac Vidal-Piñeiro, Ramiro Magno.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
