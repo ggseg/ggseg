@@ -14,4 +14,6 @@
 #' @docType package
 #' @keywords internal
 #' @import ggplot2
+#' @import ggseg.formats
+#' @importFrom sf st_as_sf st_as_sfc
 "_PACKAGE"

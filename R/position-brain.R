@@ -16,7 +16,7 @@
 #' @param data sf-data.frame of joined brain atlas and data
 #' @param position position formula for slices
 #'
-#' @return sf-data.frame with repositioned slices
+#' @return sf-data.frame with re-positioned slices
 #' @export
 #'
 #' @examples
@@ -89,15 +89,14 @@ position_formula <- function(pos, data){
   chosen <- chosen[!grepl("\\.", chosen)]
 
   if(any(duplicated(chosen)))
-    stop("Cannot position brain with the same data as columns and rows",
-         call. = FALSE)
+    cli::cli_abort("Cannot position brain with the same data as columns and rows")
 
   if(unique(data$type) == "cortical"){
     if(length(chosen) < 2)
-      stop("position formula not correct. ",
-           "Missing ", paste0(c("side","hemi")[!c("side","hemi") %in% chosen], collapse=" & "), "",
-           call. = FALSE
-      )
+      cli::cli_abort(sprintf(
+        "Position formula not correct. Missing %s",
+        paste0(c("side","hemi")[!c("side","hemi") %in% chosen], collapse=" & ")
+      ))
     position <- if(length(grep("\\+", pos)) > 0){
       ifelse(grep("^\\.", pos) == 2,
              "columns", "rows")
@@ -107,8 +106,7 @@ position_formula <- function(pos, data){
   }
 
   if(all(sum(grepl("\\.|~", pos)) != 2 & position %in% c("rows", "columns")))
-    stop("Formula for a single row or column must contain both a . and ~",
-         call. = FALSE)
+    cli::cli_abort("Formula for a single row or column must contain both a '.' and '~'")
 
   list(
     position = position,

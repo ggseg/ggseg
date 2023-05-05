@@ -23,8 +23,7 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
 
                         atlas <- as.data.frame(self$geom_params$atlas)
                         if(is.null(atlas) | nrow(atlas) == 0)
-                          stop("No atlas supplied, please provide a brain atlas to the geom.",
-                               call. = FALSE)
+                          cli::cli_abort("No atlas supplied, please provide a brain atlas to the geom.")
 
                         if(!is.null(self$geom_params$hemi)){
                           hemi <- match.arg(self$geom_params$hemi, unique(atlas$hemi))
@@ -50,12 +49,10 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                             k$geometry <- NULL
                             k <- paste(utils::capture.output(k), collapse="\n")
 
-                            warning(paste("Some data not merged. Check for spelling mistakes in:\n",
-                                          k, collapse="\n "),
-                                    call. = FALSE)
+                            cli::cli_warn(sprintf("Some data not merged. Check for spelling mistakes in:\n%s",
+                                                  k))
                             data <- data[merge_errs,]
                           }
-
                         }else{
                           data <- atlas
                         }

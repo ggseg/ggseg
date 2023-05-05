@@ -74,7 +74,7 @@ GeomBrain <- ggproto("GeomBrain", Geom,
                                            linemitre = 10,
                                            na.rm = TRUE) {
                        if (!inherits(coord, "CoordSf") ) {
-                         stop("geom_brain() must be used with coord_sf()", call.. = FALSE)
+                         cli::cli_abort("'geom_brain()' must be used with 'coord_sf()'")
                        }
 
                        coord <- coord$transform(data, panel_params)

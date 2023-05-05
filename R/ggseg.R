@@ -48,12 +48,17 @@
 #'
 #' @export
 ggseg = function(.data = NULL,
-                 atlas = "dk",
+                 atlas = dk,
                  position = "dispersed",
                  view = NULL,
                  hemisphere = NULL,
                  adapt_scales = TRUE,
                  ...){
+
+  if (!getOption("ggseg.ggseg_warn", default = FALSE)) {
+    cli::cli_warn("`ggseg()` is deprecated. Please use `geom_brain()` in stead. This warning will only be issued once per session.")
+    options(ggseg.ggseg_warn = TRUE)
+  }
 
   # Grab the atlas, even if it has been provided as character string
   atlas <- if(!is.character(atlas)){
@@ -93,7 +98,7 @@ ggseg = function(.data = NULL,
   # If .data has been supplied, merge it
   if(!is.null(.data)){
     if(is_brain_atlas(.data) | is_ggseg_atlas(.data))
-      stop("Atlas given as '.data', did you mean to give it to 'atlas'?")
+      cli::cli_abort("Atlas given as '.data', did you mean to give it to 'atlas'?")
     atlas <- brain_join(.data, atlas)
     atlas <- filter(atlas, !is.na(.long))
   }

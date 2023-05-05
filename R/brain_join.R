@@ -13,6 +13,7 @@
 #' @importFrom dplyr is.grouped_df full_join as_tibble
 #' @importFrom tidyr nest unnest
 #' @importFrom sf st_as_sf
+#' @importFrom utils capture.output
 #' @examples
 #' someData = data.frame(
 #'     region = c("transverse temporal", "insula",
@@ -28,7 +29,7 @@ brain_join <- function(data, atlas, by = NULL){
 
   if(is.null(by)){
     by <- names(data)[names(data) %in% names(atlas)]
-    message(paste0("merging atlas and data by ",
+    cli::cli_alert_info(paste0("merging atlas and data by ",
                    paste(sapply(by, function(x) paste0("'", x, "'")),
                          collapse = ", ")))
   }
@@ -55,9 +56,10 @@ brain_join <- function(data, atlas, by = NULL){
     errs <- dplyr::select(errs, -starts_with("."))
     errs <- dplyr::as_tibble(errs)
 
-    warning(paste("Some data not merged properly. Check for naming errors in data:",
-                  paste0(capture.output(errs)[-1], collapse="\n"), sep="\n"),
-            call. = FALSE)
+    cli::cli_warn(sprintf(
+      "Some data not merged properly. Check for naming errors in data: \n %s",
+      paste0(capture.output(errs)[-1], collapse = "\n"), sep = "\n")
+      )
   }
 
   if("geometry" %in% names(dt)){

@@ -1,3 +1,5 @@
+# ggseg-atlas methods here to avoid sf dependency on ggseg.formats
+
 #' `ggseg_atlas` class
 #' @param x data.frame to be made a ggseg-atlas
 #'
@@ -23,7 +25,7 @@
 #' @name ggseg_atlas
 #' @return a tibble with polygon coordinates for plotting brain regions
 #' @importFrom dplyr starts_with mutate across group_by
-#' @importFrom dplyr everything select ungroup
+#' @importFrom dplyr everything select ungroup rename
 #' @importFrom tidyr unnest
 #' @importFrom stats na.omit
 #' @export
@@ -38,9 +40,10 @@ ggseg_atlas <- function(x){
   if(!all(miss)){
     miss <- na.omit(necessaries[!miss])
 
-    stop("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
-                paste0(as.character(miss), "'", collapse=" '"),
-         call. = FALSE)
+    cli::cli_abort(
+      sprintf("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '%s",
+                paste0(as.character(miss), "'", collapse=" '"))
+    )
   }
 
   x <- group_by(x, across(!starts_with(".")))
@@ -55,11 +58,38 @@ ggseg_atlas <- function(x){
   )
 }
 
+#' @export
+#' @importFrom dplyr ungroup left_join group_split select
+#' @importFrom tidyr unnest
+#' @importFrom sf st_geometry st_as_sf
+as_brain_atlas.ggseg_atlas <- function(x){
+  dt <- x[, !names(x) %in% c("atlas", "type")]
+  dt$lab <- 1:nrow(dt)
+  dt_l <- group_by(dt, lab)
+  dt_l <- unnest(dt_l, ggseg)
+  dt_l <- group_split(dt_l)
+  geom <- lapply(dt_l, coords2sf)
+  geom <- do.call(rbind, geom)
+  dt <- cbind(select(dt, -ggseg), geom)
+  dt <- st_as_sf(dt)
+
+  names(dt)[length(names(dt))] <- "geometry"
+  sf::st_geometry(dt) <- "geometry"
+
+  dt$lab <- NULL
+  brain_atlas(unique(x$atlas),
+              ggseg.formats:::guess_type(x),
+              dt)
+}
+
+
 #' Validate ggseg_atlas
 #' @param x an object
 #' @return logical if object is of class 'ggseg_atlas'
 #' @export
-is_ggseg_atlas <- function(x) inherits(x, 'ggseg_atlas')
+is_ggseg_atlas <- function(x){
+  inherits(x, 'ggseg_atlas')
+}
 
 ## as_ggseg_atlas ----
 #' Create ggseg atlas
@@ -74,8 +104,10 @@ as_ggseg_atlas <- function(x){
 #' @export
 #' @rdname as_ggseg_atlas
 as_ggseg_atlas.default <- function(x){
-  stop("Cannot make object of class ", class(x)[1], " into a ggseg_atlas",
-          call. = FALSE)
+  cli::cli_abort(
+    sprintf("Cannot make object of class '%s' into a ggseg_atlas",
+            class(x)[1])
+  )
 }
 
 #' @export
@@ -91,7 +123,7 @@ as_ggseg_atlas.ggseg_atlas <- function(x){
   x <- unnest(x, ggseg)
 
   if(any("type" != names(x)))
-    x$type <- guess_type(x)
+    x$type <- ggseg.formats:::guess_type(x)
 
   ggseg_atlas(x)
 }
@@ -127,14 +159,13 @@ print.ggseg_atlas <- function(x, ...) {
 }
 
 #' @export
-#' @importFrom ggplot2 labs
+#' @importFrom ggplot2 labs aes
 plot.ggseg_atlas <- function(x, ..., package = "ggseg"){
   ggseg(atlas = x,
         colour = "grey30",
-        mapping = ggplot2::aes(fill = region),
+        mapping = aes(fill = region),
         ...) +
     labs( title = paste(unique(x$atlas), unique(x$type), "atlas"))
-
 }
 
 # brain polygon ----
