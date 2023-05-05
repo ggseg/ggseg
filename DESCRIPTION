@@ -23,9 +23,8 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 Depends: 
-    R (>= 3.3)
-LazyData: true
-LazyDataCompression: xz
+    R (>= 3.3),
+    ggseg.formats
 Imports:
     ggplot2 (>= 3.3),
     dplyr (>= 1.0.0),
@@ -34,7 +33,8 @@ Imports:
     stats,
     grid,
     utils,
-    vctrs
+    vctrs,
+    cli
 Suggests:
     knitr,
     here,
