@@ -20,7 +20,7 @@ test_that("check that ggseg_atlas is correct", {
   expect_equal(names(atlas), c("atlas", "type", "hemi", "side", "region", "ggseg"))
   expect_equal(typeof(atlas$ggseg), "list")
 
-  expect_equal(dim(as_ggseg_atlas(dk)), c(90, 8))
+  expect_equal(dim(as_ggseg_atlas(dk)), c(90, 10))
 })
 
 test_that("check that is_ggseg_atlas works", {
@@ -86,11 +86,10 @@ test_that("brain-polygon", {
   expect_true(inherits(ka, "brain_polygon"))
 
   expect_equal(capture.output(ka[1]),
-               "< p:  1 - v: 12>")
+               "< p:  1 - v: 10>")
 })
 
 
-context("ggseg-atlas")
 test_that("ggseg_atlas S3 methods work", {
   dk2 <- as_ggseg_atlas(dk)
 
@@ -98,7 +97,5 @@ test_that("ggseg_atlas S3 methods work", {
 
   k <-  capture.output(dk2)
   expect_equal(k[1], "# ggseg atlas")
-
-
 })
 

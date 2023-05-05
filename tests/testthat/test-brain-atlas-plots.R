@@ -1,5 +1,5 @@
-context("brain_atlas-plots")
 test_that("brain atlas plots work", {
+  set.seed(1234)
   expect_doppelganger("brain atlas dk plot", plot(dk))
   expect_doppelganger("brain atlas dk plot noleg",
                       plot(dk, show.legend = FALSE))

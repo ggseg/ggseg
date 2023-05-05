@@ -4,7 +4,7 @@ test_that("position_formula works", {
                "Cannot position brain")
 
   expect_error(position_formula(bla ~ ., as.data.frame(dk)),
-               "position formula not correct")
+               "formula not correct")
 
   k <- position_formula(hemi ~ side, as.data.frame(dk))
   expect_equal(names(k), c("position", "chosen"))

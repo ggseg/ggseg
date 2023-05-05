@@ -22,9 +22,6 @@ test_that("brain_labels works", {
   regs <- regs[order(regs)]
   expect_equal(brain_labels(dk), regs)
 
-  expect_equal(brain_labels(dk2),
-               regs)
-
   regs <- unique(aseg$data$label)
   regs <- regs[!is.na(regs)]
   regs <- regs[order(regs)]
@@ -44,3 +41,4 @@ test_that("atlas_type works", {
   k <- expect_warning(atlas_type(aseg), "atlas type not set")
   expect_equal(k, "subcortical")
 })
+

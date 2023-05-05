@@ -10,16 +10,17 @@ someData <- data.frame(
 
 test_that("Check that merging with grouped data works", {
     dk2 <- as_ggseg_atlas(dk)
-    testData <- brain_join(someData, unnest(dk2, cols = ggseg))
+    expect_message(testData <- brain_join(someData, unnest(dk2, cols = ggseg)))
 
     expect_equal(names(testData)[1], "Group")
     expect_equal(unique(testData$Group), c("G1", "G2"))
 })
 
 test_that("Check that plotting with grouped data works", {
-
+  expect_warning(
   pp <- ggseg(.data=someData, mapping=aes(fill=p)) +
     facet_wrap(~Group)
+  )
 
   expect_is(pp, c("gg","ggplot"))
   expect_true("Group" %in% names(pp$data))
