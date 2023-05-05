@@ -89,7 +89,7 @@ someData = tibble(
 someData
   
 ```
-To join a data.frame to an atlas object, you should use the specialised `brain_join` function. 
+To join a data.frame to an atlas object, you should use the specialized `brain_join` function. 
 This makes sure that atlas information is preserved while joining. 
 
 ```{r}

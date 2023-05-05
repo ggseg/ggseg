@@ -101,7 +101,7 @@ The merge function has recognized that there are two equally named columns, and 
 When you have managed to create data that merges nicely with the atlas, you can go ahead and supply it to the function.
 
 ```{r}
-ggplot(someData) +geom_brain( atlas=dk, mapping=aes(fill=p))
+ggplot(someData) + geom_brain( atlas=dk, mapping=aes(fill=p))
 ```
 
 You can actually also supply it directly as an atlas. 

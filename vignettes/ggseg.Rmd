@@ -21,7 +21,6 @@ This has introduced a lot of new functionality into the package, in addition to 
 ```{r setup}
 library(ggseg)
 library(ggplot2)
-
 ```
 
 
@@ -29,24 +28,18 @@ library(ggplot2)
 
 The first new thing to notice is that we have introduced a new atlas class called `brain-atlas`. 
 This class is a special class for ggseg-atlases, that contain information in a specific way. 
-They are objects with 4-levels, each containing important information about the atlas in question.
+They are objects with 3-levels, each containing important information about the atlas in question.
 
 ```{r}
+dk
 dk$atlas
 dk$type
-dk$palette
 dk$data
 ```
 
-Of these four, only the `palette` is an optional part, where some atlases may have this field empty.
+
 The data, you might notice, is simple-features data, with a `geometry` column that includes all the information needed to plot the data as a simple features object. 
-You can actually call `plot` directly on the data, and the standard simple features plot will appear.
-
-```{r}
-plot(dk$data)
-```
-
-Even better, though, you should call `plot` directly on the atlas object. 
+You can call `plot` directly on the atlas object. 
 This will give you a fast overview of the atlas you are thinking of using.
 
 ```{r}
@@ -81,14 +74,14 @@ brain_labels(dk)
 
 ## Plotting the atlas
 For other than quick overviews of the atlas using `plot` this new atlas class is specifically made to work with the new `geom_brain`. 
-Since we have better control over the geom, we have also optimised it so that when plotting just the atlas, without specifying `fill` the polygons are automatically filled with the `region` column.
+Since we have better control over the geom, we have also optimized it so that when plotting just the atlas, without specifying `fill` the polygons are automatically filled with the `region` column.
 
 ```{r}
 ggplot() +
   geom_brain(atlas = dk)
 ```
 
-This new geom makes it possible for you to also better control the position of the brain slices, using specialised function for this to the position argument. The `position_brain` function takes a formula argument similar to that of `facet_grid` to alter the positions of the slices.
+This new geom makes it possible for you to also better control the position of the brain slices, using specialized function for this to the position argument. The `position_brain` function takes a formula argument similar to that of `facet_grid` to alter the positions of the slices.
 
 ```{r}
 ggplot() +
@@ -212,11 +205,8 @@ data
 
 ggplot(data) +
   geom_brain(atlas = dk,
-             aes(fill = reg_col)) +
-  scale_fill_brain2(dk$palette[data$region] )
+             aes(fill = reg_col))
 ```
-
-
 
 
 ## Plotting with ggseg

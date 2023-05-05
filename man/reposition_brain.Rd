@@ -12,7 +12,7 @@ reposition_brain(data, position = "horizontal")
 \item{position}{position formula for slices}
 }
 \value{
-sf-data.frame with repositioned slices
+sf-data.frame with re-positioned slices
 }
 \description{
 Function for repositioning

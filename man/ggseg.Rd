@@ -8,7 +8,7 @@
 \usage{
 ggseg(
   .data = NULL,
-  atlas = "dk",
+  atlas = dk,
   position = "dispersed",
   view = NULL,
   hemisphere = NULL,
