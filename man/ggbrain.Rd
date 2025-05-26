@@ -28,7 +28,9 @@ variables from the supplied data to the plot}
 
 \item{hemi}{hemisphere to plot. Defaults to everything in the atlas.}
 
-\item{side}{slice to plot, as recorded in the "side" column in the atlas data. Defaults to all.}
+\item{side}{slice(s) to plot, as recorded in the "side" column in the atlas data.
+Plot a single slice with a string, or multiple slices with a vector.
+Defaults to all available in the atlas.}
 
 \item{position}{position of the data. Default is "identity" but can be
 changed by \code{\link{position_brain}}.}
