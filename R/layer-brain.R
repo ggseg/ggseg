@@ -32,7 +32,7 @@ LayerBrain <- ggproto("LayerBrain", ggplot2:::Layer,
                         }
 
                         if(!is.null(self$geom_params$side)){
-                          side <- match.arg(self$geom_params$side, unique(atlas$side))
+                          side <- match.arg(self$geom_params$side, unique(atlas$side), several.ok = TRUE)
                           atlas <- atlas[atlas$side %in% side,]
                         }
 

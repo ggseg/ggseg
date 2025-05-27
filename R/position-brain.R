@@ -213,16 +213,41 @@ stack_grid <- function(df, rows, columns){
       df <- list(df[[1]], df[[2]],
                  df[[4]], df[[3]])
     }
-  }
 
-  # move second and fourth on x
-  for(k in c(2,3)){
-    df[[k]]$geometry <- df[[k]]$geometry + c(sep[1],0)
-  }
+    # move second and third on x (to right col)
+    for(k in c(2,3)){
+      df[[k]]$geometry <- df[[k]]$geometry + c(sep[1],0)
+    }
 
-  # move third and fourth on y
-  for(k in c(3,4)){
-    df[[k]]$geometry <- df[[k]]$geometry + c(0,sep[2])
+    # move third and fourth on y (to top row)
+    for(k in c(3,4)){
+      df[[k]]$geometry <- df[[k]]$geometry + c(0,sep[2])
+    }
+  } else if (length(df) == 8){
+    # identify whether side (which is longer than hemi) is on rows or cols
+    # cols repeats fastest, so the hemi-side dfs aren't in the same order
+    # depending on what's on rows/cols
+    if (columns == "side") {
+      # move these on x (to further cols)
+      for(k in c(2:4, 6:8)){
+        df[[k]]$geometry <- df[[k]]$geometry + c(sep[1]*((k-1)%%4),0)
+      }
+
+      # move these on y (to higher rows)
+      for(k in 5:8){
+        df[[k]]$geometry <- df[[k]]$geometry + c(0,sep[2])
+      }
+    } else {
+      # move these on x (to further cols)
+      for(k in c(2,4,6,8)){
+        df[[k]]$geometry <- df[[k]]$geometry + c(sep[1],0)
+      }
+
+      # move these on y (to higher rows)
+      for(k in c(3:8)){
+        df[[k]]$geometry <- df[[k]]$geometry + c(0,sep[2]*((k-1)%/%2))
+      }
+    }
   }
 
   bx <- lapply(df, function(x) sf::st_bbox(x$geometry ))
@@ -254,7 +279,13 @@ get_sep <- function(data){
 }
 
 default_order <- function(data){
-  if(unique(data$type) == "cortical")
-    return(c("left lateral", "left medial", "right medial", "right lateral"))
+  if(unique(data$type) == "cortical") {
+    default_order <- c("left lateral", "left medial", "right medial", "right lateral")
+    if (any(c("dorsal", "ventral") %in% unique(data$side))) {
+      return (c(default_order, "left dorsal", "right dorsal", "right ventral", "left ventral"))
+    } else {
+      return(default_order)
+    }
+  }
   unique(data$side)
 }
