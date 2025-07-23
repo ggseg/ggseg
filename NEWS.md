@@ -105,7 +105,7 @@ and adaptability of the plots.
 * Moved paletted of ggsegExtra atlases to ggsegExtra package
 
 * Added a `NEWS.md` file to track changes to the package.
-# * Changes all `data` options to `.data` to decrease possibility of column naming overlap
+<!-- # * Changes all `data` options to `.data` to decrease possibility of column naming overlap -->
 * Added compatibility with `grouped` data.frames
 * Reduced internal atlases, to improve CRAN compatibility
 * Added function to install extra atlases from github easily
