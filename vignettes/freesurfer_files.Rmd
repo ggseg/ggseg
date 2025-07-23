@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+library(ggseg)
 devtools::load_all(".")
 subject_dir <- here::here("tests/testthat/data/")
 
@@ -54,6 +55,7 @@ data
 This data should be well-suited for use with ggseg. 
 
 ```{r}
+library(dplyr)
 data %>% 
   mutate(label = paste0("lh_", label)) %>% 
   ggseg(atlas = dk, mapping = aes(fill = ThickAvg))
