@@ -21,8 +21,6 @@ This has introduced a lot of new functionality into the package, in addition to 
 ```{r setup}
 library(ggseg)
 library(ggplot2)
-
-dk
 ```
 
 
@@ -33,6 +31,7 @@ This class is a special class for ggseg-atlases, that contain information in a s
 They are objects with 4-levels, each containing important information about the atlas in question.
 
 ```{r}
+library(ggseg)
 dk$atlas
 dk$type
 dk$palette
