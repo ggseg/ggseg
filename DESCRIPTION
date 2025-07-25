@@ -30,7 +30,7 @@ Imports:
     ggplot2 (>= 3.3),
     dplyr (>= 1.0.0),
     tidyr (>= 1.0.0),
-    sf (>= 1.0.0),
+    sf,
     stats,
     grid,
     utils,
