@@ -22,7 +22,7 @@ data(dk)
 }
 \references{
 Fischl et al. (2004) Cerebral Cortex 14:11-22
-(\href{https://academic.oup.com/cercor/article/14/1/11/433466}{PubMed})
+(\doi{10.1093/cercor/bhg087})
 }
 \seealso{
 Other ggseg_atlases: 

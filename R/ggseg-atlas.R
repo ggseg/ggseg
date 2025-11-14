@@ -3,7 +3,7 @@
 #'
 #' @description
 #' The `ggseg_atlas` class is a subclass of [`data.frame`][data.frame()],
-#' created in order to have different default behaviour. It heavily relies on
+#' created in order to have different default behavior. It heavily relies on
 #' the "tibble" [`tbl_df`][tibble()].
 #' [tidyverse](https://www.tidyverse.org/packages/), including
 #' [dplyr](http://dplyr.tidyverse.org/),
@@ -27,32 +27,39 @@
 #' @importFrom tidyr unnest
 #' @importFrom stats na.omit
 #' @export
-ggseg_atlas <- function(x){
-
+ggseg_atlas <- function(x) {
   stopifnot(is.data.frame(x))
 
-  necessaries <- c(".long", ".lat", ".id", ".subid",
-                   "atlas", "hemi", "region", "side", "type")
+  necessaries <- c(
+    ".long",
+    ".lat",
+    ".id",
+    ".subid",
+    "atlas",
+    "hemi",
+    "region",
+    "side",
+    "type"
+  )
   miss <- necessaries %in% names(x)
 
-  if(!all(miss)){
+  if (!all(miss)) {
     miss <- na.omit(necessaries[!miss])
 
-    stop("There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
-                paste0(as.character(miss), "'", collapse=" '"),
-         call. = FALSE)
+    stop(
+      "There are missing necessary columns in the data.frame for it to be a ggseg_atlas: '",
+      paste0(as.character(miss), "'", collapse = " '"),
+      call. = FALSE
+    )
   }
 
   x <- group_by(x, across(!starts_with(".")))
   x <- nest(x)
   x <- rename(x, ggseg = data)
   x <- ungroup(x)
-  x <- select(x, atlas, type, hemi, side, region,
-                     everything())
+  x <- select(x, atlas, type, hemi, side, region, everything())
   x$ggseg <- brain_polygon(x$ggseg)
-  structure(x,
-            class = c("ggseg_atlas", "tbl_df", "tbl", "data.frame")
-  )
+  structure(x, class = c("ggseg_atlas", "tbl_df", "tbl", "data.frame"))
 }
 
 #' Validate ggseg_atlas
@@ -67,31 +74,36 @@ is_ggseg_atlas <- function(x) inherits(x, 'ggseg_atlas')
 #' @param x object to make into a ggseg_atlas
 #' @return Object of class 'ggseg_atlas'
 #' @export
-as_ggseg_atlas <- function(x){
+as_ggseg_atlas <- function(x) {
   UseMethod("as_ggseg_atlas")
 }
 
 #' @export
 #' @rdname as_ggseg_atlas
-as_ggseg_atlas.default <- function(x){
-  stop("Cannot make object of class ", class(x)[1], " into a ggseg_atlas",
-          call. = FALSE)
+as_ggseg_atlas.default <- function(x) {
+  stop(
+    "Cannot make object of class ",
+    class(x)[1],
+    " into a ggseg_atlas",
+    call. = FALSE
+  )
 }
 
 #' @export
 #' @rdname as_ggseg_atlas
-as_ggseg_atlas.data.frame <- function(x){
+as_ggseg_atlas.data.frame <- function(x) {
   ggseg_atlas(x)
 }
 
 #' @export
 #' @rdname as_ggseg_atlas
 #' @importFrom tidyr unnest
-as_ggseg_atlas.ggseg_atlas <- function(x){
+as_ggseg_atlas.ggseg_atlas <- function(x) {
   x <- unnest(x, ggseg)
 
-  if(any("type" != names(x)))
+  if (any("type" != names(x))) {
     x$type <- guess_type(x)
+  }
 
   ggseg_atlas(x)
 }
@@ -99,8 +111,7 @@ as_ggseg_atlas.ggseg_atlas <- function(x){
 #' @export
 #' @rdname as_ggseg_atlas
 #' @importFrom tidyr unnest
-as_ggseg_atlas.brain_atlas <- function(x){
-
+as_ggseg_atlas.brain_atlas <- function(x) {
   dt <- sf2coords(x$data)
   dt$atlas <- x$atlas
   dt$type <- x$type
@@ -128,30 +139,34 @@ print.ggseg_atlas <- function(x, ...) {
 
 #' @export
 #' @importFrom ggplot2 labs
-plot.ggseg_atlas <- function(x, ..., package = "ggseg"){
-  ggseg(atlas = x,
-        colour = "grey30",
-        mapping = ggplot2::aes(fill = region),
-        ...) +
-    labs( title = paste(unique(x$atlas), unique(x$type), "atlas"))
-
+plot.ggseg_atlas <- function(x, ..., package = "ggseg") {
+  ggseg(
+    atlas = x,
+    colour = "grey30",
+    mapping = ggplot2::aes(fill = region),
+    ...
+  ) +
+    labs(title = paste(unique(x$atlas), unique(x$type), "atlas"))
 }
 
 # brain polygon ----
 
-b_poly <- function(x = data.frame(.long = numeric(),
-                                  .lat = numeric(),
-                                  .id = character(),
-                                  .subid = character(),
-                                  .order = integer())
-){
+b_poly <- function(
+  x = data.frame(
+    .long = numeric(),
+    .lat = numeric(),
+    .id = character(),
+    .subid = character(),
+    .order = integer()
+  )
+) {
   stopifnot(all(c(".long", ".lat", ".subid", ".id", ".order") %in% names(x)))
   stopifnot(is.numeric(x$.long) && is.numeric(x$.lat) && is.integer(x$.order))
   invisible(x)
 }
 
 #' @importFrom vctrs vec_assert new_vctr
-brain_poly <- function(x = list()){
+brain_poly <- function(x = list()) {
   x <- lapply(x, b_poly)
 
   vec_assert(x, list())
@@ -160,7 +175,7 @@ brain_poly <- function(x = list()){
 
 
 #' @importFrom vctrs vec_cast
-brain_polygon <- function(x){
+brain_polygon <- function(x) {
   x <- vec_cast(x, list())
   brain_poly(x)
 }
@@ -186,7 +201,6 @@ print.brain_polygon <- function(x, ...) {
 
 
 # quiets concerns of R CMD check
-if(getRversion() >= "2.15.1"){
-  utils::globalVariables(c("x", "ggseg_3d", ".subid",
-                           "type"))
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c("x", "ggseg_3d", ".subid", "type"))
 }

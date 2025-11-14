@@ -1,4 +1,3 @@
-
 dk2 <- as_ggseg_atlas(dk)
 
 test_that("brain_regions works", {
@@ -7,8 +6,7 @@ test_that("brain_regions works", {
   regs <- regs[order(regs)]
   expect_equal(brain_regions(dk), regs)
 
-  expect_equal(brain_regions(dk2),
-               regs)
+  expect_equal(brain_regions(dk2), regs)
 
   regs <- unique(aseg$data$region)
   regs <- regs[!is.na(regs)]
@@ -22,8 +20,7 @@ test_that("brain_labels works", {
   regs <- regs[order(regs)]
   expect_equal(brain_labels(dk), regs)
 
-  expect_equal(brain_labels(dk2),
-               regs)
+  expect_equal(brain_labels(dk2), regs)
 
   regs <- unique(aseg$data$label)
   regs <- regs[!is.na(regs)]
@@ -37,10 +34,16 @@ test_that("atlas_type works", {
   expect_equal(atlas_type(aseg), aseg$type)
 
   dk2$type <- NA
-  k <- expect_warning(atlas_type(dk2), "atlas type not set")
+  expect_warning(
+    k <- atlas_type(dk2),
+    "atlas type not set"
+  )
   expect_equal(k, "cortical")
 
   aseg$type <- NA
-  k <- expect_warning(atlas_type(aseg), "atlas type not set")
+  expect_warning(
+    k <- atlas_type(aseg),
+    "atlas type not set"
+  )
   expect_equal(k, "subcortical")
 })
