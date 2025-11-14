@@ -30,7 +30,7 @@ If `recon-all` from FreeSurfer has been run, each participant should have a `sta
 These have many header lines before the data actually start, and can have some formatting difficult to handle in R.
 
 The function `read_freesurfer_stats` is made to easily read in raw stats tables from each individual, without needing to go through FreeSurfer's internal converters.
-When using this file, remembering which hemisphere is read in is important, as this information must be added to the `label` column for `ggseg` to recognise the region labels.
+When using this file, remembering which hemisphere is read in is important, as this information must be added to the `label` column for `ggseg` to recognize the region labels.
 
 ```{r, eval=FALSE}
 library(ggseg)
@@ -115,7 +115,7 @@ The file is read and has three columns only. The subject column, the label colum
 Since the stats tables can contain different measures, and these are handled somewhat differently, we for convenience leave the default reading of the table this way.
 To work with ggseg, though, the labels usually (but not always) need a little cleaning. 
 In this case we read in a `volume` table, and as such all labels end with "_volume". 
-ggseg will _not_ recognise this matching the atlas, and will therefore not plot. 
+ggseg will _not_ recognize this matching the atlas, and will therefore not plot. 
 
 Easiest way to clean, is by using the `measure` argument for the function.
 

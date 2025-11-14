@@ -1,4 +1,5 @@
 
+
 # ggseg <img src="man/figures/logo.png" align="right" alt="" width="138.5" />
 
 <!-- badges: start -->
@@ -6,8 +7,8 @@
 [![R build
 status](https://github.com/ggseg/ggseg/workflows/R-CMD-check/badge.svg)](https://github.com/ggseg/ggseg/actions)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/ggseg)](https://CRAN.R-project.org/package=ggseg)
-[![downloads](https://cranlogs.r-pkg.org/badges/last-month/ggseg?color=blue)](https://r-pkg.org/pkg/ggseg)
+status](https://www.r-pkg.org/badges/version/ggseg.png)](https://CRAN.R-project.org/package=ggseg)
+[![downloads](https://CRANlogs.r-pkg.org/badges/last-month/ggseg?color=blue.png)](https://r-pkg.org/pkg/ggseg)
 [![codecov](https://codecov.io/gh/ggseg/ggseg/branch/main/graph/badge.svg?token=WtlS6Kk1vo)](https://app.codecov.io/gh/ggseg/ggseg)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -76,13 +77,15 @@ library(ggplot2)
 plot(dk)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png"
+style="width:100.0%" />
 
 ``` r
 plot(aseg)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png"
+style="width:100.0%" />
 
 While default atlas plots will give you an idea of how the atlases look,
 you will likely want to project your own data onto the plot.
@@ -114,7 +117,8 @@ someData %>%
 #> merging atlas and data by 'region'
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png"
+style="width:100.0%" />
 
 The package also has several vignettes, to help you get started using
 it. You can access it [here](https://ggseg.github.io/ggseg/)

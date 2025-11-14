@@ -1,22 +1,29 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# ggseg 1.6.5
+# ggseg 1.6
+
+
+## ggseg 1.6.7
+
+* Fixed testthat issues with latest version of testthat
+* Fixed vignette build issues on CRAN
+* removed sf minimum version requirement 
+
+## ggseg 1.6.5
 
 * Bump version to 1.6.5
 * rm freesurfer dep
 * rm old remnants
 * update readme img
-* switch cerebellum labels for wm gm, fix #80
+* switch cerebellum labels for wm, gm, fix #80
 * fix aseg labels to original, fix #78
 * add vis as categorical. fix #76
 * change aseg data class , fix #56
-* bump version, small cran fixes
+* bump version, small CRAN fixes
 * add sysreq
 * fix axial to coronal in vignette
 * change axial to coronal in aseg data
 * re-add ggplot2 depends\n\n
 
-# ggseg 1.6
 
 ## 1.6.4
 * Added options `hemi` and `side` to geom
@@ -102,7 +109,7 @@ and adaptability of the plots.
 * Changed atlas.info to function `atlas_info()`
 * Reduced code necessary for `brain_pals_info`
 * Simplified `display_brain_pal()`
-* Moved paletted of ggsegExtra atlases to ggsegExtra package
+* Moved palettes of ggsegExtra atlases to ggsegExtra package
 
 * Added a `NEWS.md` file to track changes to the package.
 <!-- # * Changes all `data` options to `.data` to decrease possibility of column naming overlap -->

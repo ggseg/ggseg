@@ -1,6 +1,6 @@
 ## Resubmission
 This is a resubmission. In this version I have:
-- made sure that examples and vignettes run faster
+- fixed compatibility issues iwth testthat 3.0.0
 
 ## Test environments
 * local R installation, R 4.2.0
@@ -21,9 +21,4 @@ This is a resubmission. In this version I have:
 ## R CMD check results
 
 0 errors | 0 warnings | 2 notes
-
-
-* 503 of DOI is incorrect. DOI is confirmed https://journals.sagepub.com/doi/10.1177/2515245920928009
-* Detritus in temp from unknown source. Dont know how to fix. 'lastMiKTeXException'
-
 

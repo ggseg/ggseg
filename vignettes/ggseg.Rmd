@@ -81,14 +81,14 @@ brain_labels(dk)
 
 ## Plotting the atlas
 For other than quick overviews of the atlas using `plot` this new atlas class is specifically made to work with the new `geom_brain`. 
-Since we have better control over the geom, we have also optimised it so that when plotting just the atlas, without specifying `fill` the polygons are automatically filled with the `region` column.
+Since we have better control over the geom, we have also optimized it so that when plotting just the atlas, without specifying `fill` the polygons are automatically filled with the `region` column.
 
 ```{r}
 ggplot() +
   geom_brain(atlas = dk)
 ```
 
-This new geom makes it possible for you to also better control the position of the brain slices, using specialised function for this to the position argument. The `position_brain` function takes a formula argument similar to that of `facet_grid` to alter the positions of the slices.
+This new geom makes it possible for you to also better control the position of the brain slices, using specialized function for this to the position argument. The `position_brain` function takes a formula argument similar to that of `facet_grid` to alter the positions of the slices.
 
 ```{r}
 ggplot() +

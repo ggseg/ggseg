@@ -6,13 +6,13 @@
 #' @param x brain atlas
 #' @return Character vector of brain region names
 #' @export
-brain_regions <- function(x){
+brain_regions <- function(x) {
   UseMethod("brain_regions")
 }
 
 #' @export
 #' @rdname brain_regions
-brain_regions.ggseg_atlas <- function(x){
+brain_regions.ggseg_atlas <- function(x) {
   x <- unique(x$region)
   x <- x[!is.na(x)]
   x[order(x)]
@@ -20,7 +20,7 @@ brain_regions.ggseg_atlas <- function(x){
 
 #' @export
 #' @rdname brain_regions
-brain_regions.brain_atlas <- function(x){
+brain_regions.brain_atlas <- function(x) {
   x <- unique(x$data$region)
   x <- x[!is.na(x)]
   x[order(x)]
@@ -28,7 +28,7 @@ brain_regions.brain_atlas <- function(x){
 
 #' @export
 #' @rdname brain_regions
-brain_regions.data.frame <- function(x){
+brain_regions.data.frame <- function(x) {
   x <- unique(x$region)
   x <- x[!is.na(x)]
   x[order(x)]
@@ -45,13 +45,13 @@ brain_regions.data.frame <- function(x){
 #' @param x brain atlas
 #' @return Character vector of atlas region labels
 #' @export
-brain_labels <- function(x){
+brain_labels <- function(x) {
   UseMethod("brain_labels")
 }
 
 #' @export
 #' @rdname brain_labels
-brain_labels.ggseg_atlas <- function(x){
+brain_labels.ggseg_atlas <- function(x) {
   x <- unique(x$label)
   x <- x[!is.na(x)]
   x[order(x)]
@@ -59,7 +59,7 @@ brain_labels.ggseg_atlas <- function(x){
 
 #' @export
 #' @rdname brain_labels
-brain_labels.brain_atlas <- function(x){
+brain_labels.brain_atlas <- function(x) {
   x <- unique(x$data$label)
   x <- x[!is.na(x)]
   x[order(x)]
@@ -69,31 +69,31 @@ brain_labels.brain_atlas <- function(x){
 #' Detect atlas type
 #' @keywords internal
 #' @noRd
-atlas_type <- function(x){
+atlas_type <- function(x) {
   UseMethod("atlas_type")
 }
 
 #' @keywords internal
 #' @noRd
-atlas_type.ggseg_atlas <- function(x){
+atlas_type.ggseg_atlas <- function(x) {
   guess_type(x)
 }
 
 #' @keywords internal
 #' @noRd
-atlas_type.brain_atlas <- function(x){
+atlas_type.brain_atlas <- function(x) {
   guess_type(x)
 }
 
 #' @keywords internal
 #' @noRd
-guess_type <- function(x){
-  k <- if("type" %in% names(x))
+guess_type <- function(x) {
+  k <- if ("type" %in% names(x)) {
     unique(x$type)
+  }
 
-  if(is.na(k)){
-    warning("atlas type not set, attempting to guess type",
-            call. = FALSE)
+  if (is.na(k)) {
+    warning("atlas type not set, attempting to guess type", call. = FALSE)
     k <- ifelse(any("medial" %in% x$side), "cortical", "subcortical")
   }
 

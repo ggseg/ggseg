@@ -1,4 +1,6 @@
 Athanasia
+al
+CRAN
 Colour
 Colours
 Desikan
@@ -16,10 +18,8 @@ PubMed
 Tourville
 aes
 aethetics
-al
 aparc
 aseg
-behaviour
 callosum
 chenAr
 chenTh
@@ -27,7 +27,6 @@ colour
 colours
 coord
 custombrain
-customisation
 devtools
 df
 dk
@@ -51,11 +50,8 @@ https
 jhu
 lh
 Mowinckel
-optimised
 orbito
 orbitofrontal
-organisation
-paletted
 parcellation
 parcellations
 plotly
@@ -63,13 +59,11 @@ postcentral
 pre
 precentral
 readr
-recognise
 repositioned
 rh
 sagittal
 segmentations
 somatomotor
-specialised
 stringr
 subcortical
 tbl
@@ -85,3 +79,10 @@ visualise
 www
 yeo
 codecov
+wm
+sysreq
+testthat
+vis
+img
+dep
+readme
