@@ -1,4 +1,3 @@
-
 #' Read in raw FreeSurfer stats file
 #'
 #' FreeSurfer atlas stats files have a format
@@ -19,8 +18,7 @@
 #' aseg_stats <- file.path(subj_dir, "bert/stats/aseg.stats")
 #' read_freesurfer_stats(aseg_stats)
 #' }
-read_freesurfer_stats <- function(path, rename = TRUE){
-
+read_freesurfer_stats <- function(path, rename = TRUE) {
   # get headers
   headers <- readLines(path)
   headers <- headers[grepl("^#", headers)]
@@ -31,12 +29,12 @@ read_freesurfer_stats <- function(path, rename = TRUE){
   headers <- headers[!grepl("ColHeaders", headers)]
   headers <- headers[headers != ""]
 
-  data <- as_tibble(read.table(path,
-                               stringsAsFactors = FALSE))
+  data <- as_tibble(read.table(path, stringsAsFactors = FALSE))
   names(data) <- headers
 
-  if(rename)
+  if (rename) {
     data <- rename(data, label = StructName)
+  }
 
   data
 }
@@ -61,9 +59,13 @@ read_freesurfer_stats <- function(path, rename = TRUE){
 #'
 #' read_atlas_files(subj_dir, "lh.aparc.stats")
 #' }
-read_atlas_files <- function(subjects_dir, atlas){
-  stats_files <- list.files(subjects_dir, pattern = atlas,
-                            full.names = TRUE, recursive = TRUE)
+read_atlas_files <- function(subjects_dir, atlas) {
+  stats_files <- list.files(
+    subjects_dir,
+    pattern = atlas,
+    full.names = TRUE,
+    recursive = TRUE
+  )
   stats_files <- stats_files[grepl("stats$", stats_files)]
 
   stats <- lapply(stats_files, read_freesurfer_stats)
@@ -72,15 +74,12 @@ read_atlas_files <- function(subjects_dir, atlas){
   subject <- unname(sapply(subject, find_subject_fromdir))
   hemi <- unname(sapply(stats_files, find_hemi_fromfile))
 
-  if(all(hemi %in% c("rh", "lh"))){
-    names(stats) <- paste(subject, hemi,
-                          sep = "___")
+  if (all(hemi %in% c("rh", "lh"))) {
+    names(stats) <- paste(subject, hemi, sep = "___")
     stats <- bind_rows(stats, .id = "id")
-    stats <- separate(stats, id, c("subject", "hemi"),
-                      sep="___")
+    stats <- separate(stats, id, c("subject", "hemi"), sep = "___")
     stats <- unite(stats, label, hemi, label)
-
-  }else{
+  } else {
     names(stats) <- subject
     stats <- bind_rows(stats, .id = "subject")
   }
@@ -111,18 +110,18 @@ read_atlas_files <- function(subjects_dir, atlas){
 #' file_path <- "all_subj_aseg.txt"
 #' read_freesurfer_table(file_path)
 #' }
-read_freesurfer_table <- function(path, measure = NULL, ...){
+read_freesurfer_table <- function(path, measure = NULL, ...) {
   dat <- read.table(path, header = TRUE, ...)
   names(dat)[1] <- "subject"
 
   dat <- gather(dat, label, value, -subject)
 
-  if(!is.null(measure)){
+  if (!is.null(measure)) {
     dat <- mutate(dat, label = gsub(paste0("_", measure), "", label))
     names(dat)[names(dat) %in% "value"] <- measure
   }
 
-  if(any(grepl("\\.", dat$label))){
+  if (any(grepl("\\.", dat$label))) {
     dat$label <- gsub("\\.", "-", dat$label)
   }
 
@@ -133,7 +132,7 @@ read_freesurfer_table <- function(path, measure = NULL, ...){
 #' helper function to easily grab subject information from directory path
 #' @param path file path
 #' @noRd
-find_subject_fromdir <- function(path){
+find_subject_fromdir <- function(path) {
   strsplit(path, "/")[[1]][2]
 }
 
@@ -141,13 +140,12 @@ find_subject_fromdir <- function(path){
 #'
 #' @param path file path
 #' @noRd
-find_hemi_fromfile <- function(path){
+find_hemi_fromfile <- function(path) {
   strsplit(basename(path), "\\.")[[1]][1]
 }
 
 
 ## quiets concerns of R CMD check
-if(getRversion() >= "2.15.1"){
-  globalVariables(c("id", "label", "StructName",
-                    "subject", "value"))
+if (getRversion() >= "2.15.1") {
+  globalVariables(c("id", "label", "StructName", "subject", "value"))
 }

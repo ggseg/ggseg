@@ -14,24 +14,28 @@
 #'        with \code{\link{geom_brain}}.
 #' @export
 brain_atlas <- function(atlas, type, data, palette = NULL) {
-  type <- match.arg(type,
-                    c("cortical", "subcortical"))
+  type <- match.arg(type, c("cortical", "subcortical"))
 
-  if(!is.null(palette))
+  if (!is.null(palette)) {
     stopifnot(length(palette) == length(unique(stats::na.omit(data$region))))
-  if(!is.null(palette))
-    stopifnot(all(brain_regions(data) %in% names(palette)) &&
-                all(names(palette) %in% brain_regions(data)))
+  }
+  if (!is.null(palette)) {
+    stopifnot(
+      all(brain_regions(data) %in% names(palette)) &&
+        all(names(palette) %in% brain_regions(data))
+    )
+  }
 
   stopifnot(length(atlas) == 1)
 
-  structure(list(
-    atlas = atlas,
-    type = type,
-    data = brain_data(data),
-    palette = palette
-  ),
-  class = 'brain_atlas'
+  structure(
+    list(
+      atlas = atlas,
+      type = type,
+      data = brain_data(data),
+      palette = palette
+    ),
+    class = 'brain_atlas'
   )
 }
 
@@ -48,8 +52,7 @@ is_brain_atlas <- function(x) inherits(x, "brain_atlas")
 format.brain_atlas <- function(x, ...) {
   dt <- x$data
 
-  sf <- ifelse(any("geometry" %in% names(dt)),
-               TRUE, FALSE)
+  sf <- ifelse(any("geometry" %in% names(dt)), TRUE, FALSE)
   dt$geometry <- NULL
 
   idx <- !grepl("ggseg|geometry", names(dt))
@@ -76,27 +79,28 @@ print.brain_atlas <- function(x, ...) {
 }
 
 #' @export
-plot.brain_atlas <- function(x,  ...){
-
-  if("geometry" %in% names(x$data)){
+plot.brain_atlas <- function(x, ...) {
+  if ("geometry" %in% names(x$data)) {
     p <- ggplot2::ggplot() +
-      geom_brain(atlas = x,
-                 ...) +
+      geom_brain(atlas = x, ...) +
       ggplot2::labs(title = paste(x$atlas, x$type, "atlas"))
 
-    if(!is.null(x$palette))
+    if (!is.null(x$palette)) {
       p <- p + scale_fill_brain2(x$palette)
+    }
 
     p
-  }else{
-    stop("This is not a correctly formatted brain atlas. ",
-         "It is missing geometry data, and cannot be plotted.",
-         call. = FALSE)
+  } else {
+    stop(
+      "This is not a correctly formatted brain atlas. ",
+      "It is missing geometry data, and cannot be plotted.",
+      call. = FALSE
+    )
   }
 }
 
 #' @export
-as.data.frame.brain_atlas <- function(x, ...){
+as.data.frame.brain_atlas <- function(x, ...) {
   cbind.data.frame(
     data.frame(
       atlas = rep(x$atlas, nrow(x$data)),
@@ -108,7 +112,7 @@ as.data.frame.brain_atlas <- function(x, ...){
 }
 
 #' @export
-as.list.brain_atlas <- function(x, ...){
+as.list.brain_atlas <- function(x, ...) {
   list(
     atlas = x$atlas,
     type = x$type,
@@ -126,25 +130,34 @@ as.list.brain_atlas <- function(x, ...){
 #' @param x object to make into a brain_atlas
 #' @return an object of class 'brain_atlas'.
 #' @export
-as_brain_atlas <- function(x){
+as_brain_atlas <- function(x) {
   UseMethod("as_brain_atlas")
 }
 
 
 #' @export
-as_brain_atlas.default <- function(x){
-  stop(paste("Cannot make object of class", class(x)[1], "into a brain_atlas"),
-       call. = FALSE)
+as_brain_atlas.default <- function(x) {
+  stop(
+    paste("Cannot make object of class", class(x)[1], "into a brain_atlas"),
+    call. = FALSE
+  )
 }
 
 #' @export
-as_brain_atlas.data.frame <- function(x){
-
-  if(is.null(names(x)) | !all(c("atlas", "hemi", "region", "side", "label") %in% names(x)))
+as_brain_atlas.data.frame <- function(x) {
+  if (
+    is.null(names(x)) |
+      !all(c("atlas", "hemi", "region", "side", "label") %in% names(x))
+  ) {
     stop("Cannot make object to brain_atlas", call. = FALSE)
+  }
 
-  if(!any(c("ggseg", "geometry") %in% names(x)))
-    stop("Object does not contain a 'ggseg' og 'geometry' column.", call. = FALSE)
+  if (!any(c("ggseg", "geometry") %in% names(x))) {
+    stop(
+      "Object does not contain a 'ggseg' og 'geometry' column.",
+      call. = FALSE
+    )
+  }
 
   type <- guess_type(x)
 
@@ -156,8 +169,7 @@ as_brain_atlas.data.frame <- function(x){
 #' @export
 #' @importFrom dplyr ungroup left_join group_split select
 #' @importFrom sf st_geometry st_as_sf
-as_brain_atlas.ggseg_atlas <- function(x){
-
+as_brain_atlas.ggseg_atlas <- function(x) {
   dt <- x[, !names(x) %in% c("atlas", "type")]
   dt$lab <- 1:nrow(dt)
   dt_l <- group_by(dt, lab)
@@ -165,7 +177,7 @@ as_brain_atlas.ggseg_atlas <- function(x){
 
   geom <- lapply(dt_l, coords2sf)
   geom <- do.call(rbind, geom)
-  dt <- left_join(select(dt, -ggseg), geom, by="lab")
+  dt <- left_join(select(dt, -ggseg), geom, by = "lab")
   dt <- st_as_sf(dt)
 
   names(dt)[length(names(dt))] <- "geometry"
@@ -177,14 +189,14 @@ as_brain_atlas.ggseg_atlas <- function(x){
 
 
 #' @export
-as_brain_atlas.list <- function(x){
-
-  if(is.null(names(x)) | !all(c("atlas", "type", "data") %in% names(x)))
+as_brain_atlas.list <- function(x) {
+  if (is.null(names(x)) | !all(c("atlas", "type", "data") %in% names(x))) {
     stop("Cannot make object to brain_atlas", call. = FALSE)
+  }
 
-  if(is.na(x$type))
-    x$type <- ifelse(any("medial" %in% x$side),
-                 "cortical", "subcortical")
+  if (is.na(x$type)) {
+    x$type <- ifelse(any("medial" %in% x$side), "cortical", "subcortical")
+  }
 
   dt <- x$data[, !names(x$data) %in% c("atlas", "type")]
 
@@ -192,7 +204,7 @@ as_brain_atlas.list <- function(x){
 }
 
 #' @export
-as_brain_atlas.brain_atlas <- function(x){
+as_brain_atlas.brain_atlas <- function(x) {
   brain_atlas(x$atlas, x$type, x$data, x$palette)
 }
 
@@ -204,8 +216,7 @@ as_brain_atlas.brain_atlas <- function(x){
 #'        data for brain atlas plotting.
 #' @name brain_data-class
 #' @noRd
-brain_data <- function(x){
-
+brain_data <- function(x) {
   stopifnot(is.data.frame(x))
   stopifnot(all(c("hemi", "region", "side") %in% names(x)))
   stopifnot(any(c("geometry") %in% names(x)))
@@ -220,7 +231,6 @@ brain_data <- function(x){
 }
 
 as_brain_data <- brain_data
-
 
 
 # sf ----

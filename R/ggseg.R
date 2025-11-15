@@ -47,70 +47,71 @@
 #' [geom_polygon][geom_polygon], [coord_fixed][coord_fixed]
 #'
 #' @export
-ggseg = function(.data = NULL,
-                 atlas = "dk",
-                 position = "dispersed",
-                 view = NULL,
-                 hemisphere = NULL,
-                 adapt_scales = TRUE,
-                 ...){
-
+ggseg = function(
+  .data = NULL,
+  atlas = "dk",
+  position = "dispersed",
+  view = NULL,
+  hemisphere = NULL,
+  adapt_scales = TRUE,
+  ...
+) {
   # Grab the atlas, even if it has been provided as character string
-  atlas <- if(!is.character(atlas)){
+  atlas <- if (!is.character(atlas)) {
     atlas
-  }else{
+  } else {
     get(atlas)
   }
 
-  if(!is_ggseg_atlas(atlas))
+  if (!is_ggseg_atlas(atlas)) {
     atlas <- as_ggseg_atlas(atlas)
+  }
 
   atlas <- unnest(atlas, ggseg)
 
-  stack <- match.arg(position,
-                     c("stacked", "dispersed"),
-                     several.ok = FALSE
-  )
+  stack <- match.arg(position, c("stacked", "dispersed"), several.ok = FALSE)
 
-  if(stack == "stacked"){
+  if (stack == "stacked") {
     atlas <- stack_brain(atlas)
   }
 
   # Remove .data we don't want to plot
-  if(!is.null(hemisphere)) atlas <- filter(atlas, hemi %in% hemisphere)
+  if (!is.null(hemisphere)) {
+    atlas <- filter(atlas, hemi %in% hemisphere)
+  }
 
-  if(!is.null(view)){
+  if (!is.null(view)) {
     atlas <- filter(atlas, grepl(view, side))
 
     # Lateral sides are on the far of eachother, squish them together
-    if(view == "lateral" &
-       (all(c("left", "right") %in% hemisphere) | is.null(hemisphere) ) &
-       stack == "dispersed"){
+    if (
+      view == "lateral" &
+        (all(c("left", "right") %in% hemisphere) | is.null(hemisphere)) &
+        stack == "dispersed"
+    ) {
       atlas <- squish_position(atlas, hemisphere)
     }
   }
 
   # If .data has been supplied, merge it
-  if(!is.null(.data)){
-    if(is_brain_atlas(.data) | is_ggseg_atlas(.data))
+  if (!is.null(.data)) {
+    if (is_brain_atlas(.data) | is_ggseg_atlas(.data)) {
       stop("Atlas given as '.data', did you mean to give it to 'atlas'?")
+    }
     atlas <- brain_join(.data, atlas)
     atlas <- filter(atlas, !is.na(.long))
   }
 
   # Create the plot
-  gg <- ggplot(data = atlas,
-               aes(x = .long,
-                   y = .lat,
-                   group = .id,
-                   subgroup = .subid
-                   )) +
+  gg <- ggplot(
+    data = atlas,
+    aes(x = .long, y = .lat, group = .id, subgroup = .subid)
+  ) +
     geom_polygon(...) +
     coord_fixed()
 
-
   # Scales may be adapted, for more convenient viewing
-  if(adapt_scales){
+  if (adapt_scales) {
     gg <- gg +
       scale_y_brain(atlas, stack) +
       scale_x_brain(atlas, stack) +
@@ -118,12 +119,10 @@ ggseg = function(.data = NULL,
   }
 
   gg + theme_brain()
-
 }
 
 
 ## quiets concerns of R CMD check
-if(getRversion() >= "2.15.1"){
-  globalVariables(c(".data","dk"))
+if (getRversion() >= "2.15.1") {
+  globalVariables(c(".data", "dk"))
 }
-

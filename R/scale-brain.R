@@ -28,14 +28,21 @@
 #'
 
 #' @importFrom ggplot2 scale_color_manual scale_colour_manual scale_fill_manual
-scale_brain = function(name = "dk", na.value="grey", ..., aesthetics = c("fill", "colour", "color")) {
+scale_brain = function(
+  name = "dk",
+  na.value = "grey",
+  ...,
+  aesthetics = c("fill", "colour", "color")
+) {
   pal = brain_pal(name = name, ...)
   aesthetics = match.arg(aesthetics)
-  func = switch(aesthetics,
-                color =   scale_color_manual,
-                colour =  scale_colour_manual,
-                fill =    scale_fill_manual)
-  func(values = pal, na.value=na.value)
+  func = switch(
+    aesthetics,
+    color = scale_color_manual,
+    colour = scale_colour_manual,
+    fill = scale_fill_manual
+  )
+  func(values = pal, na.value = na.value)
 }
 
 #' @rdname scale_brain
@@ -83,13 +90,20 @@ scale_fill_brain <- function(...) {
 #' scale_colour_brain()
 #' scale_fill_brain()
 #'
-scale_brain2 = function(palette, na.value="grey", ..., aesthetics = c("fill", "colour", "color")) {
+scale_brain2 = function(
+  palette,
+  na.value = "grey",
+  ...,
+  aesthetics = c("fill", "colour", "color")
+) {
   aesthetics = match.arg(aesthetics)
-  func = switch(aesthetics,
-                color =   ggplot2::scale_color_manual,
-                colour =  ggplot2::scale_colour_manual,
-                fill =    ggplot2::scale_fill_manual)
-  func(values = palette, na.value=na.value)
+  func = switch(
+    aesthetics,
+    color = ggplot2::scale_color_manual,
+    colour = ggplot2::scale_colour_manual,
+    fill = ggplot2::scale_fill_manual
+  )
+  func(values = palette, na.value = na.value)
 }
 
 #' @rdname scale_brain2
@@ -109,8 +123,6 @@ scale_color_brain2 <- function(...) {
 scale_fill_brain2 <- function(...) {
   scale_brain2(..., aesthetics = "fill")
 }
-
-
 
 
 # Axis scales ----
@@ -134,16 +146,19 @@ scale_fill_brain2 <- function(...) {
 #' scale_labs_brain()
 #' }
 #'
-scale_continous_brain = function(atlas = dk, position = "dispersed",
-                                 aesthetics = c("y", "x")) {
+scale_continous_brain = function(
+  atlas = dk,
+  position = "dispersed",
+  aesthetics = c("y", "x")
+) {
   positions = adapt_scales(atlas, position, aesthetics)
   aesthetics = match.arg(aesthetics)
-  func = switch(aesthetics,
-                y = ggplot2::scale_y_continuous,
-                x = ggplot2::scale_x_continuous
+  func = switch(
+    aesthetics,
+    y = ggplot2::scale_y_continuous,
+    x = ggplot2::scale_x_continuous
   )
-  func(breaks = positions$breaks,
-       labels = positions$labels)
+  func(breaks = positions$breaks, labels = positions$labels)
 }
 
 #' @export
@@ -161,11 +176,14 @@ scale_y_brain <- function(...) {
 #' @export
 #' @rdname scale_continous_brain
 #' @importFrom ggplot2 labs
-scale_labs_brain <- function(atlas = dk, position = "dispersed", aesthetics = "labs") {
-
+scale_labs_brain <- function(
+  atlas = dk,
+  position = "dispersed",
+  aesthetics = "labs"
+) {
   positions = adapt_scales(atlas, position, aesthetics)
 
   aesthetics = match.arg(aesthetics)
-  func = switch(aesthetics, labs =  labs)
+  func = switch(aesthetics, labs = labs)
   func(x = positions$x, y = positions$y)
 }

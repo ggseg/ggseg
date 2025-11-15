@@ -22,6 +22,8 @@ knitr::opts_chunk$set(
 [![downloads](https://CRANlogs.r-pkg.org/badges/last-month/ggseg?color=blue)](https://r-pkg.org/pkg/ggseg)
 [![codecov](https://codecov.io/gh/ggseg/ggseg/branch/main/graph/badge.svg?token=WtlS6Kk1vo)](https://app.codecov.io/gh/ggseg/ggseg)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Codecov test coverage](https://codecov.io/gh/ggseg/ggseg/graph/badge.svg)](https://app.codecov.io/gh/ggseg/ggseg)
+[![R-CMD-check](https://github.com/ggseg/ggseg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ggseg/ggseg/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Contains ggplot2 geom for plotting brain atlases using simple features. The largest component of the package is the data for the two built-in atlases.
@@ -83,15 +85,15 @@ While default atlas plots will give you an idea of how the atlases look, you wil
 
 ```{r}
 library(dplyr)
-someData <- tibble(
+some_data <- tibble(
   region = rep(c("transverse temporal", "insula",
            "precentral","superior parietal"), 2), 
   p = sample(seq(0,.5,.001), 8),
   groups = c(rep("g1", 4), rep("g2", 4))
 )
 
-someData %>%
-  group_by(groups) %>%
+some_data |>
+  group_by(groups) |>
   ggplot() +
   geom_brain(atlas = dk, 
              position = position_brain(hemi ~ side),
