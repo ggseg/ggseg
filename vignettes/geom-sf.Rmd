@@ -100,21 +100,18 @@ This makes sure that atlas information is preserved while joining.
 ```{r}
 some_data |>
   brain_join(dk)
-`
-`
-`
+```
+
 The output is a standard sf-object, and can therefore also be plotted as one. 
-`
-``
-{
-  r
-}
+
+```{r}
 some_data |>
   brain_join(dk) |>
   plot()
 ```
 
 To use ggplot for plotting the new sf-object, use standard ggplot-syntax with the `geom_sf` geom.
+
 ```{r}
 some_data |>
   brain_join(dk) |>
@@ -134,6 +131,7 @@ some_data |>
 
 
 Once your data is plotted as a geom_sf, you can add geoms like `geom_sf_label` to add labels to the regions.
+
 ```{r}
 some_data |>
   brain_join(dk) |>
@@ -150,6 +148,7 @@ some_data |>
 If you want a version where the labels do not overlap each other, you can try the `geom_sf_label_repel` function from the `ggrepel` package. 
 
 ## Faceting groups
+
 If your data includes groups, and you want to facet the output, you need to group the data _before_ calling `brain_join`.
 
 ```{r}
