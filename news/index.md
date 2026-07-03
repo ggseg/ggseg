@@ -1,5 +1,7 @@
 # Changelog
 
+## ggseg 2.2.1.9000 (development)
+
 ## ggseg 2.2.1
 
 CRAN release: 2026-07-03
