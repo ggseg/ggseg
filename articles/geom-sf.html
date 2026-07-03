@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggseg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,22 +139,20 @@ Convert to a plain data frame to see all the columns:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">ggseg_data_cortical</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">2D (ggseg):</span> 72 labels (sf), views: inferior, lateral, medial, superior</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">2D (ggseg):</span> 72 labels (polygons), views: inferior, lateral, superior, medial</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">3D (ggseg3d):</span> vertex indices</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 70 × 2</span></span></span>
-<span><span class="co">#&gt;    label                      vertices   </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> lh_bankssts                <span style="color: #949494;">&lt;int [126]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> lh_caudalanteriorcingulate <span style="color: #949494;">&lt;int [67]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> lh_caudalmiddlefrontal     <span style="color: #949494;">&lt;int [232]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> lh_corpuscallosum          <span style="color: #949494;">&lt;int [198]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> lh_cuneus                  <span style="color: #949494;">&lt;int [102]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> lh_entorhinal              <span style="color: #949494;">&lt;int [48]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> lh_fusiform                <span style="color: #949494;">&lt;int [308]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> lh_inferiorparietal        <span style="color: #949494;">&lt;int [484]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> lh_inferiortemporal        <span style="color: #949494;">&lt;int [271]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> lh_isthmuscingulate        <span style="color: #949494;">&lt;int [123]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt;                         label    vertices</span></span>
+<span><span class="co">#&gt; 1                 lh_bankssts &lt;int [126]&gt;</span></span>
+<span><span class="co">#&gt; 2  lh_caudalanteriorcingulate  &lt;int [67]&gt;</span></span>
+<span><span class="co">#&gt; 3      lh_caudalmiddlefrontal &lt;int [232]&gt;</span></span>
+<span><span class="co">#&gt; 4           lh_corpuscallosum &lt;int [198]&gt;</span></span>
+<span><span class="co">#&gt; 5                   lh_cuneus &lt;int [102]&gt;</span></span>
+<span><span class="co">#&gt; 6               lh_entorhinal  &lt;int [48]&gt;</span></span>
+<span><span class="co">#&gt; 7                 lh_fusiform &lt;int [308]&gt;</span></span>
+<span><span class="co">#&gt; 8         lh_inferiorparietal &lt;int [484]&gt;</span></span>
+<span><span class="co">#&gt; 9         lh_inferiortemporal &lt;int [271]&gt;</span></span>
+<span><span class="co">#&gt; 10        lh_isthmuscingulate &lt;int [123]&gt;</span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">... with 60 more rows</span></span></span></code></pre></div>
 <p>The <code>geometry</code> column holds the polygons. This is a
 standard sf object, so any sf-compatible tool works with it.</p>
 </div>
@@ -184,26 +182,26 @@ preserves the sf geometry and handles column detection:</p>
 <span><span class="co">#&gt; CRS:           NA</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
 <span><span class="co">#&gt;                         label     view  hemi                            region</span></span>
-<span><span class="co">#&gt; 1                  lh_unknown   medial  left                              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2                  lh_unknown  lateral  left                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 1                  lh_unknown  lateral  left                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2                  lh_unknown   medial  left                              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 3                  lh_unknown inferior  left                              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 4                  rh_unknown  lateral right                              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5                  rh_unknown inferior right                              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6                  rh_unknown   medial right                              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7                 lh_bankssts inferior  left banks of superior temporal sulcus</span></span>
-<span><span class="co">#&gt; 8                 lh_bankssts  lateral  left banks of superior temporal sulcus</span></span>
-<span><span class="co">#&gt; 9                 lh_bankssts superior  left banks of superior temporal sulcus</span></span>
+<span><span class="co">#&gt; 5                  rh_unknown   medial right                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6                  rh_unknown inferior right                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 7                 lh_bankssts  lateral  left banks of superior temporal sulcus</span></span>
+<span><span class="co">#&gt; 8                 lh_bankssts superior  left banks of superior temporal sulcus</span></span>
+<span><span class="co">#&gt; 9                 lh_bankssts inferior  left banks of superior temporal sulcus</span></span>
 <span><span class="co">#&gt; 10 lh_caudalanteriorcingulate   medial  left         caudal anterior cingulate</span></span>
 <span><span class="co">#&gt;         lobe atlas     type  colour  p                       geometry</span></span>
-<span><span class="co">#&gt; 1       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((1782.84 18....</span></span>
-<span><span class="co">#&gt; 2       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((926.5936 60...</span></span>
+<span><span class="co">#&gt; 1       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((926.5936 60...</span></span>
+<span><span class="co">#&gt; 2       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((1782.84 18....</span></span>
 <span><span class="co">#&gt; 3       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((367.1256 13...</span></span>
 <span><span class="co">#&gt; 4       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3849.766 60...</span></span>
-<span><span class="co">#&gt; 5       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3190.519 5....</span></span>
-<span><span class="co">#&gt; 6       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((4318.844 20...</span></span>
-<span><span class="co">#&gt; 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...</span></span>
-<span><span class="co">#&gt; 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...</span></span>
-<span><span class="co">#&gt; 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...</span></span>
+<span><span class="co">#&gt; 5       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((4318.844 20...</span></span>
+<span><span class="co">#&gt; 6       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3190.519 5....</span></span>
+<span><span class="co">#&gt; 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...</span></span>
+<span><span class="co">#&gt; 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...</span></span>
+<span><span class="co">#&gt; 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...</span></span>
 <span><span class="co">#&gt; 10 cingulate    dk cortical #7D64A0 NA MULTIPOLYGON (((1921.971 20...</span></span></code></pre></div>
 <p>The result is a standard sf object you can pass to
 <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf()</a></code>.</p>

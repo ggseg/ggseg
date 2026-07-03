@@ -25,7 +25,7 @@ dk()
 #> Type: cortical
 #> Regions: 35
 #> Hemispheres: left, right
-#> Views: inferior, lateral, medial, superior
+#> Views: inferior, lateral, superior, medial
 #> Palette: ✔
 #> Rendering: ✔ ggseg
 #> ✔ ggseg3d (vertices)
@@ -228,8 +228,8 @@ available with
 ``` r
 
 atlas_views(aseg())
-#> [1] "axial_3"   "axial_4"   "axial_5"   "axial_6"   "coronal_1" "coronal_2"
-#> [7] "sagittal"
+#> [1] "axial_3"   "axial_4"   "axial_5"   "sagittal"  "axial_6"   "coronal_1"
+#> [7] "coronal_2"
 ```
 
 ## Plotting your own data

@@ -182,8 +182,8 @@ order. Check what’s available with
 ``` r
 
 ggseg.formats::atlas_views(aseg())
-#> [1] "axial_3"   "axial_4"   "axial_5"   "axial_6"   "coronal_1" "coronal_2"
-#> [7] "sagittal"
+#> [1] "axial_3"   "axial_4"   "axial_5"   "sagittal"  "axial_6"   "coronal_1"
+#> [7] "coronal_2"
 ```
 
 ``` r

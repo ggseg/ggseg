@@ -59,22 +59,20 @@ dk()$data
 #> 
 #> ── ggseg_data_cortical ──
 #> 
-#> 2D (ggseg): 72 labels (sf), views: inferior, lateral, medial, superior
+#> 2D (ggseg): 72 labels (polygons), views: inferior, lateral, superior, medial
 #> 3D (ggseg3d): vertex indices
-#> # A tibble: 70 × 2
-#>    label                      vertices   
-#>    <chr>                      <list>     
-#>  1 lh_bankssts                <int [126]>
-#>  2 lh_caudalanteriorcingulate <int [67]> 
-#>  3 lh_caudalmiddlefrontal     <int [232]>
-#>  4 lh_corpuscallosum          <int [198]>
-#>  5 lh_cuneus                  <int [102]>
-#>  6 lh_entorhinal              <int [48]> 
-#>  7 lh_fusiform                <int [308]>
-#>  8 lh_inferiorparietal        <int [484]>
-#>  9 lh_inferiortemporal        <int [271]>
-#> 10 lh_isthmuscingulate        <int [123]>
-#> # ℹ 60 more rows
+#>                         label    vertices
+#> 1                 lh_bankssts <int [126]>
+#> 2  lh_caudalanteriorcingulate  <int [67]>
+#> 3      lh_caudalmiddlefrontal <int [232]>
+#> 4           lh_corpuscallosum <int [198]>
+#> 5                   lh_cuneus <int [102]>
+#> 6               lh_entorhinal  <int [48]>
+#> 7                 lh_fusiform <int [308]>
+#> 8         lh_inferiorparietal <int [484]>
+#> 9         lh_inferiortemporal <int [271]>
+#> 10        lh_isthmuscingulate <int [123]>
+#> ... with 60 more rows
 ```
 
 The `geometry` column holds the polygons. This is a standard sf object,
@@ -109,26 +107,26 @@ some_data |>
 #> CRS:           NA
 #> First 10 features:
 #>                         label     view  hemi                            region
-#> 1                  lh_unknown   medial  left                              <NA>
-#> 2                  lh_unknown  lateral  left                              <NA>
+#> 1                  lh_unknown  lateral  left                              <NA>
+#> 2                  lh_unknown   medial  left                              <NA>
 #> 3                  lh_unknown inferior  left                              <NA>
 #> 4                  rh_unknown  lateral right                              <NA>
-#> 5                  rh_unknown inferior right                              <NA>
-#> 6                  rh_unknown   medial right                              <NA>
-#> 7                 lh_bankssts inferior  left banks of superior temporal sulcus
-#> 8                 lh_bankssts  lateral  left banks of superior temporal sulcus
-#> 9                 lh_bankssts superior  left banks of superior temporal sulcus
+#> 5                  rh_unknown   medial right                              <NA>
+#> 6                  rh_unknown inferior right                              <NA>
+#> 7                 lh_bankssts  lateral  left banks of superior temporal sulcus
+#> 8                 lh_bankssts superior  left banks of superior temporal sulcus
+#> 9                 lh_bankssts inferior  left banks of superior temporal sulcus
 #> 10 lh_caudalanteriorcingulate   medial  left         caudal anterior cingulate
 #>         lobe atlas     type  colour  p                       geometry
-#> 1       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((1782.84 18....
-#> 2       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((926.5936 60...
+#> 1       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((926.5936 60...
+#> 2       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((1782.84 18....
 #> 3       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((367.1256 13...
 #> 4       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((3849.766 60...
-#> 5       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((3190.519 5....
-#> 6       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((4318.844 20...
-#> 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...
-#> 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...
-#> 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...
+#> 5       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((4318.844 20...
+#> 6       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((3190.519 5....
+#> 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...
+#> 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...
+#> 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...
 #> 10 cingulate    dk cortical #7D64A0 NA MULTIPOLYGON (((1921.971 20...
 ```
 
