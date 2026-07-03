@@ -1,4 +1,8 @@
-# ggseg 2.2.0.9000 (development)
+# ggseg 2.2.1
+
+- The test suite now builds its `sf` fixtures through the public atlas
+  accessors instead of reaching into atlas internals, so tests no longer
+  break when the internal atlas layout changes.
 
 # ggseg 2.2.0
 
