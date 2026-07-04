@@ -10,7 +10,7 @@ describe("coord_brain", {
   it("returns a fixed-aspect ggplot2 coord", {
     co <- coord_brain()
     expect_s3_class(co, "Coord")
-    expect_equal(co$ratio, 1)
+    expect_identical(co$ratio, 1)
   })
 
   it("registers as a default coord so it can be overridden silently", {
@@ -24,7 +24,7 @@ describe("coord_brain", {
 
   it("honours a custom ratio and clip", {
     co <- coord_brain(ratio = 2, clip = "on")
-    expect_equal(co$ratio, 2)
+    expect_identical(co$ratio, 2)
     expect_identical(co$clip, "on")
   })
 

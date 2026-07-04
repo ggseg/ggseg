@@ -4,7 +4,7 @@ describe("geom_brain_polygon()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     p <- ggplot2::ggplot() + geom_brain_polygon(atlas = poly)
     g <- ggplot2::ggplot_build(p)
-    expect_true(length(g$data) >= 1)
+    expect_gte(length(g$data), 1)
     expect_gt(nrow(g$data[[1]]), 0)
   })
 
@@ -83,7 +83,7 @@ describe("geom_brain_polygon()", {
   it("bundles a fixed-aspect default coord so shapes are not stretched", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     p <- ggplot2::ggplot() + geom_brain_polygon(atlas = poly)
-    expect_equal(p$coordinates$ratio, 1)
+    expect_identical(p$coordinates$ratio, 1)
     expect_true(isTRUE(p$coordinates$default))
   })
 
@@ -93,15 +93,15 @@ describe("geom_brain_polygon()", {
       geom_brain_polygon(atlas = poly) +
       ggplot2::coord_fixed(ratio = 2)
     expect_no_message(ggplot2::ggplot_build(p))
-    expect_equal(p$coordinates$ratio, 2)
+    expect_identical(p$coordinates$ratio, 2)
   })
 
   it("drops context regions when context = FALSE", {
     poly <- ggseg.formats::as_polygon_atlas(aseg())
     full <- prepare_polygon_atlas(poly)
     no_ctx <- prepare_polygon_atlas(poly, context = FALSE)
-    expect_true(any(is.na(full$region)))
-    expect_false(any(is.na(no_ctx$region)))
+    expect_true(anyNA(full$region))
+    expect_false(anyNA(no_ctx$region))
     expect_lt(nrow(no_ctx), nrow(full))
   })
 
@@ -166,7 +166,7 @@ describe("prepare_polygon_atlas()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly)
     keys <- unique(paste(flat$label, flat$view, flat$.group, sep = "@@"))
-    expect_equal(length(unique(flat$.feature_id)), length(keys))
+    expect_length(unique(flat$.feature_id), length(keys))
   })
 })
 
@@ -188,10 +188,10 @@ describe("brain_join_polygon() faceting", {
     expect_setequal(unique(joined$group), c("A", "B"))
     a <- joined[joined$group == "A", ]
     b <- joined[joined$group == "B", ]
-    expect_equal(nrow(a), nrow(flat))
-    expect_equal(nrow(b), nrow(flat))
-    expect_true(any(!is.na(a$p)))
-    expect_true(any(is.na(a$p)))
+    expect_identical(nrow(a), nrow(flat))
+    expect_identical(nrow(b), nrow(flat))
+    expect_false(all(is.na(a$p)))
+    expect_true(anyNA(a$p))
   })
 
   it("joins by label when data carries label but not region", {
@@ -214,7 +214,10 @@ describe("brain_join_polygon() faceting", {
     )
     joined <- brain_join_polygon(data, flat)
     expect_true("group" %in% names(joined))
-    expect_equal(unique(joined$group[joined$region %in% "insula"]), "cohort1")
+    expect_identical(
+      unique(joined$group[joined$region %in% "insula"]),
+      "cohort1"
+    )
   })
 })
 
