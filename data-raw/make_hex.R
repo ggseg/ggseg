@@ -18,7 +18,8 @@ p <- ggseg(
   theme_void() +
   theme_transparent()
 
-sticker(p,
+sticker(
+  p,
   package = pkgname,
   filename = "man/figures/logo.svg",
   s_y = 1.2,
@@ -33,7 +34,8 @@ sticker(p,
   h_color = "grey30"
 )
 
-sticker(p,
+sticker(
+  p,
   package = pkgname,
   filename = "man/figures/logo.png",
   s_y = 1.2,
