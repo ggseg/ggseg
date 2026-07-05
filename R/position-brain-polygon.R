@@ -72,7 +72,7 @@ frame_2_position_flat <- function(
 
   if (!is.null(focus)) {
     dfpos$data <- zoom_views_flat(dfpos$data, focus, zoom_pad)
-    keep <- vapply(dfpos$data, function(d) nrow(d) > 0, logical(1))
+    keep <- vapply(dfpos$data, nrow, integer(1)) > 0
     dfpos$data <- dfpos$data[keep]
   }
 
