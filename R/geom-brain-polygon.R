@@ -62,31 +62,12 @@ geom_brain_polygon <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  zoom_spec <- if (is_polygon_position(position)) position$zoom else NULL
-  focus <- resolve_zoom_focus(zoom_spec, data, atlas)
-
-  flat <- prepare_polygon_atlas(
-    atlas,
-    hemi = hemi,
-    view = view,
-    position = position,
-    context = context,
-    focus = focus
-  )
-
-  if (!is.null(data)) {
-    flat <- brain_join_polygon(data, flat)
-  }
-
   base_mapping <- aes(
     x = .data$x,
     y = .data$y,
     group = .data$.feature_id,
     subgroup = .data$subgroup
   )
-  if (!"fill" %in% names(mapping)) {
-    base_mapping$fill <- quote(.data$label)
-  }
   user_mapping <- utils::modifyList(base_mapping, as.list(mapping))
   class(user_mapping) <- "uneval"
 
@@ -98,14 +79,17 @@ geom_brain_polygon <- function(
     dots$linewidth <- 0.2
   }
 
-  layer <- rlang::exec(
-    geom_polygon,
+  layer <- layer_brain(
     mapping = user_mapping,
-    data = flat,
-    position = "identity",
+    data = data,
+    atlas = atlas,
+    hemi = hemi,
+    view = view,
+    position = position,
+    context = context,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
-    !!!dots
+    params = dots
   )
 
   result <- list(layer, coord_brain())
@@ -118,6 +102,146 @@ geom_brain_polygon <- function(
   }
 
   result
+}
+
+
+# ggplot2 does not export `Layer`, so we reach into its namespace once
+# to get the parent ggproto. Using `getFromNamespace()` rather than `:::`
+# keeps `R CMD check` clean. Defined here (the canonical polygon path)
+# because this file is sourced before layer-brain.R, whose `LayerBrainSf`
+# also subclasses it.
+ggplot2_Layer <- function() {
+  utils::getFromNamespace("Layer", "ggplot2")
+}
+
+#' Build a deferred brain-polygon layer
+#'
+#' Wraps [ggplot2::layer()] with the [LayerBrain] class and stashes the
+#' atlas and layout config on the layer object. The atlas is flattened and any
+#' user data joined at plot-build time (in `setup_layer()`), so the layer can
+#' see data and aesthetics inherited from the top-level `ggplot()` call.
+#'
+#' @keywords internal
+#' @noRd
+#' @importFrom ggplot2 GeomPolygon layer
+layer_brain <- function(
+  mapping,
+  data,
+  atlas,
+  hemi,
+  view,
+  position,
+  context,
+  show.legend,
+  inherit.aes,
+  params
+) {
+  brain_layer <- layer(
+    geom = GeomPolygon,
+    stat = "identity",
+    data = data,
+    mapping = mapping,
+    position = "identity",
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params,
+    layer_class = LayerBrain
+  )
+  brain_layer$brain_atlas <- atlas
+  brain_layer$brain_hemi <- hemi
+  brain_layer$brain_view <- view
+  brain_layer$brain_position <- position
+  brain_layer$brain_context <- context
+  brain_layer
+}
+
+
+#' Custom ggplot2 Layer for the (default) sf-optional polygon path
+#'
+#' The canonical brain layer. Its `setup_layer()` runs at plot-build time, so it
+#' inherits the top-level `data` and aesthetic mapping: it flattens the atlas,
+#' joins inherited (or geom-level) data onto it, and only falls back to
+#' colouring by `label` when neither the layer nor the plot maps `fill`. Fixes
+#' ggsegverse/ggseg#158, where top-level `aes()`/`data` were dropped by the
+#' eager (construction-time) polygon build. The deprecated sf renderer has a
+#' parallel [LayerBrainSf].
+#'
+#' @keywords internal
+#' @noRd
+#' @importFrom ggplot2 ggproto ggproto_parent
+LayerBrain <- ggproto(
+  "LayerBrain",
+  ggplot2_Layer(),
+  setup_layer = function(self, data, plot) {
+    dt <- ggproto_parent(ggplot2_Layer(), self)$setup_layer(data, plot)
+
+    atlas <- self$brain_atlas
+    if (is.null(atlas)) {
+      cli::cli_abort(
+        "No atlas supplied, please provide a brain atlas to the geom."
+      )
+    }
+
+    has_data <- !inherits(dt, "waiver")
+
+    if (has_data && !dplyr::is.grouped_df(dt)) {
+      dt <- group_by_facet_vars(dt, plot, atlas)
+    }
+
+    zoom_spec <- if (is_polygon_position(self$brain_position)) {
+      self$brain_position$zoom
+    } else {
+      NULL
+    }
+    focus <- resolve_zoom_focus(zoom_spec, if (has_data) dt else NULL, atlas)
+
+    flat <- prepare_polygon_atlas(
+      atlas,
+      hemi = self$brain_hemi,
+      view = self$brain_view,
+      position = self$brain_position,
+      context = self$brain_context,
+      focus = focus
+    )
+
+    if (has_data) {
+      flat <- brain_join_polygon(dt, flat)
+    }
+
+    if (is.null(self$computed_mapping$fill)) {
+      self$computed_mapping$fill <- quote(.data$label)
+    }
+
+    flat
+  }
+)
+
+
+#' Auto-group user data by facet variables for atlas replication
+#'
+#' Parity with [LayerBrainSf]: when data is faceted but not explicitly grouped,
+#' group it by the facet variables so [brain_join_polygon()] replicates the full
+#' atlas once per panel. Facet variables that are atlas identity columns (e.g.
+#' `hemi`, `view`) are excluded -- faceting on those subsets the atlas rather
+#' than replicating it.
+#'
+#' @keywords internal
+#' @noRd
+group_by_facet_vars <- function(data, plot, atlas) {
+  facet_vars <- plot$facet$vars()
+  group_vars <- intersect(facet_vars, names(data))
+  atlas_cols <- unique(c(
+    names(atlas$core),
+    "view",
+    "type",
+    "atlas",
+    "hemi"
+  ))
+  group_vars <- setdiff(group_vars, atlas_cols)
+  if (length(group_vars) > 0) {
+    data <- dplyr::group_by(data, dplyr::across(dplyr::all_of(group_vars)))
+  }
+  data
 }
 
 

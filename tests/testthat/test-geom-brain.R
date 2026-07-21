@@ -201,14 +201,14 @@ describe("geom_brain faceting", {
   })
 })
 
-describe("LayerBrain", {
+describe("LayerBrainSf", {
   it("errors when no atlas is supplied", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
     expect_error(
       ggplot_build(
         ggplot() +
-          layer_brain(
+          layer_brain_sf(
             geom = GeomBrain,
             stat = "sf",
             position = position_brain_sf(),

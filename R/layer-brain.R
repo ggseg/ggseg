@@ -1,7 +1,8 @@
-#' Create a brain atlas ggplot2 layer
+#' Create an sf brain atlas ggplot2 layer (deprecated path)
 #'
 #' Thin wrapper around [ggplot2::layer()] that substitutes the
-#' custom [LayerBrain] class for atlas-specific setup logic.
+#' custom [LayerBrainSf] class for atlas-specific setup logic. Used by the
+#' deprecated [geom_brain_sf()]; the default polygon path uses [layer_brain()].
 #'
 #' @param geom A ggplot2 Geom ggproto object.
 #' @param stat A ggplot2 Stat ggproto object or string.
@@ -14,11 +15,11 @@
 #' @param check.param Whether to check parameters.
 #' @param show.legend Whether to include in legends.
 #'
-#' @return A [ggplot2::layer()] object of class `LayerBrain`.
+#' @return A [ggplot2::layer()] object of class `LayerBrainSf`.
 #' @importFrom ggplot2 layer
 #' @keywords internal
 #' @noRd
-layer_brain <- function(
+layer_brain_sf <- function(
   geom = NULL,
   stat = NULL,
   data = NULL,
@@ -41,31 +42,25 @@ layer_brain <- function(
     check.aes = check.aes,
     check.param = check.param,
     show.legend = show.legend,
-    layer_class = LayerBrain
+    layer_class = LayerBrainSf
   )
 }
 
-# ggplot2 does not export `Layer`, so we reach into its namespace once
-# to get the parent ggproto. Using `getFromNamespace()` rather than `:::`
-# keeps `R CMD check` clean.
-ggplot2_Layer <- function() {
-  utils::getFromNamespace("Layer", "ggplot2")
-}
-
-#' Custom ggplot2 Layer for brain atlas data
+#' Custom ggplot2 Layer for sf brain atlas data (deprecated path)
 #'
 #' A [ggplot2::ggproto()] Layer subclass that handles atlas
 #' validation, hemisphere/view filtering, data joining, and
 #' automatic aesthetic mapping in `setup_layer()`. Subclasses
-#' ggplot2's non-exported `Layer` ggproto via
-#' [utils::getFromNamespace()], avoiding `:::` usage.
+#' ggplot2's non-exported `Layer` ggproto via `ggplot2_Layer()`
+#' (defined in geom-brain-polygon.R). Parallel to the default
+#' polygon [LayerBrain].
 #'
 #' @importFrom utils capture.output getFromNamespace
 #' @importFrom ggplot2 ggproto ggproto_parent
 #' @keywords internal
 #' @noRd
-LayerBrain <- ggproto(
-  "LayerBrain",
+LayerBrainSf <- ggproto(
+  "LayerBrainSf",
   ggplot2_Layer(),
   setup_layer = function(self, data, plot) {
     dt <- ggproto_parent(ggplot2_Layer(), self)$setup_layer(data, plot)

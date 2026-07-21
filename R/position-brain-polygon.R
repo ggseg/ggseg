@@ -13,7 +13,7 @@
 # Layouts are applied at flatten time (inside prepare_polygon_atlas()) rather
 # than via a ggproto Position. That side-steps ggplot2's aesthetic-stripping
 # of non-standard columns (type / view / hemi), which the sf path's custom
-# LayerBrain avoids by declaring those columns as aesthetics.
+# LayerBrainSf avoids by declaring those columns as aesthetics.
 
 #' Bounding box of flat polygon coords
 #'

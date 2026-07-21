@@ -126,7 +126,7 @@ geom_brain_sf <- function(
   }
 
   result <- list(
-    layer_brain(
+    layer_brain_sf(
       geom = GeomBrain,
       data = data,
       mapping = mapping,

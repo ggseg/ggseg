@@ -1,5 +1,13 @@
 # ggseg 2.2.1.9000 (development)
 
+- `geom_brain()` again respects `data` and aesthetics set in the top-level
+  `ggplot()` call. The default polygon renderer built the atlas eagerly, before
+  the plot existed, so it never saw inherited `data`/`aes()` and fell back to
+  colouring by region label — e.g. `ggplot(df, aes(fill = value)) +
+geom_brain(atlas = dk())` errored with "Discrete value supplied to a
+  continuous scale". The atlas is now flattened and joined at plot-build time, so
+  inherited mappings, inherited data, and faceting all work (#158).
+
 # ggseg 2.2.1
 
 - The test suite now builds its `sf` fixtures through the public atlas
