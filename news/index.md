@@ -2,6 +2,19 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+  again respects `data` and aesthetics set in the top-level
+  [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
+  call. The default polygon renderer built the atlas eagerly, before the
+  plot existed, so it never saw inherited
+  `data`/[`aes()`](https://ggplot2.tidyverse.org/reference/aes.html) and
+  fell back to colouring by region label —
+  e.g. `ggplot(df, aes(fill = value)) + geom_brain(atlas = dk())`
+  errored with “Discrete value supplied to a continuous scale”. The
+  atlas is now flattened and joined at plot-build time, so inherited
+  mappings, inherited data, and faceting all work
+  ([\#158](https://github.com/ggsegverse/ggseg/issues/158)).
+
 ## ggseg 2.2.1
 
 CRAN release: 2026-07-03

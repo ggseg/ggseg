@@ -9,7 +9,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggseg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1.9000" id="ggseg-2219000-development">ggseg 2.2.1.9000 (development)<a class="anchor" aria-label="anchor" href="#ggseg-2219000-development"></a></h2>
-</div>
+<ul><li>
+<code><a href="../reference/ggbrain.html">geom_brain()</a></code> again respects <code>data</code> and aesthetics set in the top-level <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> call. The default polygon renderer built the atlas eagerly, before the plot existed, so it never saw inherited <code>data</code>/<code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code> and fell back to colouring by region label — e.g. <code>ggplot(df, aes(fill = value)) + geom_brain(atlas = dk())</code> errored with “Discrete value supplied to a continuous scale”. The atlas is now flattened and joined at plot-build time, so inherited mappings, inherited data, and faceting all work (<a href="https://github.com/ggsegverse/ggseg/issues/158" class="external-link">#158</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="ggseg-221">ggseg 2.2.1<a class="anchor" aria-label="anchor" href="#ggseg-221"></a></h2><p class="text-muted">CRAN release: 2026-07-03</p>
 <ul><li>The test suite now builds its <code>sf</code> fixtures through the public atlas accessors instead of reaching into atlas internals, so tests no longer break when the internal atlas layout changes.</li>
