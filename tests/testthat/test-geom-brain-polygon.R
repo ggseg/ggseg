@@ -266,7 +266,7 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
         geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
         ggplot2::scale_fill_viridis_c()
     )
-    expect_equal(fill_column(inherited), fill_column(explicit))
+    expect_identical(fill_column(inherited), fill_column(explicit))
   })
 
   it("still colours by the atlas palette when no fill is mapped anywhere", {

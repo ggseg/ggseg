@@ -22,5 +22,6 @@ dev
 ^CRAN-SUBMISSION$
 .lintr
 .claude/
+^\.impeccable$
 ^cran-comments\.md$
 ^codemeta\.json$

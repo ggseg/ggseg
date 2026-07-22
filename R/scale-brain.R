@@ -84,10 +84,6 @@ scale_fill_brain <- function(name = "dk", na.value = "grey", ...) {
   scale_fill_manual(values = pal, na.value = na.value)
 }
 
-atlas_palette_by_name <- function(name, ...) {
-  atlas_palette(match.fun(name)(), ...)
-}
-
 #' Manual colour and fill scales for brain plots
 #'
 #' @description
@@ -275,4 +271,9 @@ scale_labs_brain <- function(
   aesthetics <- match.arg(aesthetics)
   func <- switch(aesthetics, labs = labs)
   func(x = positions$x, y = positions$y)
+}
+
+
+atlas_palette_by_name <- function(name, ...) {
+  atlas_palette(match.fun(name)(), ...)
 }

@@ -149,6 +149,11 @@ position_brain <- function(
 #' @return A `PositionBrain` ggproto object.
 #' @importFrom ggplot2 ggproto
 #' @keywords internal
+#' @examples
+#' \dontrun{
+#' # Deprecated: prefer position_brain(). Shown for reference only.
+#' position_brain_sf("horizontal")
+#' }
 position_brain_sf <- function(
   position = "horizontal",
   nrow = NULL,

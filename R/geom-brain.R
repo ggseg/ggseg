@@ -90,6 +90,13 @@ geom_brain <- function(
 #' @export
 #' @keywords internal
 #' @importFrom ggplot2 aes coord_sf scale_fill_manual
+#' @examples
+#' \dontrun{
+#' # Deprecated: prefer geom_brain(). Shown for reference only.
+#' library(ggplot2)
+#' ggplot() +
+#'   geom_brain_sf(atlas = dk())
+#' }
 geom_brain_sf <- function(
   mapping = aes(),
   data = NULL,

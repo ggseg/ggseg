@@ -18,7 +18,7 @@ describe("position_brain_polygon()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly, position = position_brain_polygon())
     bbox <- attr(flat, "polygon_bbox")
-    expect_true(!is.null(bbox))
+    expect_false(is.null(bbox))
     expect_gt(bbox["xmax"] - bbox["xmin"], bbox["ymax"] - bbox["ymin"])
   })
 
@@ -39,7 +39,7 @@ describe("position_brain_polygon()", {
       position = position_brain_polygon(hemi ~ view)
     )
     bbox <- attr(flat, "polygon_bbox")
-    expect_true(!is.null(bbox))
+    expect_false(is.null(bbox))
     expect_true(all(is.finite(bbox)))
   })
 })
