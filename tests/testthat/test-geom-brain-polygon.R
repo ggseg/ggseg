@@ -226,14 +226,22 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
     ggplot2::ggplot_build(p)$data[[1]]$fill
   }
 
-  it("uses a continuous fill mapped in ggplot(), not the region labels", {
-    mex <- data.frame(
+  # Adding a user fill scale on top of the atlas default emits an expected
+  # "Scale for fill is already present" message at plot-construction time.
+  labelled_values <- function() {
+    data.frame(
       label = ggseg.formats::atlas_labels(dk()),
       value = seq_along(ggseg.formats::atlas_labels(dk()))
     )
-    p <- ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
-      geom_brain(atlas = dk()) +
-      ggplot2::scale_fill_viridis_c()
+  }
+
+  it("uses a continuous fill mapped in ggplot(), not the region labels", {
+    mex <- labelled_values()
+    p <- suppressMessages(
+      ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+        geom_brain(atlas = dk()) +
+        ggplot2::scale_fill_viridis_c()
+    )
     # The bug threw "Discrete value supplied to a continuous scale" at build.
     expect_no_error(fills <- fill_column(p))
     # A continuous scale resolves to many hex colours; unmatched context
@@ -244,16 +252,17 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
   })
 
   it("matches the explicit geom-level data= workaround from the issue", {
-    mex <- data.frame(
-      label = ggseg.formats::atlas_labels(dk()),
-      value = seq_along(ggseg.formats::atlas_labels(dk()))
+    mex <- labelled_values()
+    inherited <- suppressMessages(
+      ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+        geom_brain(atlas = dk()) +
+        ggplot2::scale_fill_viridis_c()
     )
-    inherited <- ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
-      geom_brain(atlas = dk()) +
-      ggplot2::scale_fill_viridis_c()
-    explicit <- ggplot2::ggplot() +
-      geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
-      ggplot2::scale_fill_viridis_c()
+    explicit <- suppressMessages(
+      ggplot2::ggplot() +
+        geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
+        ggplot2::scale_fill_viridis_c()
+    )
     expect_equal(fill_column(inherited), fill_column(explicit))
   })
 
@@ -265,21 +274,15 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
 
   it("replicates the atlas per facet for inherited grouped-by-facet data", {
     mex <- rbind(
-      data.frame(
-        label = ggseg.formats::atlas_labels(dk()),
-        value = 1,
-        cohort = "A"
-      ),
-      data.frame(
-        label = ggseg.formats::atlas_labels(dk()),
-        value = 2,
-        cohort = "B"
-      )
+      cbind(labelled_values(), cohort = "A"),
+      cbind(labelled_values(), cohort = "B")
     )
-    p <- ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
-      geom_brain(atlas = dk()) +
-      ggplot2::facet_wrap(~cohort) +
-      ggplot2::scale_fill_viridis_c()
+    p <- suppressMessages(
+      ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+        geom_brain(atlas = dk()) +
+        ggplot2::facet_wrap(~cohort) +
+        ggplot2::scale_fill_viridis_c()
+    )
     g <- ggplot2::ggplot_build(p)
     expect_setequal(unique(g$data[[1]]$PANEL), factor(c(1, 2)))
   })
