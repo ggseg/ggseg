@@ -72,12 +72,6 @@ geom_brain_polygon <- function(
   class(user_mapping) <- "uneval"
 
   dots <- list(...)
-  if (!"colour" %in% names(dots) && !"color" %in% names(dots)) {
-    dots$colour <- "grey35"
-  }
-  if (!"linewidth" %in% names(dots) && !"size" %in% names(dots)) {
-    dots$linewidth <- 0.2
-  }
 
   layer <- layer_brain(
     mapping = user_mapping,
@@ -114,6 +108,27 @@ ggplot2_Layer <- function() {
   utils::getFromNamespace("Layer", "ggplot2")
 }
 
+#' `GeomPolygon` with brain-atlas outline defaults
+#'
+#' Supplies the default outline `colour` (grey35) and `linewidth` (0.2) through
+#' `default_aes`, so they apply only when the user has not mapped or set those
+#' aesthetics. This replaces injecting them as fixed geom params, which
+#' silently overrode a user's `aes(colour = ...)` / `aes(linewidth = ...)`
+#' mapping (ggsegverse/ggseg#160): a fixed param always beats a mapping,
+#' whereas a `default_aes` yields to one.
+#'
+#' @keywords internal
+#' @noRd
+#' @importFrom ggplot2 ggproto GeomPolygon aes
+GeomBrainPolygon <- ggproto(
+  "GeomBrainPolygon",
+  GeomPolygon,
+  default_aes = utils::modifyList(
+    GeomPolygon$default_aes,
+    aes(colour = "grey35", linewidth = 0.2)
+  )
+)
+
 #' Build a deferred brain-polygon layer
 #'
 #' Wraps [ggplot2::layer()] with the [LayerBrain] class and stashes the
@@ -123,7 +138,7 @@ ggplot2_Layer <- function() {
 #'
 #' @keywords internal
 #' @noRd
-#' @importFrom ggplot2 GeomPolygon layer
+#' @importFrom ggplot2 layer
 layer_brain <- function(
   mapping,
   data,
@@ -137,7 +152,7 @@ layer_brain <- function(
   params
 ) {
   brain_layer <- layer(
-    geom = GeomPolygon,
+    geom = GeomBrainPolygon,
     stat = "identity",
     data = data,
     mapping = mapping,
@@ -326,8 +341,14 @@ prepare_polygon_atlas <- function(
     )
   }
 
+  # Draw order follows row order: feature ids increase in the order features
+  # first appear in the atlas (levels = unique), not alphabetically. When user
+  # data is joined, brain_join_polygon() reassigns these to follow the data's
+  # row order (see ggsegverse/ggseg#162). Lower id = drawn first (underneath).
+  feature_key <- paste(flat$label, flat$view, flat$.group, sep = "@@")
   flat$.feature_id <- as.integer(factor(
-    paste(flat$label, flat$view, flat$.group, sep = "@@")
+    feature_key,
+    levels = unique(feature_key)
   ))
 
   if (is_polygon_position(position)) {
@@ -375,7 +396,8 @@ brain_join_polygon <- function(data, flat) {
   }
 
   if (!dplyr::is.grouped_df(data)) {
-    return(dplyr::left_join(flat, data, by = by, suffix = c("", ".user")))
+    joined <- dplyr::left_join(flat, data, by = by, suffix = c("", ".user"))
+    return(order_features_by_data(joined, data, by))
   }
 
   group_cols <- dplyr::group_vars(data)
@@ -390,7 +412,51 @@ brain_join_polygon <- function(data, flat) {
     for (g in group_cols) {
       piece[[g]] <- nested[[g]][[i]]
     }
-    piece
+    order_features_by_data(piece, nested$data[[i]], by)
   })
   dplyr::bind_rows(pieces)
+}
+
+
+#' Order `.feature_id` by the user data row order so draw order follows it
+#'
+#' `ggplot2::GeomPolygon` paints features in ascending `group` (here
+#' `.feature_id`) order, so lower ids draw first (underneath) and higher ids on
+#' top. This orders the `.feature_id` levels by the order each region first
+#' appears in `data`, so users control layering with [dplyr::arrange()] (later
+#' rows on top). Regions absent from `data` keep the atlas order underneath.
+#' ggplot2 handles the actual sorting and drawing; this only sets the group ids
+#' it sorts on (see ggsegverse/ggseg#162).
+#'
+#' Per-group pieces may reuse the same ids: ggplot2 draws each facet panel from
+#' its own rows, so ids need not be globally unique.
+#'
+#' @param flat Joined flat polygon data with `label`, `view`, `.group` and the
+#'   `by` columns.
+#' @param data The user data.frame the features were joined against.
+#' @param by Character vector of join columns.
+#' @return `flat` with `.feature_id` reassigned to follow the data order.
+#' @keywords internal
+#' @noRd
+order_features_by_data <- function(flat, data, by) {
+  paste_cols <- function(df, cols) {
+    do.call(
+      paste,
+      c(lapply(cols, function(col) as.character(df[[col]])), sep = "@@")
+    )
+  }
+
+  data_rank <- match(paste_cols(flat, by), unique(paste_cols(data, by)))
+  data_rank[is.na(data_rank)] <- 0L
+
+  feature_key <- paste_cols(flat, c("label", "view", ".group"))
+  first_feature <- !duplicated(feature_key)
+  # order() is stable, so features with the same rank (context regions, or the
+  # rings of one region) keep their atlas appearance order.
+  ordered_levels <- feature_key[first_feature][
+    order(data_rank[first_feature])
+  ]
+
+  flat$.feature_id <- as.integer(factor(feature_key, levels = ordered_levels))
+  flat
 }

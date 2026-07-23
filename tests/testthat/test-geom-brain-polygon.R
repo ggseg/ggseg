@@ -311,3 +311,147 @@ describe("geom_brain() backwards-compatibility with sf atlases", {
     expect_gt(nrow(g$data[[1]]), 0)
   })
 })
+
+
+describe("geom_brain() outline aesthetics (ggseg#160)", {
+  # Regression test for ggsegverse/ggseg#160: the outline colour/linewidth were
+  # injected as fixed geom params, which silently overrode a user's
+  # aes(colour = ...) / aes(linewidth = ...) mapping. GeomBrainPolygon now
+  # supplies them through default_aes, which yields to a mapping.
+  built <- function(p) ggplot2::ggplot_build(p)$data[[1]]
+
+  outline_data <- function() {
+    data.frame(
+      region = c("insula", "precentral", "superior parietal"),
+      grp = c("a", "b", "c"),
+      w = c(0.5, 1.5, 3)
+    )
+  }
+
+  it("maps aes(colour) to region outlines instead of overriding it", {
+    p <- ggplot2::ggplot(outline_data()) +
+      geom_brain(atlas = dk(), ggplot2::aes(colour = grp))
+    cols <- unique(built(p)$colour)
+    expect_gt(length(cols), 1)
+    expect_false(all(cols == "grey35"))
+  })
+
+  it("maps aes(linewidth) to region outlines instead of overriding it", {
+    p <- ggplot2::ggplot(outline_data()) +
+      geom_brain(atlas = dk(), ggplot2::aes(linewidth = w))
+    expect_gt(length(unique(built(p)$linewidth)), 1)
+  })
+
+  it("uses the grey35 / 0.2 defaults when outline aes are neither mapped nor set", {
+    g <- built(ggplot2::ggplot() + geom_brain(atlas = dk()))
+    expect_setequal(unique(g$colour), "grey35")
+    expect_setequal(unique(g$linewidth), 0.2)
+  })
+
+  it("still lets a fixed colour param override the mapping", {
+    p <- ggplot2::ggplot(outline_data()) +
+      geom_brain(atlas = dk(), ggplot2::aes(colour = grp), colour = "red")
+    expect_setequal(unique(built(p)$colour), "red")
+  })
+})
+
+
+describe("draw order follows the data row order (ggseg#162)", {
+  # ggsegverse/ggseg#162: GeomPolygon paints in ascending group (.feature_id)
+  # order, so the renderer must let the data row order set that id -- later rows
+  # draw on top -- rather than forcing alphabetical order. Users then control
+  # overlapping-outline layering with dplyr::arrange().
+
+  it("assigns feature ids in atlas appearance order, not alphabetically", {
+    poly <- ggseg.formats::as_polygon_atlas(dk())
+    flat <- prepare_polygon_atlas(poly)
+    key <- paste(flat$label, flat$view, flat$.group, sep = "@@")
+    first_ids <- flat$.feature_id[!duplicated(key)]
+    expect_equal(first_ids, seq_along(first_ids))
+  })
+
+  it("orders feature ids by first appearance in the user data", {
+    flat <- data.frame(
+      label = c("a", "a", "b", "b", "c", "c"),
+      view = "lateral",
+      .group = 1L,
+      region = c("ra", "ra", "rb", "rb", "rc", "rc"),
+      stringsAsFactors = FALSE
+    )
+    # rb is absent from the data -> a context region, must stay underneath.
+    data <- data.frame(region = c("rc", "ra"), stringsAsFactors = FALSE)
+    ids <- unique(order_features_by_data(flat, data, by = "region")[,
+      c("region", ".feature_id")
+    ])
+    expect_equal(ids$region[order(ids$.feature_id)], c("rb", "rc", "ra"))
+  })
+
+  it("draws atlas context regions beneath the user's regions", {
+    poly <- ggseg.formats::as_polygon_atlas(dk())
+    flat <- prepare_polygon_atlas(poly)
+    data <- data.frame(region = c("precentral", "insula"), v = 1:2)
+    joined <- brain_join_polygon(data, flat)
+    feat <- joined[!duplicated(joined$.feature_id), c(".feature_id", "region")]
+    in_data <- feat$region %in% data$region
+    expect_lt(max(feat$.feature_id[!in_data]), min(feat$.feature_id[in_data]))
+  })
+
+  it("puts the last-arranged region on top", {
+    poly <- ggseg.formats::as_polygon_atlas(dk())
+    flat <- prepare_polygon_atlas(poly)
+    top_region <- function(order_regs) {
+      d <- data.frame(region = order_regs, v = seq_along(order_regs))
+      j <- brain_join_polygon(d, flat)
+      j$region[j$.feature_id == max(j$.feature_id)][1]
+    }
+    regs <- c("precentral", "insula", "superior parietal", "fusiform")
+    expect_equal(top_region(regs), "fusiform")
+    expect_equal(top_region(rev(regs)), "precentral")
+  })
+
+  it("orders each facet panel by its own data order", {
+    poly <- ggseg.formats::as_polygon_atlas(dk())
+    flat <- prepare_polygon_atlas(poly)
+    data <- dplyr::group_by(
+      data.frame(
+        region = c("insula", "precentral", "precentral", "insula"),
+        cohort = c("A", "A", "B", "B"),
+        v = c(1, 2, 1, 2)
+      ),
+      cohort
+    )
+    joined <- brain_join_polygon(data, flat)
+    top_in <- function(coh) {
+      sub <- joined[joined$cohort == coh, ]
+      sub$region[sub$.feature_id == max(sub$.feature_id)][1]
+    }
+    expect_equal(top_in("A"), "precentral")
+    expect_equal(top_in("B"), "insula")
+  })
+
+  it("layers overlapping outlines by data order", {
+    skip_if_not_installed("vdiffr")
+    # Mirrors ggseg#162: fill by a statistic, outline by a threshold factor.
+    # The factor levels are fixed, so each region keeps its colour and only the
+    # row order differs between the two plots -- isolating the draw order.
+    regs <- c("precentral", "postcentral", "superior parietal")
+    make <- function(order_regs) {
+      d <- data.frame(
+        region = order_regs,
+        stat = match(order_regs, regs),
+        thr = factor(order_regs, levels = regs)
+      )
+      ggplot2::ggplot(d) +
+        geom_brain(
+          atlas = dk(),
+          ggplot2::aes(fill = stat, colour = thr),
+          hemi = "left",
+          view = "lateral",
+          linewidth = 3
+        ) +
+        ggplot2::theme_void()
+    }
+    vdiffr::expect_doppelganger("draw-order-forward", make(regs))
+    vdiffr::expect_doppelganger("draw-order-reversed", make(rev(regs)))
+  })
+})

@@ -55,6 +55,12 @@ Colour brain regions by your own values. Give `geom_brain()` an atlas like
 `dk()` and a data frame, and it matches your values to the right regions and
 lays out the brain views for you. No data? It just draws the atlas.
 }
+\details{
+Regions are drawn in the order they appear in your `data`, so when outlines
+overlap (e.g. mapping `colour` to a threshold with a wide `linewidth`) the
+later rows draw on top. Reorder your data with [dplyr::arrange()] to control
+the layering; regions you supply no value for stay underneath in atlas order.
+}
 \section{GeomBrain ggproto}{
 
 `GeomBrain` is a [ggplot2::Geom] ggproto object that handles rendering

@@ -1,5 +1,20 @@
 # ggseg 2.2.1.9000 (development)
 
+- Polygon draw order now follows your data's row order, so overlapping region
+  outlines layer predictably. The renderer used to force alphabetical draw
+  order, so when you mapped a variable to `colour` the outlines stacked in an
+  order unrelated to that variable. Regions now draw in the order they appear
+  in your `data` (later rows on top), and regions you supply no value for stay
+  underneath in atlas order — so `arrange()` your data to control layering
+  (#162).
+
+- `geom_brain()` again maps `aes(colour = ...)` and `aes(linewidth = ...)` to
+  region outlines. The default outline colour (`grey35`) and width (`0.2`) were
+  injected as fixed geom parameters, which silently overrode any mapping. They
+  are now `default_aes` on a dedicated `GeomPolygon` subclass, so a mapping (or
+  an explicit constant) takes precedence while the defaults still apply when
+  neither is given (#160).
+
 - `geom_brain()` again respects `data` and aesthetics set in the top-level
   `ggplot()` call. The default polygon renderer built the atlas eagerly, before
   the plot existed, so it never saw inherited `data`/`aes()` and fell back to

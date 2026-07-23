@@ -4,6 +4,12 @@
 #' `dk()` and a data frame, and it matches your values to the right regions and
 #' lays out the brain views for you. No data? It just draws the atlas.
 #'
+#' @details
+#' Regions are drawn in the order they appear in your `data`, so when outlines
+#' overlap (e.g. mapping `colour` to a threshold with a wide `linewidth`) the
+#' later rows draw on top. Reorder your data with [dplyr::arrange()] to control
+#' the layering; regions you supply no value for stay underneath in atlas order.
+#'
 #' @param mapping Set of aesthetic mappings created by [ggplot2::aes()].
 #' @param data A data.frame containing variables to map. If `NULL`, the atlas
 #'   is plotted without user data. Group it with [dplyr::group_by()] to facet.
