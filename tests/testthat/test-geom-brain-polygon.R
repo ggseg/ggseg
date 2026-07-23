@@ -342,7 +342,7 @@ describe("geom_brain() outline aesthetics (ggseg#160)", {
     expect_gt(length(unique(built(p)$linewidth)), 1)
   })
 
-  it("uses the grey35 / 0.2 defaults when outline aes are neither mapped nor set", {
+  it("uses the grey35 / 0.2 defaults when neither mapped nor set", {
     g <- built(ggplot2::ggplot() + geom_brain(atlas = dk()))
     expect_setequal(unique(g$colour), "grey35")
     expect_setequal(unique(g$linewidth), 0.2)
@@ -357,10 +357,10 @@ describe("geom_brain() outline aesthetics (ggseg#160)", {
 
 
 describe("draw order follows the data row order (ggseg#162)", {
-  # ggsegverse/ggseg#162: GeomPolygon paints in ascending group (.feature_id)
-  # order, so the renderer must let the data row order set that id -- later rows
-  # draw on top -- rather than forcing alphabetical order. Users then control
-  # overlapping-outline layering with dplyr::arrange().
+  # Regression test for ggsegverse/ggseg#162: GeomPolygon paints features in
+  # ascending .feature_id order, so the renderer must let the data row order set
+  # that id -- later rows draw on top -- rather than forcing alphabetical order.
+  # Users then control overlapping-outline layering with dplyr::arrange().
 
   it("assigns feature ids in atlas appearance order, not alphabetically", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
@@ -380,9 +380,8 @@ describe("draw order follows the data row order (ggseg#162)", {
     )
     # rb is absent from the data -> a context region, must stay underneath.
     data <- data.frame(region = c("rc", "ra"), stringsAsFactors = FALSE)
-    ids <- unique(order_features_by_data(flat, data, by = "region")[,
-      c("region", ".feature_id")
-    ])
+    ordered <- order_features_by_data(flat, data, by = "region")
+    ids <- unique(ordered[c("region", ".feature_id")])
     expect_equal(ids$region[order(ids$.feature_id)], c("rb", "rc", "ra"))
   })
 
@@ -441,13 +440,17 @@ describe("draw order follows the data row order (ggseg#162)", {
         stat = match(order_regs, regs),
         thr = factor(order_regs, levels = regs)
       )
+      # No legend/titles: text rendering is font-dependent and differs across
+      # platforms, which would make the snapshot fail on CI. The overlapping
+      # outlines alone carry the draw-order signal.
       ggplot2::ggplot(d) +
         geom_brain(
           atlas = dk(),
           ggplot2::aes(fill = stat, colour = thr),
           hemi = "left",
           view = "lateral",
-          linewidth = 3
+          linewidth = 3,
+          show.legend = FALSE
         ) +
         ggplot2::theme_void()
     }
