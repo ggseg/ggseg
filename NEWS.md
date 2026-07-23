@@ -1,5 +1,11 @@
 # ggseg 2.2.1.9000 (development)
 
+- `geom_brain()` now ignores (with a warning) a user `aes()` mapping for
+  `x`, `y`, `group`, or `subgroup`. These are derived from the atlas geometry
+  — `group` is the polygon feature id and `subgroup` marks holes — so mapping
+  them previously corrupted the rendering silently (e.g. `aes(group = region)`
+  collapsed each region's separate polygon pieces).
+
 - Polygon draw order now follows your data's row order, so overlapping region
   outlines layer predictably. The renderer used to force alphabetical draw
   order, so when you mapped a variable to `colour` the outlines stacked in an

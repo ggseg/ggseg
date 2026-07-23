@@ -356,6 +356,36 @@ describe("geom_brain() outline aesthetics (ggseg#160)", {
 })
 
 
+describe("geom_brain() protects atlas-controlled aesthetics", {
+  # x/y/group/subgroup are derived from the atlas geometry. A user mapping for
+  # them would corrupt the polygons (e.g. aes(group = region) collapses the
+  # per-feature ring grouping), so geom_brain() ignores and warns.
+  n_groups <- function(p) {
+    length(unique(ggplot2::ggplot_build(p)$data[[1]]$group))
+  }
+
+  it("warns and ignores a user-mapped group aesthetic", {
+    d <- data.frame(region = c("insula", "precentral"), v = c(1, 2))
+    baseline <- n_groups(
+      ggplot2::ggplot(d) + geom_brain(atlas = dk(), ggplot2::aes(fill = v))
+    )
+    expect_warning(
+      p <- ggplot2::ggplot(d) +
+        geom_brain(atlas = dk(), ggplot2::aes(fill = v, group = region)),
+      "Ignoring"
+    )
+    expect_equal(n_groups(p), baseline)
+  })
+
+  it("warns listing every reserved aesthetic the user supplied", {
+    expect_warning(
+      geom_brain(atlas = dk(), ggplot2::aes(x = 1, subgroup = 1)),
+      "subgroup"
+    )
+  })
+})
+
+
 describe("draw order follows the data row order (ggseg#162)", {
   # Regression test for ggsegverse/ggseg#162: GeomPolygon paints features in
   # ascending .feature_id order, so the renderer must let the data row order set

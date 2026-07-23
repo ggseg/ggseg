@@ -68,7 +68,21 @@ geom_brain_polygon <- function(
     group = .data$.feature_id,
     subgroup = .data$subgroup
   )
-  user_mapping <- utils::modifyList(base_mapping, as.list(mapping))
+  # x/y/group/subgroup come from the atlas geometry: `group` is the polygon
+  # feature id (ring grouping and draw order) and `subgroup` marks holes. A
+  # user mapping for any of them would corrupt the rendering, so the atlas
+  # values win and we warn rather than silently honour the override.
+  reserved <- intersect(names(mapping), names(base_mapping))
+  if (length(reserved)) {
+    cli::cli_warn(c(
+      "Ignoring the {.field {reserved}} aesthetic{?s} in {.arg mapping}.",
+      "i" = paste(
+        "{.fn geom_brain} sets {.field x}, {.field y}, {.field group}, and",
+        "{.field subgroup} from the atlas geometry."
+      )
+    ))
+  }
+  user_mapping <- utils::modifyList(as.list(mapping), base_mapping)
   class(user_mapping) <- "uneval"
 
   dots <- list(...)
