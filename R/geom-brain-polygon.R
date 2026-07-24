@@ -376,6 +376,8 @@ brain_join_polygon <- function(data, flat) {
     ))
   }
 
+  warn_unmatched_polygon_data(data, flat, by)
+
   if (!dplyr::is.grouped_df(data)) {
     joined <- dplyr::left_join(flat, data, by = by, suffix = c("", ".user"))
     return(order_features_by_data(joined, data, by))
@@ -396,6 +398,38 @@ brain_join_polygon <- function(data, flat) {
     order_features_by_data(piece, nested$data[[i]], by)
   })
   dplyr::bind_rows(pieces)
+}
+
+
+#' Warn about user data rows that match no atlas region
+#'
+#' The polygon join keeps every atlas polygon and drops unmatched user rows
+#' (e.g. a mistyped or renamed region), so a mismatch would otherwise vanish
+#' silently. This mirrors the sf-path [brain_join()] warning so the dropped rows
+#' are surfaced (ggsegverse/ggseg#121). Grouping columns are ignored when
+#' detecting matches -- only the `by` keys (region/label/hemi) decide a match --
+#' so the unmatched rows are reported once across all groups.
+#'
+#' @param data The user data.frame (possibly grouped) being joined.
+#' @param flat The flattened atlas rows joined against.
+#' @param by Character vector of join columns.
+#' @return `invisible(NULL)`, called for its warning side effect.
+#' @keywords internal
+#' @noRd
+warn_unmatched_polygon_data <- function(data, flat, by) {
+  unmatched <- dplyr::anti_join(dplyr::ungroup(data), flat, by = by)
+  if (nrow(unmatched) == 0) {
+    return(invisible(NULL))
+  }
+  cli::cli_warn(c(
+    "Some data not merged properly.",
+    "i" = "Check for naming errors in {.arg data}:",
+    " " = paste(
+      utils::capture.output(print(dplyr::as_tibble(unmatched))),
+      collapse = "\n"
+    )
+  ))
+  invisible(NULL)
 }
 
 
