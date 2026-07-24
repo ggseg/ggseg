@@ -2,6 +2,41 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- Internal geom/layer consolidation: the exported `GeomBrain` ggproto is
+  now the polygon geom that backs the default
+  [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+  (a `GeomPolygon` subclass). The deprecated sf renderer’s geom was
+  renamed to the internal `GeomBrainSf`. Only affects code reaching for
+  the `GeomBrain` object directly.
+
+- [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+  now ignores (with a warning) a user
+  [`aes()`](https://ggplot2.tidyverse.org/reference/aes.html) mapping
+  for `x`, `y`, `group`, or `subgroup`. These are derived from the atlas
+  geometry — `group` is the polygon feature id and `subgroup` marks
+  holes — so mapping them previously corrupted the rendering silently
+  (e.g. `aes(group = region)` collapsed each region’s separate polygon
+  pieces).
+
+- Polygon draw order now follows your data’s row order, so overlapping
+  region outlines layer predictably. The renderer used to force
+  alphabetical draw order, so when you mapped a variable to `colour` the
+  outlines stacked in an order unrelated to that variable. Regions now
+  draw in the order they appear in your `data` (later rows on top), and
+  regions you supply no value for stay underneath in atlas order — so
+  [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) your
+  data to control layering
+  ([\#162](https://github.com/ggsegverse/ggseg/issues/162)).
+
+- [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+  again maps `aes(colour = ...)` and `aes(linewidth = ...)` to region
+  outlines. The default outline colour (`grey35`) and width (`0.2`) were
+  injected as fixed geom parameters, which silently overrode any
+  mapping. They are now `default_aes` on a dedicated `GeomPolygon`
+  subclass, so a mapping (or an explicit constant) takes precedence
+  while the defaults still apply when neither is given
+  ([\#160](https://github.com/ggsegverse/ggseg/issues/160)).
+
 - [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
   again respects `data` and aesthetics set in the top-level
   [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
