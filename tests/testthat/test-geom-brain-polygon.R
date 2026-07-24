@@ -4,7 +4,7 @@ describe("geom_brain_polygon()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     p <- ggplot2::ggplot() + geom_brain_polygon(atlas = poly)
     g <- ggplot2::ggplot_build(p)
-    expect_true(length(g$data) >= 1)
+    expect_gte(length(g$data), 1)
     expect_gt(nrow(g$data[[1]]), 0)
   })
 
@@ -83,7 +83,7 @@ describe("geom_brain_polygon()", {
   it("bundles a fixed-aspect default coord so shapes are not stretched", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     p <- ggplot2::ggplot() + geom_brain_polygon(atlas = poly)
-    expect_equal(p$coordinates$ratio, 1)
+    expect_identical(p$coordinates$ratio, 1)
     expect_true(isTRUE(p$coordinates$default))
   })
 
@@ -93,15 +93,15 @@ describe("geom_brain_polygon()", {
       geom_brain_polygon(atlas = poly) +
       ggplot2::coord_fixed(ratio = 2)
     expect_no_message(ggplot2::ggplot_build(p))
-    expect_equal(p$coordinates$ratio, 2)
+    expect_identical(p$coordinates$ratio, 2)
   })
 
   it("drops context regions when context = FALSE", {
     poly <- ggseg.formats::as_polygon_atlas(aseg())
     full <- prepare_polygon_atlas(poly)
     no_ctx <- prepare_polygon_atlas(poly, context = FALSE)
-    expect_true(any(is.na(full$region)))
-    expect_false(any(is.na(no_ctx$region)))
+    expect_true(anyNA(full$region))
+    expect_false(anyNA(no_ctx$region))
     expect_lt(nrow(no_ctx), nrow(full))
   })
 
@@ -166,7 +166,7 @@ describe("prepare_polygon_atlas()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly)
     keys <- unique(paste(flat$label, flat$view, flat$.group, sep = "@@"))
-    expect_equal(length(unique(flat$.feature_id)), length(keys))
+    expect_length(unique(flat$.feature_id), length(keys))
   })
 })
 
@@ -188,10 +188,10 @@ describe("brain_join_polygon() faceting", {
     expect_setequal(unique(joined$group), c("A", "B"))
     a <- joined[joined$group == "A", ]
     b <- joined[joined$group == "B", ]
-    expect_equal(nrow(a), nrow(flat))
-    expect_equal(nrow(b), nrow(flat))
-    expect_true(any(!is.na(a$p)))
-    expect_true(any(is.na(a$p)))
+    expect_identical(nrow(a), nrow(flat))
+    expect_identical(nrow(b), nrow(flat))
+    expect_false(all(is.na(a$p)))
+    expect_true(anyNA(a$p))
   })
 
   it("joins by label when data carries label but not region", {
@@ -214,7 +214,10 @@ describe("brain_join_polygon() faceting", {
     )
     joined <- brain_join_polygon(data, flat)
     expect_true("group" %in% names(joined))
-    expect_equal(unique(joined$group[joined$region %in% "insula"]), "cohort1")
+    expect_identical(
+      unique(joined$group[joined$region %in% "insula"]),
+      "cohort1"
+    )
   })
 })
 
@@ -263,7 +266,7 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
         geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
         ggplot2::scale_fill_viridis_c()
     )
-    expect_equal(fill_column(inherited), fill_column(explicit))
+    expect_identical(fill_column(inherited), fill_column(explicit))
   })
 
   it("still colours by the atlas palette when no fill is mapped anywhere", {
@@ -374,7 +377,7 @@ describe("geom_brain() protects atlas-controlled aesthetics", {
         geom_brain(atlas = dk(), ggplot2::aes(fill = v, group = region)),
       "Ignoring"
     )
-    expect_equal(n_groups(p), baseline)
+    expect_identical(n_groups(p), baseline)
   })
 
   it("warns listing every reserved aesthetic the user supplied", {
@@ -397,7 +400,7 @@ describe("draw order follows the data row order (ggseg#162)", {
     flat <- prepare_polygon_atlas(poly)
     key <- paste(flat$label, flat$view, flat$.group, sep = "@@")
     first_ids <- flat$.feature_id[!duplicated(key)]
-    expect_equal(first_ids, seq_along(first_ids))
+    expect_identical(first_ids, seq_along(first_ids))
   })
 
   it("orders feature ids by first appearance in the user data", {
@@ -412,7 +415,7 @@ describe("draw order follows the data row order (ggseg#162)", {
     data <- data.frame(region = c("rc", "ra"), stringsAsFactors = FALSE)
     ordered <- order_features_by_data(flat, data, by = "region")
     ids <- unique(ordered[c("region", ".feature_id")])
-    expect_equal(ids$region[order(ids$.feature_id)], c("rb", "rc", "ra"))
+    expect_identical(ids$region[order(ids$.feature_id)], c("rb", "rc", "ra"))
   })
 
   it("draws atlas context regions beneath the user's regions", {
@@ -434,8 +437,8 @@ describe("draw order follows the data row order (ggseg#162)", {
       j$region[j$.feature_id == max(j$.feature_id)][1]
     }
     regs <- c("precentral", "insula", "superior parietal", "fusiform")
-    expect_equal(top_region(regs), "fusiform")
-    expect_equal(top_region(rev(regs)), "precentral")
+    expect_identical(top_region(regs), "fusiform")
+    expect_identical(top_region(rev(regs)), "precentral")
   })
 
   it("orders each facet panel by its own data order", {
@@ -454,8 +457,8 @@ describe("draw order follows the data row order (ggseg#162)", {
       sub <- joined[joined$cohort == coh, ]
       sub$region[sub$.feature_id == max(sub$.feature_id)][1]
     }
-    expect_equal(top_in("A"), "precentral")
-    expect_equal(top_in("B"), "insula")
+    expect_identical(top_in("A"), "precentral")
+    expect_identical(top_in("B"), "insula")
   })
 
   it("layers overlapping outlines by data order", {

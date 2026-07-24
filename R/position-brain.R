@@ -145,8 +145,13 @@ position_brain <- function(
 #' with `as_sf_atlas()` and use [ggplot2::geom_sf()] directly.
 #'
 #' @inheritParams position_brain
-#' @export
 #' @return A `PositionBrain` ggproto object.
+#' @examples
+#' \dontrun{
+#' # Deprecated: prefer position_brain(). Shown for reference only.
+#' position_brain_sf("horizontal")
+#' }
+#' @export
 #' @importFrom ggplot2 ggproto
 #' @keywords internal
 position_brain_sf <- function(
