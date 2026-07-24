@@ -221,6 +221,63 @@ describe("brain_join_polygon() faceting", {
   })
 })
 
+describe("brain_join_polygon() warns on unmatched data (ggseg#121)", {
+  # The polygon join keeps every atlas polygon via a left join, so a data row
+  # that matches no region (a typo, or a name the atlas no longer uses -- e.g.
+  # the short "bankssts" against the long region label) was silently dropped.
+  # Restore the sf-path brain_join() warning so the mismatch surfaces.
+  poly <- ggseg.formats::as_polygon_atlas(dk())
+
+  it("warns when a data region matches no atlas region", {
+    flat <- prepare_polygon_atlas(poly)
+    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    expect_warning(brain_join_polygon(data, flat), "not merged")
+  })
+
+  it("names the unmatched value in the message", {
+    flat <- prepare_polygon_atlas(poly)
+    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    w <- expect_warning(brain_join_polygon(data, flat), "not merged")
+    expect_match(conditionMessage(w), "bankssts")
+    expect_no_match(conditionMessage(w), "insula")
+  })
+
+  it("stays silent when every data row matches", {
+    flat <- prepare_polygon_atlas(poly)
+    data <- data.frame(
+      region = c("banks of superior temporal sulcus", "insula"),
+      p = c(0.9, 0.1)
+    )
+    expect_no_warning(brain_join_polygon(data, flat))
+  })
+
+  it("matches by label without warning", {
+    flat <- prepare_polygon_atlas(poly)
+    data <- data.frame(label = c("lh_bankssts", "rh_bankssts"), p = c(0.9, 0.9))
+    expect_no_warning(brain_join_polygon(data, flat))
+  })
+
+  it("warns once for grouped data, not once per group", {
+    flat <- prepare_polygon_atlas(poly)
+    data <- dplyr::group_by(
+      data.frame(
+        region = c("bankssts", "insula"),
+        p = c(0.9, 0.1),
+        g = c("A", "B")
+      ),
+      g
+    )
+    expect_warning(brain_join_polygon(data, flat), "not merged")
+  })
+
+  it("surfaces the mismatch through a built plot", {
+    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    p <- ggplot2::ggplot(data) +
+      geom_brain(atlas = dk(), ggplot2::aes(fill = p))
+    expect_warning(ggplot2::ggplot_build(p), "not merged")
+  })
+})
+
 describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
   # Regression test for ggsegverse/ggseg#158: data and aesthetics set in the
   # top-level ggplot() call were dropped by the eager polygon build, so fill
