@@ -2,6 +2,15 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+  again warns when rows of your `data` match no atlas region. The
+  default polygon renderer joins your data onto the atlas with a left
+  join, which silently dropped unmatched rows — so a region name the
+  atlas does not use (e.g. the short `"bankssts"` against the long
+  region name) vanished without notice. It now surfaces those rows with
+  the same “Some data not merged properly” warning the sf renderer gives
+  ([\#121](https://github.com/ggsegverse/ggseg/issues/121)).
+
 - Internal geom/layer consolidation: the exported `GeomBrain` ggproto is
   now the polygon geom that backs the default
   [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
