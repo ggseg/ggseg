@@ -48,3 +48,12 @@ position_brain_sf(
 ## Value
 
 A \`PositionBrain\` ggproto object.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Deprecated: prefer position_brain(). Shown for reference only.
+position_brain_sf("horizontal")
+} # }
+```

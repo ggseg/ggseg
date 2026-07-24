@@ -74,3 +74,14 @@ geom_brain_sf(
 ## Value
 
 A list of ggplot2 layer and coord objects.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Deprecated: prefer geom_brain(). Shown for reference only.
+library(ggplot2)
+ggplot() +
+  geom_brain_sf(atlas = dk())
+} # }
+```
