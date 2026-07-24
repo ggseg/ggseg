@@ -41,7 +41,7 @@
 #' @return A list of ggplot2 layer and coord objects.
 #' @keywords internal
 #' @noRd
-#' @importFrom ggplot2 aes geom_polygon scale_fill_manual
+#' @importFrom ggplot2 aes layer scale_fill_manual
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -87,18 +87,25 @@ geom_brain_polygon <- function(
 
   dots <- list(...)
 
-  layer <- layer_brain(
-    mapping = user_mapping,
+  layer <- layer(
+    geom = GeomBrain,
+    stat = "identity",
     data = data,
-    atlas = atlas,
-    hemi = hemi,
-    view = view,
-    position = position,
-    context = context,
+    mapping = user_mapping,
+    position = "identity",
     show.legend = show.legend,
     inherit.aes = inherit.aes,
-    params = dots
+    params = dots,
+    layer_class = LayerBrain
   )
+  # The atlas and layout config ride on the layer object so LayerBrain's
+  # setup_layer() can flatten and join at plot-build time (after inheriting
+  # top-level data/aes), rather than eagerly at construction time.
+  layer$brain_atlas <- atlas
+  layer$brain_hemi <- hemi
+  layer$brain_view <- view
+  layer$brain_position <- position
+  layer$brain_context <- context
 
   result <- list(layer, coord_brain())
 
@@ -122,68 +129,28 @@ ggplot2_Layer <- function() {
   utils::getFromNamespace("Layer", "ggplot2")
 }
 
-#' `GeomPolygon` with brain-atlas outline defaults
+#' @section GeomBrain ggproto:
+#' `GeomBrain` is the [ggplot2::Geom] ggproto that renders brain atlas polygons.
+#' It subclasses [ggplot2::GeomPolygon] and only supplies the brain default
+#' outline `colour` (grey35) and `linewidth` (0.2) through `default_aes`, so
+#' they apply when the user has not mapped or set those aesthetics but yield to
+#' a mapping when present (ggsegverse/ggseg#160). It is used internally by
+#' [geom_brain()] and should not typically be called directly.
 #'
-#' Supplies the default outline `colour` (grey35) and `linewidth` (0.2) through
-#' `default_aes`, so they apply only when the user has not mapped or set those
-#' aesthetics. This replaces injecting them as fixed geom params, which
-#' silently overrode a user's `aes(colour = ...)` / `aes(linewidth = ...)`
-#' mapping (ggsegverse/ggseg#160): a fixed param always beats a mapping,
-#' whereas a `default_aes` yields to one.
-#'
-#' @keywords internal
-#' @noRd
+#' @export
+#' @rdname ggbrain
+#' @order 2
+#' @usage NULL
+#' @format NULL
 #' @importFrom ggplot2 ggproto GeomPolygon aes
-GeomBrainPolygon <- ggproto(
-  "GeomBrainPolygon",
+GeomBrain <- ggproto(
+  "GeomBrain",
   GeomPolygon,
   default_aes = utils::modifyList(
     GeomPolygon$default_aes,
     aes(colour = "grey35", linewidth = 0.2)
   )
 )
-
-#' Build a deferred brain-polygon layer
-#'
-#' Wraps [ggplot2::layer()] with the [LayerBrain] class and stashes the
-#' atlas and layout config on the layer object. The atlas is flattened and any
-#' user data joined at plot-build time (in `setup_layer()`), so the layer can
-#' see data and aesthetics inherited from the top-level `ggplot()` call.
-#'
-#' @keywords internal
-#' @noRd
-#' @importFrom ggplot2 layer
-layer_brain <- function(
-  mapping,
-  data,
-  atlas,
-  hemi,
-  view,
-  position,
-  context,
-  show.legend,
-  inherit.aes,
-  params
-) {
-  brain_layer <- layer(
-    geom = GeomBrainPolygon,
-    stat = "identity",
-    data = data,
-    mapping = mapping,
-    position = "identity",
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = params,
-    layer_class = LayerBrain
-  )
-  brain_layer$brain_atlas <- atlas
-  brain_layer$brain_hemi <- hemi
-  brain_layer$brain_view <- view
-  brain_layer$brain_position <- position
-  brain_layer$brain_context <- context
-  brain_layer
-}
-
 
 #' Custom ggplot2 Layer for the (default) sf-optional polygon path
 #'

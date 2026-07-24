@@ -30,6 +30,7 @@
 #'
 #' @return A list of ggplot2 layer and coord objects.
 #' @rdname ggbrain
+#' @order 1
 #' @export
 #'
 #' @examples
@@ -133,7 +134,7 @@ geom_brain_sf <- function(
 
   result <- list(
     layer_brain_sf(
-      geom = GeomBrain,
+      geom = GeomBrainSf,
       data = data,
       mapping = mapping,
       stat = "sf",
@@ -162,18 +163,18 @@ geom_brain_sf <- function(
 }
 
 
-#' @section GeomBrain ggproto:
-#' `GeomBrain` is a [ggplot2::Geom] ggproto object that handles rendering
-#' of brain atlas polygons. It is used internally by [geom_brain()] and
-#' should not typically be called directly.
+#' Deprecated sf brain geom ggproto
 #'
-#' @export
-#' @rdname ggbrain
-#' @usage NULL
-#' @format NULL
+#' The [ggplot2::Geom] backing the deprecated [geom_brain_sf()] sf path. It
+#' renders atlas geometry via [sf::st_as_grob()] and requires
+#' [coord_sf()][ggplot2::coord_sf]. The default [geom_brain()] path uses the
+#' polygon [GeomBrain] instead.
+#'
+#' @keywords internal
+#' @noRd
 #' @importFrom ggplot2 Geom aes ggproto draw_key_polygon
-GeomBrain <- ggproto(
-  "GeomBrain",
+GeomBrainSf <- ggproto(
+  "GeomBrainSf",
   Geom,
   default_aes = aes(
     shape = NULL,

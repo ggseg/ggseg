@@ -316,7 +316,7 @@ describe("geom_brain() backwards-compatibility with sf atlases", {
 describe("geom_brain() outline aesthetics (ggseg#160)", {
   # Regression test for ggsegverse/ggseg#160: the outline colour/linewidth were
   # injected as fixed geom params, which silently overrode a user's
-  # aes(colour = ...) / aes(linewidth = ...) mapping. GeomBrainPolygon now
+  # aes(colour = ...) / aes(linewidth = ...) mapping. GeomBrain now
   # supplies them through default_aes, which yields to a mapping.
   built <- function(p) ggplot2::ggplot_build(p)$data[[1]]
 

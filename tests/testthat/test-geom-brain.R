@@ -209,7 +209,7 @@ describe("LayerBrainSf", {
       ggplot_build(
         ggplot() +
           layer_brain_sf(
-            geom = GeomBrain,
+            geom = GeomBrainSf,
             stat = "sf",
             position = position_brain_sf(),
             params = list(na.rm = FALSE, atlas = NULL)
@@ -288,18 +288,18 @@ describe("LayerBrainSf", {
   })
 })
 
-describe("GeomBrain", {
+describe("GeomBrainSf", {
   it("exists as ggproto object", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
-    expect_s3_class(GeomBrain, "Geom")
+    expect_s3_class(GeomBrainSf, "Geom")
   })
 
   it("has default aesthetics", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
-    expect_true("default_aes" %in% names(GeomBrain))
-    defaults <- GeomBrain$default_aes
+    expect_true("default_aes" %in% names(GeomBrainSf))
+    defaults <- GeomBrainSf$default_aes
     expect_true("linetype" %in% names(defaults))
     expect_true("stroke" %in% names(defaults))
   })
@@ -307,13 +307,13 @@ describe("GeomBrain", {
   it("has draw_panel method", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
-    expect_true("draw_panel" %in% names(GeomBrain))
+    expect_true("draw_panel" %in% names(GeomBrainSf))
   })
 
   it("has draw_key method", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
-    expect_true("draw_key" %in% names(GeomBrain))
+    expect_true("draw_key" %in% names(GeomBrainSf))
   })
 })
 

@@ -1,5 +1,10 @@
 # ggseg 2.2.1.9000 (development)
 
+- Internal geom/layer consolidation: the exported `GeomBrain` ggproto is now
+  the polygon geom that backs the default `geom_brain()` (a `GeomPolygon`
+  subclass). The deprecated sf renderer's geom was renamed to the internal
+  `GeomBrainSf`. Only affects code reaching for the `GeomBrain` object directly.
+
 - `geom_brain()` now ignores (with a warning) a user `aes()` mapping for
   `x`, `y`, `group`, or `subgroup`. These are derived from the atlas geometry
   — `group` is the polygon feature id and `subgroup` marks holes — so mapping
