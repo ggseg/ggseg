@@ -4,6 +4,12 @@
 #' `dk()` and a data frame, and it matches your values to the right regions and
 #' lays out the brain views for you. No data? It just draws the atlas.
 #'
+#' @details
+#' Regions are drawn in the order they appear in your `data`, so when outlines
+#' overlap (e.g. mapping `colour` to a threshold with a wide `linewidth`) the
+#' later rows draw on top. Reorder your data with [dplyr::arrange()] to control
+#' the layering; regions you supply no value for stay underneath in atlas order.
+#'
 #' @param mapping Set of aesthetic mappings created by [ggplot2::aes()].
 #' @param data A data.frame containing variables to map. If `NULL`, the atlas
 #'   is plotted without user data. Group it with [dplyr::group_by()] to facet.
@@ -24,6 +30,7 @@
 #'
 #' @return A list of ggplot2 layer and coord objects.
 #' @rdname ggbrain
+#' @order 1
 #' @export
 #'
 #' @examples
@@ -127,7 +134,7 @@ geom_brain_sf <- function(
 
   result <- list(
     layer_brain_sf(
-      geom = GeomBrain,
+      geom = GeomBrainSf,
       data = data,
       mapping = mapping,
       stat = "sf",
@@ -156,18 +163,18 @@ geom_brain_sf <- function(
 }
 
 
-#' @section GeomBrain ggproto:
-#' `GeomBrain` is a [ggplot2::Geom] ggproto object that handles rendering
-#' of brain atlas polygons. It is used internally by [geom_brain()] and
-#' should not typically be called directly.
+#' Deprecated sf brain geom ggproto
 #'
-#' @export
-#' @rdname ggbrain
-#' @usage NULL
-#' @format NULL
+#' The [ggplot2::Geom] backing the deprecated [geom_brain_sf()] sf path. It
+#' renders atlas geometry via [sf::st_as_grob()] and requires
+#' [coord_sf()][ggplot2::coord_sf]. The default [geom_brain()] path uses the
+#' polygon [GeomBrain] instead.
+#'
+#' @keywords internal
+#' @noRd
 #' @importFrom ggplot2 Geom aes ggproto draw_key_polygon
-GeomBrain <- ggproto(
-  "GeomBrain",
+GeomBrainSf <- ggproto(
+  "GeomBrainSf",
   Geom,
   default_aes = aes(
     shape = NULL,
