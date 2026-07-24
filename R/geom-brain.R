@@ -94,6 +94,13 @@ geom_brain <- function(
 #'
 #' @inheritParams geom_brain
 #' @return A list of ggplot2 layer and coord objects.
+#' @examples
+#' \dontrun{
+#' # Deprecated: prefer geom_brain(). Shown for reference only.
+#' library(ggplot2)
+#' ggplot() +
+#'   geom_brain_sf(atlas = dk())
+#' }
 #' @export
 #' @keywords internal
 #' @importFrom ggplot2 aes coord_sf scale_fill_manual

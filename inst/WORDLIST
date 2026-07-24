@@ -7,6 +7,7 @@ FreeSurfer's
 GDAL
 GEOS
 GeomBrain
+GeomPolygon
 ICV
 Killiany
 Lifebrain
@@ -30,15 +31,18 @@ callosum
 cli
 colour
 coloured
+colouring
 colours
 coord
 custombrain
 customisable
+data's
 dep
 dk
 dkt
 doi
 dplyr
+errored
 favour
 flamap
 freesurfer
@@ -56,6 +60,7 @@ labelled
 labelling
 lh
 lifecycle
+linewidth
 neuroimaging
 orbito
 orbitofrontal
@@ -66,6 +71,8 @@ postcentral
 pre
 precentral
 readme
+renderer
+renderer's
 reorganised
 repositioned
 roxygen

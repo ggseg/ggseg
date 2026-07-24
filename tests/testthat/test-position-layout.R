@@ -8,9 +8,9 @@ describe("layout_cell_offsets", {
     offs <- layout_cell_offsets(bboxes, row_idx = c(1, 1), col_idx = c(1, 2))
     # cell is 10x10 (largest), sep_x = 12
     # g1: already fills the cell at origin -> no shift
-    expect_equal(unname(offs[1, ]), c(0, 0))
+    expect_identical(unname(offs[1, ]), c(0, 0))
     # g2: centred in the 10-wide cell ((10-4)/2 = 3) then +1 column (sep 12)
-    expect_equal(unname(offs[2, ]), c(3 + 12, 3))
+    expect_identical(unname(offs[2, ]), c(3 + 12, 3))
   })
 
   it("shifts down the rows for a vertical layout", {
@@ -19,15 +19,15 @@ describe("layout_cell_offsets", {
       c(xmin = 0, ymin = 0, xmax = 10, ymax = 10)
     )
     offs <- layout_cell_offsets(bboxes, row_idx = c(1, 2), col_idx = c(1, 1))
-    expect_equal(unname(offs[, "dx"]), c(0, 0))
+    expect_identical(unname(offs[, "dx"]), c(0, 0))
     # second group drops one row; vertical separation is 12
-    expect_equal(unname(offs[, "dy"]), c(0, 12))
+    expect_identical(unname(offs[, "dy"]), c(0, 12))
   })
 
   it("folds a non-zero origin into the offset (gather)", {
     bboxes <- rbind(c(xmin = 100, ymin = 50, xmax = 110, ymax = 60))
     offs <- layout_cell_offsets(bboxes, row_idx = 1, col_idx = 1)
-    expect_equal(unname(offs[1, ]), c(-100, -50))
+    expect_identical(unname(offs[1, ]), c(-100, -50))
   })
 })
 
@@ -39,7 +39,7 @@ describe("layout_box", {
     )
     box <- layout_box(bboxes)
     pad <- 22 * 0.01
-    expect_equal(unname(box), c(-pad, -pad, 22 + pad, 10 + pad))
+    expect_identical(unname(box), c(-pad, -pad, 22 + pad, 10 + pad))
     expect_named(box, c("xmin", "ymin", "xmax", "ymax"))
   })
 })
@@ -48,16 +48,16 @@ describe("cell_indices", {
   it("lays groups left-to-right for columns", {
     groups <- vector("list", 3)
     idx <- cell_indices(groups, "columns")
-    expect_equal(idx$row, c(1, 1, 1))
-    expect_equal(idx$col, c(1, 2, 3))
-    expect_equal(idx$order, 1:3)
+    expect_identical(idx$row, c(1L, 1L, 1L))
+    expect_identical(idx$col, c(1L, 2L, 3L))
+    expect_identical(idx$order, 1:3)
   })
 
   it("stacks groups top-to-bottom for rows", {
     groups <- vector("list", 3)
     idx <- cell_indices(groups, "rows")
-    expect_equal(idx$row, c(1, 2, 3))
-    expect_equal(idx$col, c(1, 1, 1))
+    expect_identical(idx$row, c(1L, 2L, 3L))
+    expect_identical(idx$col, c(1L, 1L, 1L))
   })
 
   it("maps grid groups to (row, col) indices and returns row-major order", {
@@ -65,10 +65,10 @@ describe("cell_indices", {
     # indices are positions in the first-appearance unique values
     groups <- list(mk(1, 1), mk(1, 2), mk(2, 1))
     idx <- cell_indices(groups, "grid", ".grid_row", ".grid_col")
-    expect_equal(idx$row, c(1, 1, 2))
-    expect_equal(idx$col, c(1, 2, 1))
+    expect_identical(idx$row, c(1L, 1L, 2L))
+    expect_identical(idx$col, c(1L, 2L, 1L))
     # already in row-major (row, col) order
-    expect_equal(idx$order, c(1, 2, 3))
+    expect_identical(idx$order, c(1L, 2L, 3L))
   })
 })
 
@@ -90,7 +90,7 @@ describe("position_groups", {
     )
     expect_length(res$data, 2)
     # second group shifted one cell to the right (sep_x = 12)
-    expect_equal(min(res$data[[2]]$x), 12)
+    expect_identical(min(res$data[[2]]$x), 12)
     expect_named(res$box, c("xmin", "ymin", "xmax", "ymax"))
   })
 })

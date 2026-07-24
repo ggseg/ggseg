@@ -57,6 +57,6 @@ describe("compute_label_positions_flat()", {
     poly_aseg <- ggseg.formats::as_polygon_atlas(aseg())
     flat <- prepare_polygon_atlas(poly_aseg)
     labels <- compute_label_positions_flat(flat)
-    expect_equal(nrow(labels), length(unique(flat$view)))
+    expect_identical(nrow(labels), length(unique(flat$view)))
   })
 })

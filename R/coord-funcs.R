@@ -1,15 +1,3 @@
-#' Midpoint of a numeric range
-#'
-#' @param x Numeric vector.
-#'
-#' @return Single numeric value, the mean of `min(x)` and `max(x)`.
-#' @keywords internal
-#' @noRd
-gap <- function(x) {
-  (min(x) + max(x)) / 2
-}
-
-
 #' Keep brain shapes undistorted
 #'
 #' Fixes the aspect ratio so brains aren't stretched by the shape of the
@@ -41,4 +29,16 @@ coord_brain <- function(ratio = 1, clip = "off", ...) {
   coord <- coord_fixed(ratio = ratio, clip = clip, ...)
   coord$default <- TRUE
   coord
+}
+
+
+#' Midpoint of a numeric range
+#'
+#' @param x Numeric vector.
+#'
+#' @return Single numeric value, the mean of `min(x)` and `max(x)`.
+#' @keywords internal
+#' @noRd
+gap <- function(x) {
+  (min(x) + max(x)) / 2
 }

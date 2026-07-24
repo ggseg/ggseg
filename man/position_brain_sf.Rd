@@ -40,4 +40,10 @@ legacy `PositionBrain` ggproto for use with [geom_brain_sf()]. For new
 code, use [position_brain()] (the polygon default), or convert the atlas
 with `as_sf_atlas()` and use [ggplot2::geom_sf()] directly.
 }
+\examples{
+\dontrun{
+# Deprecated: prefer position_brain(). Shown for reference only.
+position_brain_sf("horizontal")
+}
+}
 \keyword{internal}

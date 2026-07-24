@@ -2,7 +2,7 @@ describe("position_brain_polygon()", {
   it("returns a position_brain_polygon_spec object", {
     spec <- position_brain_polygon()
     expect_s3_class(spec, "position_brain_polygon_spec")
-    expect_equal(spec$position, "horizontal")
+    expect_identical(spec$position, "horizontal")
     expect_null(spec$nrow)
     expect_null(spec$ncol)
     expect_null(spec$views)
@@ -18,7 +18,7 @@ describe("position_brain_polygon()", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly, position = position_brain_polygon())
     bbox <- attr(flat, "polygon_bbox")
-    expect_true(!is.null(bbox))
+    expect_false(is.null(bbox))
     expect_gt(bbox["xmax"] - bbox["xmin"], bbox["ymax"] - bbox["ymin"])
   })
 
@@ -39,7 +39,7 @@ describe("position_brain_polygon()", {
       position = position_brain_polygon(hemi ~ view)
     )
     bbox <- attr(flat, "polygon_bbox")
-    expect_true(!is.null(bbox))
+    expect_false(is.null(bbox))
     expect_true(all(is.finite(bbox)))
   })
 })
@@ -49,7 +49,7 @@ describe("flat-coord helpers", {
     df <- data.frame(x = c(0, 1, 2), y = c(0, 1, 2))
     b <- bbox_flat(df)
     expect_named(b, c("xmin", "ymin", "xmax", "ymax"))
-    expect_equal(unname(b), c(0, 0, 2, 2))
+    expect_identical(unname(b), c(0, 0, 2, 2))
   })
 })
 
@@ -100,18 +100,18 @@ describe("geom_brain_polygon() with position", {
 describe("clip_ring_to_box", {
   it("clips a ring that straddles the box to the box bounds", {
     sq <- clip_ring_to_box(c(0, 10, 10, 0), c(0, 0, 10, 10), c(2, 8, 2, 8))
-    expect_equal(range(sq[, 1]), c(2, 8))
-    expect_equal(range(sq[, 2]), c(2, 8))
+    expect_identical(range(sq[, 1]), c(2, 8))
+    expect_identical(range(sq[, 2]), c(2, 8))
   })
 
   it("leaves a fully-contained ring's extent unchanged", {
     tri <- clip_ring_to_box(c(3, 5, 4), c(3, 3, 5), c(0, 10, 0, 10))
-    expect_equal(nrow(tri), 3)
+    expect_identical(nrow(tri), 3L)
   })
 
   it("drops a ring fully outside the box", {
     out <- clip_ring_to_box(c(20, 22, 21), c(20, 20, 22), c(0, 10, 0, 10))
-    expect_equal(nrow(out), 0)
+    expect_identical(nrow(out), 0L)
   })
 
   it("fills the box when the ring contains it", {
@@ -120,8 +120,8 @@ describe("clip_ring_to_box", {
       c(-5, -5, 15, 15),
       c(0, 10, 0, 10)
     )
-    expect_equal(range(big[, 1]), c(0, 10))
-    expect_equal(range(big[, 2]), c(0, 10))
+    expect_identical(range(big[, 1]), c(0, 10))
+    expect_identical(range(big[, 2]), c(0, 10))
   })
 })
 
@@ -148,7 +148,7 @@ describe("resolve_zoom_focus", {
   })
 
   it("returns explicit region names unchanged", {
-    expect_equal(resolve_zoom_focus(c("x", "y"), NULL, aseg()), c("x", "y"))
+    expect_identical(resolve_zoom_focus(c("x", "y"), NULL, aseg()), c("x", "y"))
   })
 
   it("uses regions present in data when zoom = TRUE", {
