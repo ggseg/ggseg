@@ -26,17 +26,17 @@ theme_brain2(
 )
 }
 \arguments{
-\item{text.size}{Text size in points (default: `12`).}
+\item{text.size}{Text size in points (default: \code{12}).}
 
-\item{text.family}{Font family (default: `"mono"`).}
+\item{text.family}{Font family (default: \code{"mono"}).}
 
-\item{plot.background}{Background fill colour (`theme_custombrain` and
-`theme_brain2` only).}
+\item{plot.background}{Background fill colour (\code{theme_custombrain} and
+\code{theme_brain2} only).}
 
-\item{text.colour}{Text colour (`theme_custombrain` and `theme_brain2` only).}
+\item{text.colour}{Text colour (\code{theme_custombrain} and \code{theme_brain2} only).}
 }
 \value{
-A [ggplot2::theme] object.
+A \link[ggplot2:theme]{ggplot2::theme} object.
 }
 \description{
 A set of ggplot2 themes designed for brain atlas visualisations. All themes
@@ -45,17 +45,17 @@ remove axis ticks and grid lines for a clean presentation.
 \details{
 \describe{
 
-\item{`theme_brain`}{
+\item{\code{theme_brain}}{
 Default theme. Transparent background, no axes, no grid.}
 
-\item{`theme_darkbrain`}{
+\item{\code{theme_darkbrain}}{
 Dark theme with black background and light text.}
 
-\item{`theme_custombrain`}{
+\item{\code{theme_custombrain}}{
 Fully customisable background, text colour, size, and font.}
 
-\item{`theme_brain2`}{
-Like `theme_custombrain` but with axis text removed entirely.}
+\item{\code{theme_brain2}}{
+Like \code{theme_custombrain} but with axis text removed entirely.}
 
 }
 }
@@ -73,5 +73,5 @@ p +
 
 }
 \seealso{
-[geom_brain()], [ggplot2::theme()]
+\code{\link[=geom_brain]{geom_brain()}}, \code{\link[ggplot2:theme]{ggplot2::theme()}}
 }

@@ -20,13 +20,13 @@ scale_y_brain(...)
 scale_labs_brain(atlas = dk(), position = "dispersed", aesthetics = "labs")
 }
 \arguments{
-\item{atlas}{A `ggseg_atlas` object or data.frame containing atlas data.}
+\item{atlas}{A \code{ggseg_atlas} object or data.frame containing atlas data.}
 
-\item{position}{Layout style: `"dispersed"` (default) or `"stacked"`.}
+\item{position}{Layout style: \code{"dispersed"} (default) or \code{"stacked"}.}
 
-\item{aesthetics}{Which axis to scale: `"x"`, `"y"`, or `"labs"`.}
+\item{aesthetics}{Which axis to scale: \code{"x"}, \code{"y"}, or \code{"labs"}.}
 
-\item{...}{Additional arguments passed to [adapt_scales()].}
+\item{...}{Additional arguments passed to \code{adapt_scales()}.}
 }
 \value{
 A ggplot2 scale or labs object.

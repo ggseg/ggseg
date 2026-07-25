@@ -7,24 +7,24 @@
 coord_brain(ratio = 1, clip = "off", ...)
 }
 \arguments{
-\item{ratio}{Aspect ratio, expressed as `y / x`. Defaults to `1`, which
+\item{ratio}{Aspect ratio, expressed as \code{y / x}. Defaults to \code{1}, which
 keeps brain polygons undistorted.}
 
-\item{clip}{Should drawing be clipped to the panel extent (`"on"`) or
-allowed to overflow (`"off"`)? Defaults to `"off"` so region outlines at
+\item{clip}{Should drawing be clipped to the panel extent (\code{"on"}) or
+allowed to overflow (\code{"off"})? Defaults to \code{"off"} so region outlines at
 the panel edge are not cut.}
 
-\item{...}{Additional arguments passed to [ggplot2::coord_fixed()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:coord_fixed]{ggplot2::coord_fixed()}}.}
 }
 \value{
 A ggplot2 coordinate system that registers as a default.
 }
 \description{
 Fixes the aspect ratio so brains aren't stretched by the shape of the
-plotting window. [geom_brain()] adds `coord_brain()` for you, so you rarely
-need to call it yourself -- reach for it only to adjust the `ratio` or
-`clip` behaviour. You can safely add your own coord or stack several
-`geom_brain()` layers; it steps aside cleanly.
+plotting window. \code{\link[=geom_brain]{geom_brain()}} adds \code{coord_brain()} for you, so you rarely
+need to call it yourself -- reach for it only to adjust the \code{ratio} or
+\code{clip} behaviour. You can safely add your own coord or stack several
+\code{geom_brain()} layers; it steps aside cleanly.
 }
 \examples{
 library(ggplot2)

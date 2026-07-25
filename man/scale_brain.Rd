@@ -21,23 +21,23 @@ scale_color_brain(name = "dk", na.value = "grey", ...)
 scale_fill_brain(name = "dk", na.value = "grey", ...)
 }
 \arguments{
-\item{name}{String name of the atlas palette (e.g. `"dk"`, `"aseg"`).}
+\item{name}{String name of the atlas palette (e.g. \code{"dk"}, \code{"aseg"}).}
 
-\item{na.value}{Colour for `NA` entries (default: `"grey"`).}
+\item{na.value}{Colour for \code{NA} entries (default: \code{"grey"}).}
 
-\item{...}{Additional arguments passed to [ggseg.formats::atlas_palette()].}
+\item{...}{Additional arguments passed to \code{\link[ggseg.formats:atlas_palette]{ggseg.formats::atlas_palette()}}.}
 
-\item{aesthetics}{Which aesthetic to scale: `"fill"`, `"colour"`, or
-`"color"`.}
+\item{aesthetics}{Which aesthetic to scale: \code{"fill"}, \code{"colour"}, or
+\code{"color"}.}
 }
 \value{
 A ggplot2 scale object.
 }
 \description{
-`r lifecycle::badge("deprecated")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Atlas palettes are now applied automatically by [geom_brain()].
-Use [scale_fill_brain_manual()] for custom palettes.
+Atlas palettes are now applied automatically by \code{\link[=geom_brain]{geom_brain()}}.
+Use \code{\link[=scale_fill_brain_manual]{scale_fill_brain_manual()}} for custom palettes.
 }
 \examples{
 \dontrun{

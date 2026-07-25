@@ -215,7 +215,7 @@ NULL
 #' @inheritParams brain_join
 #' @param position Layout style: `"dispersed"` (default) or `"stacked"`.
 #' @param aesthetics Which axis to scale: `"x"`, `"y"`, or `"labs"`.
-#' @param ... Additional arguments passed to [adapt_scales()].
+#' @param ... Additional arguments passed to `adapt_scales()`.
 #'
 #' @return A ggplot2 scale or labs object.
 #' @rdname scale_continous_brain

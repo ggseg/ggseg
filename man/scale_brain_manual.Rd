@@ -23,12 +23,12 @@ scale_fill_brain_manual(...)
 \arguments{
 \item{palette}{Named character vector mapping region names to colours.}
 
-\item{na.value}{Colour for `NA` entries (default: `"grey"`).}
+\item{na.value}{Colour for \code{NA} entries (default: \code{"grey"}).}
 
 \item{...}{Additional arguments (unused).}
 
-\item{aesthetics}{Which aesthetic to scale: `"fill"`, `"colour"`, or
-`"color"`.}
+\item{aesthetics}{Which aesthetic to scale: \code{"fill"}, \code{"colour"}, or
+\code{"color"}.}
 }
 \value{
 A ggplot2 scale object.

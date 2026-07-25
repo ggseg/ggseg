@@ -18,31 +18,31 @@ annotate_brain(
 )
 }
 \arguments{
-\item{atlas}{A `brain_atlas` object (e.g. `dk()`, `aseg()`).}
+\item{atlas}{A \code{brain_atlas} object (e.g. \code{dk()}, \code{aseg()}).}
 
-\item{position}{The same layout you passed to [geom_brain()], from
-[position_brain()].}
+\item{position}{The same layout you passed to \code{\link[=geom_brain]{geom_brain()}}, from
+\code{\link[=position_brain]{position_brain()}}.}
 
-\item{hemi}{Character vector of hemispheres to include. If `NULL`
+\item{hemi}{Character vector of hemispheres to include. If \code{NULL}
 (default), all hemispheres are included.}
 
-\item{view}{Character vector of views to include. If `NULL`
+\item{view}{Character vector of views to include. If \code{NULL}
 (default), all views are included.}
 
-\item{size}{Text size in mm (default: `3`).}
+\item{size}{Text size in mm (default: \code{3}).}
 
-\item{colour}{Text colour (default: `"grey30"`).}
+\item{colour}{Text colour (default: \code{"grey30"}).}
 
-\item{family}{Font family (default: `"mono"`).}
+\item{family}{Font family (default: \code{"mono"}).}
 
 \item{padding}{Vertical gap between each label and its view, as a
-fraction of the plot's total height (default: `0.05`). Labels are also
-bottom-anchored (`vjust = 0`) so they sit clear of the geometry.}
+fraction of the plot's total height (default: \code{0.05}). Labels are also
+bottom-anchored (\code{vjust = 0}) so they sit clear of the geometry.}
 
 \item{nudge_y}{Additional absolute vertical offset for labels
-(default: `0`).}
+(default: \code{0}).}
 
-\item{...}{Additional arguments passed to [ggplot2::annotate()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:annotate]{ggplot2::annotate()}}.}
 }
 \value{
 A ggplot2 annotation layer.
@@ -54,7 +54,7 @@ and view (e.g., "left lateral"). For subcortical and tract atlases,
 labels show the view name directly (e.g., "axial_1", "sagittal").
 }
 \details{
-Pass the same `position` you gave [geom_brain()] and the labels line up with
+Pass the same \code{position} you gave \code{\link[=geom_brain]{geom_brain()}} and the labels line up with
 the views automatically.
 }
 \examples{

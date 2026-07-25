@@ -15,8 +15,8 @@ position_brain(
 }
 \arguments{
 \item{position}{Formula describing the rows ~ columns organisation for
-cortical atlases (e.g., `hemi ~ view`). For subcortical/tract atlases,
-can be "horizontal", "vertical", or a formula with `type ~ .` where type
+cortical atlases (e.g., \code{hemi ~ view}). For subcortical/tract atlases,
+can be "horizontal", "vertical", or a formula with \code{type ~ .} where type
 is extracted from view names like "axial_1" -> "axial".}
 
 \item{nrow}{Number of rows for grid layout. If NULL (default), calculated
@@ -31,22 +31,22 @@ not a formula.}
 order. If NULL (default), all views are included in their original order.
 Only applies to subcortical/tract atlases.}
 
-\item{zoom}{Controls per-view zoom. `NULL`/`FALSE` (default) draws each view
-at full extent. `TRUE` zooms each view onto its focus regions; a character
+\item{zoom}{Controls per-view zoom. \code{NULL}/\code{FALSE} (default) draws each view
+at full extent. \code{TRUE} zooms each view onto its focus regions; a character
 vector names the focus regions explicitly.}
 
-\item{zoom_pad}{Fractional padding added around the focus window when `zoom`
-is active. Defaults to `0.05` (5\%).}
+\item{zoom_pad}{Fractional padding added around the focus window when \code{zoom}
+is active. Defaults to \code{0.05} (5\%).}
 }
 \value{
-A layout specification to hand to [geom_brain()]'s `position`
-  argument.
+A layout specification to hand to \code{\link[=geom_brain]{geom_brain()}}'s \code{position}
+argument.
 }
 \description{
 Controls how an atlas's hemispheres and views are arranged in the plot --
 side by side, stacked, or in a grid -- and can zoom each view in on the
-regions you care about. Pass the result to the `position` argument of
-[geom_brain()] (or [annotate_brain()]).
+regions you care about. Pass the result to the \code{position} argument of
+\code{\link[=geom_brain]{geom_brain()}} (or \code{\link[=annotate_brain]{annotate_brain()}}).
 }
 \examples{
 library(ggplot2)

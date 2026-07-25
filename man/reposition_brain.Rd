@@ -16,8 +16,8 @@ reposition_brain(
 \item{data}{sf-data.frame of joined brain atlas and data}
 
 \item{position}{Position formula for slices. For cortical atlases, use
-formulas like `hemi ~ view`. For subcortical/tract atlases, use
-"horizontal", "vertical", or `type ~ .` for type-based layout.}
+formulas like \code{hemi ~ view}. For subcortical/tract atlases, use
+"horizontal", "vertical", or \code{type ~ .} for type-based layout.}
 
 \item{nrow}{Number of rows for grid layout (subcortical/tract only)}
 
@@ -35,9 +35,9 @@ detailed control, convert the "hemi" and "view" columns into factors ordered
 by wanted order of appearance.
 }
 \details{
-This is the sf layout helper. It requires the `sf` package (an optional
-dependency); for the sf-free default, build a layout with [position_brain()]
-and pass it to [geom_brain()].
+This is the sf layout helper. It requires the \code{sf} package (an optional
+dependency); for the sf-free default, build a layout with \code{\link[=position_brain]{position_brain()}}
+and pass it to \code{\link[=geom_brain]{geom_brain()}}.
 }
 \examples{
 \dontshow{if (requireNamespace("sf", quietly = TRUE)) withAutoprint(\{ # examplesIf}

@@ -19,6 +19,8 @@ navbar:
           href: articles/external-data.html
         - text: -------
         - text: Advanced Usage
+        - text: How geom_brain() works
+          href: articles/how-geom-brain-works.html
         - text: Positioning Views
           href: articles/positioning-views.html
         - text: Using geom_sf
@@ -35,6 +37,7 @@ articles:
 
   - title: Advanced Usage
     contents:
+      - how-geom-brain-works
       - positioning-views
       - geom-sf
       - freesurfer-files
@@ -44,6 +47,7 @@ reference:
     desc: Core geom and positioning for brain plots
     contents:
       - geom_brain
+      - stat_brain
       - position_brain
       - annotate_brain
       - coord_brain
