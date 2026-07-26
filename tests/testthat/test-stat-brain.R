@@ -1,7 +1,7 @@
 describe("StatBrain", {
   it("is a ggplot2 Stat ggproto with a compute_panel", {
     expect_s3_class(StatBrain, "Stat")
-    expect_true(is.function(StatBrain$compute_panel))
+    expect_type(StatBrain$compute_panel, "closure")
   })
 })
 
@@ -11,14 +11,14 @@ describe("aggregate_brain_values()", {
   it("reduces numeric columns per key with fun (default mean)", {
     d <- data.frame(region = c("a", "a", "b"), fill = c(1, 3, 10))
     agg <- aggregate_brain_values(d, "region", mean, keys)
-    expect_equal(agg$fill[agg$region == "a"], 2)
-    expect_equal(agg$fill[agg$region == "b"], 10)
+    expect_identical(agg$fill[agg$region == "a"], 2)
+    expect_identical(agg$fill[agg$region == "b"], 10)
   })
 
   it("honours a custom aggregating function", {
     d <- data.frame(region = c("a", "a"), fill = c(1, 3))
-    expect_equal(aggregate_brain_values(d, "region", max, keys)$fill, 3)
-    expect_equal(aggregate_brain_values(d, "region", min, keys)$fill, 1)
+    expect_identical(aggregate_brain_values(d, "region", max, keys)$fill, 3)
+    expect_identical(aggregate_brain_values(d, "region", min, keys)$fill, 1)
   })
 
   it("takes the first value of non-numeric columns", {
@@ -52,7 +52,10 @@ describe("join_brain_values()", {
     d <- data.frame(region = "insula", fill = 5)
     j <- join_brain_values(d, flat, mean)
     expect_identical(nrow(j), nrow(flat))
-    expect_equal(unique(j$fill[j$region %in% "insula" & !is.na(j$region)]), 5)
+    expect_identical(
+      unique(j$fill[j$region %in% "insula" & !is.na(j$region)]),
+      5
+    )
     expect_true(anyNA(j$fill))
   })
 
@@ -60,7 +63,7 @@ describe("join_brain_values()", {
     lbl <- ggseg.formats::atlas_labels(dk())[1]
     d <- data.frame(label = lbl, fill = 1.5)
     j <- join_brain_values(d, flat, mean)
-    expect_equal(unique(j$fill[j$label %in% lbl]), 1.5)
+    expect_identical(unique(j$fill[j$label %in% lbl]), 1.5)
   })
 
   it("returns the bare atlas when the data has no join keys", {
@@ -133,12 +136,13 @@ describe("geom_brain() aggregates multiple rows per region", {
   }
 
   it("defaults to the mean of the rows", {
-    expect_equal(min(raw_fill(mean), na.rm = TRUE), 12) # mean(11, 12, 13)
+    # 12 is the mean of the region's three rows 11, 12 and 13
+    expect_identical(min(raw_fill(mean), na.rm = TRUE), 12)
   })
 
   it("honours a custom fun", {
-    expect_equal(min(raw_fill(max), na.rm = TRUE), 13)
-    expect_equal(min(raw_fill(min), na.rm = TRUE), 11)
+    expect_identical(min(raw_fill(max), na.rm = TRUE), 13)
+    expect_identical(min(raw_fill(min), na.rm = TRUE), 11)
   })
 })
 
@@ -192,7 +196,7 @@ describe("faceting on an atlas column subsets the atlas (not replicate)", {
     expect_length(per, 2)
     # each panel is one hemisphere: fewer rows than the full atlas
     expect_true(all(per < full))
-    expect_equal(sum(per), full)
+    expect_identical(sum(per), full)
   })
 
   it("splits by view with facet_wrap(~view), no user data", {
@@ -210,7 +214,7 @@ describe("faceting on an atlas column subsets the atlas (not replicate)", {
     regs <- ggseg.formats::atlas_regions(dk())
     d <- data.frame(
       region = regs,
-      hemi = ifelse(grepl("frontal", regs), "left", "right"),
+      hemi = ifelse(grepl("frontal", regs, fixed = TRUE), "left", "right"),
       v = 1
     )
     per <- panel_rows(

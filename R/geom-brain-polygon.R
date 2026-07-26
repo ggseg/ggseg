@@ -88,7 +88,9 @@ geom_brain_polygon <- function(
   # that an aesthetic typo like aes(fil = x) is no longer caught here.
   brain_layer <- layer(
     geom = geom,
-    stat = StatBrain,
+    # StatBrain lives in R/stat-brain.R; lintr can't resolve the cross-file
+    # ggproto object statically (R CMD check does).
+    stat = StatBrain, # nolint: object_usage_linter.
     data = data,
     mapping = mapping,
     position = "identity",

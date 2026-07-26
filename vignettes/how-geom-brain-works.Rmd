@@ -42,7 +42,7 @@ A bare atlas has no values to colour, so it draws grey.
 
 ```{r}
 #| label: bare
-#| fig-alt: "The Desikan-Killiany atlas drawn in uniform grey with region outlines visible, no fill colour."
+#| fig-alt: "The DK atlas in uniform grey with region outlines and no fill."
 #| fig-cap: "A bare atlas: the full shape, drawn grey."
 ggplot() +
   geom_brain(atlas = dk(), show.legend = FALSE)
@@ -53,7 +53,7 @@ Everything else stays grey, so the brain remains legible even when you have meas
 
 ```{r}
 #| label: subset
-#| fig-alt: "The atlas with three regions filled on a red-blue diverging scale and all other regions grey."
+#| fig-alt: "Three regions on a red-blue diverging scale, the rest grey."
 #| fig-cap: "Three regions have values; the rest of the brain still renders."
 results <- data.frame(
   region = c("precentral", "superior frontal", "insula"),
@@ -74,8 +74,8 @@ The default is the mean, and the `fun` argument takes any function that turns a 
 
 ```{r}
 #| label: aggregate
-#| fig-alt: "Two brain plots of the same three regions, one summarising each region by its mean thickness and one by its maximum."
-#| fig-cap: "The same repeated-measures data, summarised by mean (left) and by maximum (right)."
+#| fig-alt: "The three regions summarised by mean, then by maximum."
+#| fig-cap: "Repeated-measures data summarised by mean and by maximum."
 thickness <- data.frame(
   region = rep(c("precentral", "insula", "fusiform"), each = 4),
   subject = rep(1:4, times = 3),
@@ -100,7 +100,7 @@ No `group_by()`, no copying the atlas by hand -- `facet_wrap()` and `facet_grid(
 ```{r}
 #| label: facet
 #| fig-height: 4
-#| fig-alt: "Two stacked brain plots, one per cohort, each showing the full atlas with four regions coloured by score."
+#| fig-alt: "Two stacked brains, one per cohort, four regions coloured."
 #| fig-cap: "One brain per cohort, each drawn from that cohort's own rows."
 cohorts <- expand.grid(
   region = c("precentral", "insula", "fusiform", "superior parietal"),
@@ -127,7 +127,7 @@ A stepped scale bins the aggregated value for you.
 
 ```{r}
 #| label: bins-scale
-#| fig-alt: "The three-region atlas coloured in four discrete steps from a binned fill scale, with a stepped legend."
+#| fig-alt: "The atlas in four discrete colour steps from a binned scale."
 #| fig-cap: "Binning the aggregated value with a stepped scale."
 ggplot(thickness, aes(fill = thickness)) +
   geom_brain(atlas = dk()) +
@@ -138,7 +138,7 @@ When your bins carry meaning -- a threshold, a clinical band -- cut the values y
 
 ```{r}
 #| label: bins-cut
-#| fig-alt: "The atlas with regions coloured by a three-level factor labelled thin, typical, and thick."
+#| fig-alt: "Regions coloured by a factor: thin, typical, and thick."
 #| fig-cap: "Named bands, made with cut() and mapped as a discrete fill."
 thickness$band <- cut(
   thickness$thickness,
@@ -171,7 +171,7 @@ Reach for it when you want `StatBrain` paired with a different geom, such as dra
 
 ```{r}
 #| label: stat-brain
-#| fig-alt: "The atlas rendered as a dense cloud of small grey points instead of filled polygons."
+#| fig-alt: "The atlas as a dense cloud of small grey points."
 #| fig-cap: "StatBrain with a point geom instead of the polygon default."
 ggplot() +
   stat_brain(atlas = dk(), geom = "point", size = 0.1)
