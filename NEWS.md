@@ -1,5 +1,35 @@
 # ggseg 2.2.1.9000 (development)
 
+- **Breaking:** `geom_brain()` no longer colours the atlas by its built-in
+  palette when you map no `fill`. A bare `geom_brain(atlas = dk())` now renders
+  grey, matching how regions you supply no value for already looked. `geom_brain()`
+  is for plotting _your_ data on the brain; for a palette-coloured atlas overview
+  use `plot(atlas)` (from `ggseg.formats`), or map it yourself with
+  `aes(fill = region)` and `scale_fill_brain()`. This also removes the discrete
+  palette scale that `geom_brain()` used to inject silently, so a continuous fill
+  set in `ggplot()` — `ggplot(df, aes(fill = value)) + geom_brain(atlas = dk())`
+  — no longer errors with "Continuous value supplied to a discrete scale".
+
+- `geom_brain()` now combines multiple `data` rows that map to the same atlas
+  region into a single value with a new `fun` argument (default `mean`). Long
+  data with several rows per region — e.g. one per subject — is summarised per
+  region instead of overplotting. Any reducing function works, so
+  `geom_brain(atlas = dk(), fun = median)` draws the median.
+
+- Faceting no longer needs `dplyr::group_by()`. The atlas geometry is now drawn
+  by a `Stat` (`StatBrain`), which `ggplot2` recomputes per panel, so
+  `facet_wrap()` / `facet_grid()` work directly from your data. Faceting on a
+  variable of your own (e.g. a cohort) draws the complete brain in every panel;
+  faceting on an atlas column (e.g. `hemi` or `view`) draws that slice in each
+  panel, as before. The old grouped-data-frame replication in the polygon path
+  is gone (the deprecated sf path is unchanged).
+
+- New `stat_brain()` and exported `StatBrain` ggproto — the stat-first spelling
+  of `geom_brain()`. Both build the same layer; use `stat_brain()` to pair
+  `StatBrain` with a different geom.
+
+- Roxygen documentation now uses markdown.
+
 - `geom_brain()` again warns when rows of your `data` match no atlas region.
   The default polygon renderer joins your data onto the atlas with a left join,
   which silently dropped unmatched rows — so a region name the atlas does not

@@ -170,74 +170,30 @@ describe("prepare_polygon_atlas()", {
   })
 })
 
-describe("brain_join_polygon() faceting", {
-  it("replicates the full atlas per group for grouped data", {
-    poly <- ggseg.formats::as_polygon_atlas(dk())
-    flat <- prepare_polygon_atlas(poly)
-    data <- dplyr::group_by(
-      data.frame(
-        region = c("insula", "precentral"),
-        p = c(0.1, 0.2),
-        group = c("A", "B"),
-        stringsAsFactors = FALSE
-      ),
-      group
-    )
-    joined <- brain_join_polygon(data, flat)
-
-    expect_setequal(unique(joined$group), c("A", "B"))
-    a <- joined[joined$group == "A", ]
-    b <- joined[joined$group == "B", ]
-    expect_identical(nrow(a), nrow(flat))
-    expect_identical(nrow(b), nrow(flat))
-    expect_false(all(is.na(a$p)))
-    expect_true(anyNA(a$p))
-  })
-
-  it("joins by label when data carries label but not region", {
-    poly <- ggseg.formats::as_polygon_atlas(dk())
-    flat <- prepare_polygon_atlas(poly)
-    lbl <- ggseg.formats::atlas_labels(dk())[1]
-    data <- data.frame(label = lbl, val = 1.5, stringsAsFactors = FALSE)
-    joined <- brain_join_polygon(data, flat)
-    expect_true("val" %in% names(joined))
-    expect_equal(unique(joined$val[joined$label %in% lbl]), 1.5)
-  })
-
-  it("keeps a user column named group without colliding", {
-    poly <- ggseg.formats::as_polygon_atlas(dk())
-    flat <- prepare_polygon_atlas(poly)
-    data <- data.frame(
-      region = "insula",
-      group = "cohort1",
-      stringsAsFactors = FALSE
-    )
-    joined <- brain_join_polygon(data, flat)
-    expect_true("group" %in% names(joined))
-    expect_identical(
-      unique(joined$group[joined$region %in% "insula"]),
-      "cohort1"
-    )
-  })
-})
-
-describe("brain_join_polygon() warns on unmatched data (ggseg#121)", {
+describe("warn_unmatched_polygon_data() (ggseg#121)", {
   # The polygon join keeps every atlas polygon via a left join, so a data row
   # that matches no region (a typo, or a name the atlas no longer uses -- e.g.
-  # the short "bankssts" against the long region label) was silently dropped.
-  # Restore the sf-path brain_join() warning so the mismatch surfaces.
+  # the short "bankssts" against the long region label) is silently dropped.
+  # The setup_layer warning surfaces the mismatch. StatBrain does the join now;
+  # the warning helper is exercised directly plus through a built plot.
   poly <- ggseg.formats::as_polygon_atlas(dk())
 
   it("warns when a data region matches no atlas region", {
     flat <- prepare_polygon_atlas(poly)
     data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
-    expect_warning(brain_join_polygon(data, flat), "not merged")
+    expect_warning(
+      warn_unmatched_polygon_data(data, flat, "region"),
+      "not merged"
+    )
   })
 
   it("names the unmatched value in the message", {
     flat <- prepare_polygon_atlas(poly)
     data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
-    w <- expect_warning(brain_join_polygon(data, flat), "not merged")
+    w <- expect_warning(
+      warn_unmatched_polygon_data(data, flat, "region"),
+      "not merged"
+    )
     expect_match(conditionMessage(w), "bankssts")
     expect_no_match(conditionMessage(w), "insula")
   })
@@ -248,26 +204,13 @@ describe("brain_join_polygon() warns on unmatched data (ggseg#121)", {
       region = c("banks of superior temporal sulcus", "insula"),
       p = c(0.9, 0.1)
     )
-    expect_no_warning(brain_join_polygon(data, flat))
+    expect_no_warning(warn_unmatched_polygon_data(data, flat, "region"))
   })
 
   it("matches by label without warning", {
     flat <- prepare_polygon_atlas(poly)
     data <- data.frame(label = c("lh_bankssts", "rh_bankssts"), p = c(0.9, 0.9))
-    expect_no_warning(brain_join_polygon(data, flat))
-  })
-
-  it("warns once for grouped data, not once per group", {
-    flat <- prepare_polygon_atlas(poly)
-    data <- dplyr::group_by(
-      data.frame(
-        region = c("bankssts", "insula"),
-        p = c(0.9, 0.1),
-        g = c("A", "B")
-      ),
-      g
-    )
-    expect_warning(brain_join_polygon(data, flat), "not merged")
+    expect_no_warning(warn_unmatched_polygon_data(data, flat, "label"))
   })
 
   it("surfaces the mismatch through a built plot", {
@@ -286,8 +229,6 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
     ggplot2::ggplot_build(p)$data[[1]]$fill
   }
 
-  # Adding a user fill scale on top of the atlas default emits an expected
-  # "Scale for fill is already present" message at plot-construction time.
   labelled_values <- function() {
     data.frame(
       label = ggseg.formats::atlas_labels(dk()),
@@ -297,11 +238,9 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
 
   it("uses a continuous fill mapped in ggplot(), not the region labels", {
     mex <- labelled_values()
-    p <- suppressMessages(
-      ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
-        geom_brain(atlas = dk()) +
-        ggplot2::scale_fill_viridis_c()
-    )
+    p <- ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+      geom_brain(atlas = dk()) +
+      ggplot2::scale_fill_viridis_c()
     # The bug threw "Discrete value supplied to a continuous scale" at build.
     expect_no_error(fills <- fill_column(p))
     # A continuous scale resolves to many hex colours; unmatched context
@@ -313,23 +252,32 @@ describe("geom_brain() inherits top-level data and aes (ggseg#158)", {
 
   it("matches the explicit geom-level data= workaround from the issue", {
     mex <- labelled_values()
-    inherited <- suppressMessages(
-      ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
-        geom_brain(atlas = dk()) +
-        ggplot2::scale_fill_viridis_c()
-    )
-    explicit <- suppressMessages(
-      ggplot2::ggplot() +
-        geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
-        ggplot2::scale_fill_viridis_c()
-    )
+    inherited <- ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+      geom_brain(atlas = dk()) +
+      ggplot2::scale_fill_viridis_c()
+    explicit <- ggplot2::ggplot() +
+      geom_brain(data = mex, atlas = dk(), ggplot2::aes(fill = value)) +
+      ggplot2::scale_fill_viridis_c()
     expect_identical(fill_column(inherited), fill_column(explicit))
   })
 
-  it("still colours by the atlas palette when no fill is mapped anywhere", {
+  it("renders grey (not the palette) when no fill is mapped anywhere", {
+    # geom_brain() plots your data, so a bare atlas is grey; the palette is
+    # opt-in via plot(atlas) or aes(fill = region) + scale_fill_brain().
     p <- ggplot2::ggplot() + geom_brain(atlas = dk())
-    fills <- unique(fill_column(p))
-    expect_gt(length(fills), 2)
+    expect_setequal(unique(fill_column(p)), "grey")
+  })
+
+  it("no longer injects a discrete palette that fights a continuous fill", {
+    # Regression: plot-level continuous fill with no user scale used to error
+    # "Continuous value supplied to a discrete scale" from the injected palette.
+    mex <- labelled_values()
+    expect_no_error(
+      ggplot2::ggplot_build(
+        ggplot2::ggplot(mex, ggplot2::aes(fill = value)) +
+          geom_brain(atlas = dk())
+      )
+    )
   })
 
   it("replicates the atlas per facet for inherited grouped-by-facet data", {
@@ -479,7 +427,7 @@ describe("draw order follows the data row order (ggseg#162)", {
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly)
     data <- data.frame(region = c("precentral", "insula"), v = 1:2)
-    joined <- brain_join_polygon(data, flat)
+    joined <- join_brain_values(data, flat, mean)
     feat <- joined[!duplicated(joined$.feature_id), c(".feature_id", "region")]
     in_data <- feat$region %in% data$region
     expect_lt(max(feat$.feature_id[!in_data]), min(feat$.feature_id[in_data]))
@@ -490,7 +438,7 @@ describe("draw order follows the data row order (ggseg#162)", {
     flat <- prepare_polygon_atlas(poly)
     top_region <- function(order_regs) {
       d <- data.frame(region = order_regs, v = seq_along(order_regs))
-      j <- brain_join_polygon(d, flat)
+      j <- join_brain_values(d, flat, mean)
       j$region[j$.feature_id == max(j$.feature_id)][1]
     }
     regs <- c("precentral", "insula", "superior parietal", "fusiform")
@@ -499,23 +447,17 @@ describe("draw order follows the data row order (ggseg#162)", {
   })
 
   it("orders each facet panel by its own data order", {
+    # StatBrain runs per panel, so each panel is joined against just its own
+    # rows -- join_brain_values() is called once per panel's data.
     poly <- ggseg.formats::as_polygon_atlas(dk())
     flat <- prepare_polygon_atlas(poly)
-    data <- dplyr::group_by(
-      data.frame(
-        region = c("insula", "precentral", "precentral", "insula"),
-        cohort = c("A", "A", "B", "B"),
-        v = c(1, 2, 1, 2)
-      ),
-      cohort
-    )
-    joined <- brain_join_polygon(data, flat)
-    top_in <- function(coh) {
-      sub <- joined[joined$cohort == coh, ]
-      sub$region[sub$.feature_id == max(sub$.feature_id)][1]
+    top_in <- function(panel_regs) {
+      d <- data.frame(region = panel_regs, v = seq_along(panel_regs))
+      j <- join_brain_values(d, flat, mean)
+      j$region[j$.feature_id == max(j$.feature_id)][1]
     }
-    expect_identical(top_in("A"), "precentral")
-    expect_identical(top_in("B"), "insula")
+    expect_identical(top_in(c("insula", "precentral")), "precentral")
+    expect_identical(top_in(c("precentral", "insula")), "insula")
   })
 
   it("layers overlapping outlines by data order", {

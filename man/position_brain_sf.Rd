@@ -13,8 +13,8 @@ position_brain_sf(
 }
 \arguments{
 \item{position}{Formula describing the rows ~ columns organisation for
-cortical atlases (e.g., `hemi ~ view`). For subcortical/tract atlases,
-can be "horizontal", "vertical", or a formula with `type ~ .` where type
+cortical atlases (e.g., \code{hemi ~ view}). For subcortical/tract atlases,
+can be "horizontal", "vertical", or a formula with \code{type ~ .} where type
 is extracted from view names like "axial_1" -> "axial".}
 
 \item{nrow}{Number of rows for grid layout. If NULL (default), calculated
@@ -30,15 +30,15 @@ order. If NULL (default), all views are included in their original order.
 Only applies to subcortical/tract atlases.}
 }
 \value{
-A `PositionBrain` ggproto object.
+A \code{PositionBrain} ggproto object.
 }
 \description{
-`r lifecycle::badge("deprecated")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-The sf rendering path is deprecated. `position_brain_sf()` returns the
-legacy `PositionBrain` ggproto for use with [geom_brain_sf()]. For new
-code, use [position_brain()] (the polygon default), or convert the atlas
-with `as_sf_atlas()` and use [ggplot2::geom_sf()] directly.
+The sf rendering path is deprecated. \code{position_brain_sf()} returns the
+legacy \code{PositionBrain} ggproto for use with \code{\link[=geom_brain_sf]{geom_brain_sf()}}. For new
+code, use \code{\link[=position_brain]{position_brain()}} (the polygon default), or convert the atlas
+with \code{as_sf_atlas()} and use \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} directly.
 }
 \examples{
 \dontrun{

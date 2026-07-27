@@ -11,7 +11,7 @@
 #'
 #' Combines the three steps the old `gather_*` / `center_view*` / `stack_*`
 #' helpers did — gather to origin, centre in a uniform cell (sized to the
-#' largest group, +20\% separation), and shift to the `(row, col)` grid cell —
+#' largest group, +20% separation), and shift to the `(row, col)` grid cell —
 #' into one translation per group. 1-D layouts pass a constant row or col index.
 #'
 #' @param bboxes Numeric matrix, one row per group, columns `xmin`, `ymin`,
@@ -36,7 +36,7 @@ layout_cell_offsets <- function(bboxes, row_idx, col_idx) {
 
 #' Padded overall bounding box from per-group post-translation bboxes
 #'
-#' 1\% of the largest extent, anchored at the negative pad (matching the old
+#' 1% of the largest extent, anchored at the negative pad (matching the old
 #' `get_box()` / `get_box_flat()`).
 #'
 #' @param bboxes Numeric matrix of post-translation group bboxes.

@@ -10,9 +10,16 @@
 #' later rows draw on top. Reorder your data with [dplyr::arrange()] to control
 #' the layering; regions you supply no value for stay underneath in atlas order.
 #'
+#' Faceting works without any [dplyr::group_by()]: the atlas geometry is drawn
+#' by [StatBrain], which ggplot2 recomputes per panel, so the complete brain
+#' appears in every facet. If your `data` has several rows for the same region
+#' (e.g. one per subject), they are combined with `fun` (mean by default) before
+#' drawing.
+#'
 #' @param mapping Set of aesthetic mappings created by [ggplot2::aes()].
 #' @param data A data.frame containing variables to map. If `NULL`, the atlas
-#'   is plotted without user data. Group it with [dplyr::group_by()] to facet.
+#'   is plotted without user data. Add a facet with [ggplot2::facet_wrap()] to
+#'   draw one brain per group.
 #' @param atlas A `ggseg_atlas` object (e.g. `dk()`, `aseg()`, `tracula()`).
 #' @param hemi Character vector of hemispheres to include (e.g. `"left"`,
 #'   `"right"`). Defaults to all hemispheres in the atlas.
@@ -23,12 +30,17 @@
 #'   a call to [position_brain()].
 #' @param context Keep the rest of the brain as a soft grey backdrop (`TRUE`,
 #'   the default), or show only the regions you're plotting (`FALSE`).
+#' @param fun Function used to combine multiple `data` rows that map to the same
+#'   atlas region, applied within each facet panel. Defaults to [mean()]. Any
+#'   function reducing a vector to a single value works (e.g. [median()],
+#'   [max()]).
 #' @param show.legend Logical. Should this layer be included in the legends?
 #' @param inherit.aes Logical. If `FALSE`, overrides the default aesthetics
 #'   rather than combining with them.
 #' @param ... Additional arguments passed to [ggplot2::geom_polygon()].
 #'
 #' @return A list of ggplot2 layer and coord objects.
+#' @seealso [stat_brain()] for the stat-first spelling.
 #' @rdname ggbrain
 #' @order 1
 #' @export
@@ -46,6 +58,7 @@ geom_brain <- function(
   view = NULL,
   position = position_brain(),
   context = TRUE,
+  fun = mean,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -73,6 +86,7 @@ geom_brain <- function(
         view = view,
         position = position,
         context = context,
+        fun = fun,
         show.legend = show.legend,
         inherit.aes = inherit.aes
       ),

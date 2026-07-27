@@ -73,7 +73,7 @@ reposition_brain <- function(
 #'   at full extent. `TRUE` zooms each view onto its focus regions; a character
 #'   vector names the focus regions explicitly.
 #' @param zoom_pad Fractional padding added around the focus window when `zoom`
-#'   is active. Defaults to `0.05` (5\%).
+#'   is active. Defaults to `0.05` (5%).
 #'
 #' @export
 #' @return A layout specification to hand to [geom_brain()]'s `position`

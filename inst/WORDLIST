@@ -7,7 +7,6 @@ FreeSurfer's
 GDAL
 GEOS
 GeomBrain
-GeomPolygon
 ICV
 Killiany
 Lifebrain
@@ -17,13 +16,13 @@ ORCID
 Optimising
 PROJ
 Piñeiro
-PositionBrain
 Repositions
+Roxygen
+StatBrain
 Subcortical
 Tourville
 Visualise
 WebAssembly
-aes
 aseg
 bankssts
 behaviour
@@ -34,7 +33,6 @@ coloured
 colouring
 colours
 coord
-custombrain
 customisable
 data's
 dep
@@ -54,13 +52,13 @@ ggsegExtra
 ggsegverse
 github
 grey
+greyed
 hemi
 img
 labelled
 labelling
+labour
 lh
-lifecycle
-linewidth
 neuroimaging
 orbito
 orbitofrontal
@@ -78,6 +76,7 @@ repositioned
 roxygen
 sagittal
 subcortical
+summarised
 sysreq
 testthat
 tibble
@@ -89,5 +88,4 @@ vdiffr
 vis
 visualisations
 visualising
-vjust
 wm

@@ -21,12 +21,12 @@ geometries are stored as simple features (sf), enabling seamless
 integration with the ggplot2 ecosystem including faceting, custom scales,
 and themes.
 
-`ggseg()` is defunct as of version 2.0.0. Use
-`ggplot() + geom_brain()` instead.
+\code{ggseg()} is defunct as of version 2.0.0. Use
+\code{ggplot() + geom_brain()} instead.
 }
 \details{
-The main entry point is [geom_brain()], which accepts a `ggseg_atlas`
-object and optional user data. Use [position_brain()] to control the
+The main entry point is \code{\link[=geom_brain]{geom_brain()}}, which accepts a \code{ggseg_atlas}
+object and optional user data. Use \code{\link[=position_brain]{position_brain()}} to control the
 layout of brain slices/views.
 }
 \examples{
@@ -43,7 +43,7 @@ Useful links:
 }
 
 
-[geom_brain()] for the replacement API.
+\code{\link[=geom_brain]{geom_brain()}} for the replacement API.
 }
 \author{
 \strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (\href{https://orcid.org/0000-0002-5756-0223}{ORCID})

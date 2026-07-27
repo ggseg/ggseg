@@ -23,13 +23,15 @@ scale_fill_brain2(...)
 A ggplot2 scale object.
 }
 \description{
-`r lifecycle::badge("deprecated")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 These functions have been renamed for clarity:
-- `scale_brain2()` -> [scale_brain_manual()]
-- `scale_fill_brain2()` -> [scale_fill_brain_manual()]
-- `scale_colour_brain2()` -> [scale_colour_brain_manual()]
-- `scale_color_brain2()` -> [scale_color_brain_manual()]
+\itemize{
+\item \code{scale_brain2()} -> \code{\link[=scale_brain_manual]{scale_brain_manual()}}
+\item \code{scale_fill_brain2()} -> \code{\link[=scale_fill_brain_manual]{scale_fill_brain_manual()}}
+\item \code{scale_colour_brain2()} -> \code{\link[=scale_colour_brain_manual]{scale_colour_brain_manual()}}
+\item \code{scale_color_brain2()} -> \code{\link[=scale_color_brain_manual]{scale_color_brain_manual()}}
+}
 }
 \examples{
 pal <- c("transverse temporal" = "#FF0000", "insula" = "#00FF00")

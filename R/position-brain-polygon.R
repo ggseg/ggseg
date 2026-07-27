@@ -131,7 +131,7 @@ frame_2_position_flat <- function(
 #'   polygon clip so context regions become a clean rectangular frame around
 #'   the focus.
 #' @param zoom_pad Fractional padding added around the focus window when
-#'   `zoom` is active. Defaults to `0.05` (5\%).
+#'   `zoom` is active. Defaults to `0.05` (5%).
 #' @return A `position_brain_polygon_spec` list with the layout parameters.
 #' @keywords internal
 #' @noRd

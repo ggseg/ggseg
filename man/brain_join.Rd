@@ -8,22 +8,22 @@ brain_join(data, atlas, by = NULL)
 }
 \arguments{
 \item{data}{A data.frame with a column matching an atlas column
-(typically `"region"`). Can be grouped with [dplyr::group_by()].}
+(typically \code{"region"}). Can be grouped with \code{\link[dplyr:group_by]{dplyr::group_by()}}.}
 
-\item{atlas}{A `ggseg_atlas` object or data.frame containing atlas data.}
+\item{atlas}{A \code{ggseg_atlas} object or data.frame containing atlas data.}
 
-\item{by}{Character vector of column names to join by. If `NULL` (default),
+\item{by}{Character vector of column names to join by. If \code{NULL} (default),
 columns are detected automatically.}
 }
 \value{
-An `sf` object if the atlas contains geometry, otherwise a tibble.
+An \code{sf} object if the atlas contains geometry, otherwise a tibble.
 }
 \description{
-Matches your data to a brain atlas by a shared column (usually `region`),
+Matches your data to a brain atlas by a shared column (usually \code{region}),
 keeping every atlas region whether or not you have a value for it. Grouped
-data (via [dplyr::group_by()]) gives one complete atlas per group. You
-rarely need this directly -- [geom_brain()] joins your data for you; reach
-for `brain_join()` when you want the joined sf object yourself.
+data (via \code{\link[dplyr:group_by]{dplyr::group_by()}}) gives one complete atlas per group. You
+rarely need this directly -- \code{\link[=geom_brain]{geom_brain()}} joins your data for you; reach
+for \code{brain_join()} when you want the joined sf object yourself.
 }
 \examples{
 \dontshow{if (requireNamespace("sf", quietly = TRUE)) withAutoprint(\{ # examplesIf}
