@@ -26,8 +26,8 @@ reposition_brain(
 - position:
 
   Position formula for slices. For cortical atlases, use formulas like
-  \`hemi ~ view\`. For subcortical/tract atlases, use "horizontal",
-  "vertical", or \`type ~ .\` for type-based layout.
+  `hemi ~ view`. For subcortical/tract atlases, use "horizontal",
+  "vertical", or `type ~ .` for type-based layout.
 
 - nrow:
 
@@ -47,9 +47,11 @@ sf-data.frame with re-positioned slices
 
 ## Details
 
-This is the sf layout helper. It requires the \`sf\` package (an
-optional dependency); for the sf-free default, build a layout with
-\[position_brain()\] and pass it to \[geom_brain()\].
+This is the sf layout helper. It requires the `sf` package (an optional
+dependency); for the sf-free default, build a layout with
+[`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md)
+and pass it to
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md).
 
 ## Examples
 

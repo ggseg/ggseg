@@ -1,10 +1,13 @@
 # Keep brain shapes undistorted
 
 Fixes the aspect ratio so brains aren't stretched by the shape of the
-plotting window. \[geom_brain()\] adds \`coord_brain()\` for you, so you
-rarely need to call it yourself – reach for it only to adjust the
-\`ratio\` or \`clip\` behaviour. You can safely add your own coord or
-stack several \`geom_brain()\` layers; it steps aside cleanly.
+plotting window.
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+adds `coord_brain()` for you, so you rarely need to call it yourself –
+reach for it only to adjust the `ratio` or `clip` behaviour. You can
+safely add your own coord or stack several
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+layers; it steps aside cleanly.
 
 ## Usage
 
@@ -16,18 +19,19 @@ coord_brain(ratio = 1, clip = "off", ...)
 
 - ratio:
 
-  Aspect ratio, expressed as \`y / x\`. Defaults to \`1\`, which keeps
-  brain polygons undistorted.
+  Aspect ratio, expressed as `y / x`. Defaults to `1`, which keeps brain
+  polygons undistorted.
 
 - clip:
 
-  Should drawing be clipped to the panel extent (\`"on"\`) or allowed to
-  overflow (\`"off"\`)? Defaults to \`"off"\` so region outlines at the
+  Should drawing be clipped to the panel extent (`"on"`) or allowed to
+  overflow (`"off"`)? Defaults to `"off"` so region outlines at the
   panel edge are not cut.
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::coord_fixed()\].
+  Additional arguments passed to
+  [`ggplot2::coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html).
 
 ## Value
 

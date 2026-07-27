@@ -6,6 +6,8 @@ Core geom and positioning for brain plots
 
 - [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
   : Plot brain atlas regions
+- [`stat_brain()`](https://ggsegverse.github.io/ggseg/reference/stat_brain.md)
+  : Stat-first constructor for a brain atlas layer
 - [`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md)
   : Arrange brain atlas views
 - [`annotate_brain()`](https://ggsegverse.github.io/ggseg/reference/annotate_brain.md)
@@ -30,12 +32,12 @@ Colour scales for brain plots
   [`scale_colour_brain()`](https://ggsegverse.github.io/ggseg/reference/scale_brain.md)
   [`scale_color_brain()`](https://ggsegverse.github.io/ggseg/reference/scale_brain.md)
   [`scale_fill_brain()`](https://ggsegverse.github.io/ggseg/reference/scale_brain.md)
-  : Colour and fill scales from brain atlas palettes
+  **\[deprecated\]** : Colour and fill scales from brain atlas palettes
 - [`scale_brain2()`](https://ggsegverse.github.io/ggseg/reference/scale_brain2-deprecated.md)
   [`scale_colour_brain2()`](https://ggsegverse.github.io/ggseg/reference/scale_brain2-deprecated.md)
   [`scale_color_brain2()`](https://ggsegverse.github.io/ggseg/reference/scale_brain2-deprecated.md)
   [`scale_fill_brain2()`](https://ggsegverse.github.io/ggseg/reference/scale_brain2-deprecated.md)
-  : Deprecated scale functions
+  **\[deprecated\]** : Deprecated scale functions
 - [`scale_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
   [`scale_colour_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
   [`scale_color_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)

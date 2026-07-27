@@ -32,6 +32,7 @@ labels show the view name directly (e.g., &quot;axial_1&quot;, &quot;sagittal&qu
     <li><a class="dropdown-item" href="../articles/external-data.html">External Data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Usage</h6></li>
+    <li><a class="dropdown-item" href="../articles/how-geom-brain-works.html">How geom_brain() works</a></li>
     <li><a class="dropdown-item" href="../articles/positioning-views.html">Positioning Views</a></li>
     <li><a class="dropdown-item" href="../articles/geom-sf.html">Using geom_sf</a></li>
     <li><a class="dropdown-item" href="../articles/freesurfer-files.html">FreeSurfer Files</a></li>
@@ -86,49 +87,49 @@ labels show the view name directly (e.g., "axial_1", "sagittal").</p>
 
 
 <dl><dt id="arg-atlas">atlas<a class="anchor" aria-label="anchor" href="#arg-atlas"></a></dt>
-<dd><p>A `brain_atlas` object (e.g. `dk()`, `aseg()`).</p></dd>
+<dd><p>A <code>brain_atlas</code> object (e.g. <code><a href="https://ggsegverse.github.io/ggseg.formats/reference/dk.html">dk()</a></code>, <code><a href="https://ggsegverse.github.io/ggseg.formats/reference/aseg.html">aseg()</a></code>).</p></dd>
 
 
 <dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
-<dd><p>The same layout you passed to [geom_brain()], from
-[position_brain()].</p></dd>
+<dd><p>The same layout you passed to <code><a href="ggbrain.html">geom_brain()</a></code>, from
+<code><a href="position_brain.html">position_brain()</a></code>.</p></dd>
 
 
 <dt id="arg-hemi">hemi<a class="anchor" aria-label="anchor" href="#arg-hemi"></a></dt>
-<dd><p>Character vector of hemispheres to include. If `NULL`
+<dd><p>Character vector of hemispheres to include. If <code>NULL</code>
 (default), all hemispheres are included.</p></dd>
 
 
 <dt id="arg-view">view<a class="anchor" aria-label="anchor" href="#arg-view"></a></dt>
-<dd><p>Character vector of views to include. If `NULL`
+<dd><p>Character vector of views to include. If <code>NULL</code>
 (default), all views are included.</p></dd>
 
 
 <dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
-<dd><p>Text size in mm (default: `3`).</p></dd>
+<dd><p>Text size in mm (default: <code>3</code>).</p></dd>
 
 
 <dt id="arg-colour">colour<a class="anchor" aria-label="anchor" href="#arg-colour"></a></dt>
-<dd><p>Text colour (default: `"grey30"`).</p></dd>
+<dd><p>Text colour (default: <code>"grey30"</code>).</p></dd>
 
 
 <dt id="arg-family">family<a class="anchor" aria-label="anchor" href="#arg-family"></a></dt>
-<dd><p>Font family (default: `"mono"`).</p></dd>
+<dd><p>Font family (default: <code>"mono"</code>).</p></dd>
 
 
 <dt id="arg-padding">padding<a class="anchor" aria-label="anchor" href="#arg-padding"></a></dt>
 <dd><p>Vertical gap between each label and its view, as a
-fraction of the plot's total height (default: `0.05`). Labels are also
-bottom-anchored (`vjust = 0`) so they sit clear of the geometry.</p></dd>
+fraction of the plot's total height (default: <code>0.05</code>). Labels are also
+bottom-anchored (<code>vjust = 0</code>) so they sit clear of the geometry.</p></dd>
 
 
 <dt id="arg-nudge-y">nudge_y<a class="anchor" aria-label="anchor" href="#arg-nudge-y"></a></dt>
 <dd><p>Additional absolute vertical offset for labels
-(default: `0`).</p></dd>
+(default: <code>0</code>).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::annotate()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">ggplot2::annotate()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -137,7 +138,7 @@ bottom-anchored (`vjust = 0`) so they sit clear of the geometry.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Pass the same `position` you gave [geom_brain()] and the labels line up with
+    <p>Pass the same <code>position</code> you gave <code><a href="ggbrain.html">geom_brain()</a></code> and the labels line up with
 the views automatically.</p>
     </div>
 

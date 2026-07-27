@@ -1,12 +1,20 @@
 # Deprecated scale functions
 
-\`r lifecycle::badge("deprecated")\`
+**\[deprecated\]**
 
-These functions have been renamed for clarity: - \`scale_brain2()\` -\>
-\[scale_brain_manual()\] - \`scale_fill_brain2()\` -\>
-\[scale_fill_brain_manual()\] - \`scale_colour_brain2()\` -\>
-\[scale_colour_brain_manual()\] - \`scale_color_brain2()\` -\>
-\[scale_color_brain_manual()\]
+These functions have been renamed for clarity:
+
+- `scale_brain2()` -\>
+  [`scale_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
+
+- `scale_fill_brain2()` -\>
+  [`scale_fill_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
+
+- `scale_colour_brain2()` -\>
+  [`scale_colour_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
+
+- `scale_color_brain2()` -\>
+  [`scale_color_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
 
 ## Usage
 

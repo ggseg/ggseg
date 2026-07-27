@@ -1,9 +1,10 @@
 # Plot brain atlas regions
 
-Colour brain regions by your own values. Give \`geom_brain()\` an atlas
-like \`dk()\` and a data frame, and it matches your values to the right
-regions and lays out the brain views for you. No data? It just draws the
-atlas.
+Colour brain regions by your own values. Give `geom_brain()` an atlas
+like
+[`dk()`](https://ggsegverse.github.io/ggseg.formats/reference/dk.html)
+and a data frame, and it matches your values to the right regions and
+lays out the brain views for you. No data? It just draws the atlas.
 
 ## Usage
 
@@ -16,6 +17,7 @@ geom_brain(
   view = NULL,
   position = position_brain(),
   context = TRUE,
+  fun = mean,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -26,39 +28,52 @@ geom_brain(
 
 - mapping:
 
-  Set of aesthetic mappings created by \[ggplot2::aes()\].
+  Set of aesthetic mappings created by
+  [`ggplot2::aes()`](https://ggplot2.tidyverse.org/reference/aes.html).
 
 - data:
 
-  A data.frame containing variables to map. If \`NULL\`, the atlas is
-  plotted without user data. Group it with \[dplyr::group_by()\] to
-  facet.
+  A data.frame containing variables to map. If `NULL`, the atlas is
+  plotted without user data. Add a facet with
+  [`ggplot2::facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
+  to draw one brain per group.
 
 - atlas:
 
-  A \`ggseg_atlas\` object (e.g. \`dk()\`, \`aseg()\`, \`tracula()\`).
+  A `ggseg_atlas` object (e.g.
+  [`dk()`](https://ggsegverse.github.io/ggseg.formats/reference/dk.html),
+  [`aseg()`](https://ggsegverse.github.io/ggseg.formats/reference/aseg.html),
+  [`tracula()`](https://ggsegverse.github.io/ggseg.formats/reference/tracula.html)).
 
 - hemi:
 
-  Character vector of hemispheres to include (e.g. \`"left"\`,
-  \`"right"\`). Defaults to all hemispheres in the atlas.
+  Character vector of hemispheres to include (e.g. `"left"`, `"right"`).
+  Defaults to all hemispheres in the atlas.
 
 - view:
 
   Character vector of views to include, as recorded in the atlas data.
-  For cortical atlases: \`"lateral"\`, \`"medial"\`. For
-  subcortical/tract atlases: slice identifiers like \`"axial_3"\`.
-  Defaults to all views.
+  For cortical atlases: `"lateral"`, `"medial"`. For subcortical/tract
+  atlases: slice identifiers like `"axial_3"`. Defaults to all views.
 
 - position:
 
   Position adjustment, either as a string or the result of a call to
-  \[position_brain()\].
+  [`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md).
 
 - context:
 
-  Keep the rest of the brain as a soft grey backdrop (\`TRUE\`, the
-  default), or show only the regions you're plotting (\`FALSE\`).
+  Keep the rest of the brain as a soft grey backdrop (`TRUE`, the
+  default), or show only the regions you're plotting (`FALSE`).
+
+- fun:
+
+  Function used to combine multiple `data` rows that map to the same
+  atlas region, applied within each facet panel. Defaults to
+  [`mean()`](https://rdrr.io/r/base/mean.html). Any function reducing a
+  vector to a single value works (e.g.
+  [`median()`](https://rdrr.io/r/stats/median.html),
+  [`max()`](https://rdrr.io/r/base/Extremes.html)).
 
 - show.legend:
 
@@ -66,12 +81,13 @@ geom_brain(
 
 - inherit.aes:
 
-  Logical. If \`FALSE\`, overrides the default aesthetics rather than
+  Logical. If `FALSE`, overrides the default aesthetics rather than
   combining with them.
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::geom_polygon()\].
+  Additional arguments passed to
+  [`ggplot2::geom_polygon()`](https://ggplot2.tidyverse.org/reference/geom_polygon.html).
 
 ## Value
 
@@ -79,21 +95,51 @@ A list of ggplot2 layer and coord objects.
 
 ## Details
 
-Regions are drawn in the order they appear in your \`data\`, so when
-outlines overlap (e.g. mapping \`colour\` to a threshold with a wide
-\`linewidth\`) the later rows draw on top. Reorder your data with
-\[dplyr::arrange()\] to control the layering; regions you supply no
-value for stay underneath in atlas order.
+Regions are drawn in the order they appear in your `data`, so when
+outlines overlap (e.g. mapping `colour` to a threshold with a wide
+`linewidth`) the later rows draw on top. Reorder your data with
+[`dplyr::arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)
+to control the layering; regions you supply no value for stay underneath
+in atlas order.
+
+Faceting works without any
+[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html):
+the atlas geometry is drawn by StatBrain, which ggplot2 recomputes per
+panel, so the complete brain appears in every facet. If your `data` has
+several rows for the same region (e.g. one per subject), they are
+combined with `fun` (mean by default) before drawing.
 
 ## GeomBrain ggproto
 
-\`GeomBrain\` is the \[ggplot2::Geom\] ggproto that renders brain atlas
-polygons. It subclasses \[ggplot2::GeomPolygon\] and only supplies the
-brain default outline \`colour\` (grey35) and \`linewidth\` (0.2)
-through \`default_aes\`, so they apply when the user has not mapped or
-set those aesthetics but yield to a mapping when present
-(ggsegverse/ggseg#160). It is used internally by \[geom_brain()\] and
-should not typically be called directly.
+`GeomBrain` is the
+[ggplot2::Geom](https://ggplot2.tidyverse.org/reference/Geom.html)
+ggproto that renders brain atlas polygons. It subclasses
+[ggplot2::GeomPolygon](https://ggplot2.tidyverse.org/reference/Geom.html)
+and supplies the brain defaults through `default_aes` – outline `colour`
+(grey35), `linewidth` (0.2), and `fill` (grey) – which apply when the
+user has not mapped those aesthetics but yield to a mapping when present
+(ggsegverse/ggseg#160). The grey default fill is why an atlas plotted
+without data renders grey, not palette-coloured. Used internally by
+`geom_brain()`; not typically called directly.
+
+## StatBrain ggproto
+
+`StatBrain` is the
+[ggplot2::Stat](https://ggplot2.tidyverse.org/reference/Stat.html) that
+powers `geom_brain()` and
+[`stat_brain()`](https://ggsegverse.github.io/ggseg/reference/stat_brain.md).
+Its `compute_panel()` receives one facet panel's user data, aggregates
+the mapped values per atlas region with `fun`, and joins them onto the
+full atlas geometry – so every region renders in every panel whether or
+not you supplied a value for it. You rarely reference it directly; use
+it via `geom_brain(..., stat = StatBrain)` or
+[`stat_brain()`](https://ggsegverse.github.io/ggseg/reference/stat_brain.md)
+when building a custom layer.
+
+## See also
+
+[`stat_brain()`](https://ggsegverse.github.io/ggseg/reference/stat_brain.md)
+for the stat-first spelling.
 
 ## Examples
 

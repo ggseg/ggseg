@@ -6,6 +6,7 @@
 <url><loc>https://ggsegverse.github.io/ggseg/articles/freesurfer-files.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/articles/geom-sf.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/articles/ggseg.html</loc></url>
+<url><loc>https://ggsegverse.github.io/ggseg/articles/how-geom-brain-works.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/articles/index.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/articles/positioning-views.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/authors.html</loc></url>
@@ -27,6 +28,7 @@
 <url><loc>https://ggsegverse.github.io/ggseg/reference/scale_brain2-deprecated.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/reference/scale_continous_brain.html</loc></url>
+<url><loc>https://ggsegverse.github.io/ggseg/reference/stat_brain.html</loc></url>
 <url><loc>https://ggsegverse.github.io/ggseg/reference/theme_brain.html</loc></url>
 </urlset>
 

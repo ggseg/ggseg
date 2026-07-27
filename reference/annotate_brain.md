@@ -26,48 +26,53 @@ annotate_brain(
 
 - atlas:
 
-  A \`brain_atlas\` object (e.g. \`dk()\`, \`aseg()\`).
+  A `brain_atlas` object (e.g.
+  [`dk()`](https://ggsegverse.github.io/ggseg.formats/reference/dk.html),
+  [`aseg()`](https://ggsegverse.github.io/ggseg.formats/reference/aseg.html)).
 
 - position:
 
-  The same layout you passed to \[geom_brain()\], from
-  \[position_brain()\].
+  The same layout you passed to
+  [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md),
+  from
+  [`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md).
 
 - hemi:
 
-  Character vector of hemispheres to include. If \`NULL\` (default), all
+  Character vector of hemispheres to include. If `NULL` (default), all
   hemispheres are included.
 
 - view:
 
-  Character vector of views to include. If \`NULL\` (default), all views
+  Character vector of views to include. If `NULL` (default), all views
   are included.
 
 - size:
 
-  Text size in mm (default: \`3\`).
+  Text size in mm (default: `3`).
 
 - colour:
 
-  Text colour (default: \`"grey30"\`).
+  Text colour (default: `"grey30"`).
 
 - family:
 
-  Font family (default: \`"mono"\`).
+  Font family (default: `"mono"`).
 
 - padding:
 
   Vertical gap between each label and its view, as a fraction of the
-  plot's total height (default: \`0.05\`). Labels are also
-  bottom-anchored (\`vjust = 0\`) so they sit clear of the geometry.
+  plot's total height (default: `0.05`). Labels are also bottom-anchored
+  (`vjust = 0`) so they sit clear of the geometry.
 
 - nudge_y:
 
-  Additional absolute vertical offset for labels (default: \`0\`).
+  Additional absolute vertical offset for labels (default: `0`).
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::annotate()\].
+  Additional arguments passed to
+  [`ggplot2::annotate()`](https://ggplot2.tidyverse.org/reference/annotate.html).
 
 ## Value
 
@@ -75,8 +80,9 @@ A ggplot2 annotation layer.
 
 ## Details
 
-Pass the same \`position\` you gave \[geom_brain()\] and the labels line
-up with the views automatically.
+Pass the same `position` you gave
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+and the labels line up with the views automatically.
 
 ## Examples
 

@@ -29,7 +29,7 @@ scale_fill_brain_manual(...)
 
 - na.value:
 
-  Colour for \`NA\` entries (default: \`"grey"\`).
+  Colour for `NA` entries (default: `"grey"`).
 
 - ...:
 
@@ -37,7 +37,7 @@ scale_fill_brain_manual(...)
 
 - aesthetics:
 
-  Which aesthetic to scale: \`"fill"\`, \`"colour"\`, or \`"color"\`.
+  Which aesthetic to scale: `"fill"`, `"colour"`, or `"color"`.
 
 ## Value
 

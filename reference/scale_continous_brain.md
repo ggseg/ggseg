@@ -24,19 +24,19 @@ scale_labs_brain(atlas = dk(), position = "dispersed", aesthetics = "labs")
 
 - atlas:
 
-  A \`ggseg_atlas\` object or data.frame containing atlas data.
+  A `ggseg_atlas` object or data.frame containing atlas data.
 
 - position:
 
-  Layout style: \`"dispersed"\` (default) or \`"stacked"\`.
+  Layout style: `"dispersed"` (default) or `"stacked"`.
 
 - aesthetics:
 
-  Which axis to scale: \`"x"\`, \`"y"\`, or \`"labs"\`.
+  Which axis to scale: `"x"`, `"y"`, or `"labs"`.
 
 - ...:
 
-  Additional arguments passed to \[adapt_scales()\].
+  Additional arguments passed to `adapt_scales()`.
 
 ## Value
 

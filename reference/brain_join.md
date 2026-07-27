@@ -1,11 +1,13 @@
 # Join user data with a brain atlas
 
 Matches your data to a brain atlas by a shared column (usually
-\`region\`), keeping every atlas region whether or not you have a value
-for it. Grouped data (via \[dplyr::group_by()\]) gives one complete
-atlas per group. You rarely need this directly – \[geom_brain()\] joins
-your data for you; reach for \`brain_join()\` when you want the joined
-sf object yourself.
+`region`), keeping every atlas region whether or not you have a value
+for it. Grouped data (via
+[`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html))
+gives one complete atlas per group. You rarely need this directly –
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+joins your data for you; reach for `brain_join()` when you want the
+joined sf object yourself.
 
 ## Usage
 
@@ -18,20 +20,21 @@ brain_join(data, atlas, by = NULL)
 - data:
 
   A data.frame with a column matching an atlas column (typically
-  \`"region"\`). Can be grouped with \[dplyr::group_by()\].
+  `"region"`). Can be grouped with
+  [`dplyr::group_by()`](https://dplyr.tidyverse.org/reference/group_by.html).
 
 - atlas:
 
-  A \`ggseg_atlas\` object or data.frame containing atlas data.
+  A `ggseg_atlas` object or data.frame containing atlas data.
 
 - by:
 
-  Character vector of column names to join by. If \`NULL\` (default),
+  Character vector of column names to join by. If `NULL` (default),
   columns are detected automatically.
 
 ## Value
 
-An \`sf\` object if the atlas contains geometry, otherwise a tibble.
+An `sf` object if the atlas contains geometry, otherwise a tibble.
 
 ## Examples
 

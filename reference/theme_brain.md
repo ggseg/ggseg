@@ -29,46 +29,47 @@ theme_brain2(
 
 - text.size:
 
-  Text size in points (default: \`12\`).
+  Text size in points (default: `12`).
 
 - text.family:
 
-  Font family (default: \`"mono"\`).
+  Font family (default: `"mono"`).
 
 - plot.background:
 
-  Background fill colour (\`theme_custombrain\` and \`theme_brain2\`
-  only).
+  Background fill colour (`theme_custombrain` and `theme_brain2` only).
 
 - text.colour:
 
-  Text colour (\`theme_custombrain\` and \`theme_brain2\` only).
+  Text colour (`theme_custombrain` and `theme_brain2` only).
 
 ## Value
 
-A \[ggplot2::theme\] object.
+A [ggplot2::theme](https://ggplot2.tidyverse.org/reference/theme.html)
+object.
 
 ## Details
 
-- \`theme_brain\`:
+- `theme_brain`:
 
   Default theme. Transparent background, no axes, no grid.
 
-- \`theme_darkbrain\`:
+- `theme_darkbrain`:
 
   Dark theme with black background and light text.
 
-- \`theme_custombrain\`:
+- `theme_custombrain`:
 
   Fully customisable background, text colour, size, and font.
 
-- \`theme_brain2\`:
+- `theme_brain2`:
 
-  Like \`theme_custombrain\` but with axis text removed entirely.
+  Like `theme_custombrain` but with axis text removed entirely.
 
 ## See also
 
-\[geom_brain()\], \[ggplot2::theme()\]
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md),
+[`ggplot2::theme()`](https://ggplot2.tidyverse.org/reference/theme.html)
 
 ## Examples
 

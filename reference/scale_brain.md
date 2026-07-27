@@ -1,9 +1,12 @@
 # Colour and fill scales from brain atlas palettes
 
-\`r lifecycle::badge("deprecated")\`
+**\[deprecated\]**
 
-Atlas palettes are now applied automatically by \[geom_brain()\]. Use
-\[scale_fill_brain_manual()\] for custom palettes.
+Atlas palettes are now applied automatically by
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md).
+Use
+[`scale_fill_brain_manual()`](https://ggsegverse.github.io/ggseg/reference/scale_brain_manual.md)
+for custom palettes.
 
 ## Usage
 
@@ -26,19 +29,20 @@ scale_fill_brain(name = "dk", na.value = "grey", ...)
 
 - name:
 
-  String name of the atlas palette (e.g. \`"dk"\`, \`"aseg"\`).
+  String name of the atlas palette (e.g. `"dk"`, `"aseg"`).
 
 - na.value:
 
-  Colour for \`NA\` entries (default: \`"grey"\`).
+  Colour for `NA` entries (default: `"grey"`).
 
 - ...:
 
-  Additional arguments passed to \[ggseg.formats::atlas_palette()\].
+  Additional arguments passed to
+  [`ggseg.formats::atlas_palette()`](https://ggsegverse.github.io/ggseg.formats/reference/atlas_palette.html).
 
 - aesthetics:
 
-  Which aesthetic to scale: \`"fill"\`, \`"colour"\`, or \`"color"\`.
+  Which aesthetic to scale: `"fill"`, `"colour"`, or `"color"`.
 
 ## Value
 

@@ -32,6 +32,7 @@ by wanted order of appearance.'><meta property="og:image" content="https://ggseg
     <li><a class="dropdown-item" href="../articles/external-data.html">External Data</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Usage</h6></li>
+    <li><a class="dropdown-item" href="../articles/how-geom-brain-works.html">How geom_brain() works</a></li>
     <li><a class="dropdown-item" href="../articles/positioning-views.html">Positioning Views</a></li>
     <li><a class="dropdown-item" href="../articles/geom-sf.html">Using geom_sf</a></li>
     <li><a class="dropdown-item" href="../articles/freesurfer-files.html">FreeSurfer Files</a></li>
@@ -86,8 +87,8 @@ by wanted order of appearance.</p>
 
 <dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>Position formula for slices. For cortical atlases, use
-formulas like `hemi ~ view`. For subcortical/tract atlases, use
-"horizontal", "vertical", or `type ~ .` for type-based layout.</p></dd>
+formulas like <code>hemi ~ view</code>. For subcortical/tract atlases, use
+"horizontal", "vertical", or <code>type ~ .</code> for type-based layout.</p></dd>
 
 
 <dt id="arg-nrow">nrow<a class="anchor" aria-label="anchor" href="#arg-nrow"></a></dt>
@@ -108,9 +109,9 @@ formulas like `hemi ~ view`. For subcortical/tract atlases, use
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This is the sf layout helper. It requires the `sf` package (an optional
-dependency); for the sf-free default, build a layout with [position_brain()]
-and pass it to [geom_brain()].</p>
+    <p>This is the sf layout helper. It requires the <code>sf</code> package (an optional
+dependency); for the sf-free default, build a layout with <code><a href="position_brain.html">position_brain()</a></code>
+and pass it to <code><a href="ggbrain.html">geom_brain()</a></code>.</p>
     </div>
 
     <div class="section level2">

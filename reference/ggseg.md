@@ -6,8 +6,8 @@ geometries are stored as simple features (sf), enabling seamless
 integration with the ggplot2 ecosystem including faceting, custom
 scales, and themes.
 
-\`ggseg()\` is defunct as of version 2.0.0. Use \`ggplot() +
-geom_brain()\` instead.
+`ggseg()` is defunct as of version 2.0.0. Use `ggplot() + geom_brain()`
+instead.
 
 ## Usage
 
@@ -27,8 +27,10 @@ Does not return; always raises an error.
 
 ## Details
 
-The main entry point is \[geom_brain()\], which accepts a
-\`ggseg_atlas\` object and optional user data. Use \[position_brain()\]
+The main entry point is
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md),
+which accepts a `ggseg_atlas` object and optional user data. Use
+[`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md)
 to control the layout of brain slices/views.
 
 ## See also
@@ -41,7 +43,8 @@ Useful links:
 
 - Report bugs at <https://github.com/ggsegverse/ggseg/issues>
 
-\[geom_brain()\] for the replacement API.
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+for the replacement API.
 
 ## Author
 

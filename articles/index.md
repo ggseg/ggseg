@@ -9,6 +9,8 @@
 
 ### Advanced Usage
 
+- [How geom_brain()
+  works](https://ggsegverse.github.io/ggseg/articles/how-geom-brain-works.md):
 - [Arranging brain
   views](https://ggsegverse.github.io/ggseg/articles/positioning-views.md):
 - [Working with geom_sf

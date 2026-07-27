@@ -2,8 +2,10 @@
 
 Controls how an atlas's hemispheres and views are arranged in the plot –
 side by side, stacked, or in a grid – and can zoom each view in on the
-regions you care about. Pass the result to the \`position\` argument of
-\[geom_brain()\] (or \[annotate_brain()\]).
+regions you care about. Pass the result to the `position` argument of
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
+(or
+[`annotate_brain()`](https://ggsegverse.github.io/ggseg/reference/annotate_brain.md)).
 
 ## Usage
 
@@ -23,8 +25,8 @@ position_brain(
 - position:
 
   Formula describing the rows ~ columns organisation for cortical
-  atlases (e.g., \`hemi ~ view\`). For subcortical/tract atlases, can be
-  "horizontal", "vertical", or a formula with \`type ~ .\` where type is
+  atlases (e.g., `hemi ~ view`). For subcortical/tract atlases, can be
+  "horizontal", "vertical", or a formula with `type ~ .` where type is
   extracted from view names like "axial_1" -\> "axial".
 
 - nrow:
@@ -47,19 +49,20 @@ position_brain(
 
 - zoom:
 
-  Controls per-view zoom. \`NULL\`/\`FALSE\` (default) draws each view
-  at full extent. \`TRUE\` zooms each view onto its focus regions; a
+  Controls per-view zoom. `NULL`/`FALSE` (default) draws each view at
+  full extent. `TRUE` zooms each view onto its focus regions; a
   character vector names the focus regions explicitly.
 
 - zoom_pad:
 
-  Fractional padding added around the focus window when \`zoom\` is
-  active. Defaults to \`0.05\` (5%).
+  Fractional padding added around the focus window when `zoom` is
+  active. Defaults to `0.05` (5%).
 
 ## Value
 
-A layout specification to hand to \[geom_brain()\]'s \`position\`
-argument.
+A layout specification to hand to
+[`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)'s
+`position` argument.
 
 ## Examples
 
