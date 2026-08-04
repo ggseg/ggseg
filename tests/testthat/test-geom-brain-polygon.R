@@ -172,15 +172,15 @@ describe("prepare_polygon_atlas()", {
 
 describe("warn_unmatched_polygon_data() (ggseg#121)", {
   # The polygon join keeps every atlas polygon via a left join, so a data row
-  # that matches no region (a typo, or a name the atlas no longer uses -- e.g.
-  # the short "bankssts" against the long region label) is silently dropped.
-  # The setup_layer warning surfaces the mismatch. StatBrain does the join now;
-  # the warning helper is exercised directly plus through a built plot.
+  # that matches no region (a typo, or the fully spelled-out `names` value used
+  # where the short `region` key is expected) is silently dropped. The
+  # setup_layer warning surfaces the mismatch. StatBrain does the join now; the
+  # warning helper is exercised directly plus through a built plot.
   poly <- ggseg.formats::as_polygon_atlas(dk())
 
   it("warns when a data region matches no atlas region", {
     flat <- prepare_polygon_atlas(poly)
-    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    data <- data.frame(region = c("bankssts", "notaregion"), p = c(0.9, 0.1))
     expect_warning(
       warn_unmatched_polygon_data(data, flat, "region"),
       "not merged"
@@ -189,19 +189,19 @@ describe("warn_unmatched_polygon_data() (ggseg#121)", {
 
   it("names the unmatched value in the message", {
     flat <- prepare_polygon_atlas(poly)
-    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    data <- data.frame(region = c("bankssts", "notaregion"), p = c(0.9, 0.1))
     w <- expect_warning(
       warn_unmatched_polygon_data(data, flat, "region"),
       "not merged"
     )
-    expect_match(conditionMessage(w), "bankssts")
-    expect_no_match(conditionMessage(w), "insula")
+    expect_match(conditionMessage(w), "notaregion")
+    expect_no_match(conditionMessage(w), "bankssts")
   })
 
   it("stays silent when every data row matches", {
     flat <- prepare_polygon_atlas(poly)
     data <- data.frame(
-      region = c("banks of superior temporal sulcus", "insula"),
+      region = c("bankssts", "insula"),
       p = c(0.9, 0.1)
     )
     expect_no_warning(warn_unmatched_polygon_data(data, flat, "region"))
@@ -214,7 +214,7 @@ describe("warn_unmatched_polygon_data() (ggseg#121)", {
   })
 
   it("surfaces the mismatch through a built plot", {
-    data <- data.frame(region = c("bankssts", "insula"), p = c(0.9, 0.1))
+    data <- data.frame(region = c("bankssts", "notaregion"), p = c(0.9, 0.1))
     p <- ggplot2::ggplot(data) +
       geom_brain(atlas = dk(), ggplot2::aes(fill = p))
     expect_warning(ggplot2::ggplot_build(p), "not merged")
@@ -330,7 +330,7 @@ describe("geom_brain() outline aesthetics (ggseg#160)", {
 
   outline_data <- function() {
     data.frame(
-      region = c("insula", "precentral", "superior parietal"),
+      region = c("insula", "precentral", "superiorparietal"),
       grp = c("a", "b", "c"),
       w = c(0.5, 1.5, 3)
     )
@@ -441,7 +441,7 @@ describe("draw order follows the data row order (ggseg#162)", {
       j <- join_brain_values(d, flat, mean)
       j$region[j$.feature_id == max(j$.feature_id)][1]
     }
-    regs <- c("precentral", "insula", "superior parietal", "fusiform")
+    regs <- c("precentral", "insula", "superiorparietal", "fusiform")
     expect_identical(top_region(regs), "fusiform")
     expect_identical(top_region(rev(regs)), "precentral")
   })
@@ -465,7 +465,7 @@ describe("draw order follows the data row order (ggseg#162)", {
     # Mirrors ggseg#162: fill by a statistic, outline by a threshold factor.
     # The factor levels are fixed, so each region keeps its colour and only the
     # row order differs between the two plots -- isolating the draw order.
-    regs <- c("precentral", "postcentral", "superior parietal")
+    regs <- c("precentral", "postcentral", "superiorparietal")
     make <- function(order_regs) {
       d <- data.frame(
         region = order_regs,

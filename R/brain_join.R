@@ -20,8 +20,8 @@
 #' @examplesIf requireNamespace("sf", quietly = TRUE)
 #' someData <- data.frame(
 #'   region = c(
-#'     "transverse temporal", "insula",
-#'     "precentral", "superior parietal"
+#'     "transversetemporal", "insula",
+#'     "precentral", "superiorparietal"
 #'   ),
 #'   p = sample(seq(0, .5, .001), 4),
 #'   stringsAsFactors = FALSE

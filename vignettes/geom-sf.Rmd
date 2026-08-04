@@ -73,10 +73,10 @@ geometry and handles column detection:
 #| label: brain-join
 some_data <- tibble(
   region = c(
-    "transverse temporal",
+    "transversetemporal",
     "insula",
     "precentral",
-    "superior parietal"
+    "superiorparietal"
   ),
   p = sample(seq(0, 0.5, 0.001), 4)
 )
@@ -148,10 +148,10 @@ The grouping tells the join to replicate the atlas for each group:
 some_data <- tibble(
   region = rep(
     c(
-      "transverse temporal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal"
+      "superiorparietal"
     ),
     2
   ),

@@ -1,14 +1,14 @@
 describe("brain_join", {
   some_data <- data.frame(
     region = c(
-      "transverse temporal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal",
-      "transverse temporal",
+      "superiorparietal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal"
+      "superiorparietal"
     ),
     p = seq(0.1, 0.8, by = 0.1),
     grp = c(rep("G1", 4), rep("G2", 4)),
