@@ -55,7 +55,7 @@ Three regions, three p-values:
 ```{r}
 #| label: minimal-data
 some_data <- tibble(
-  region = c("superior temporal", "precentral", "lateral orbitofrontal"),
+  region = c("superiortemporal", "precentral", "lateralorbitofrontal"),
   p = c(0.03, 0.6, 0.05)
 )
 some_data
@@ -103,10 +103,10 @@ full atlas -- context regions included -- in each panel:
 some_data <- tibble(
   region = rep(
     c(
-      "transverse temporal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal"
+      "superiorparietal"
     ),
     2
   ),

@@ -1,5 +1,11 @@
 # ggseg 2.2.1.9000 (development)
 
+- Examples, tests, and vignettes now use the new `ggseg.formats` short
+  `region` keys (e.g. `"superiorparietal"`, `"transversetemporal"`). The
+  fully spelled-out long names moved to the atlas `names` column, so passing a
+  long name in a `region =` position no longer matches. Any user data joined to
+  an atlas by `region` must use the short keys.
+
 - **Breaking:** `geom_brain()` no longer colours the atlas by its built-in
   palette when you map no `fill`. A bare `geom_brain(atlas = dk())` now renders
   grey, matching how regions you supply no value for already looked. `geom_brain()`

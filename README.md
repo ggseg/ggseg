@@ -1,5 +1,3 @@
-
-
 # ggseg <img src="man/figures/logo.png" align="right" alt="" width="138.5" />
 
 <!-- badges: start -->
@@ -14,6 +12,7 @@ Status](https://raw.githubusercontent.com/ggsegverse/ggseg/coverage/badges/cover
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![pkgcheck](https://github.com/ggsegverse/ggseg/workflows/pkgcheck/badge.svg)](https://github.com/ggsegverse/ggseg/actions?query=workflow%3Apkgcheck)
+
 <!-- badges: end -->
 
 Neuroimaging analyses produce region-level results – cortical thickness,
@@ -22,23 +21,23 @@ ggseg stores brain atlas geometries as simple features and plots them as
 ggplot2 layers, so you get publication-ready brain figures with the same
 code you’d use for any other ggplot.
 
-Mowinckel & Vidal-Piñeiro (2020). [*Visualization of Brain Statistics
+Mowinckel & Vidal-Piñeiro (2020). [_Visualization of Brain Statistics
 With R Packages ggseg and
-ggseg3d.*](https://doi.org/10.1177/2515245920928009) Advances in Methods
+ggseg3d._](https://doi.org/10.1177/2515245920928009) Advances in Methods
 and Practices in Psychological Science.
 
 ## Installation
 
 Install from CRAN:
 
-``` r
+```r
 install.packages("ggseg")
 ```
 
 Or get the development version from the [ggsegverse
 r-universe](https://ggsegverse.r-universe.dev):
 
-``` r
+```r
 options(repos = c(
   ggsegverse = "https://ggsegverse.r-universe.dev",
   CRAN = "https://cloud.r-project.org"
@@ -48,7 +47,7 @@ install.packages("ggseg")
 
 ## Quick start
 
-``` r
+```r
 library(ggseg)
 library(ggplot2)
 ```
@@ -59,7 +58,7 @@ ggseg ships with three atlases: `dk` (Desikan-Killiany cortical
 parcellation), `aseg` (automatic subcortical segmentation), and
 `tracula` (white matter tracts). `plot()` gives you a quick overview:
 
-``` r
+```r
 plot(dk())
 plot(aseg())
 ```
@@ -85,16 +84,16 @@ Figure 2: Overview of the dk and aseg built-in brain atlases.
 Pass a data frame to `ggplot()` with a column that matches the atlas
 (typically `region` or `label`). `geom_brain()` handles the join:
 
-``` r
+```r
 library(dplyr)
 
 some_data <- tibble(
   region = rep(
     c(
-      "transverse temporal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal"
+      "superiorparietal"
     ),
     2
   ),
@@ -127,7 +126,7 @@ Figure 3: Brain plot coloured by external data, faceted by group.
 Many additional atlases are available through the [ggsegverse
 r-universe](https://ggsegverse.r-universe.dev):
 
-``` r
+```r
 install.packages("ggsegYeo2011", repos = "https://ggsegverse.r-universe.dev")
 ```
 
@@ -142,5 +141,4 @@ reading FreeSurfer stats files.
 This tool is partly funded by:
 
 **EU Horizon 2020 Grant:** Healthy minds 0-100 years: Optimising the use
-of European brain imaging cohorts (Lifebrain). Grant agreement number:
-732592.
+of European brain imaging cohorts (Lifebrain). Grant agreement number: 732592.

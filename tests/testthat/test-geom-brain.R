@@ -60,7 +60,7 @@ describe("geom_brain_sf (deprecated sf path)", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
     some_data <- tibble(
-      region = c("transverse temporal", "insula"),
+      region = c("transversetemporal", "insula"),
       p = c(0.1, 0.5)
     )
     p <- ggplot(some_data) +
@@ -112,7 +112,7 @@ describe("geom_brain_sf (deprecated sf path)", {
 describe("geom_brain faceting", {
   some_data <- tibble(
     region = rep(
-      c("transverse temporal", "insula", "precentral", "superior parietal"),
+      c("transversetemporal", "insula", "precentral", "superiorparietal"),
       2
     ),
     p = seq(0.1, 0.8, by = 0.1),
@@ -186,7 +186,7 @@ describe("geom_brain faceting", {
     skip_if_not_installed("sf")
     withr::local_options(lifecycle_verbosity = "quiet")
     data_with_hemi <- tibble(
-      region = c("transverse temporal", "insula"),
+      region = c("transversetemporal", "insula"),
       p = c(0.1, 0.5),
       hemi = c("left", "right")
     )

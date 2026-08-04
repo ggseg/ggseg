@@ -29,8 +29,8 @@ for \code{brain_join()} when you want the joined sf object yourself.
 \dontshow{if (requireNamespace("sf", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 someData <- data.frame(
   region = c(
-    "transverse temporal", "insula",
-    "precentral", "superior parietal"
+    "transversetemporal", "insula",
+    "precentral", "superiorparietal"
   ),
   p = sample(seq(0, .5, .001), 4),
   stringsAsFactors = FALSE
