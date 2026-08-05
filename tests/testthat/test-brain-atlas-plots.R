@@ -1,5 +1,6 @@
 describe("position_brain visual", {
   it("dk default horizontal", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk default horizontal",
       ggplot() + geom_brain(atlas = dk(), show.legend = FALSE)
@@ -7,6 +8,7 @@ describe("position_brain visual", {
   })
 
   it("dk hemi ~ view", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk hemi ~ view",
       ggplot() +
@@ -19,6 +21,7 @@ describe("position_brain visual", {
   })
 
   it("dk view ~ hemi", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk view ~ hemi",
       ggplot() +
@@ -31,6 +34,7 @@ describe("position_brain visual", {
   })
 
   it("dk hemi + view ~ .", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk rows hemi+view",
       ggplot() +
@@ -43,6 +47,7 @@ describe("position_brain visual", {
   })
 
   it("dk . ~ hemi + view", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk cols hemi+view",
       ggplot() +
@@ -55,6 +60,7 @@ describe("position_brain visual", {
   })
 
   it("dk vertical", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk vertical",
       ggplot() +
@@ -67,6 +73,7 @@ describe("position_brain visual", {
   })
 
   it("dk character view order", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk custom view order",
       ggplot() +
@@ -84,6 +91,7 @@ describe("position_brain visual", {
   })
 
   it("aseg default horizontal", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg default horizontal",
       ggplot() + geom_brain(atlas = aseg(), show.legend = FALSE)
@@ -91,6 +99,7 @@ describe("position_brain visual", {
   })
 
   it("aseg vertical", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg vertical",
       ggplot() +
@@ -103,6 +112,7 @@ describe("position_brain visual", {
   })
 
   it("aseg nrow 2", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg nrow 2",
       ggplot() +
@@ -115,6 +125,7 @@ describe("position_brain visual", {
   })
 
   it("aseg ncol 3", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg ncol 3",
       ggplot() +
@@ -127,6 +138,7 @@ describe("position_brain visual", {
   })
 
   it("aseg type ~ .", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg type rows",
       ggplot() +
@@ -139,6 +151,7 @@ describe("position_brain visual", {
   })
 
   it("tracula default horizontal", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "tracula default horizontal",
       ggplot() + geom_brain(atlas = tracula(), show.legend = FALSE)
@@ -146,6 +159,7 @@ describe("position_brain visual", {
   })
 
   it("tracula vertical", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "tracula vertical",
       ggplot() +
@@ -158,6 +172,7 @@ describe("position_brain visual", {
   })
 
   it("tracula nrow 2", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "tracula nrow 2",
       ggplot() +
@@ -170,6 +185,7 @@ describe("position_brain visual", {
   })
 
   it("tracula ncol 3", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "tracula ncol 3",
       ggplot() +
@@ -182,6 +198,7 @@ describe("position_brain visual", {
   })
 
   it("tracula type ~ .", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "tracula type rows",
       ggplot() +

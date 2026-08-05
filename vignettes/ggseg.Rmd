@@ -143,12 +143,7 @@ the `data` argument and it joins to the atlas automatically:
 library(dplyr)
 
 some_data <- tibble(
-  region = c(
-    "transversetemporal",
-    "insula",
-    "precentral",
-    "superiorparietal"
-  ),
+  region = atlas_regions(dk())[1:4],
   p = sample(seq(0, 0.5, 0.001), 4)
 )
 
@@ -174,15 +169,7 @@ variable and `geom_brain()` replicates the full atlas in each panel:
 #| label: fig-faceting
 #| fig-cap: "Brain plots faceted by group, each panel showing the full atlas."
 some_data <- tibble(
-  region = rep(
-    c(
-      "transversetemporal",
-      "insula",
-      "precentral",
-      "superiorparietal"
-    ),
-    2
-  ),
+  region = rep(atlas_regions(dk())[1:4], 2),
   p = sample(seq(0, 0.5, 0.001), 8),
   group = c(rep("A", 4), rep("B", 4))
 )

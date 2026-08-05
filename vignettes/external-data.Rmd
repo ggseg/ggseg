@@ -55,7 +55,7 @@ Three regions, three p-values:
 ```{r}
 #| label: minimal-data
 some_data <- tibble(
-  region = c("superiortemporal", "precentral", "lateralorbitofrontal"),
+  region = ggseg.formats::atlas_regions(dk())[1:3],
   p = c(0.03, 0.6, 0.05)
 )
 some_data
@@ -101,15 +101,7 @@ full atlas -- context regions included -- in each panel:
 #| label: fig-facet-groups
 #| fig-cap: "Brain plots faceted by age group with a custom colour gradient."
 some_data <- tibble(
-  region = rep(
-    c(
-      "transversetemporal",
-      "insula",
-      "precentral",
-      "superiorparietal"
-    ),
-    2
-  ),
+  region = rep(ggseg.formats::atlas_regions(dk())[1:4], 2),
   p = sample(seq(0, 0.5, 0.001), 8),
   group = c(rep("Young", 4), rep("Old", 4))
 )

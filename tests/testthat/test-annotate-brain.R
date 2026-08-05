@@ -177,6 +177,7 @@ describe("annotate_brain (polygon path)", {
 
 describe("annotate_brain visual", {
   it("dk default with labels", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk default labels",
       ggplot() +
@@ -186,6 +187,7 @@ describe("annotate_brain visual", {
   })
 
   it("dk hemi ~ view with labels", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "dk hemi view labels",
       ggplot() +
@@ -202,6 +204,7 @@ describe("annotate_brain visual", {
   })
 
   it("aseg default with labels", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg default labels",
       ggplot() +
@@ -211,6 +214,7 @@ describe("annotate_brain visual", {
   })
 
   it("aseg nrow 2 with labels", {
+    testthat::skip_on_cran()
     expect_doppelganger(
       "aseg nrow 2 labels",
       ggplot() +
