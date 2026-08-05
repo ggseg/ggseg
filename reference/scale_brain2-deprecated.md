@@ -41,7 +41,7 @@ A ggplot2 scale object.
 ## Examples
 
 ``` r
-pal <- c("transverse temporal" = "#FF0000", "insula" = "#00FF00")
+pal <- c("transversetemporal" = "#FF0000", "insula" = "#00FF00")
 suppressWarnings(scale_fill_brain_manual(palette = pal))
 #> <ggproto object: Class ScaleDiscrete, Scale, gg>
 #>     aesthetics: fill

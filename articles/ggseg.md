@@ -252,12 +252,7 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 
 some_data <- tibble(
-  region = c(
-    "transverse temporal",
-    "insula",
-    "precentral",
-    "superior parietal"
-  ),
+  region = atlas_regions(dk())[1:4],
   p = sample(seq(0, 0.5, 0.001), 4)
 )
 
@@ -291,15 +286,7 @@ replicates the full atlas in each panel:
 ``` r
 
 some_data <- tibble(
-  region = rep(
-    c(
-      "transverse temporal",
-      "insula",
-      "precentral",
-      "superior parietal"
-    ),
-    2
-  ),
+  region = rep(atlas_regions(dk())[1:4], 2),
   p = sample(seq(0, 0.5, 0.001), 8),
   group = c(rep("A", 4), rep("B", 4))
 )

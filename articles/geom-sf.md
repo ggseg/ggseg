@@ -88,12 +88,7 @@ handles column detection:
 ``` r
 
 some_data <- tibble(
-  region = c(
-    "transverse temporal",
-    "insula",
-    "precentral",
-    "superior parietal"
-  ),
+  region = ggseg.formats::atlas_regions(dk())[1:4],
   p = sample(seq(0, 0.5, 0.001), 4)
 )
 
@@ -117,17 +112,17 @@ some_data |>
 #> 8                 lh_bankssts superior  left banks of superior temporal sulcus
 #> 9                 lh_bankssts inferior  left banks of superior temporal sulcus
 #> 10 lh_caudalanteriorcingulate   medial  left         caudal anterior cingulate
-#>         lobe atlas     type  colour  p                       geometry
-#> 1       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((926.5936 60...
-#> 2       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((1782.84 18....
-#> 3       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((367.1256 13...
-#> 4       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((3849.766 60...
-#> 5       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((4318.844 20...
-#> 6       <NA>    dk cortical    <NA> NA MULTIPOLYGON (((3190.519 5....
-#> 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...
-#> 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...
-#> 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...
-#> 10 cingulate    dk cortical #7D64A0 NA MULTIPOLYGON (((1921.971 20...
+#>         lobe atlas     type  colour     p                       geometry
+#> 1       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((926.5936 60...
+#> 2       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((1782.84 18....
+#> 3       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((367.1256 13...
+#> 4       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((3849.766 60...
+#> 5       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((4318.844 20...
+#> 6       <NA>    dk cortical    <NA>    NA MULTIPOLYGON (((3190.519 5....
+#> 7   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((1121.478 12...
+#> 8   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((2448.464 20...
+#> 9   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((534.4782 21...
+#> 10 cingulate    dk cortical #7D64A0 0.406 MULTIPOLYGON (((1921.971 20...
 ```
 
 The result is a standard sf object you can pass to
@@ -194,7 +189,7 @@ some_data |>
     show.legend = FALSE
   )
 #> Merging atlas and data by region.
-#> Warning: Removed 168 rows containing missing values or values outside the scale range
+#> Warning: Removed 174 rows containing missing values or values outside the scale range
 #> (`geom_label()`).
 ```
 
@@ -217,15 +212,7 @@ The grouping tells the join to replicate the atlas for each group:
 ``` r
 
 some_data <- tibble(
-  region = rep(
-    c(
-      "transverse temporal",
-      "insula",
-      "precentral",
-      "superior parietal"
-    ),
-    2
-  ),
+  region = rep(ggseg.formats::atlas_regions(dk())[1:4], 2),
   p = sample(seq(0, 0.5, 0.001), 8),
   group = c(rep("A", 4), rep("B", 4))
 )

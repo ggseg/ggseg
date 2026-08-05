@@ -114,18 +114,18 @@ Three regions, three p-values:
 ``` r
 
 some_data <- tibble(
-  region = c("superior temporal", "precentral", "lateral orbitofrontal"),
+  region = ggseg.formats::atlas_regions(dk())[1:3],
   p = c(0.03, 0.6, 0.05)
 )
 some_data
 ```
 
     ## # A tibble: 3 × 2
-    ##   region                    p
-    ##   <chr>                 <dbl>
-    ## 1 superior temporal      0.03
-    ## 2 precentral             0.6 
-    ## 3 lateral orbitofrontal  0.05
+    ##   region                                p
+    ##   <chr>                             <dbl>
+    ## 1 banks of superior temporal sulcus  0.03
+    ## 2 caudal anterior cingulate          0.6 
+    ## 3 caudal middle frontal              0.05
 
 Pass the data to
 [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
@@ -180,15 +180,7 @@ replicates the full atlas – context regions included – in each panel:
 ``` r
 
 some_data <- tibble(
-  region = rep(
-    c(
-      "transverse temporal",
-      "insula",
-      "precentral",
-      "superior parietal"
-    ),
-    2
-  ),
+  region = rep(ggseg.formats::atlas_regions(dk())[1:4], 2),
   p = sample(seq(0, 0.5, 0.001), 8),
   group = c(rep("Young", 4), rep("Old", 4))
 )

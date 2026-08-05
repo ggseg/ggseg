@@ -17,7 +17,7 @@ for brain_join() when you want the joined sf object yourself."><meta property="o
 
     <a class="navbar-brand me-2" href="../index.html">ggseg</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,10 +100,7 @@ columns are detected automatically.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">someData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  region <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"transverse temporal"</span>, <span class="st">"insula"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"precentral"</span>, <span class="st">"superior parietal"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  region <span class="op">=</span> <span class="fu">ggseg.formats</span><span class="fu">::</span><span class="fu"><a href="https://ggsegverse.github.io/ggseg.formats/reference/atlas_regions.html">atlas_regions</a></span><span class="op">(</span><span class="fu"><a href="https://ggsegverse.github.io/ggseg.formats/reference/dk.html">dk</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">.5</span>, <span class="fl">.001</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -127,17 +124,17 @@ columns are detected automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8                 lh_bankssts superior  left banks of superior temporal sulcus</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9                 lh_bankssts inferior  left banks of superior temporal sulcus</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 lh_caudalanteriorcingulate   medial  left         caudal anterior cingulate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         lobe atlas     type  colour  p                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((926.5936 60...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((1782.84 18....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((367.1256 13...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3849.766 60...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((4318.844 20...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3190.519 5....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 cingulate    dk cortical #7D64A0 NA MULTIPOLYGON (((1921.971 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         lobe atlas     type  colour     p                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((926.5936 60...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((1782.84 18....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((367.1256 13...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((3849.766 60...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((4318.844 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((3190.519 5....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((1121.478 12...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((2448.464 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((534.4782 21...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 cingulate    dk cortical #7D64A0 0.406 MULTIPOLYGON (((1921.971 20...</span>
 <span class="r-in"><span><span class="fu">brain_join</span><span class="op">(</span><span class="va">someData</span>, <span class="fu"><a href="https://ggsegverse.github.io/ggseg.formats/reference/dk.html">dk</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"region"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 191 features and 9 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
@@ -156,17 +153,17 @@ columns are detected automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8                 lh_bankssts superior  left banks of superior temporal sulcus</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9                 lh_bankssts inferior  left banks of superior temporal sulcus</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 lh_caudalanteriorcingulate   medial  left         caudal anterior cingulate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         lobe atlas     type  colour  p                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((926.5936 60...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((1782.84 18....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((367.1256 13...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3849.766 60...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((4318.844 20...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;    dk cortical    &lt;NA&gt; NA MULTIPOLYGON (((3190.519 5....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   temporal    dk cortical #196428 NA MULTIPOLYGON (((1121.478 12...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   temporal    dk cortical #196428 NA MULTIPOLYGON (((2448.464 20...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   temporal    dk cortical #196428 NA MULTIPOLYGON (((534.4782 21...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 cingulate    dk cortical #7D64A0 NA MULTIPOLYGON (((1921.971 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         lobe atlas     type  colour     p                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((926.5936 60...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((1782.84 18....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((367.1256 13...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((3849.766 60...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((4318.844 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       &lt;NA&gt;    dk cortical    &lt;NA&gt;    NA MULTIPOLYGON (((3190.519 5....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((1121.478 12...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((2448.464 20...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   temporal    dk cortical #196428 0.172 MULTIPOLYGON (((534.4782 21...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 cingulate    dk cortical #7D64A0 0.406 MULTIPOLYGON (((1921.971 20...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

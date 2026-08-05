@@ -48,7 +48,7 @@ measured only a corner of it.
 ``` r
 
 results <- data.frame(
-  region = c("precentral", "superior frontal", "insula"),
+  region = ggseg.formats::atlas_regions(dk())[1:3],
   score = c(2.1, -1.4, 0.8)
 )
 
@@ -73,7 +73,7 @@ turns a vector into one number.
 ``` r
 
 thickness <- data.frame(
-  region = rep(c("precentral", "insula", "fusiform"), each = 4),
+  region = rep(ggseg.formats::atlas_regions(dk())[1:3], each = 4),
   subject = rep(1:4, times = 3),
   thickness = c(2.5, 2.6, 2.4, 2.7, 3.1, 3.0, 3.2, 2.9, 2.8, 2.7, 2.9, 2.6)
 )
@@ -116,8 +116,9 @@ behave exactly as they do for any other geom.
 ``` r
 
 cohorts <- expand.grid(
-  region = c("precentral", "insula", "fusiform", "superior parietal"),
-  group = c("patients", "controls")
+  region = ggseg.formats::atlas_regions(dk())[1:4],
+  group = c("patients", "controls"),
+  stringsAsFactors = FALSE
 )
 cohorts$score <- rnorm(nrow(cohorts))
 

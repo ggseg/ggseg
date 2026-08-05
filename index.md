@@ -77,10 +77,10 @@ library(dplyr)
 some_data <- tibble(
   region = rep(
     c(
-      "transverse temporal",
+      "transversetemporal",
       "insula",
       "precentral",
-      "superior parietal"
+      "superiorparietal"
     ),
     2
   ),

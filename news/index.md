@@ -2,6 +2,21 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- Tests, examples, and vignettes now resolve region names dynamically
+  through
+  [`ggseg.formats::atlas_regions()`](https://ggsegverse.github.io/ggseg.formats/reference/atlas_regions.html)
+  (and the schema-stable `label` column) instead of hard-coding region
+  strings, so `R CMD check` passes cleanly against both the released and
+  the development `ggseg.formats` schema. Visual regression tests that
+  use `vdiffr` now `skip_on_cran()`, since their snapshots are
+  geometry-specific and cannot match both schema versions.
+
+- Examples, tests, and vignettes now use the new `ggseg.formats` short
+  `region` keys (e.g. `"superiorparietal"`, `"transversetemporal"`). The
+  fully spelled-out long names moved to the atlas `names` column, so
+  passing a long name in a `region =` position no longer matches. Any
+  user data joined to an atlas by `region` must use the short keys.
+
 - **Breaking:**
   [`geom_brain()`](https://ggsegverse.github.io/ggseg/reference/ggbrain.md)
   no longer colours the atlas by its built-in palette when you map no
