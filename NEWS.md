@@ -2,10 +2,10 @@
 
 - Tests, examples, and vignettes now resolve region names dynamically through
   `ggseg.formats::atlas_regions()` (and the schema-stable `label` column)
-  instead of hardcoding region strings, so `R CMD check` passes cleanly against
+  instead of hard-coding region strings, so `R CMD check` passes cleanly against
   both the released and the development `ggseg.formats` schema. Visual
   regression tests that use `vdiffr` now `skip_on_cran()`, since their snapshots
-  are geometry-specific and cannot match both schemas.
+  are geometry-specific and cannot match both schema versions.
 
 - Examples, tests, and vignettes now use the new `ggseg.formats` short
   `region` keys (e.g. `"superiorparietal"`, `"transversetemporal"`). The
