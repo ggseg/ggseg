@@ -1,15 +1,7 @@
 describe("brain_join", {
+  regs <- ggseg.formats::atlas_regions(dk())[1:4]
   some_data <- data.frame(
-    region = c(
-      "transversetemporal",
-      "insula",
-      "precentral",
-      "superiorparietal",
-      "transversetemporal",
-      "insula",
-      "precentral",
-      "superiorparietal"
-    ),
+    region = rep(regs, 2),
     p = seq(0.1, 0.8, by = 0.1),
     grp = c(rep("G1", 4), rep("G2", 4)),
     stringsAsFactors = FALSE

@@ -49,11 +49,12 @@ describe("join_brain_values()", {
   flat <- prepare_polygon_atlas(poly)
 
   it("keeps every atlas polygon and leaves unmatched regions NA", {
-    d <- data.frame(region = "insula", fill = 5)
+    reg <- ggseg.formats::atlas_regions(dk())[1]
+    d <- data.frame(region = reg, fill = 5)
     j <- join_brain_values(d, flat, mean)
     expect_identical(nrow(j), nrow(flat))
     expect_identical(
-      unique(j$fill[j$region %in% "insula" & !is.na(j$region)]),
+      unique(j$fill[j$region %in% reg & !is.na(j$region)]),
       5
     )
     expect_true(anyNA(j$fill))
@@ -74,7 +75,7 @@ describe("join_brain_values()", {
   })
 
   it("sets group to the polygon feature id", {
-    d <- data.frame(region = "insula", fill = 1)
+    d <- data.frame(region = ggseg.formats::atlas_regions(dk())[1], fill = 1)
     j <- join_brain_values(d, flat, mean)
     expect_identical(j$group, j$.feature_id)
   })
