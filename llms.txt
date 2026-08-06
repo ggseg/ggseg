@@ -146,6 +146,8 @@ Core geom and positioning for brain plots
   : Keep brain shapes undistorted
 - [`reposition_brain()`](https://ggsegverse.github.io/ggseg/reference/reposition_brain.md)
   : Reposition brain slices
+- [`brain_test_plot()`](https://ggsegverse.github.io/ggseg/reference/brain_test_plot.md)
+  : Render a brain atlas with default snapshot styling
 
 ## Data
 

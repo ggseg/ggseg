@@ -2,6 +2,15 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- New
+  [`brain_test_plot()`](https://ggsegverse.github.io/ggseg/reference/brain_test_plot.md)
+  builds a minimal, deterministic atlas plot (regions filled by `label`,
+  no legend,
+  [`theme_void()`](https://ggplot2.tidyverse.org/reference/ggtheme.html))
+  — the canonical construction for `vdiffr` snapshots across the
+  ggsegverse, so a stray legend or title cannot creep into a snapshot
+  and every atlas is rendered identically.
+
 - Tests, examples, and vignettes now resolve region names dynamically
   through
   [`ggseg.formats::atlas_regions()`](https://ggsegverse.github.io/ggseg.formats/reference/atlas_regions.html)
