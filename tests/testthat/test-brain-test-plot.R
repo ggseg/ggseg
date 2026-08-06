@@ -6,7 +6,7 @@ describe("brain_test_plot()", {
 
   it("draws no legend, so snapshots stay text-free", {
     gt <- ggplot2::ggplotGrob(brain_test_plot(dk()))
-    guide_boxes <- gt$grobs[grepl("guide-box", gt$layout$name)]
+    guide_boxes <- gt$grobs[grepl("guide-box", gt$layout$name, fixed = TRUE)]
     expect_true(all(vapply(
       guide_boxes,
       inherits,
