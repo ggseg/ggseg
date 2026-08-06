@@ -52,6 +52,7 @@ reference:
       - annotate_brain
       - coord_brain
       - reposition_brain
+      - brain_test_plot
 
   - title: Data
     desc: Joining user data to brain atlases
