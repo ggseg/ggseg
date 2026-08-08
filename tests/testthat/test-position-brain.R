@@ -261,11 +261,14 @@ describe("reposition_brain subcortical formula", {
 })
 
 describe("position_formula subcortical multi-var", {
-  it("handles two-variable formula for subcortical", {
+  it("ignores hemi for subcortical two-variable formulas", {
     data <- as.data.frame(aseg())
     data$hemi <- "left"
-    k <- position_formula(view ~ hemi, data)
-    expect_identical(k$position, c("view", "hemi"))
+    expect_warning(
+      k <- position_formula(view ~ hemi, data),
+      "hemi.*ignored"
+    )
+    expect_false("hemi" %in% k$chosen)
   })
 })
 
@@ -372,11 +375,15 @@ describe("position_subcortical", {
     expect_identical(result$position, "rows")
   })
 
-  it("returns chosen vars for two-var formula", {
+  it("drops hemi for a slice-based two-var formula", {
     data <- as.data.frame(aseg())
     data$hemi <- "left"
-    result <- position_subcortical(view ~ hemi, c("view", "hemi"), data)
-    expect_identical(result$position, c("view", "hemi"))
+    expect_warning(
+      result <- position_subcortical(view ~ hemi, c("view", "hemi"), data),
+      "hemi.*ignored"
+    )
+    expect_false("hemi" %in% result$chosen)
+    expect_identical(result$position, "columns")
   })
 })
 
@@ -415,5 +422,31 @@ describe("drop_temp_columns", {
     df <- data.frame(x = 1:3, y = 4:6)
     result <- drop_temp_columns(df)
     expect_identical(result, df)
+  })
+})
+
+describe("position_formula() with slice-based atlases", {
+  it("ignores hemi for subcortical atlases, laying out by view only", {
+    d <- as.data.frame(aseg())
+    expect_warning(
+      res <- position_formula(hemi ~ view, d),
+      "hemi.*ignored"
+    )
+    expect_false("hemi" %in% res$chosen)
+    expect_true("view" %in% res$chosen)
+  })
+
+  it("falls back to view when only hemi is supplied", {
+    d <- as.data.frame(aseg())
+    expect_warning(
+      res <- position_formula(hemi ~ ., d),
+      "hemi.*ignored"
+    )
+    expect_identical(res$chosen, "view")
+  })
+
+  it("does not warn about hemi for cortical atlases", {
+    d <- as.data.frame(dk())
+    expect_no_warning(position_formula(hemi ~ view, d))
   })
 })

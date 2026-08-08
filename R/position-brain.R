@@ -309,6 +309,7 @@ position_formula <- function(pos, data) {
 
   if (atlas_type == "cortical") {
     position <- position_cortical(pos, chosen)
+    validate_stacking_formula(pos, position)
   } else {
     result <- position_subcortical(pos, chosen, data)
     position <- result$position
@@ -316,7 +317,6 @@ position_formula <- function(pos, data) {
     data <- result$data
   }
 
-  validate_stacking_formula(pos, position)
   list(position = position, chosen = chosen, data = data)
 }
 
@@ -350,9 +350,23 @@ position_cortical <- function(pos, chosen) {
 #' @keywords internal
 #' @noRd
 position_subcortical <- function(pos, chosen, data) {
+  if ("hemi" %in% chosen) {
+    cli::cli_warn(c(
+      "!" = "{.arg hemi} is ignored for slice-based atlases.",
+      "i" = "Subcortical, cerebellar and tract atlas views are whole slices \\
+             that already contain both hemispheres; laying out by \\
+             {.field view} only."
+    ))
+    chosen <- setdiff(chosen, "hemi")
+  }
+
   if ("type" %in% chosen) {
     data$.view_type <- extract_view_type(data$view)
     chosen[chosen == "type"] <- ".view_type"
+  }
+
+  if (length(chosen) == 0) {
+    chosen <- "view"
   }
 
   position <- if (length(chosen) == 1) {

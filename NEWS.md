@@ -1,5 +1,11 @@
 # ggseg 2.2.1.9000 (development)
 
+- `position_brain()` now ignores the `hemi` term (with a warning) for
+  slice-based atlases (subcortical, cerebellar, tract). Those views are whole
+  slices already containing both hemispheres, so `hemi ~ view` no longer splits
+  the grey-brain context into its own row away from the structures — each view
+  now renders with its anatomical context integrated, matching `plot()`.
+
 - New `brain_test_plot()` builds a minimal, deterministic atlas plot (regions
   filled by `label`, no legend, `theme_void()`) — the canonical construction for
   `vdiffr` snapshots across the ggsegverse, so a stray legend or title cannot
