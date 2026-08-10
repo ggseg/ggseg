@@ -2,6 +2,14 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- [`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md)
+  now ignores the `hemi` term (with a warning) for slice-based atlases
+  (subcortical, cerebellar, tract). Those views are whole slices already
+  containing both hemispheres, so `hemi ~ view` no longer splits the
+  grey-brain context into its own row away from the structures — each
+  view now renders with its anatomical context integrated, matching
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
+
 - New
   [`brain_test_plot()`](https://ggsegverse.github.io/ggseg/reference/brain_test_plot.md)
   builds a minimal, deterministic atlas plot (regions filled by `label`,
