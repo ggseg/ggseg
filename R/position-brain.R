@@ -353,9 +353,7 @@ position_subcortical <- function(pos, chosen, data) {
   if ("hemi" %in% chosen) {
     cli::cli_warn(c(
       "!" = "{.arg hemi} is ignored for slice-based atlases.",
-      "i" = "Subcortical, cerebellar and tract atlas views are whole slices \\
-             that already contain both hemispheres; laying out by \\
-             {.field view} only."
+      "i" = "Slice-based atlas views already contain both hemispheres; {.arg hemi} will be dropped from the layout variables."
     ))
     chosen <- setdiff(chosen, "hemi")
   }
