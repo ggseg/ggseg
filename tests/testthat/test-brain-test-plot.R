@@ -30,4 +30,17 @@ describe("brain_test_plot()", {
   it("errors on a non-atlas input", {
     expect_error(brain_test_plot(1), "ggseg_atlas")
   })
+
+  it("lays out slice-based atlases by view without a hemi warning", {
+    expect_no_warning(ggplot2::ggplot_build(brain_test_plot(aseg())))
+  })
+
+  it("keeps the slice-based layout that hemi ~ view resolves to", {
+    by_view <- ggplot2::layer_data(brain_test_plot(aseg()))
+    by_hemi_and_view <- suppressWarnings(ggplot2::layer_data(
+      brain_test_plot(aseg(), position = position_brain(hemi ~ view))
+    ))
+
+    expect_identical(by_view, by_hemi_and_view)
+  })
 })
