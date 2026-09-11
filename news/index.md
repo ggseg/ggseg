@@ -2,6 +2,13 @@
 
 ## ggseg 2.2.1.9000 (development)
 
+- [`brain_test_plot()`](https://ggsegverse.github.io/ggseg/reference/brain_test_plot.md)
+  now defaults to `position_brain(. ~ view)` for slice-based atlases
+  (subcortical, cerebellar, tract) and keeps
+  `position_brain(hemi ~ view)` for cortical ones. The layout is
+  unchanged, but atlas packages’ snapshot tests no longer warn that
+  `hemi` is ignored.
+
 - [`position_brain()`](https://ggsegverse.github.io/ggseg/reference/position_brain.md)
   now ignores the `hemi` term (with a warning) for slice-based atlases
   (subcortical, cerebellar, tract). Those views are whole slices already

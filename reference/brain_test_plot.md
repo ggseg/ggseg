@@ -13,7 +13,7 @@ snapshot. It doubles as a quick way to preview an atlas.
 ``` r
 brain_test_plot(
   atlas,
-  position = position_brain(hemi ~ view),
+  position = NULL,
   na.value = "grey"
 )
 ```
@@ -30,7 +30,9 @@ brain_test_plot(
 - position:
 
   A `ggplot2` position adjustment arranging the brain views. Defaults to
-  `position_brain(hemi ~ view)`.
+  `position_brain(hemi ~ view)` for cortical atlases and
+  `position_brain(. ~ view)` for slice-based atlases (subcortical,
+  cerebellar, tract), whose views already contain both hemispheres.
 
 - na.value:
 
