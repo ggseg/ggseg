@@ -6,7 +6,7 @@
 \usage{
 brain_test_plot(
   atlas,
-  position = position_brain(hemi ~ view),
+  position = NULL,
   na.value = "grey"
 )
 }
@@ -14,7 +14,9 @@ brain_test_plot(
 \item{atlas}{A \code{ggseg_atlas} object, such as \code{\link[=dk]{dk()}} or \code{\link[=aseg]{aseg()}}.}
 
 \item{position}{A \code{ggplot2} position adjustment arranging the brain views.
-Defaults to \code{position_brain(hemi ~ view)}.}
+Defaults to \code{position_brain(hemi ~ view)} for cortical atlases and
+\code{position_brain(. ~ view)} for slice-based atlases (subcortical,
+cerebellar, tract), whose views already contain both hemispheres.}
 
 \item{na.value}{Fill colour for regions with no palette entry. Defaults to
 \code{"grey"}.}

@@ -13,7 +13,9 @@
 #'
 #' @param atlas A `ggseg_atlas` object, such as [dk()] or [aseg()].
 #' @param position A `ggplot2` position adjustment arranging the brain views.
-#'   Defaults to `position_brain(hemi ~ view)`.
+#'   Defaults to `position_brain(hemi ~ view)` for cortical atlases and
+#'   `position_brain(. ~ view)` for slice-based atlases (subcortical,
+#'   cerebellar, tract), whose views already contain both hemispheres.
 #' @param na.value Fill colour for regions with no palette entry. Defaults to
 #'   `"grey"`.
 #'
@@ -26,7 +28,7 @@
 #' @export
 brain_test_plot <- function(
   atlas,
-  position = position_brain(hemi ~ view),
+  position = NULL,
   na.value = "grey"
 ) {
   if (!ggseg.formats::is_ggseg_atlas(atlas)) {
@@ -34,6 +36,14 @@ brain_test_plot <- function(
       "{.arg atlas} must be a {.cls ggseg_atlas} object.",
       "i" = "Got {.cls {class(atlas)}}."
     ))
+  }
+
+  if (is.null(position)) {
+    position <- if (identical(atlas$type, "cortical")) {
+      position_brain(hemi ~ view)
+    } else {
+      position_brain(. ~ view)
+    }
   }
 
   p <- ggplot2::ggplot() +
